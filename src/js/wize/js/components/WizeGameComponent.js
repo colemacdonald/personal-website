@@ -6,15 +6,15 @@ import { _ } from "underscore";
 import { util } from "../util.js";
 
 class WizeGameComponent extends Component {
-  viewportH = 600;
-  viewportW = 1200;
+  viewportH = 500;
+  viewportW = 1000;
   viewportY = 0;
   viewportX = 0;
 
   constructor() {
     super();
 
-    _.bindAll(this, "update", "keyup", "keydown");
+    _.bindAll(this, "update", "keyup", "keydown", "startGame");
 
     this.bootstrapCoinsImages();
 
@@ -39,12 +39,15 @@ class WizeGameComponent extends Component {
     return (
       <div className="tab-content">
         <h2>The Adventures of Yeezy the Wize</h2>
+        <button onClick={this.startGame}>Start Again</button>
+        <br />
         <canvas
           ref={this.canvas}
           className="game-canvas"
-          height={this.viewportH}
-          width={this.viewportW}
+          height={`${this.viewportH}px`}
+          width={`${this.viewportW}px`}
         />
+        <h5>Art by Tom Gavelin</h5>
       </div>
     );
   }
@@ -90,13 +93,15 @@ class WizeGameComponent extends Component {
   drawGame() {
     if (!this.game.playerAlive) {
       this.drawBackground();
+      this.games = 0;
       this.cntx.fillStyle = "red";
       this.cntx.font = "30px Arial";
       this.cntx.fillText(
-        "Game Over.... Refresh to play again",
-        this.viewportW / 2 - 250,
+        "Game Over...",
+        this.viewportW / 2 - 75,
         this.viewportH / 2
       );
+      this.drawScore();
       return;
     } else if (this.game.score === 2000) {
       this.games++;
@@ -119,6 +124,10 @@ class WizeGameComponent extends Component {
     this.drawPlayer();
 
     // Score
+    this.drawScore();
+  }
+
+  drawScore() {
     this.cntx.fillStyle = "red";
     this.cntx.font = "30px Arial";
     this.cntx.fillText(

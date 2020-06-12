@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useRouteMatch,
+} from "react-router-dom";
 import "../css/App.css";
 import "../css/style.css";
 import MainNavBar from "./MainNavBar.js";
@@ -10,15 +15,17 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <React.Fragment>
+        <h1>Cole Macdonald</h1>
+        <MainNavBar />
+        {/* <React.Fragment>
           <Router>
             <MainNavBar />
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/wize" component={WizeGameComponent} />
+              <Route path={`/wize`} component={WizeGameComponent} />
+              <Route path="/" component={Home} />
             </Switch>
           </Router>
-        </React.Fragment>
+        </React.Fragment> */}
       </div>
     );
   }
