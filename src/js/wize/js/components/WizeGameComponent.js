@@ -37,7 +37,7 @@ class WizeGameComponent extends Component {
 
   render() {
     return (
-      <div>
+      <div className="tab-content">
         <h2>The Adventures of Yeezy the Wize</h2>
         <canvas
           ref={this.canvas}
@@ -93,9 +93,9 @@ class WizeGameComponent extends Component {
       this.cntx.fillStyle = "red";
       this.cntx.font = "30px Arial";
       this.cntx.fillText(
-        "Game Over....",
-        this.viewPortH / 2,
-        this.viewPortW / 2
+        "Game Over.... Refresh to play again",
+        this.viewportW / 2 - 250,
+        this.viewportH / 2
       );
       return;
     } else if (this.game.score === 2000) {
