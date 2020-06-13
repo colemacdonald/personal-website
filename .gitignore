@@ -1,5 +1,8 @@
 .DS_Store
 
+flask-server/static/react/*
+build/*
+
 # Logs
 logs
 *.log
