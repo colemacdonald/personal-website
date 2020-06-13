@@ -23,7 +23,7 @@ class ControllableCharacter extends Character {
   }
 
   upPress() {
-    if (this.jmpCnt < 1) {
+    if (this.jmpCnt < 2) {
       this.yv = -10;
       this.jmpCnt++;
     }

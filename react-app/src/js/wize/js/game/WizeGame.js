@@ -79,7 +79,8 @@ class WizeGame {
             plat.h,
             plat.w
           ) &&
-          !this.character.onG
+          !this.character.onG &&
+          this.character.yv > 0
         ) {
           this.character.setCurrentPlatform(plat);
           this.onGround = true;
