@@ -22,7 +22,7 @@ class Wize extends Component {
     `Double jumps supported!`,
   ];
 
-  background = `This game was developed by Tom Gavelin and I in 2017. The physics and frames are all custom built. All pixel art was done by Tom.`;
+  background = `This game was developed by Tom Gavelin and I in 2017. The physics are all custom, and frames are drawn on an html canvas (yes, really). All pixel art was done by Tom.`;
 
   render() {
     let controls = [];
