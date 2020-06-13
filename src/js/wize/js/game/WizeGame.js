@@ -1,6 +1,7 @@
 import { Coin } from "./Coin.js";
 import { util } from "../util.js";
 import { KYeezy } from "./KYeezyCharacter.js";
+import { Monster } from "./Monster.js";
 import { _ } from "underscore";
 
 class WizeGame {
@@ -40,12 +41,15 @@ class WizeGame {
     }
 
     for (let i = 0; i < 20; i++) {
-      this.monsters.push({
-        x: this.platforms[i].x + this.platforms[i].w / 2,
-        y: this.platforms[i].y - 20,
-        h: 50,
-        w: 20,
-      });
+      this.monsters.push(
+        new Monster({
+          platform: this.platforms[i],
+          x: this.platforms[i].x + this.platforms[i].w / 2,
+          y: this.platforms[i].y - 20,
+          h: 50,
+          w: 20,
+        })
+      );
     }
 
     for (let i = 0; i < 20; i++) {
@@ -102,6 +106,7 @@ class WizeGame {
         ) {
           this.playerAlive = false;
         }
+        monster.move();
       },
       this
     );

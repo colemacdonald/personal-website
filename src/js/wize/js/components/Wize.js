@@ -27,36 +27,38 @@ class Wize extends Component {
   render() {
     let controls = [];
 
-    this.controls.forEach((cntrl) => {
-      controls.push(<li>{cntrl}</li>);
+    this.controls.forEach((cntrl, i) => {
+      controls.push(<li key={i}>{cntrl}</li>);
     });
 
     return (
       <div>
         <p className="game-title">The Adventures of Yeezy the Wize</p>
         <table>
-          <tr>
-            <td>
-              <div className="flex-item">
-                <div className="vertical-flex">
-                  <div className="flex-item">{this.description}</div>
-                  <div className="flex-item">{this.scoring}</div>
+          <tbody>
+            <tr>
+              <td>
+                <div className="flex-item">
+                  <div className="vertical-flex">
+                    <div className="flex-item">{this.description}</div>
+                    <div className="flex-item">{this.scoring}</div>
 
-                  <div className="flex-item">
-                    Controls:
-                    {controls}
+                    <div className="flex-item">
+                      Controls:
+                      {controls}
+                    </div>
+                    <div className="flex-item">{this.background}</div>
                   </div>
-                  <div className="flex-item">{this.background}</div>
                 </div>
-              </div>
-            </td>
-            <td>
-              <WizeGameComponent
-                className="flex-item"
-                dimensions={this.gameDimensions}
-              />
-            </td>
-          </tr>
+              </td>
+              <td>
+                <WizeGameComponent
+                  className="flex-item"
+                  dimensions={this.gameDimensions}
+                />
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     );
