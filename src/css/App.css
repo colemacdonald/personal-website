@@ -1,5 +1,5 @@
 .app {
-  text-align: center;
+  /* text-align: center; */
   background-color: rgb(37, 37, 37);
   color: lightgrey;
   width: 100vw;
@@ -7,5 +7,5 @@
 }
 
 .tab-content {
-  margin: 20px;
+  margin: 20px 0 20px 20px;
 }

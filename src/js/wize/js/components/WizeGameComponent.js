@@ -6,13 +6,13 @@ import { _ } from "underscore";
 import { util } from "../util.js";
 
 class WizeGameComponent extends Component {
-  viewportH = 500;
-  viewportW = 1000;
-  viewportY = 0;
-  viewportX = 0;
+  constructor(props) {
+    super(props);
 
-  constructor() {
-    super();
+    this.viewportH = props.dimensions.viewportH;
+    this.viewportW = props.dimensions.viewportW;
+    this.viewportY = props.dimensions.viewportY;
+    this.viewportX = props.dimensions.viewportX;
 
     _.bindAll(this, "update", "keyup", "keydown", "startGame");
 
@@ -37,17 +37,16 @@ class WizeGameComponent extends Component {
 
   render() {
     return (
-      <div className="tab-content">
-        <h2>The Adventures of Yeezy the Wize</h2>
+      <div>
         <button onClick={this.startGame}>Start Again</button>
-        <br />
-        <canvas
-          ref={this.canvas}
-          className="game-canvas"
-          height={`${this.viewportH}px`}
-          width={`${this.viewportW}px`}
-        />
-        <h5>Art by Tom Gavelin</h5>
+        <div className="wize-game">
+          <canvas
+            ref={this.canvas}
+            className="game-canvas"
+            height={`${this.viewportH}px`}
+            width={`${this.viewportW}px`}
+          />
+        </div>
       </div>
     );
   }

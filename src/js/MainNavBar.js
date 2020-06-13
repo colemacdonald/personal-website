@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Tabs, Tab } from "react-bootstrap";
-import WizeGameComponent from "./wize/js/components/WizeGameComponent";
+import { Navbar, Nav, Tabs, Tab } from "react-bootstrap";
+import Wize from "./wize/js/components/Wize";
 import Home from "./Home.js";
 
 class MainNavBar extends Component {
@@ -19,10 +19,10 @@ class MainNavBar extends Component {
       //   </Navbar>
       <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
         <Tab eventKey="home" title="Home">
-          <Home />
+          <Home className="tab-content" />
         </Tab>
         <Tab eventKey="game" title="Wize">
-          <WizeGameComponent />
+          <Wize className="tab-content" />
         </Tab>
       </Tabs>
     );
