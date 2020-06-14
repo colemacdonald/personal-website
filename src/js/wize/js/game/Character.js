@@ -1,4 +1,5 @@
 import { _ } from "underscore";
+import { util } from "../util.js";
 
 let DIRECTIONS = {
   RIGHT: "right",
@@ -32,6 +33,7 @@ class Character {
     this.jmpCnt = 0;
     this.fall = false;
     this.alive = true;
+    this.fallThroughPlatform = false;
 
     // Interaction
     this.hurtBoxes = []; // List of rectangles relative to px,py
@@ -46,9 +48,12 @@ class Character {
   // Called when game determines that you are on a platform
   setCurrentPlatform(plat) {
     this.currentPlatform = plat;
-    this.y = plat.y - this.h;
-    this.onG = true;
     this.jmpCnt = 0;
+
+    if (!this.fall && !this.fallThroughPlatform) {
+      this.y = plat.y - this.h;
+      this.onG = true;
+    }
   }
 
   setPosition(x, y) {
@@ -88,7 +93,24 @@ class Character {
     this.y += this.yv;
 
     if (this.fall && this.currentPlatform) {
-      this.y = this.currentPlatform.y + this.currentPlatform.h - 5;
+      this.fallThroughPlatform = true;
+    }
+
+    if (
+      this.fallThroughPlatform &&
+      this.currentPlatform &&
+      !util.doRectanglesOverlap(
+        this.x,
+        this.y + this.h * 0.95,
+        this.h * 0.1,
+        this.w,
+        this.currentPlatform.x,
+        this.currentPlatform.y,
+        this.currentPlatform.h,
+        this.currentPlatform.w
+      )
+    ) {
+      this.fallThroughPlatform = false;
       this.currentPlatform = null;
     }
   }

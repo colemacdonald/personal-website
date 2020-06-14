@@ -28,7 +28,7 @@ class WizeGame {
     this.character.setPosition(100, 1300);
 
     while (this.platforms.length < 50) {
-      var newPlat = {
+      let newPlat = {
         x: Math.random() * this.width,
         y: Math.random() * this.height,
         h: 50,
@@ -40,16 +40,33 @@ class WizeGame {
       }
     }
 
-    for (let i = 0; i < 20; i++) {
-      this.monsters.push(
-        new Monster({
-          platform: this.platforms[i],
-          x: this.platforms[i].x + this.platforms[i].w / 2,
-          y: this.platforms[i].y - 20,
-          h: 50,
-          w: 20,
-        })
-      );
+    let i = 0;
+    while (this.monsters.length < 20) {
+      if (
+        !util.doRectangleArraysOverlap(
+          [this.platforms[i]],
+          [
+            {
+              x: this.character.x - 10,
+              y: this.character.y - this.character.h - 30,
+              h: 400,
+              w: 200,
+            },
+          ]
+        )
+      ) {
+        this.monsters.push(
+          new Monster({
+            platform: this.platforms[i],
+            x: this.platforms[i].x + this.platforms[i].w / 2,
+            y: this.platforms[i].y - 20,
+            h: 50,
+            w: 20,
+            speed: 2,
+          })
+        );
+      }
+      i++;
     }
 
     for (let i = 0; i < 20; i++) {

@@ -37,6 +37,9 @@ class ControllableCharacter extends Character {
 
   downPress() {
     this.fall = true;
+    if (this.currentPlatform) {
+      this.yv = 6 * this.game.grav;
+    }
   }
 
   downRelease() {

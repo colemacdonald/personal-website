@@ -5,20 +5,18 @@ class Monster {
     this.h = options.h;
     this.w = options.w;
 
+    this.speed = options.speed;
+
     this.platform = options.platform;
 
-    this.speed = 2;
-
     this.xv = this.speed;
-    this.yv = 0;
-    this.canFly = false;
   }
 
   move() {
     //these walk back and forth on platforms
     if (
-      this.x < this.platform.x - 5 ||
-      this.x > this.platform.x + this.platform.w
+      this.x < this.platform.x + 10 ||
+      this.x + this.w > this.platform.x + this.platform.w - 10
     ) {
       this.xv *= -1;
     }
