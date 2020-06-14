@@ -22,14 +22,14 @@ class WizeGame {
     this.score = 0;
 
     this.height = 1500;
-    this.width = 1500;
+    this.width = 2000;
 
     this.character = new KYeezy({ game: this });
     this.character.setPosition(100, 1300);
 
     while (this.platforms.length < 50) {
       let newPlat = {
-        x: Math.random() * this.width,
+        x: Math.random() * (this.width - 400),
         y: Math.random() * this.height,
         h: 50,
         w: Math.ceil(Math.random() * 5 + 1) * 50,

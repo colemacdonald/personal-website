@@ -9,6 +9,7 @@ class WizeGameComponent extends Component {
   constructor(props) {
     super(props);
 
+    // TODO: separate canvas size from viewportH / allow scaling
     this.viewportH = props.dimensions.viewportH;
     this.viewportW = props.dimensions.viewportW;
     this.viewportY = props.dimensions.viewportY;
@@ -135,6 +136,9 @@ class WizeGameComponent extends Component {
 
     // Score
     this.drawScore();
+
+    // Mini Map
+    this.drawMinimap();
   }
 
   drawScore() {
@@ -301,6 +305,71 @@ class WizeGameComponent extends Component {
 
     // this.cntx.fillStyle = 'purple';
     // this.cntx.fillRect(c.x - this.viewportX, c.y - this.viewportY, c.w, c.h);
+  }
+
+  drawMinimap() {
+    let minimapScale = 0.09;
+
+    let minimap = {
+      y: 10,
+      w: this.game.width * minimapScale,
+      h: this.game.height * minimapScale,
+    };
+    minimap.x = this.viewportW - minimap.w - 10;
+
+    this.cntx.save();
+    this.cntx.globalAlpha = 0.55;
+    this.cntx.fillStyle = "green";
+    this.cntx.fillRect(minimap.x, minimap.y, minimap.w, minimap.h);
+
+    this.drawMinimapPlatforms(minimapScale, minimap);
+    this.drawMinimapCharacter(minimapScale, minimap);
+    this.drawMinimapCoins(minimapScale, minimap);
+    this.drawMinimapMonsters(minimapScale, minimap);
+
+    this.cntx.restore();
+  }
+
+  drawMinimapPlatforms(scale, minimap) {
+    this.cntx.fillStyle = "brown";
+
+    this.drawOnMinimap(this.game.platforms, scale, minimap);
+  }
+
+  drawMinimapCharacter(scale, minimap) {
+    this.cntx.fillStyle = "blue";
+    let c = this.game.getMainCharacter();
+
+    this.drawOnMinimap([c], scale, minimap);
+  }
+
+  drawMinimapCoins(scale, minimap) {
+    this.cntx.fillStyle = "gold";
+
+    this.game.coins.forEach((c) => {
+      this.cntx.fillRect(
+        minimap.x + (c.x / this.game.width) * minimap.w,
+        minimap.y + (c.y / this.game.height) * minimap.h,
+        Math.max(c.r * scale, 3),
+        Math.max(c.r * scale, 3)
+      );
+    });
+  }
+
+  drawMinimapMonsters(scale, minimap) {
+    this.cntx.fillStyle = "red";
+    this.drawOnMinimap(this.game.monsters, scale, minimap);
+  }
+
+  drawOnMinimap(rects, scale, minimap) {
+    rects.forEach((r) => {
+      this.cntx.fillRect(
+        minimap.x + (r.x / this.game.width) * minimap.w,
+        minimap.y + (r.y / this.game.height) * minimap.h,
+        r.w * scale,
+        r.h * scale
+      );
+    });
   }
 
   /*
