@@ -23,6 +23,7 @@ class WizeGameComponent extends Component {
     this.canvas = React.createRef();
 
     this.games = 0;
+    this.frameCount = 0;
   }
 
   componentDidMount() {
@@ -60,6 +61,7 @@ class WizeGameComponent extends Component {
   startGame(reset) {
     if (reset === true) {
       this.games = 0;
+      this.frameCount = 0;
     }
 
     if (this.game) delete this.game;
@@ -139,7 +141,13 @@ class WizeGameComponent extends Component {
     this.cntx.fillStyle = "red";
     this.cntx.font = "30px Arial";
     this.cntx.fillText(
-      "Games: " + this.games + " Score: " + this.game.score,
+      "Games: " +
+        this.games +
+        " Score: " +
+        this.game.score +
+        " (" +
+        Math.floor(this.frameCount / this.game.fps) +
+        "s)",
       10,
       30
     );
@@ -303,6 +311,9 @@ class WizeGameComponent extends Component {
     this.game.update();
     this.drawGame();
     this.updateViewport();
+    if (this.game.playerAlive) {
+      this.frameCount++;
+    }
   }
 
   /*
