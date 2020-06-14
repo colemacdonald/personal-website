@@ -26,7 +26,7 @@ class WizeGameComponent extends Component {
   }
 
   componentDidMount() {
-    this.startGame();
+    this.startGame(false);
   }
 
   componentWillUnmount() {
@@ -38,7 +38,13 @@ class WizeGameComponent extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.startGame}>Start Again</button>
+        <button
+          onClick={() => {
+            this.startGame(true);
+          }}
+        >
+          Start Again
+        </button>
         <div className="wize-game">
           <canvas
             ref={this.canvas}
@@ -51,7 +57,11 @@ class WizeGameComponent extends Component {
     );
   }
 
-  startGame() {
+  startGame(reset) {
+    if (reset === true) {
+      this.games = 0;
+    }
+
     if (this.game) delete this.game;
     this.game = new WizeGame();
 
@@ -92,7 +102,6 @@ class WizeGameComponent extends Component {
   drawGame() {
     if (!this.game.playerAlive) {
       this.drawBackground();
-      this.games = 0;
       this.cntx.fillStyle = "red";
       this.cntx.font = "30px Arial";
       this.cntx.fillText(
@@ -104,7 +113,7 @@ class WizeGameComponent extends Component {
       return;
     } else if (this.game.score === 2000) {
       this.games++;
-      this.startGame();
+      this.startGame(false);
       return;
     }
 
