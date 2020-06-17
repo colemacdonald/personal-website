@@ -5,6 +5,7 @@ import { WizeGame } from "../game/WizeGame.js";
 import { _ } from "underscore";
 import { util } from "../util.js";
 
+// TODO: Separate view from game controller logic
 class WizeGameComponent extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,7 @@ class WizeGameComponent extends Component {
 
     this.canvas = React.createRef();
 
-    this.games = 0;
+    this.level = 0;
     this.frameCount = 0;
   }
 
@@ -61,12 +62,15 @@ class WizeGameComponent extends Component {
 
   startGame(reset) {
     if (reset === true) {
-      this.games = 0;
+      this.level = 0;
       this.frameCount = 0;
     }
 
     if (this.game) delete this.game;
-    this.game = new WizeGame();
+    this.game = new WizeGame({
+      monsterSpeed: 1 + 0.5 * this.level,
+      numberOfMonsters: 20 + 2 * this.level,
+    });
 
     this.viewportY = this.game.getMainCharacter().x - 100;
     this.viewportX = this.game.getMainCharacter().y - 100;
@@ -115,7 +119,7 @@ class WizeGameComponent extends Component {
       this.drawScore();
       return;
     } else if (this.game.score === 2000) {
-      this.games++;
+      this.level++;
       this.startGame(false);
       return;
     }
@@ -145,8 +149,8 @@ class WizeGameComponent extends Component {
     this.cntx.fillStyle = "red";
     this.cntx.font = "30px Arial";
     this.cntx.fillText(
-      "Games: " +
-        this.games +
+      "Level: " +
+        this.level +
         " Score: " +
         this.game.score +
         " (" +

@@ -8,9 +8,24 @@ class WizeGame {
   /**
    * Create a new game
    */
-  constructor() {
-    this.fps = 60;
-    this.speed = 3;
+  constructor(options) {
+    // TODO: Move all of these things to the options
+    options = {
+      fps: 60,
+      speed: 3,
+      coinMargin: 150,
+      height: 1500,
+      width: 2000,
+      monsterSpeed: 2,
+      numberOfMonsters: 20,
+
+      ...options,
+    };
+
+    this.fps = options.fps;
+    this.speed = options.speed;
+    this.height = options.height;
+    this.width = options.width;
 
     this.platforms = [{ x: 0, y: 1500, h: 150, w: 2000 }];
     this.monsters = [];
@@ -18,18 +33,14 @@ class WizeGame {
 
     this.playerAlive = true;
     this.grav = 0.5;
-
     this.score = 0;
-
-    this.height = 1500;
-    this.width = 2000;
 
     this.character = new KYeezy({ game: this });
     this.character.setPosition(100, 1300);
 
     while (this.platforms.length < 50) {
       let newPlat = {
-        x: Math.random() * (this.width - 400),
+        x: Math.random() * (this.width - 300),
         y: Math.random() * this.height,
         h: 50,
         w: Math.ceil(Math.random() * 5 + 1) * 50,
@@ -41,7 +52,10 @@ class WizeGame {
     }
 
     let i = 0;
-    while (this.monsters.length < 20) {
+    while (
+      this.monsters.length < options.numberOfMonsters &&
+      i < this.platforms.length
+    ) {
       if (
         !util.doRectangleArraysOverlap(
           [this.platforms[i]],
@@ -62,7 +76,7 @@ class WizeGame {
             y: this.platforms[i].y - 20,
             h: 50,
             w: 20,
-            speed: 2,
+            speed: options.monsterSpeed,
           })
         );
       }
@@ -72,8 +86,12 @@ class WizeGame {
     for (let i = 0; i < 20; i++) {
       this.coins.push(
         new Coin({
-          x: Math.random() * this.width,
-          y: Math.random() * this.height,
+          x:
+            Math.random() * (this.width - options.coinMargin * 2) +
+            options.coinMargin,
+          y:
+            Math.random() * (this.height - options.coinMargin * 2) +
+            options.coinMargin,
         })
       );
     }
