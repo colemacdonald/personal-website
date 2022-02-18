@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { COIN_FRAMES } from "../game/Coin.js";
-import { TILES } from "../game/Frames.js";
-import { WizeGame } from "../game/WizeGame.js";
+import { COIN_FRAMES } from "../game/sprites/Coin.js";
+import { TILES } from "../game/sprites/Frames.js";
+import WizeGame from "../game/WizeGame.js";
+import WizeGameController from "../game/WizeGameController.js"
 import { _ } from "underscore";
 import { util } from "../util.js";
 
@@ -23,6 +24,9 @@ class WizeGameComponent extends Component {
     this.bootstrapPlatformImages();
 
     this.canvas = React.createRef();
+
+    this.gameController = new WizeGameController();
+    this.gameController.startRandomGame();
 
     this.level = 0;
     this.frameCount = 0;
@@ -64,13 +68,13 @@ class WizeGameComponent extends Component {
     if (reset === true) {
       this.level = 0;
       this.frameCount = 0;
+
+      this.gameController.startRandomGame();
+    } else {
+      this.gameController.incrementGameDifficulty();
     }
 
-    if (this.game) delete this.game;
-    this.game = new WizeGame({
-      monsterSpeed: 1 + 0.5 * this.level,
-      numberOfMonsters: 20 + 2 * this.level,
-    });
+    this.game = this.gameController.game;
 
     this.viewportY = this.game.getMainCharacter().x - 100;
     this.viewportX = this.game.getMainCharacter().y - 100;
@@ -165,7 +169,7 @@ class WizeGameComponent extends Component {
    * Draws each platform that exists inside the viewport at its position offset the viewport
    */
   drawPlatforms() {
-    var plats = this.game.platforms;
+    var plats = this.game.level.platforms;
 
     _.each(
       plats,
@@ -226,7 +230,7 @@ class WizeGameComponent extends Component {
    * Draws each monster that exists inside the viewport at its position offset the viewport
    */
   drawMonsters() {
-    var monsters = this.game.monsters;
+    var monsters = this.game.level.monsters;
 
     this.cntx.fillStyle = "brown";
     _.each(
@@ -260,7 +264,7 @@ class WizeGameComponent extends Component {
    * Draws each coin that exists inside the viewport at its position offset the viewport
    */
   drawCoins() {
-    var coins = this.game.coins;
+    var coins = this.game.level.coins;
 
     this.cntx.fillStyle = "yellow";
     _.each(
@@ -337,7 +341,7 @@ class WizeGameComponent extends Component {
   drawMinimapPlatforms(scale, minimap) {
     this.cntx.fillStyle = "brown";
 
-    this.drawOnMinimap(this.game.platforms, scale, minimap);
+    this.drawOnMinimap(this.game.level.platforms, scale, minimap);
   }
 
   drawMinimapCharacter(scale, minimap) {
@@ -350,7 +354,7 @@ class WizeGameComponent extends Component {
   drawMinimapCoins(scale, minimap) {
     this.cntx.fillStyle = "gold";
 
-    this.game.coins.forEach((c) => {
+    this.game.level.coins.forEach((c) => {
       this.cntx.fillRect(
         minimap.x + (c.x / this.game.width) * minimap.w,
         minimap.y + (c.y / this.game.height) * minimap.h,
@@ -362,7 +366,7 @@ class WizeGameComponent extends Component {
 
   drawMinimapMonsters(scale, minimap) {
     this.cntx.fillStyle = "red";
-    this.drawOnMinimap(this.game.monsters, scale, minimap);
+    this.drawOnMinimap(this.game.level.monsters, scale, minimap);
   }
 
   drawOnMinimap(rects, scale, minimap) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Tabs, Tab } from "react-bootstrap";
-import Wize from "./wize/js/components/Wize";
+import WizeHome from "./wize/js/components/WizeHome";
 import Home from "./Home.js";
 
 class MainNavBar extends Component {
@@ -22,7 +22,7 @@ class MainNavBar extends Component {
           <Home className="tab-content" />
         </Tab>
         <Tab eventKey="game" title="Wize">
-          <Wize className="tab-content" />
+          <WizeHome className="tab-content" />
         </Tab>
       </Tabs>
     );
