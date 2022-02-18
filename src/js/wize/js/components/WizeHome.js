@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import WizeGameComponent from "./WizeGameComponent.js";
 import "../../../../css/wize.css";
 
-class Wize extends Component {
+class WizeHome extends Component {
   // TODO: these aren't game dimensions, they are viewport dimensions
   gameDimensions = {
     viewportH: 500,
@@ -88,4 +88,4 @@ class Wize extends Component {
   }
 }
 
-export default Wize;
+export default WizeHome;

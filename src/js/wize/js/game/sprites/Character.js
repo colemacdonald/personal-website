@@ -1,5 +1,5 @@
 import { _ } from "underscore";
-import { util } from "../util.js";
+import { util } from "../../util.js";
 
 let DIRECTIONS = {
   RIGHT: "right",
@@ -13,9 +13,6 @@ let DIRECTIONS = {
  */
 class Character {
   constructor(options) {
-    // Options must contain the game object
-    this.game = options.game;
-
     // Positioning and Movement
     this.x = options.x ? options.x : 0;
     this.y = options.y ? options.y : 0;
@@ -43,6 +40,10 @@ class Character {
     // Animation
     this.direction = DIRECTIONS.RIGHT;
     this.frameCounter = 0;
+  }
+
+  setGame(game) {
+    this.game = game;
   }
 
   // Called when game determines that you are on a platform

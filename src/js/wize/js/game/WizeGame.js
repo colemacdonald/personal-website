@@ -1,7 +1,7 @@
-import { Coin } from "./Coin.js";
+import { Coin } from "./sprites/Coin.js";
 import { util } from "../util.js";
-import { KYeezy } from "./KYeezyCharacter.js";
-import { Monster } from "./Monster.js";
+import { KYeezy } from "./sprites/KYeezyCharacter.js";
+import { Monster } from "./sprites/Monster.js";
 import { _ } from "underscore";
 
 class WizeGame {
@@ -9,92 +9,17 @@ class WizeGame {
    * Create a new game
    */
   constructor(options) {
-    // TODO: Move all of these things to the options
-    options = {
-      fps: 60,
-      speed: 3,
-      coinMargin: 150,
-      height: 1500,
-      width: 2000,
-      monsterSpeed: 2,
-      numberOfMonsters: 20,
-
-      ...options,
-    };
-
     this.fps = options.fps;
     this.speed = options.speed;
     this.height = options.height;
     this.width = options.width;
+    this.grav = options.grav;
 
-    this.platforms = [{ x: 0, y: 1500, h: 150, w: 2000 }];
-    this.monsters = [];
-    this.coins = [];
+    this.level = options.level;
+    this.character = options.character;
 
     this.playerAlive = true;
-    this.grav = 0.5;
     this.score = 0;
-
-    this.character = new KYeezy({ game: this });
-    this.character.setPosition(100, 1300);
-
-    while (this.platforms.length < 50) {
-      let newPlat = {
-        x: Math.random() * (this.width - 300),
-        y: Math.random() * this.height,
-        h: 50,
-        w: Math.ceil(Math.random() * 5 + 1) * 50,
-      };
-
-      if (!util.doRectangleArraysOverlap(this.platforms, [newPlat])) {
-        this.platforms.push(newPlat);
-      }
-    }
-
-    let i = 0;
-    while (
-      this.monsters.length < options.numberOfMonsters &&
-      i < this.platforms.length
-    ) {
-      if (
-        !util.doRectangleArraysOverlap(
-          [this.platforms[i]],
-          [
-            {
-              x: this.character.x - 10,
-              y: this.character.y - this.character.h - 30,
-              h: 400,
-              w: 200,
-            },
-          ]
-        )
-      ) {
-        this.monsters.push(
-          new Monster({
-            platform: this.platforms[i],
-            x: this.platforms[i].x + this.platforms[i].w / 2,
-            y: this.platforms[i].y - 20,
-            h: 50,
-            w: 20,
-            speed: options.monsterSpeed,
-          })
-        );
-      }
-      i++;
-    }
-
-    for (let i = 0; i < 20; i++) {
-      this.coins.push(
-        new Coin({
-          x:
-            Math.random() * (this.width - options.coinMargin * 2) +
-            options.coinMargin,
-          y:
-            Math.random() * (this.height - options.coinMargin * 2) +
-            options.coinMargin,
-        })
-      );
-    }
   }
 
   /**
@@ -105,7 +30,7 @@ class WizeGame {
     this.onGround = false;
     this.character.onG = false;
     _.each(
-      this.platforms,
+      this.level.platforms,
       function (plat) {
         if (
           util.doRectanglesOverlap(
@@ -132,7 +57,7 @@ class WizeGame {
     this.character.move();
 
     _.each(
-      this.monsters,
+      this.level.monsters,
       function (monster) {
         if (
           util.doRectangleArraysOverlap(this.character.getHurtBoxes(), [
@@ -148,7 +73,7 @@ class WizeGame {
 
     var indices = [];
     _.each(
-      this.coins,
+      this.level.coins,
       function (coin) {
         if (
           util.doRectangleArraysOverlap(this.character.getHurtBoxes(), [
@@ -160,7 +85,7 @@ class WizeGame {
             },
           ])
         ) {
-          indices.push(this.coins.indexOf(coin));
+          indices.push(this.level.coins.indexOf(coin));
         }
       },
       this
@@ -169,12 +94,12 @@ class WizeGame {
     // Remove coins from game
     for (var i = indices.length - 1; i >= 0; i--) {
       this.score += 100;
-      this.coins.splice(indices[i], 1);
+      this.level.coins.splice(indices[i], 1);
     }
 
     // Don't let character fall below stage
     if (this.character.y > this.height)
-      this.character.y = this.platforms[0].y - this.character.h - 5;
+      this.character.y = this.level.platforms[0].y - this.character.h - 5;
   }
 
   getMainCharacter() {

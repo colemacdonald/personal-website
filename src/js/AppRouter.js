@@ -6,8 +6,6 @@ import {
   //   useRouteMatch,
 } from "react-router-dom";
 import MainNavBar from "./MainNavBar.js";
-import Wize from "./wize/js/components/Wize";
-import Home from "./Home.js";
 
 class AppRouter extends Component {
   render() {
