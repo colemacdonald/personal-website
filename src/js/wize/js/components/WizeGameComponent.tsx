@@ -12,6 +12,7 @@ class WizeGameComponent extends Component {
   viewportW: number;
   viewportY: number;
   viewportX: number;
+  canvasScale: number;
 
   canvas: any;
   cntx: any;
@@ -38,6 +39,7 @@ class WizeGameComponent extends Component {
     this.viewportW = props.viewportW;
     this.viewportY = props.viewportY;
     this.viewportX = props.viewportX;
+    this.canvasScale = props.canvasScale;
 
     this.canvas = React.createRef();
 
@@ -59,8 +61,8 @@ class WizeGameComponent extends Component {
       if (this.interval) window.clearInterval(this.interval);
     }
 
-    this.drawGame();
     this.updateViewport();
+    this.drawGame();
     if (this.gameController.game.playerAlive) {
       this.frameCount++;
     }
@@ -92,8 +94,8 @@ class WizeGameComponent extends Component {
           <canvas
             ref={this.canvas}
             className="game-canvas"
-            height={`${this.viewportH}px`}
-            width={`${this.viewportW}px`}
+            height={`${this.viewportH * this.canvasScale}px`}
+            width={`${this.viewportW * this.canvasScale}px`}
           />
         </div>
       </div>
@@ -125,12 +127,21 @@ class WizeGameComponent extends Component {
     );
 
     // Background
-    this.cntx.fillStyle = "#33beff";
+    this.cntx.fillStyle = "black";
     this.cntx.fillRect(
       0,
       0,
       this.canvas.current.width,
       this.canvas.current.height
+    );
+
+    // Room Background
+    this.cntx.fillStyle = "#33beff";
+    this.cntx.fillRect(
+      0 - this.viewportX * this.canvasScale,
+      0 - this.viewportY * this.canvasScale,
+      this.gameController.game.room.w * this.canvasScale,
+      this.gameController.game.room.h * this.canvasScale
     );
   }
 
@@ -214,10 +225,10 @@ class WizeGameComponent extends Component {
         // Left corner
         this.cntx.drawImage(
           this.platformImages.left,
-          plat.x - this.viewportX,
-          plat.y - this.viewportY,
-          TILES.w,
-          TILES.h
+        (plat.x - this.viewportX) * this.canvasScale,
+          (plat.y - this.viewportY) * this.canvasScale,
+          TILES.w * this.canvasScale,
+          TILES.h * this.canvasScale
         );
 
         // Middle tiles
@@ -227,10 +238,10 @@ class WizeGameComponent extends Component {
         while ((i + 1) * TILES.w < plat.w) {
           this.cntx.drawImage(
             this.platformImages.center,
-            plat.x + TILES.w * i - this.viewportX,
-            plat.y - this.viewportY,
-            TILES.w,
-            TILES.h
+            (plat.x + TILES.w * i - this.viewportX) * this.canvasScale,
+            (plat.y - this.viewportY) * this.canvasScale,
+            TILES.w * this.canvasScale,
+            TILES.h * this.canvasScale
           );
 
           i++;
@@ -239,10 +250,10 @@ class WizeGameComponent extends Component {
         // Right corner
         this.cntx.drawImage(
           this.platformImages.right,
-          plat.x + TILES.w * i - this.viewportX,
-          plat.y - this.viewportY,
-          TILES.w,
-          TILES.h
+          (plat.x + TILES.w * i - this.viewportX) * this.canvasScale,
+          (plat.y - this.viewportY) * this.canvasScale,
+          TILES.w * this.canvasScale,
+          TILES.h * this.canvasScale
         );
       }
     });
@@ -267,10 +278,10 @@ class WizeGameComponent extends Component {
         )
       ) {
         this.cntx.fillRect(
-          door.x - this.viewportX,
-          door.y - this.viewportY,
-          door.w,
-          door.h
+          (door.x - this.viewportX) * this.canvasScale,
+          (door.y - this.viewportY) * this.canvasScale,
+          door.w * this.canvasScale,
+          door.h * this.canvasScale
         );
       }
     });
@@ -298,10 +309,10 @@ class WizeGameComponent extends Component {
         )
       ) {
         this.cntx.fillRect(
-          monster.x - this.viewportX,
-          monster.y - this.viewportY,
-          monster.w,
-          monster.h
+          (monster.x - this.viewportX) * this.canvasScale,
+          (monster.y - this.viewportY) * this.canvasScale,
+          monster.w * this.canvasScale,
+          monster.h * this.canvasScale
         );
       }
     });
@@ -332,10 +343,10 @@ class WizeGameComponent extends Component {
 
         this.cntx.drawImage(
           COIN_FRAMES.images[index],
-          coin.x - coin.r - this.viewportX,
-          coin.y - coin.r - this.viewportY,
-          coin.r * 2,
-          coin.r * 2
+          (coin.x - coin.r - this.viewportX) * this.canvasScale,
+          (coin.y - coin.r - this.viewportY) * this.canvasScale,
+          coin.r * 2 * this.canvasScale,
+          coin.r * 2 * this.canvasScale
         );
       }
     }, this);
@@ -351,10 +362,10 @@ class WizeGameComponent extends Component {
 
     this.cntx.drawImage(
       frame.img,
-      c.x - this.viewportX + frame.x_offset,
-      c.y - this.viewportY,
-      c.w + frame.width_extend,
-      c.h
+      (c.x - this.viewportX + frame.x_offset) * this.canvasScale,
+      (c.y - this.viewportY) * this.canvasScale,
+      (c.w + frame.width_extend) * this.canvasScale,
+      c.h * this.canvasScale
     );
     
 
@@ -367,16 +378,16 @@ class WizeGameComponent extends Component {
 
     let minimap = {
       y: 10,
-      w: this.gameController.game.width * minimapScale,
-      h: this.gameController.game.height * minimapScale,
+      w: this.gameController.game.room.w * minimapScale,
+      h: this.gameController.game.room.h * minimapScale,
       x: 0
     };
-    minimap.x = this.viewportW - minimap.w - 10;
+    minimap.x = (this.viewportW - minimap.w - 10);
 
     this.cntx.save();
     this.cntx.globalAlpha = 0.55;
     this.cntx.fillStyle = "green";
-    this.cntx.fillRect(minimap.x, minimap.y, minimap.w, minimap.h);
+    this.cntx.fillRect(minimap.x * this.canvasScale, minimap.y * this.canvasScale, minimap.w * this.canvasScale, minimap.h * this.canvasScale);
 
     this.drawMinimapPlatforms(minimapScale, minimap);
     this.drawMinimapDoors(minimapScale, minimap);
@@ -427,10 +438,10 @@ class WizeGameComponent extends Component {
   drawOnMinimap(rects, scale, minimap) {
     rects.forEach((r) => {
       this.cntx.fillRect(
-        minimap.x + (r.x / this.gameController.game.width) * minimap.w,
-        minimap.y + (r.y / this.gameController.game.height) * minimap.h,
-        r.w * scale,
-        r.h * scale
+        (minimap.x + (r.x / this.gameController.game.width) * minimap.w) * this.canvasScale,
+        (minimap.y + (r.y / this.gameController.game.height) * minimap.h) * this.canvasScale,
+        r.w * scale * this.canvasScale,
+        r.h * scale * this.canvasScale
       );
     });
   }

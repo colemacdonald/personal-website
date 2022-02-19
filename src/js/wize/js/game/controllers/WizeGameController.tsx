@@ -1,5 +1,4 @@
-import { updateTypeLiteralNode } from "typescript";
-import Room from "../Room";
+import { Room, CreateRoomWithFloor } from "../Room";
 import { KYeezy } from "../sprites/KYeezyCharacter";
 import WizeGame from "../WizeGame";
 import { GameControllerBase, GameState } from "./GameControllerBase";
@@ -10,20 +9,17 @@ import Door from "../sprites/Door";
 class WizeGameController extends GameControllerBase {
 
     rooms: Array<Room>;
-
-    basePlatform = { x: 0, y: 1500, h: 150, w: 2000 };
-
     
     constructor() {
         super();
 
         this.rooms = [ 
-            {h: 500, w: 500, platforms: [this.basePlatform], coins:[], monsters:[], doors: [] },
-            {h: 1500, w: 2000, platforms: [{x: 0, y:1500, h:150, w:900}], coins:[], monsters:[], doors: [] },
+            CreateRoomWithFloor(1500, 2000),
+            CreateRoomWithFloor(500, 1000),
         ];
 0
-        this.rooms[0].doors.push({x: 1900, y:1400, h:100, w: 50, destRoom: this.rooms[1], destX: 60, destY: 1400});
-        this.rooms[1].doors.push({x: 0, y:1400, h:100, w: 50, destRoom: this.rooms[0], destX: 1800, destY: 1400});
+        this.rooms[0].doors.push({x: 1900, y:1400, h:100, w: 50, destRoom: this.rooms[1], destX: 100, destY: 900});
+        this.rooms[1].doors.push({x: 50, y:400, h:100, w: 50, destRoom: this.rooms[0], destX: 1800, destY: 1400});
     }
 
     newGame() {
