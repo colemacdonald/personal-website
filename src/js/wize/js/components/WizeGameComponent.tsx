@@ -44,7 +44,7 @@ class WizeGameComponent extends Component {
     this.bootstrapCoinsImages();
     this.bootstrapPlatformImages();
 
-    this.gameController = new RandomWizeGameController();
+    this.gameController = props.gameController;
 
     this.level = 0;
     this.frameCount = 0;
