@@ -156,6 +156,9 @@ class WizeGameComponent extends Component {
     // Draw platforms (which are currently coded to hav width of 50 that are >= 100)
     this.drawPlatforms();
 
+    // Draw doors
+    this.drawDoors();
+
     // Monsters
     this.drawMonsters();
 
@@ -245,11 +248,39 @@ class WizeGameComponent extends Component {
     });
   }
 
+  drawDoors() {
+    let doors = this.gameController.game.room.doors;
+
+    this.cntx.fillStyle = "grey";
+
+    doors.forEach(door => {
+      if (
+        util.doRectanglesOverlap(
+          this.viewportX,
+          this.viewportY,
+          this.viewportH,
+          this.viewportW,
+          door.x,
+          door.y,
+          door.h,
+          door.w
+        )
+      ) {
+        this.cntx.fillRect(
+          door.x - this.viewportX,
+          door.y - this.viewportY,
+          door.w,
+          door.h
+        );
+      }
+    });
+  }
+
   /*
    * Draws each monster that exists inside the viewport at its position offset the viewport
    */
   drawMonsters() {
-    var monsters = this.gameController.game.room.monsters;
+    let monsters = this.gameController.game.room.monsters;
 
     this.cntx.fillStyle = "brown";
 
@@ -280,7 +311,7 @@ class WizeGameComponent extends Component {
    * Draws each coin that exists inside the viewport at its position offset the viewport
    */
   drawCoins() {
-    var coins = this.gameController.game.room.coins;
+    let coins = this.gameController.game.room.coins;
 
     this.cntx.fillStyle = "yellow";
 
@@ -348,6 +379,7 @@ class WizeGameComponent extends Component {
     this.cntx.fillRect(minimap.x, minimap.y, minimap.w, minimap.h);
 
     this.drawMinimapPlatforms(minimapScale, minimap);
+    this.drawMinimapDoors(minimapScale, minimap);
     this.drawMinimapCharacter(minimapScale, minimap);
     this.drawMinimapCoins(minimapScale, minimap);
     this.drawMinimapMonsters(minimapScale, minimap);
@@ -359,6 +391,12 @@ class WizeGameComponent extends Component {
     this.cntx.fillStyle = "brown";
 
     this.drawOnMinimap(this.gameController.game.room.platforms, scale, minimap);
+  }
+
+  drawMinimapDoors(scale, minimap) {
+    this.cntx.fillStyle = "black";
+
+    this.drawOnMinimap(this.gameController.game.room.doors, scale, minimap);
   }
 
   drawMinimapCharacter(scale, minimap) {
