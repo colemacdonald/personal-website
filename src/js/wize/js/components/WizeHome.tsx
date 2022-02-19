@@ -1,14 +1,23 @@
 import React, { Component } from "react";
 import { WizeGameComponent } from "./WizeGameComponent";
 import "../../../../css/wize.css";
+import { GameControllerBase } from "../game/controllers/GameControllerBase";
 
 class WizeHome extends Component {
+  gameController: GameControllerBase;
+
+  constructor(props){
+    super(props);
+    this.gameProperties.gameController = props.gameController;
+  }
+
   // TODO: these aren't game dimensions, they are viewport dimensions
-  gameDimensions = {
+  gameProperties = {
     viewportH: 500,
     viewportW: 1000,
     viewportY: 0,
     viewportX: 0,
+    gameController: null
   };
 
   description = `Play as Yeezy the Wize as he tries to collect all of the K-Coins.
@@ -75,7 +84,7 @@ class WizeHome extends Component {
                 </div>
               </td>
               <td>
-                <WizeGameComponent {...this.gameDimensions}/>
+                <WizeGameComponent {...this.gameProperties}/>
               </td>
             </tr>
           </tbody>

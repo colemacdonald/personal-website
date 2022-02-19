@@ -1,17 +1,15 @@
 import WizeGame from "../WizeGame";
 import { KYeezy } from "../sprites/KYeezyCharacter";
 import { RoomGenerator } from "../RoomGenerator";
-import { ControllableCharacter } from "../sprites/ControllableCharacter";
 import { GameControllerBase, GameState } from "./GameControllerBase"
 
 class RandomWizeGameController extends GameControllerBase {
-    
-    character: ControllableCharacter;
-    game: WizeGame;
-
     newGame() {
         this.gameState = GameState.Playing;
         this.level = 0;
+
+        this.baseOptions.monsterSpeed = 2;
+        this.baseOptions.numberOfMonsters = 20;
 
         let room = RoomGenerator.generateRandomRoom(this.baseOptions);
         this.character = new KYeezy({});
@@ -24,10 +22,10 @@ class RandomWizeGameController extends GameControllerBase {
     incrementGameDifficulty() {
         if (this.game) delete this.game;
 
-        this.baseOptions.monsterSpeed += 0.5;
-        this.baseOptions.numberOfMonsters += 2;
-
         this.level++;
+
+        this.baseOptions.monsterSpeed = 2 + this.level * 1;
+        this.baseOptions.numberOfMonsters = 20 + this.level * 2;
 
         let room = RoomGenerator.generateRandomRoom(this.baseOptions);
 
