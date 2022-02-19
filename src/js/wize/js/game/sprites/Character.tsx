@@ -1,9 +1,15 @@
-import { _ } from "underscore";
+import { ExtendedConfigCacheEntry } from "typescript";
 import { util } from "../../util.js";
 
 let DIRECTIONS = {
   RIGHT: "right",
   LEFT: "left",
+};
+
+type Frame = {
+  img: any,
+  x_offset: number,
+  width_extend: number
 };
 
 /**
@@ -12,6 +18,31 @@ let DIRECTIONS = {
  * Call the super class constructor if your are extending this class
  */
 class Character {
+  x: number;
+  y: number;
+  h: number;
+  w: number;
+  speed: number;
+
+  frameCounter: number;
+  movingLeft: boolean;
+  direction: string;
+  movingRight: boolean;
+  
+  alive: boolean;
+  jmpCnt: number;
+  yv: number;
+  xv: number;
+  onG: any;
+  fall: boolean;
+  fallThroughPlatform: boolean;
+  currentPlatform: any;
+
+  game: any;
+  
+  hitBoxes: Array<Rectangle>;
+  hurtBoxes: Array<Rectangle>;
+  
   constructor(options) {
     // Positioning and Movement
     this.x = options.x ? options.x : 0;
@@ -116,26 +147,24 @@ class Character {
     }
   }
 
-  getFrame() {}
+  getFrame(): Frame {
+    return null;
+  }
 
   getHurtBoxes() {
     var hurtBoxes = [];
 
-    _.each(
-      this.hurtBoxes,
-      function (box) {
-        hurtBoxes.push({
-          x: box.x + this.x,
-          y: box.y + this.y,
-          h: box.h,
-          w: box.w,
-        });
-      },
-      this
-    );
+    this.hurtBoxes.forEach(function (box) {
+      hurtBoxes.push({
+        x: box.x + this.x,
+        y: box.y + this.y,
+        h: box.h,
+        w: box.w,
+      });
+    }, this);
 
     return hurtBoxes;
   }
 }
 
-export { DIRECTIONS, Character };
+export { DIRECTIONS, Character, Frame };

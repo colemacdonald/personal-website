@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import WizeGameComponent from "./WizeGameComponent.js";
+import { WizeGameComponent } from "./WizeGameComponent";
 import "../../../../css/wize.css";
 
 class WizeHome extends Component {
@@ -75,10 +75,7 @@ class WizeHome extends Component {
                 </div>
               </td>
               <td>
-                <WizeGameComponent
-                  className="flex-item"
-                  dimensions={this.gameDimensions}
-                />
+                <WizeGameComponent {...this.gameDimensions}/>
               </td>
             </tr>
           </tbody>

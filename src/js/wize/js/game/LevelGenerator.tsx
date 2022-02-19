@@ -1,13 +1,17 @@
 import { util } from "../util.js";
-import { Monster } from "../game/sprites/Monster.js"
-import { Coin } from "../game/sprites/Coin.js"
+import { Monster } from "./sprites/Monster"
+import { Coin } from "./sprites/Coin"
+import Room from "./Room";
 
 class LevelGenerator {
-    static generateRandomLevel(options) {
+    static generateRandomLevel(options: GameOptions): Room {
         let level = {
             platforms: [{ x: 0, y: 1500, h: 150, w: 2000 }],
             coins: [],
-            monsters: []
+            monsters: [],
+            h: options.height,
+            w: options.width,
+            doors: []
         };
 
         while (level.platforms.length < 50) {

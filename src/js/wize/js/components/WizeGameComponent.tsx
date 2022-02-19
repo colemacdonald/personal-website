@@ -1,29 +1,46 @@
-import React, { Component } from "react";
-import { COIN_FRAMES } from "../game/sprites/Coin.js";
-import { TILES } from "../game/sprites/Frames.js";
-import WizeGame from "../game/WizeGame.js";
-import WizeGameController from "../game/WizeGameController.js"
-import { _ } from "underscore";
+import React, { Component, useEffect } from "react";
+import { TILES } from "../frames/PlatformTiles";
+import { COIN_FRAMES } from "../frames/CoinFrames";
+import WizeGameController from "../game/WizeGameController"
 import { util } from "../util.js";
 
 // TODO: Separate view from game controller logic
 class WizeGameComponent extends Component {
+  viewportH: number;
+  viewportW: number;
+  viewportY: number;
+  viewportX: number;
+
+  canvas: any;
+  cntx: any;
+
+  gameController: WizeGameController;
+
+  level: number;
+  frameCount: number;
+
+  interval: NodeJS.Timer;
+
+  platformImages: {
+    left: any,
+    center: any,
+    right: any
+  };
+  
+
   constructor(props) {
     super(props);
 
     // TODO: separate canvas size from viewportH / allow scaling
-    this.viewportH = props.dimensions.viewportH;
-    this.viewportW = props.dimensions.viewportW;
-    this.viewportY = props.dimensions.viewportY;
-    this.viewportX = props.dimensions.viewportX;
-
-    _.bindAll(this, "update", "keyup", "keydown", "startGame");
-
-    this.bootstrapCoinsImages();
-
-    this.bootstrapPlatformImages();
+    this.viewportH = props.viewportH;
+    this.viewportW = props.viewportW;
+    this.viewportY = props.viewportY;
+    this.viewportX = props.viewportX;
 
     this.canvas = React.createRef();
+
+    this.bootstrapCoinsImages();
+    this.bootstrapPlatformImages();
 
     this.gameController = new WizeGameController();
 
@@ -43,7 +60,7 @@ class WizeGameComponent extends Component {
 
   render() {
     return (
-      <div>
+      <div className="flex-item">
         <button
           onClick={() => {
             this.startGame(true);
@@ -73,8 +90,6 @@ class WizeGameComponent extends Component {
       this.gameController.incrementGameDifficulty();
     }
 
-    this.game = this.gameController.game;
-
     this.viewportY = this.gameController.getCurrentGame().getMainCharacter().x - 100;
     this.viewportX = this.gameController.getCurrentGame().getMainCharacter().y - 100;
 
@@ -82,10 +97,10 @@ class WizeGameComponent extends Component {
     this.cntx.imageSmoothingEnabled = false;
 
     if (this.interval) window.clearInterval(this.interval);
-    this.interval = setInterval(this.update, 1000 / this.gameController.getCurrentGame().fps);
+    this.interval = setInterval(this.update.bind(this), 1000 / this.gameController.getCurrentGame().fps);
 
-    document.addEventListener("keyup", this.keyup);
-    document.addEventListener("keydown", this.keydown);
+    document.addEventListener("keyup", this.keyup.bind(this));
+    document.addEventListener("keydown", this.keydown.bind(this));
   }
 
   drawBackground() {
@@ -168,120 +183,114 @@ class WizeGameComponent extends Component {
    * Draws each platform that exists inside the viewport at its position offset the viewport
    */
   drawPlatforms() {
-    var plats = this.gameController.getCurrentGame().level.platforms;
+    var plats = this.gameController.getCurrentGame().room.platforms;
 
-    _.each(
-      plats,
-      function (plat) {
-        // If visible
-        if (
-          util.doRectanglesOverlap(
-            this.viewportX,
-            this.viewportY,
-            this.viewportH,
-            this.viewportW,
-            plat.x,
-            plat.y,
-            plat.h,
-            plat.w
-          )
-        ) {
-          // Left corner
+    plats.forEach(plat => {
+      // If visible
+      if (
+        util.doRectanglesOverlap(
+          this.viewportX,
+          this.viewportY,
+          this.viewportH,
+          this.viewportW,
+          plat.x,
+          plat.y,
+          plat.h,
+          plat.w
+        )
+      ) {
+        // Left corner
+        this.cntx.drawImage(
+          this.platformImages.left,
+          plat.x - this.viewportX,
+          plat.y - this.viewportY,
+          TILES.w,
+          TILES.h
+        );
+
+        // Middle tiles
+
+        var i = 1;
+        // Until we reach the right side
+        while ((i + 1) * TILES.w < plat.w) {
           this.cntx.drawImage(
-            this.platformImages.left,
-            plat.x - this.viewportX,
-            plat.y - this.viewportY,
-            TILES.w,
-            TILES.h
-          );
-
-          // Middle tiles
-
-          var i = 1;
-          // Until we reach the right side
-          while ((i + 1) * TILES.w < plat.w) {
-            this.cntx.drawImage(
-              this.platformImages.center,
-              plat.x + TILES.w * i - this.viewportX,
-              plat.y - this.viewportY,
-              TILES.w,
-              TILES.h
-            );
-
-            i++;
-          }
-
-          // Right corner
-          this.cntx.drawImage(
-            this.platformImages.right,
+            this.platformImages.center,
             plat.x + TILES.w * i - this.viewportX,
             plat.y - this.viewportY,
             TILES.w,
             TILES.h
           );
+
+          i++;
         }
-      },
-      this
-    );
+
+        // Right corner
+        this.cntx.drawImage(
+          this.platformImages.right,
+          plat.x + TILES.w * i - this.viewportX,
+          plat.y - this.viewportY,
+          TILES.w,
+          TILES.h
+        );
+      }
+    });
   }
 
   /*
    * Draws each monster that exists inside the viewport at its position offset the viewport
    */
   drawMonsters() {
-    var monsters = this.gameController.getCurrentGame().level.monsters;
+    var monsters = this.gameController.getCurrentGame().room.monsters;
 
     this.cntx.fillStyle = "brown";
-    _.each(
-      monsters,
-      function (monster) {
-        if (
-          util.doRectanglesOverlap(
-            this.viewportX,
-            this.viewportY,
-            this.viewportH,
-            this.viewportW,
-            monster.x,
-            monster.y,
-            monster.h,
-            monster.w
-          )
-        ) {
-          this.cntx.fillRect(
-            monster.x - this.viewportX,
-            monster.y - this.viewportY,
-            monster.w,
-            monster.h
-          );
-        }
-      },
-      this
-    );
+
+    monsters.forEach(monster => {
+      if (
+        util.doRectanglesOverlap(
+          this.viewportX,
+          this.viewportY,
+          this.viewportH,
+          this.viewportW,
+          monster.x,
+          monster.y,
+          monster.h,
+          monster.w
+        )
+      ) {
+        this.cntx.fillRect(
+          monster.x - this.viewportX,
+          monster.y - this.viewportY,
+          monster.w,
+          monster.h
+        );
+      }
+    });
   }
 
   /*
    * Draws each coin that exists inside the viewport at its position offset the viewport
    */
   drawCoins() {
-    var coins = this.gameController.getCurrentGame().level.coins;
+    var coins = this.gameController.getCurrentGame().room.coins;
 
     this.cntx.fillStyle = "yellow";
-    _.each(
-      coins,
-      function (coin) {
-        if (
-          util.doRectanglesOverlap(
-            this.viewportX,
-            this.viewportY,
-            this.viewportH,
-            this.viewportW,
-            coin.x - coin.r,
-            coin.y - coin.r,
-            2 * coin.r,
-            2 * coin.r
-          )
-        ) {
-          var index = coin.getImageIndex();
+
+    coins.forEach(coin => {
+      if (
+        util.doRectanglesOverlap(
+          this.viewportX,
+          this.viewportY,
+          this.viewportH,
+          this.viewportW,
+          coin.x - coin.r,
+          coin.y - coin.r,
+          2 * coin.r,
+          2 * coin.r
+        )
+      ) {
+        var index = coin.getImageIndex();
+
+        COIN_FRAMES.images[index].onload = () => {
           this.cntx.drawImage(
             COIN_FRAMES.images[index],
             coin.x - coin.r - this.viewportX,
@@ -289,19 +298,19 @@ class WizeGameComponent extends Component {
             coin.r * 2,
             coin.r * 2
           );
-        }
-      },
-      this
-    );
+        };
+      }
+    }, this);
   }
 
   /*
    * Draws the player at its position offset the viewport
    */
   drawPlayer() {
-    var c = this.gameController.getCurrentGame().getMainCharacter(),
+    let c = this.gameController.getCurrentGame().getMainCharacter(),
       frame = c.getFrame();
     // drawImage(img, x, y, w, h)
+
     this.cntx.drawImage(
       frame.img,
       c.x - this.viewportX + frame.x_offset,
@@ -309,6 +318,7 @@ class WizeGameComponent extends Component {
       c.w + frame.width_extend,
       c.h
     );
+    
 
     // this.cntx.fillStyle = 'purple';
     // this.cntx.fillRect(c.x - this.viewportX, c.y - this.viewportY, c.w, c.h);
@@ -321,6 +331,7 @@ class WizeGameComponent extends Component {
       y: 10,
       w: this.gameController.getCurrentGame().width * minimapScale,
       h: this.gameController.getCurrentGame().height * minimapScale,
+      x: 0
     };
     minimap.x = this.viewportW - minimap.w - 10;
 
@@ -340,7 +351,7 @@ class WizeGameComponent extends Component {
   drawMinimapPlatforms(scale, minimap) {
     this.cntx.fillStyle = "brown";
 
-    this.drawOnMinimap(this.gameController.getCurrentGame().level.platforms, scale, minimap);
+    this.drawOnMinimap(this.gameController.getCurrentGame().room.platforms, scale, minimap);
   }
 
   drawMinimapCharacter(scale, minimap) {
@@ -353,7 +364,7 @@ class WizeGameComponent extends Component {
   drawMinimapCoins(scale, minimap) {
     this.cntx.fillStyle = "gold";
 
-    this.gameController.getCurrentGame().level.coins.forEach((c) => {
+    this.gameController.getCurrentGame().room.coins.forEach((c) => {
       this.cntx.fillRect(
         minimap.x + (c.x / this.gameController.getCurrentGame().width) * minimap.w,
         minimap.y + (c.y / this.gameController.getCurrentGame().height) * minimap.h,
@@ -365,7 +376,7 @@ class WizeGameComponent extends Component {
 
   drawMinimapMonsters(scale, minimap) {
     this.cntx.fillStyle = "red";
-    this.drawOnMinimap(this.gameController.getCurrentGame().level.monsters, scale, minimap);
+    this.drawOnMinimap(this.gameController.getCurrentGame().room.monsters, scale, minimap);
   }
 
   drawOnMinimap(rects, scale, minimap) {
@@ -396,7 +407,7 @@ class WizeGameComponent extends Component {
    * Update the viewport if the character gets too close to the edge
    */
   updateViewport() {
-    var c = this.gameController.getCurrentGame().getMainCharacter();
+    let c = this.gameController.getCurrentGame().getMainCharacter();
     if (c.x < this.viewportX + 0.3 * this.viewportW) {
       this.viewportX = c.x - 0.3 * this.viewportW;
     } else if (c.x > this.viewportX + 0.7 * this.viewportW) {
@@ -412,7 +423,7 @@ class WizeGameComponent extends Component {
 
   bootstrapCoinsImages() {
     COIN_FRAMES.sources.forEach((src) => {
-      var img = new Image();
+      const img = new Image();
       img.src = src;
 
       COIN_FRAMES.images.push(img);
@@ -420,7 +431,7 @@ class WizeGameComponent extends Component {
   }
 
   bootstrapPlatformImages() {
-    var left = new Image(),
+    const left = new Image(),
       right = new Image(),
       center = new Image();
 
@@ -476,4 +487,4 @@ class WizeGameComponent extends Component {
   }
 }
 
-export default WizeGameComponent;
+export {WizeGameComponent};

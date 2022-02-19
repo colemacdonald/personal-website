@@ -1,4 +1,13 @@
 class Monster {
+  x: number;
+  y: number;
+  h: number;
+  w: number;
+  speed: number;
+  platform: Rectangle;
+  xv: number;
+  
+
   constructor(options) {
     this.x = options.x;
     this.y = options.y;

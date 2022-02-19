@@ -1,5 +1,4 @@
 //util.js
-import { _ } from "underscore";
 class util {
   static doRectanglesOverlap(x1, y1, h1, w1, x2, y2, h2, w2) {
     if (x1 > x2 + w2 || x2 > x1 + w1) return false;
@@ -13,8 +12,8 @@ class util {
   static doRectangleArraysOverlap(array1, array2) {
     var overlap = false;
 
-    _.each(array1, function (r1) {
-      _.each(array2, function (r2) {
+    array1.forEach((r1) => {
+      array2.forEach((r2) => {
         // Neither beside, nor below
         if (
           !(r1.x > r2.x + r2.w || r2.x > r1.x + r1.w) &&
@@ -22,8 +21,8 @@ class util {
         ) {
           overlap = true;
         }
-      });
-    });
+      }, this)
+    }, this);
 
     return overlap;
   }

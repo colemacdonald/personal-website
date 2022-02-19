@@ -17,6 +17,8 @@ class WizeGameController {
             w: 200
         }
     };
+    
+    randomGameManager: RandomWizeGameManager;
 
     constructor() {
         this.randomGameManager = new RandomWizeGameManager(this.baseOptions);

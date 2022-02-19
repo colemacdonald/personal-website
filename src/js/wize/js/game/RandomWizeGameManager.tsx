@@ -1,8 +1,13 @@
 import WizeGame from "./WizeGame";
 import { KYeezy } from "./sprites/KYeezyCharacter";
 import LevelGenerator from "./LevelGenerator";
+import { ControllableCharacter } from "./sprites/ControllableCharacter";
 
 class RandomWizeGameManager {
+    gameOptions: any;
+    character: ControllableCharacter;
+    game: WizeGame;
+
     constructor(baseOptions) {
         console.log("Constructed random manager.")
         this.gameOptions = {
@@ -12,7 +17,7 @@ class RandomWizeGameManager {
 
     startRandomGame() {
         let level = LevelGenerator.generateRandomLevel(this.gameOptions);
-        this.character = new KYeezy();
+        this.character = new KYeezy({});
 
         this.game = new WizeGame(this.gameOptions, level, this.character);
         this.character.setPosition(this.gameOptions.safeBox.x + this.gameOptions.safeBox.w/2, this.gameOptions.safeBox.y + this.gameOptions.safeBox.h/2);
