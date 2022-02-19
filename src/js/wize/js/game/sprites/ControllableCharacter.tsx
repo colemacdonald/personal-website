@@ -1,7 +1,8 @@
-import { Character, DIRECTIONS } from "./Character.js";
-import { _ } from "underscore";
+import { Character, DIRECTIONS } from "./Character";
 
 class ControllableCharacter extends Character {
+  upPressed: boolean;
+
   /************* CONTROLS **************/
   // To make characters do weird things, edit these functions!
   leftPress() {
@@ -23,13 +24,17 @@ class ControllableCharacter extends Character {
   }
 
   upPress() {
+    if (this.upPressed) return;
+
     if (this.jmpCnt < 2) {
       this.yv = -10;
       this.jmpCnt++;
     }
+    this.upPressed = true;
   }
 
   upRelease() {
+    this.upPressed = false;
     if (this.onG) {
       if (this.yv < -1) this.yv = -1;
     }

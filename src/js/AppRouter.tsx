@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MainNavBar from "./MainNavBar.js";
+import MainNavBar from "./MainNavBar";
 
 class AppRouter extends Component {
   render() {
