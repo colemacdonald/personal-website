@@ -1,8 +1,10 @@
 import React, { Component, useEffect } from "react";
 import { TILES } from "../frames/PlatformTiles";
 import { COIN_FRAMES } from "../frames/CoinFrames";
-import WizeGameController from "../game/WizeGameController"
+import { WizeGameController } from "../game/controllers/WizeGameController"
 import { util } from "../util.js";
+import { GameControllerBase, GameState } from "../game/controllers/GameControllerBase";
+import { RandomWizeGameController } from "../game/controllers/RandomWizeGameController";
 
 // TODO: Separate view from game controller logic
 class WizeGameComponent extends Component {
@@ -14,7 +16,7 @@ class WizeGameComponent extends Component {
   canvas: any;
   cntx: any;
 
-  gameController: WizeGameController;
+  gameController: GameControllerBase;
 
   level: number;
   frameCount: number;
@@ -42,14 +44,32 @@ class WizeGameComponent extends Component {
     this.bootstrapCoinsImages();
     this.bootstrapPlatformImages();
 
-    this.gameController = new WizeGameController();
+    this.gameController = new RandomWizeGameController();
 
     this.level = 0;
     this.frameCount = 0;
   }
 
+    /*
+   * To be called at the frame rate.
+   */
+  update() {
+    this.gameController.tick();
+    if (this.gameController.gameState === GameState.Over) {
+      if (this.interval) window.clearInterval(this.interval);
+    }
+
+    this.drawGame();
+    this.updateViewport();
+    if (this.gameController.game.playerAlive) {
+      this.frameCount++;
+    }
+  }
+
   componentDidMount() {
-    this.startGame(true);
+    document.addEventListener("keyup", this.keyup.bind(this));
+    document.addEventListener("keydown", this.keydown.bind(this));
+    this.startGame();
   }
 
   componentWillUnmount() {
@@ -63,7 +83,7 @@ class WizeGameComponent extends Component {
       <div className="flex-item">
         <button
           onClick={() => {
-            this.startGame(true);
+            this.startGame();
           }}
         >
           Start Again
@@ -80,27 +100,20 @@ class WizeGameComponent extends Component {
     );
   }
 
-  startGame(reset) {
-    if (reset === true) {
-      this.level = 0;
-      this.frameCount = 0;
+  startGame() {
+    this.level = 0;
+    this.frameCount = 0;
 
-      this.gameController.startRandomGame();
-    } else {
-      this.gameController.incrementGameDifficulty();
-    }
+    this.gameController.newGame();
 
-    this.viewportY = this.gameController.getCurrentGame().getMainCharacter().x - 100;
-    this.viewportX = this.gameController.getCurrentGame().getMainCharacter().y - 100;
+    this.viewportY = this.gameController.game.character.x - 100;
+    this.viewportX = this.gameController.game.character.y - 100;
 
     this.cntx = this.canvas.current.getContext("2d");
     this.cntx.imageSmoothingEnabled = false;
 
     if (this.interval) window.clearInterval(this.interval);
-    this.interval = setInterval(this.update.bind(this), 1000 / this.gameController.getCurrentGame().fps);
-
-    document.addEventListener("keyup", this.keyup.bind(this));
-    document.addEventListener("keydown", this.keydown.bind(this));
+    this.interval = setInterval(this.update.bind(this), 1000 / this.gameController.game.fps);
   }
 
   drawBackground() {
@@ -125,7 +138,7 @@ class WizeGameComponent extends Component {
    * Calls various draw functions in order
    */
   drawGame() {
-    if (!this.gameController.getCurrentGame().playerAlive) {
+    if (this.gameController.gameState === GameState.Over) {
       this.drawBackground();
       this.cntx.fillStyle = "red";
       this.cntx.font = "30px Arial";
@@ -135,10 +148,6 @@ class WizeGameComponent extends Component {
         this.viewportH / 2
       );
       this.drawScore();
-      return;
-    } else if (this.gameController.getCurrentGame().score === 2000) {
-      this.level++;
-      this.startGame(false);
       return;
     }
 
@@ -168,11 +177,11 @@ class WizeGameComponent extends Component {
     this.cntx.font = "30px Arial";
     this.cntx.fillText(
       "Level: " +
-        this.level +
+        this.gameController.level +
         " Score: " +
-        this.gameController.getCurrentGame().score +
+        this.gameController.game.score +
         " (" +
-        Math.floor(this.frameCount / this.gameController.getCurrentGame().fps) +
+        Math.floor(this.frameCount / this.gameController.game.fps) +
         "s)",
       10,
       30
@@ -183,7 +192,7 @@ class WizeGameComponent extends Component {
    * Draws each platform that exists inside the viewport at its position offset the viewport
    */
   drawPlatforms() {
-    var plats = this.gameController.getCurrentGame().room.platforms;
+    var plats = this.gameController.game.room.platforms;
 
     plats.forEach(plat => {
       // If visible
@@ -240,7 +249,7 @@ class WizeGameComponent extends Component {
    * Draws each monster that exists inside the viewport at its position offset the viewport
    */
   drawMonsters() {
-    var monsters = this.gameController.getCurrentGame().room.monsters;
+    var monsters = this.gameController.game.room.monsters;
 
     this.cntx.fillStyle = "brown";
 
@@ -271,7 +280,7 @@ class WizeGameComponent extends Component {
    * Draws each coin that exists inside the viewport at its position offset the viewport
    */
   drawCoins() {
-    var coins = this.gameController.getCurrentGame().room.coins;
+    var coins = this.gameController.game.room.coins;
 
     this.cntx.fillStyle = "yellow";
 
@@ -290,15 +299,13 @@ class WizeGameComponent extends Component {
       ) {
         var index = coin.getImageIndex();
 
-        COIN_FRAMES.images[index].onload = () => {
-          this.cntx.drawImage(
-            COIN_FRAMES.images[index],
-            coin.x - coin.r - this.viewportX,
-            coin.y - coin.r - this.viewportY,
-            coin.r * 2,
-            coin.r * 2
-          );
-        };
+        this.cntx.drawImage(
+          COIN_FRAMES.images[index],
+          coin.x - coin.r - this.viewportX,
+          coin.y - coin.r - this.viewportY,
+          coin.r * 2,
+          coin.r * 2
+        );
       }
     }, this);
   }
@@ -307,7 +314,7 @@ class WizeGameComponent extends Component {
    * Draws the player at its position offset the viewport
    */
   drawPlayer() {
-    let c = this.gameController.getCurrentGame().getMainCharacter(),
+    let c = this.gameController.game.character,
       frame = c.getFrame();
     // drawImage(img, x, y, w, h)
 
@@ -329,8 +336,8 @@ class WizeGameComponent extends Component {
 
     let minimap = {
       y: 10,
-      w: this.gameController.getCurrentGame().width * minimapScale,
-      h: this.gameController.getCurrentGame().height * minimapScale,
+      w: this.gameController.game.width * minimapScale,
+      h: this.gameController.game.height * minimapScale,
       x: 0
     };
     minimap.x = this.viewportW - minimap.w - 10;
@@ -351,12 +358,12 @@ class WizeGameComponent extends Component {
   drawMinimapPlatforms(scale, minimap) {
     this.cntx.fillStyle = "brown";
 
-    this.drawOnMinimap(this.gameController.getCurrentGame().room.platforms, scale, minimap);
+    this.drawOnMinimap(this.gameController.game.room.platforms, scale, minimap);
   }
 
   drawMinimapCharacter(scale, minimap) {
     this.cntx.fillStyle = "blue";
-    let c = this.gameController.getCurrentGame().getMainCharacter();
+    let c = this.gameController.game.character;
 
     this.drawOnMinimap([c], scale, minimap);
   }
@@ -364,10 +371,10 @@ class WizeGameComponent extends Component {
   drawMinimapCoins(scale, minimap) {
     this.cntx.fillStyle = "gold";
 
-    this.gameController.getCurrentGame().room.coins.forEach((c) => {
+    this.gameController.game.room.coins.forEach((c) => {
       this.cntx.fillRect(
-        minimap.x + (c.x / this.gameController.getCurrentGame().width) * minimap.w,
-        minimap.y + (c.y / this.gameController.getCurrentGame().height) * minimap.h,
+        minimap.x + (c.x / this.gameController.game.width) * minimap.w,
+        minimap.y + (c.y / this.gameController.game.height) * minimap.h,
         Math.max(c.r * scale, 3),
         Math.max(c.r * scale, 3)
       );
@@ -376,14 +383,14 @@ class WizeGameComponent extends Component {
 
   drawMinimapMonsters(scale, minimap) {
     this.cntx.fillStyle = "red";
-    this.drawOnMinimap(this.gameController.getCurrentGame().room.monsters, scale, minimap);
+    this.drawOnMinimap(this.gameController.game.room.monsters, scale, minimap);
   }
 
   drawOnMinimap(rects, scale, minimap) {
     rects.forEach((r) => {
       this.cntx.fillRect(
-        minimap.x + (r.x / this.gameController.getCurrentGame().width) * minimap.w,
-        minimap.y + (r.y / this.gameController.getCurrentGame().height) * minimap.h,
+        minimap.x + (r.x / this.gameController.game.width) * minimap.w,
+        minimap.y + (r.y / this.gameController.game.height) * minimap.h,
         r.w * scale,
         r.h * scale
       );
@@ -391,23 +398,10 @@ class WizeGameComponent extends Component {
   }
 
   /*
-   * To be called at the frame rate.
-   *
-   */
-  update() {
-    this.gameController.tick();
-    this.drawGame();
-    this.updateViewport();
-    if (this.gameController.getCurrentGame().playerAlive) {
-      this.frameCount++;
-    }
-  }
-
-  /*
    * Update the viewport if the character gets too close to the edge
    */
   updateViewport() {
-    let c = this.gameController.getCurrentGame().getMainCharacter();
+    let c = this.gameController.game.character;
     if (c.x < this.viewportX + 0.3 * this.viewportW) {
       this.viewportX = c.x - 0.3 * this.viewportW;
     } else if (c.x > this.viewportX + 0.7 * this.viewportW) {
@@ -452,16 +446,16 @@ class WizeGameComponent extends Component {
   keyup(e) {
     switch (e.keyCode) {
       case 37:
-        this.gameController.getCurrentGame().leftRelease();
+        this.gameController.game.leftRelease();
         break;
       case 38:
-        this.gameController.getCurrentGame().upRelease();
+        this.gameController.game.upRelease();
         break;
       case 39:
-        this.gameController.getCurrentGame().rightRelease();
+        this.gameController.game.rightRelease();
         break;
       case 40:
-        this.gameController.getCurrentGame().downRelease();
+        this.gameController.game.downRelease();
         break;
       default:
         break;
@@ -470,16 +464,16 @@ class WizeGameComponent extends Component {
   keydown(e) {
     switch (e.keyCode) {
       case 37:
-        this.gameController.getCurrentGame().leftPress();
+        this.gameController.game.leftPress();
         break;
       case 38:
-        this.gameController.getCurrentGame().upPress();
+        this.gameController.game.upPress();
         break;
       case 39:
-        this.gameController.getCurrentGame().rightPress();
+        this.gameController.game.rightPress();
         break;
       case 40:
-        this.gameController.getCurrentGame().downPress();
+        this.gameController.game.downPress();
         break;
       default:
         break;

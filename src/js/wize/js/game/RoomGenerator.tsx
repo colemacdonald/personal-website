@@ -3,8 +3,8 @@ import { Monster } from "./sprites/Monster"
 import { Coin } from "./sprites/Coin"
 import Room from "./Room";
 
-class LevelGenerator {
-    static generateRandomLevel(options: GameOptions): Room {
+class RoomGenerator {
+    static generateRandomRoom(options: GameOptions): Room {
         let level = {
             platforms: [{ x: 0, y: 1500, h: 150, w: 2000 }],
             coins: [],
@@ -76,4 +76,4 @@ class LevelGenerator {
     }
 }
 
-export default LevelGenerator;
+export { RoomGenerator };
