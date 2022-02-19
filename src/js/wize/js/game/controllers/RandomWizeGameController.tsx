@@ -43,7 +43,7 @@ class RandomWizeGameController extends GameControllerBase {
             return;
         }
 
-        if (this.game.score === 200) {
+        if (this.game.score === 2000) {
             this.incrementGameDifficulty();
         }
     }

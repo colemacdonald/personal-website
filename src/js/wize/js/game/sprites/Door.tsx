@@ -5,7 +5,9 @@ type Door = {
     y: number,
     h: number,
     w: number,
-    destinationLevel: Room
+    destRoom: Room,
+    destX: number,
+    destY: number
 };
 
 export default Door;
