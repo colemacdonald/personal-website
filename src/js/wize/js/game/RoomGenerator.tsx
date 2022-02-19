@@ -1,20 +1,13 @@
 import { util } from "../util.js";
 import { Monster } from "./sprites/Monster"
 import { Coin } from "./sprites/Coin"
-import Room from "./Room";
+import { CreateRoomWithFloor, Room } from "./Room";
 
 class RoomGenerator {
     static generateRandomRoom(options: GameOptions): Room {
-        let level = {
-            platforms: [{ x: 0, y: 1500, h: 150, w: 2000 }],
-            coins: [],
-            monsters: [],
-            h: options.height,
-            w: options.width,
-            doors: []
-        };
+        let room = CreateRoomWithFloor(1500, 2000);
 
-        while (level.platforms.length < 50) {
+        while (room.platforms.length < 50) {
             let newPlat = {
                 x: Math.random() * (options.width - 300),
                 y: Math.random() * options.height,
@@ -22,19 +15,19 @@ class RoomGenerator {
                 w: Math.ceil(Math.random() * 5 + 1) * 50,
             };
         
-            if (!util.doRectangleArraysOverlap(level.platforms, [newPlat])) {
-                level.platforms.push(newPlat);
+            if (!util.doRectangleArraysOverlap(room.platforms, [newPlat])) {
+                room.platforms.push(newPlat);
             }
         }
         
         let i = 0;
         while (
-            level.monsters.length < options.numberOfMonsters &&
-            i < level.platforms.length
+            room.monsters.length < options.numberOfMonsters &&
+            i < room.platforms.length
         ) {
             if (
                 !util.doRectangleArraysOverlap(
-                [level.platforms[i]],
+                [room.platforms[i]],
                 [
                     {
                     x: options.safeBox.x - 10,
@@ -45,11 +38,11 @@ class RoomGenerator {
                 ]
                 )
             ) {
-                level.monsters.push(
+                room.monsters.push(
                 new Monster({
-                    platform: level.platforms[i],
-                    x: level.platforms[i].x + level.platforms[i].w / 2,
-                    y: level.platforms[i].y - 20,
+                    platform: room.platforms[i],
+                    x: room.platforms[i].x + room.platforms[i].w / 2,
+                    y: room.platforms[i].y - 20,
                     h: 50,
                     w: 20,
                     speed: options.monsterSpeed,
@@ -60,7 +53,7 @@ class RoomGenerator {
         }
     
         for (let i = 0; i < 20; i++) {
-            level.coins.push(
+            room.coins.push(
                 new Coin({
                 x:
                     Math.random() * (options.width - options.coinMargin * 2) +
@@ -72,7 +65,7 @@ class RoomGenerator {
             );
         }
 
-        return level;
+        return room;
     }
 }
 

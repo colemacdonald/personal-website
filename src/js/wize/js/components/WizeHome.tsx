@@ -17,6 +17,7 @@ class WizeHome extends Component {
     viewportW: 1000,
     viewportY: 0,
     viewportX: 0,
+    canvasScale: 2,
     gameController: null
   };
 
