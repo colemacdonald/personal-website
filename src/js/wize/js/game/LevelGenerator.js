@@ -33,8 +33,8 @@ class LevelGenerator {
                 [level.platforms[i]],
                 [
                     {
-                    x: options.character.x - 10,
-                    y: options.character.y - options.character.h - 30,
+                    x: options.safeBox.x - 10,
+                    y: options.safeBox.y - options.safeBox.h - 30,
                     h: 400,
                     w: 200,
                     },
