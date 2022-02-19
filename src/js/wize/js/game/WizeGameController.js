@@ -1,6 +1,4 @@
-import WizeGame from "./WizeGame";
-import { KYeezy } from "./sprites/KYeezyCharacter";
-import LevelGenerator from "./LevelGenerator";
+import RandomWizeGameManager from "./RandomWizeGameManager";
 
 class WizeGameController {
     baseOptions = {
@@ -20,30 +18,27 @@ class WizeGameController {
         }
     };
 
-    startRandomGame() {
-        this.gameOptions = {
-            character: new KYeezy(),
-            ...this.baseOptions
-        };
+    constructor() {
+        this.randomGameManager = new RandomWizeGameManager(this.baseOptions);
+    }
 
-        this.gameOptions.level = LevelGenerator.generateRandomLevel(this.gameOptions);
-            
-        this.game = new WizeGame(this.gameOptions);
-        this.gameOptions.character.setPosition(this.gameOptions.safeBox.x + this.gameOptions.safeBox.w/2, this.gameOptions.safeBox.y + this.gameOptions.safeBox.h/2);
-        this.gameOptions.character.setGame(this.game);
+    getCurrentGame() {
+        return this.randomGameManager.game;
+    }
+
+    /*
+     Main game update method that signals a frame
+     */
+    tick() {
+        this.getCurrentGame().update();
+    }
+
+    startRandomGame() {
+        this.randomGameManager.startRandomGame();
     }
 
     incrementGameDifficulty() {
-        if (this.game) delete this.game;
-
-        this.gameOptions.monsterSpeed += 0.5;
-        this.gameOptions.numberOfMonsters += 2;
-
-
-        this.game = new WizeGame(this.gameOptions);
-        this.gameOptions.character.setPosition(this.gameOptions.safeBox.x + this.gameOptions.safeBox.w/2, this.gameOptions.safeBox.y + this.gameOptions.safeBox.h/2);
-        this.gameOptions.character.setGame(this.game);
-
+        this.randomGameManager.incrementGameDifficulty();
     }
 }
 

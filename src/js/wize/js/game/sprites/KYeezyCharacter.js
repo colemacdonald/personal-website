@@ -1,4 +1,4 @@
-import { ControllableCharacter, DIRECTIONS } from "./ControllableCharacter.js";
+import { ControllableCharacter } from "./ControllableCharacter.js";
 import { _ } from "underscore";
 
 let STATES = {

@@ -1,22 +1,18 @@
-import { Coin } from "./sprites/Coin.js";
 import { util } from "../util.js";
-import { KYeezy } from "./sprites/KYeezyCharacter.js";
-import { Monster } from "./sprites/Monster.js";
 import { _ } from "underscore";
 
 class WizeGame {
   /**
    * Create a new game
    */
-  constructor(options) {
-    this.fps = options.fps;
-    this.speed = options.speed;
+  constructor(options, level, character) {
     this.height = options.height;
     this.width = options.width;
+    this.fps = options.fps;
+    this.speed = options.speed;
     this.grav = options.grav;
-
-    this.level = options.level;
-    this.character = options.character;
+    this.level = level;
+    this.character = character;
 
     this.playerAlive = true;
     this.score = 0;
