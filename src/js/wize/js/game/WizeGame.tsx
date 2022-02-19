@@ -103,10 +103,6 @@ class WizeGame {
       this.character.y = this.room.platforms[0].y - this.character.h - 5;
   }
 
-  getMainCharacter() {
-    return this.character;
-  }
-
   /***************** EVENTS *******************/
 
   leftPress() {
