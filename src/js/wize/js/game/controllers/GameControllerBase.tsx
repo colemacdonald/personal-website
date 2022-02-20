@@ -37,7 +37,7 @@ class GameControllerBase {
 
     tick() {
         // update the game a single frame
-        this.game.update();
+        this.game.tick();
     }
 }
 

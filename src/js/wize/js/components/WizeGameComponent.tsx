@@ -44,7 +44,7 @@ class WizeGameComponent extends Component {
     /*
    * To be called at the frame rate.
    */
-    update() {
+    tick() {
         this.gameController.tick();
         if (this.gameController.gameState === GameState.Over) {
             if (this.interval) window.clearInterval(this.interval);
@@ -59,9 +59,7 @@ class WizeGameComponent extends Component {
         if (this.gameController.game.lastPowerup) {
             if (this.interval) window.clearInterval(this.interval);
 
-
-
-            this.interval = setInterval(this.update.bind(this), 1000 / this.gameController.game.gameOptions.fps);
+            this.interval = setInterval(this.tick.bind(this), 1000 / this.gameController.game.gameOptions.fps);
         }
     }
 
@@ -112,7 +110,7 @@ class WizeGameComponent extends Component {
         this.cntx.imageSmoothingEnabled = false;
 
         if (this.interval) window.clearInterval(this.interval);
-        this.interval = setInterval(this.update.bind(this), 1000 / this.gameController.game.gameOptions.fps);
+        this.interval = setInterval(this.tick.bind(this), 1000 / this.gameController.game.gameOptions.fps);
     }
 
     drawBackground() {
@@ -143,7 +141,7 @@ class WizeGameComponent extends Component {
 
         // Background Elements
         this.gameController.game.room.backgroundElements.forEach(e => {
-            this.drawImage(e.getNextFrame(), e.box);
+            this.drawImage(e.getFrame(), e.box);
         });
     }
 
@@ -294,7 +292,7 @@ class WizeGameComponent extends Component {
                     monster.w
                 )
             ) {
-                this.drawImage(monster.getNextFrame(), monster.box);
+                this.drawImage(monster.getFrame(), monster.box);
             }
         });
     }
@@ -319,7 +317,7 @@ class WizeGameComponent extends Component {
                     coin.box.w
                 )
             ) {
-                this.drawImage(coin.getNextFrame(), coin.box);
+                this.drawImage(coin.getFrame(), coin.box);
             }
         }, this);
     }
@@ -329,7 +327,7 @@ class WizeGameComponent extends Component {
      */
     drawPlayer() {
         let c = this.gameController.game.character,
-            img = c.getNextFrame();
+            img = c.getFrame();
 
         this.drawImage(img, c.box);
     }

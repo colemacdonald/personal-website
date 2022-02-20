@@ -139,10 +139,6 @@ class Character extends MovingSprite {
             this.currentPlatform = null;
         }
     }
-
-    getFrame(): Frame {
-        return null;
-    }
 }
 
 export { Character };

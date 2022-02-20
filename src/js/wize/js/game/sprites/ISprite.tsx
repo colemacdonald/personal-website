@@ -1,5 +1,7 @@
 interface ISprite {
     box: Rectangle;
 
-    getNextFrame();
+    tick();
+
+    getFrame();
 }

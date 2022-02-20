@@ -45,6 +45,15 @@ class MovingSprite implements ISprite {
         return [{ x: this.x + this.frames[this.state][this.direction].x_offset, y: this.y, w: this.w + this.frames[this.state][this.direction].width_extend, h: this.h }];
     }
 
+    tick() {
+        this.move();
+        this.incrementFrameCounter();
+    }
+
+    move() {
+        
+    }
+
     incrementFrameCounter() {
         this.frameCounter++;
 
@@ -54,7 +63,7 @@ class MovingSprite implements ISprite {
             this.frameCounter % frameGroup.images.length;
     }
 
-    getNextFrame() : Frame {
+    getFrame() : Frame {
         return this.frames[this.state][this.direction].images[this.frameCounter];
     }
 }
