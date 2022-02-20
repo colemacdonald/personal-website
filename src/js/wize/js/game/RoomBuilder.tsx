@@ -22,8 +22,8 @@ class RoomBuilder {
         return this;
     }
 
-    withDoor(door: Door): RoomBuilder {
-        this.room.doors.push(door)
+    withDoor({x, y, destRoom, destX, destY}): RoomBuilder {
+        this.room.doors.push({x: x, y: y, destRoom: destRoom, destX: destX, destY: destY, h: 100, w: 50})
         return this;
     }
 

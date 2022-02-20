@@ -23,6 +23,7 @@ class GameControllerBase {
         monsterSpeed: 2,
         numberOfMonsters: 20,
         grav: 0.5,
+        snapToPlatforms: true,
         safeBox: {
             x: 100,
             y: 1300,

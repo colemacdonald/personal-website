@@ -7,7 +7,8 @@ type GameOptions = {
     monsterSpeed: number,
     numberOfMonsters: number,
     grav: number,
-    safeBox: Rectangle
+    safeBox: Rectangle,
+    snapToPlatforms: boolean
 };
 
 type Rectangle = {

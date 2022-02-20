@@ -12,6 +12,8 @@ class WizeGame {
   character: ControllableCharacter;
   onGround: boolean;
 
+  gameOptions: GameOptions;
+
   playerAlive: boolean;
   score: number;
 
@@ -19,6 +21,7 @@ class WizeGame {
    * Create a new game
    */
   constructor(options: GameOptions, room: Room, character: ControllableCharacter) {
+    this.gameOptions = options;
     this.height = options.height;
     this.width = options.width;
     this.fps = options.fps;
@@ -43,12 +46,12 @@ class WizeGame {
       if (
         util.doRectanglesOverlap(
           this.character.x,
-          this.character.y + this.character.h * 0.95,
+          this.character.y + this.character.h * 0.97,
           this.character.h * 0.1,
           this.character.w,
           plat.x,
           plat.y,
-          plat.h,
+          plat.h * 0.4, // platforms are mostly dirt
           plat.w
         ) &&
         !this.character.onG &&
