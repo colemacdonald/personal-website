@@ -2,6 +2,7 @@ import { Character, DIRECTIONS } from "./Character";
 
 class ControllableCharacter extends Character {
   upPressed: boolean;
+  maxJmpCnt: number = 1;
 
   /************* CONTROLS **************/
   // To make characters do weird things, edit these functions!
@@ -26,7 +27,7 @@ class ControllableCharacter extends Character {
   upPress() {
     if (this.upPressed) return;
 
-    if (this.jmpCnt < 2) {
+    if (this.jmpCnt < this.maxJmpCnt) {
       this.yv = -10;
       this.jmpCnt++;
     }

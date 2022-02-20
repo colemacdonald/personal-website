@@ -1,5 +1,5 @@
-import { ExtendedConfigCacheEntry } from "typescript";
 import { util } from "../../util.js";
+import WizeGame from "../WizeGame.js";
 
 let DIRECTIONS = {
   RIGHT: "right",
@@ -33,12 +33,13 @@ class Character {
   jmpCnt: number;
   yv: number;
   xv: number;
-  onG: any;
+  onG: boolean;
   fall: boolean;
   fallThroughPlatform: boolean;
-  currentPlatform: any;
+  terminalVelocity: number;
+  currentPlatform: Rectangle;
 
-  game: any;
+  game: WizeGame;
   
   hitBoxes: Array<Rectangle>;
   hurtBoxes: Array<Rectangle>;
@@ -53,6 +54,7 @@ class Character {
     this.xv = options.xv ? options.xv : 0;
     this.yv = options.yv ? options.yv : 0;
     this.speed = options.speed ? options.speed : 3;
+    this.terminalVelocity = 8;
 
     // Status and Inputs
     this.onG = false;
@@ -119,6 +121,7 @@ class Character {
       }
     } else {
       this.yv += this.game.grav;
+      this.yv = Math.min(this.yv, this.terminalVelocity);
     }
 
     this.x += this.xv;

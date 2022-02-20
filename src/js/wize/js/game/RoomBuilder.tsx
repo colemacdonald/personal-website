@@ -1,11 +1,39 @@
 import { util } from "../util.js";
 import { Monster } from "./sprites/Monster"
 import { Coin } from "./sprites/Coin"
-import { CreateRoomWithFloor, Room } from "./Room";
+import { Room } from "./Room";
+import Door from "./sprites/Door.js";
 
-class RoomGenerator {
-    static generateRandomRoom(options: GameOptions): Room {
-        let room = CreateRoomWithFloor(1500, 2000);
+class RoomBuilder {
+
+    room: Room;
+
+    constructor({h, w}) {
+        this.room = {h: h, w: w, platforms: [], monsters: [], coins: [], doors: []};
+    }
+
+    withFloor() : RoomBuilder {
+        this.room.platforms.push({x: 0, y: this.room.h, w: this.room.w, h: 150});
+        return this;
+    }
+
+    withPlatform(plat: Rectangle) : RoomBuilder {
+        this.room.platforms.push(plat);
+        return this;
+    }
+
+    withDoor(door: Door): RoomBuilder {
+        this.room.doors.push(door)
+        return this;
+    }
+
+    build() : Room {
+        return this.room;
+    }
+
+
+    static buildRandomRoom(options: GameOptions): Room {
+        let room = new RoomBuilder({h:1500, w:2000}).withFloor().build();
 
         while (room.platforms.length < 50) {
             let newPlat = {
@@ -69,4 +97,4 @@ class RoomGenerator {
     }
 }
 
-export { RoomGenerator };
+export { RoomBuilder };
