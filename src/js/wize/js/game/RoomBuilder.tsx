@@ -1,5 +1,5 @@
 import { util } from "../util";
-import { Monster } from "./sprites/Monster"
+import { Monster, MonsterType } from "./sprites/Monster"
 import { Coin } from "./sprites/Coin"
 import { Room } from "./Room";
 import Door from "./sprites/Door.js";
@@ -25,7 +25,7 @@ class RoomBuilder {
     }
 
     withDoor(d: { x: number, y: number, destRoom: number, destX: number, destY: number }): RoomBuilder {
-        this.room.doors.push({ x: d.x, y: d.y, destRoom: d.destRoom, destX: d.destX, destY: d.destY, h: 100, w: 50 })
+        this.room.doors.push({ x: d.x, y: d.y, destRoom: d.destRoom, destX: d.destX, destY: d.destY, h: 100, w: 50 });
         return this;
     }
 
@@ -34,9 +34,9 @@ class RoomBuilder {
         return this;
     }
 
-    withMonster(m: { w: number, h: number, plat: number }): RoomBuilder {
-        let platform = this.room.platforms[m.plat]
-        this.room.monsters.push(new Monster({ w: m.w, h: m.h, x: platform.x + platform.w / 2, y: platform.y - 20, platform: platform, speed: 1 }))
+    withMonster(m: { monsterType: MonsterType, plat: number }): RoomBuilder {
+        let platform = this.room.platforms[m.plat];
+        this.room.monsters.push(new Monster({ monsterType: m.monsterType, x: platform.x + platform.w / 2, y: platform.y - 20, platform: platform }));
         return this;
     }
 
@@ -89,9 +89,7 @@ class RoomBuilder {
                         platform: room.platforms[i],
                         x: room.platforms[i].x + room.platforms[i].w / 2,
                         y: room.platforms[i].y - 20,
-                        h: 50,
-                        w: 20,
-                        speed: options.monsterSpeed,
+                        monsterType: MonsterType.Centipede,
                     })
                 );
             }

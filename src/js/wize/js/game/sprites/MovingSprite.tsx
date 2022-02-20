@@ -1,4 +1,4 @@
-import { Direction, State } from "../Frames";
+import { Direction, Frame, State } from "../Frames";
 
 class MovingSprite implements ISprite {
     frameCounter: number;
@@ -17,6 +17,9 @@ class MovingSprite implements ISprite {
 
     constructor(frames) {
         this.frames = frames;
+        this.frameCounter = 0;
+        this.state = State.Idle;
+        this.direction = Direction.Right;
     }
 
     get box(): Rectangle {
@@ -51,8 +54,8 @@ class MovingSprite implements ISprite {
             this.frameCounter % frameGroup.images.length;
     }
 
-    getNextFrame() {
-        throw new Error("Method not implemented.");
+    getNextFrame() : Frame {
+        return this.frames[this.state][this.direction].images[this.frameCounter];
     }
 }
 
