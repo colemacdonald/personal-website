@@ -66,6 +66,14 @@ class WizeGameComponent extends Component {
     if (this.gameController.game.playerAlive) {
       this.frameCount++;
     }
+
+    if (this.gameController.game.lastPowerup) {
+        if (this.interval) window.clearInterval(this.interval);
+
+        
+
+        this.interval = setInterval(this.update.bind(this), 1000 / this.gameController.game.gameOptions.fps);
+    }
   }
 
   componentDidMount() {
@@ -115,7 +123,7 @@ class WizeGameComponent extends Component {
     this.cntx.imageSmoothingEnabled = false;
 
     if (this.interval) window.clearInterval(this.interval);
-    this.interval = setInterval(this.update.bind(this), 1000 / this.gameController.game.fps);
+    this.interval = setInterval(this.update.bind(this), 1000 / this.gameController.game.gameOptions.fps);
   }
 
   drawBackground() {
@@ -184,6 +192,9 @@ class WizeGameComponent extends Component {
 
     // Mini Map
     this.drawMinimap();
+
+    this.cntx.fillStyle = "gold";
+    this.cntx.fillText(this.gameController.message, this.canvas.current.width / 2 - 50, this.canvas.current.height / 2);
   }
 
   drawScore() {
@@ -195,7 +206,7 @@ class WizeGameComponent extends Component {
         " Score: " +
         this.gameController.game.score +
         " (" +
-        Math.floor(this.frameCount / this.gameController.game.fps) +
+        Math.floor(this.frameCount / this.gameController.game.gameOptions.fps) +
         "s)",
       10,
       30
@@ -322,11 +333,10 @@ class WizeGameComponent extends Component {
    * Draws each coin that exists inside the viewport at its position offset the viewport
    */
   drawCoins() {
-    let coins = this.gameController.game.room.coins;
-
     this.cntx.fillStyle = "yellow";
 
-    coins.forEach(coin => {
+    this.gameController.game.room.powerups.forEach(p => {
+        let coin = p.coin;
       if (
         util.doRectanglesOverlap(
           this.viewportX,
@@ -421,14 +431,8 @@ class WizeGameComponent extends Component {
   drawMinimapCoins(scale, minimap) {
     this.cntx.fillStyle = "gold";
 
-    this.gameController.game.room.coins.forEach((c) => {
-      this.cntx.fillRect(
-        minimap.x + (c.x / this.gameController.game.width) * minimap.w,
-        minimap.y + (c.y / this.gameController.game.height) * minimap.h,
-        Math.max(c.r * scale, 3),
-        Math.max(c.r * scale, 3)
-      );
-    });
+    this.drawOnMinimap(this.gameController.game.room.coins.map(c => { return { x: c.x - c.r/2, y: c.y - c.r/2, h: c.r*2, w: c.r*2}}), scale, minimap);
+    this.drawOnMinimap(this.gameController.game.room.powerups.map(p => {return { x: p.coin.x - p.coin.r/2, y: p.coin.y - p.coin.r/2, h: p.coin.r*2, w: p.coin.r*2 }}), scale, minimap);
   }
 
   drawMinimapMonsters(scale, minimap) {

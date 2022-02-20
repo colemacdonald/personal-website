@@ -3,13 +3,14 @@ import { Monster } from "./sprites/Monster"
 import { Coin } from "./sprites/Coin"
 import { Room } from "./Room";
 import Door from "./sprites/Door.js";
+import { Powerup } from "./Powerup";
 
 class RoomBuilder {
 
     room: Room;
 
     constructor({h, w}) {
-        this.room = {h: h, w: w, platforms: [], monsters: [], coins: [], doors: []};
+        this.room = {h: h, w: w, platforms: [], monsters: [], coins: [], doors: [], powerups: []};
     }
 
     withFloor() : RoomBuilder {
@@ -24,6 +25,11 @@ class RoomBuilder {
 
     withDoor({x, y, destRoom, destX, destY}): RoomBuilder {
         this.room.doors.push({x: x, y: y, destRoom: destRoom, destX: destX, destY: destY, h: 100, w: 50})
+        return this;
+    }
+
+    withPowerup(powerup: Powerup): RoomBuilder {
+        this.room.powerups.push(powerup);
         return this;
     }
 

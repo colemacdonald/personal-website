@@ -1,12 +1,9 @@
 import { util } from "../util.js";
 import { ControllableCharacter } from "./sprites/ControllableCharacter";
 import { Room } from "./Room";
+import { Powerup } from "./Powerup.js";
 
 class WizeGame {
-  height: number;
-  width: number;
-  fps: number;
-  speed: number;
   grav: number;
   room: Room;
   character: ControllableCharacter;
@@ -17,15 +14,13 @@ class WizeGame {
   playerAlive: boolean;
   score: number;
 
+  lastPowerup: Powerup;
+
   /**
    * Create a new game
    */
   constructor(options: GameOptions, room: Room, character: ControllableCharacter) {
     this.gameOptions = options;
-    this.height = options.height;
-    this.width = options.width;
-    this.fps = options.fps;
-    this.speed = options.speed;
     this.grav = options.grav;
     this.room = room;
     this.character = character;
@@ -79,7 +74,6 @@ class WizeGame {
       monster.move();
     }, this);
 
-
     var indices = [];
 
     this.room.coins.forEach(coin => {
@@ -102,7 +96,28 @@ class WizeGame {
       this.score += 100;
       this.room.coins.splice(indices[i], 1);
     }
+
+    // check for powerups
+    let powerup = this.getOverlappingPowerup();
+    if (powerup) {
+      powerup.method(this.character);
+      this.room.powerups.splice(this.room.powerups.indexOf(powerup), 1);
+      this.lastPowerup = powerup;
+    }
   }
+
+  getOverlappingPowerup() : Powerup {
+    let powerup = null;
+
+    this.room.powerups.forEach(p => {
+        if (util.doRectangleArraysOverlap([{x: p.coin.x - p.coin.r / 2, y: p.coin.y - p.coin.r/2, h: p.coin.r*2, w: p.coin.r*2}], this.character.getHurtBoxes())) {
+            powerup = p;
+        }
+    });
+
+    return powerup;
+}
+
 
   /***************** EVENTS *******************/
 
