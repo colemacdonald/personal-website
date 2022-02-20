@@ -1,3 +1,4 @@
+import { util } from "../../util";
 
 class Coin implements ISprite {
   box: Rectangle;
@@ -20,27 +21,14 @@ class Coin implements ISprite {
     this.frameCounter = 0;
   }
 
-  getImageIndex() {
+  getNextFrame() {
     this.frameCounter = (this.frameCounter + 1) % 4;
 
     if (this.frameCounter === 0) {
       this.imageCounter = (this.imageCounter + 1) % COIN_FRAMES.sources.length;
     }
 
-    return this.imageCounter;
-  }
-
-  getNextFrame() {
-    return COIN_FRAMES.images[this.getImageIndex()];
-  }
-
-  static bootstrapImages() {
-    COIN_FRAMES.sources.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-
-      COIN_FRAMES.images.push(img);
-    });
+    return COIN_FRAMES.images[this.imageCounter];
   }
 }
 
@@ -64,6 +52,6 @@ let COIN_FRAMES = {
   images: [],
 };
 
-Coin.bootstrapImages();
+util.bootstrapImages(COIN_FRAMES);
 
 export { Coin, COIN_FRAMES };

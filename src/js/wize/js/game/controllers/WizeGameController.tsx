@@ -2,7 +2,7 @@ import { Room } from "../Room";
 import { KYeezy } from "../main-character/KYeezyCharacter";
 import WizeGame from "../WizeGame";
 import { GameControllerBase, GameState } from "./GameControllerBase";
-import { util } from "../../util.js"
+import { util } from "../../util"
 import Door from "../sprites/Door";
 import { RoomBuilder } from "../RoomBuilder";
 import { Coin } from "../sprites/Coin";

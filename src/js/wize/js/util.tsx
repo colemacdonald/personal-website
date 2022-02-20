@@ -26,6 +26,15 @@ class util {
 
     return overlap;
   }
+
+  static bootstrapImages(frames: {sources: Array<string>, images: Array<any> }){
+    frames.sources.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+
+      frames.images.push(img);
+    });
+  }
 }
 
 export { util };
