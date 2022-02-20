@@ -61,17 +61,17 @@ class WizeGameController extends GameControllerBase {
         new RoomBuilder({h:750, w: 1000}).withFloor()
             .withDoor({x: 900, y:650, h:100, w: 50, destRoom: 1, destX: 100, destY: 0})
         .build(),
-        new RoomBuilder({h:2500, w:500}).withFloor()
+        new RoomBuilder({h:2400, w:500}).withFloor()
             .withPlatform({x: 0, y: 300, h: 150, w: 300})
             .withDoor({x: 50, y:200, h:100, w: 50, destRoom: 0, destX: 840, destY: 750})
             .withPlatform({x:200, y: 500, h: 150, w: 300})
             .withPlatform({x:0, y: 800, h: 150, w: 300})
             .withPlatform({x:200, y: 1100, h: 150, w: 300})
             .withPlatform({x:0, y: 1400, h: 150, w: 300})
-            .withDoor({x:50, y: 2400, h: 100, w: 50, destRoom:2, destX: 2400, destY:50})
+            .withDoor({x:50, y: 2300, h: 100, w: 50, destRoom:2, destX: 2400, destY:50})
         .build(),
         new RoomBuilder({h: 100, w: 2500}).withFloor()
-            .withDoor({x: 2450, y:0, h: 100, w: 50, destRoom: 1, destX: 60, destY: 2450})
+            .withDoor({x: 2450, y:0, h: 100, w: 50, destRoom: 1, destX: 110, destY: 2250})
         .build()
     ];
 }
