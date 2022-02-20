@@ -388,6 +388,7 @@ class WizeGameComponent extends Component {
     this.cntx.globalAlpha = 0.55;
     this.cntx.fillStyle = "green";
     this.cntx.fillRect(minimap.x * this.canvasScale, minimap.y * this.canvasScale, minimap.w * this.canvasScale, minimap.h * this.canvasScale);
+    
 
     this.drawMinimapPlatforms(minimapScale, minimap);
     this.drawMinimapDoors(minimapScale, minimap);
@@ -438,8 +439,8 @@ class WizeGameComponent extends Component {
   drawOnMinimap(rects, scale, minimap) {
     rects.forEach((r) => {
       this.cntx.fillRect(
-        (minimap.x + (r.x / this.gameController.game.width) * minimap.w) * this.canvasScale,
-        (minimap.y + (r.y / this.gameController.game.height) * minimap.h) * this.canvasScale,
+        (minimap.x + (r.x / this.gameController.game.room.w) * minimap.w) * this.canvasScale,
+        (minimap.y + (r.y / this.gameController.game.room.h) * minimap.h) * this.canvasScale,
         r.w * scale * this.canvasScale,
         r.h * scale * this.canvasScale
       );
