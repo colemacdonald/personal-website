@@ -1,4 +1,5 @@
-import { Character, DIRECTIONS } from "./Character";
+import { Character } from "./Character";
+import { Direction } from "../Frames";
 
 class ControllableCharacter extends Character {
   upPressed: boolean;
@@ -8,7 +9,7 @@ class ControllableCharacter extends Character {
   // To make characters do weird things, edit these functions!
   leftPress() {
     this.movingLeft = true;
-    this.direction = DIRECTIONS.LEFT;
+    this.direction = Direction.Left;
   }
 
   leftRelease() {
@@ -17,7 +18,7 @@ class ControllableCharacter extends Character {
 
   rightPress() {
     this.movingRight = true;
-    this.direction = DIRECTIONS.RIGHT;
+    this.direction = Direction.Right;
   }
 
   rightRelease() {
@@ -53,4 +54,4 @@ class ControllableCharacter extends Character {
   }
 }
 
-export { ControllableCharacter, DIRECTIONS };
+export { ControllableCharacter };
