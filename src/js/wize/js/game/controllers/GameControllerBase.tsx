@@ -13,6 +13,7 @@ class GameControllerBase {
     game: WizeGame;
     character: ControllableCharacter;
     level: number = 0;
+    message: string = "";
 
     baseOptions: GameOptions = {
         fps: 60,

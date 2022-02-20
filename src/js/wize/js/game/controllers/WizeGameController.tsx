@@ -5,9 +5,14 @@ import { GameControllerBase, GameState } from "./GameControllerBase";
 import { util } from "../../util.js"
 import Door from "../sprites/Door";
 import { RoomBuilder } from "../RoomBuilder";
+import { Coin } from "../sprites/Coin";
+import { Powerup } from "../Powerup";
 
 
 class WizeGameController extends GameControllerBase {
+    loadingTicks: number = 0;
+    maxLoadingTicks: number = 250;
+
     constructor() {
         super();
 
@@ -32,22 +37,41 @@ class WizeGameController extends GameControllerBase {
      Main game update method that signals a frame
      */
     tick() {
-        super.tick();
 
-        // check for death
-        if (!this.game.playerAlive) {
-            this.gameState = GameState.Over;
-            return;
-        }
+        switch(this.gameState) {
+            case GameState.Playing:
+                super.tick();
+                // check for death
+                if (!this.game.playerAlive) {
+                    this.gameState = GameState.Over;
+                    return;
+                }
 
-        // check for doors
-        let door = this.getOverlappingDoor();
-        if (door) {
-           delete this.game;
+                // check for doors
+                let door = this.getOverlappingDoor();
+                if (door) {
+                delete this.game;
 
-           this.game = new WizeGame(this.baseOptions, this.rooms[door.destRoom], this.character);
-            this.character.setPosition(door.destX, door.destY);
-            this.character.setGame(this.game);
+                this.game = new WizeGame(this.baseOptions, this.rooms[door.destRoom], this.character);
+                    this.character.setPosition(door.destX, door.destY);
+                    this.character.setGame(this.game);
+                }
+
+                // check for powerups
+                if (this.game.lastPowerup) {
+                    this.message = this.game.lastPowerup.name + " acquired!";
+        
+                    this.gameState = GameState.Loading;
+                    this.game.lastPowerup = null;
+                }
+            case GameState.Loading:
+                this.loadingTicks++;
+                if (this.loadingTicks > this.maxLoadingTicks) {
+                    this.gameState = GameState.Playing;
+                    this.loadingTicks = 0;
+                    this.message = "";
+                }
+            default:
         }
     }
 
@@ -63,10 +87,18 @@ class WizeGameController extends GameControllerBase {
         return overlappedDoor;
     }
 
+    doubleJump: Powerup = {
+        coin: new Coin({x: 950, y: 200}),
+        name: "Double Jump",
+        method: (character: KYeezy) => {
+            character.maxJmpCnt = 2;
+        }
+    };
+
     rooms: Array<Room> = [
         new RoomBuilder({h:750, w: 1000}).withFloor()
             .withDoor({x: 900, y:650, destRoom: 1, destX: 100, destY: 0})
-            .withDoor({x: 700, y:650, destRoom:3, destX: 300, destY:2170})
+            .withDoor({x: 700, y:650, destRoom:3, destX: 300, destY:0})
         .build(),
         new RoomBuilder({h:2400, w:500}).withFloor()
             .withPlatform({x: 0, y: 300, h: 50, w: 300})
@@ -107,8 +139,9 @@ class WizeGameController extends GameControllerBase {
             .withPlatform({x: 760, y: 450, w: 100, h: 50})
             .withPlatform({x: 900, y: 350, w: 100, h: 50})
             .withPlatform({x: 900, y: 250, w: 100, h: 50})
-            .withPlatform({x: 0, y: 200, w: 750, h: 50})
-            .withPlatform({x: 0, y: 100, w: 450, h: 50})
+            .withPlatform({x: 0, y: 150, w: 450, h: 50})
+            .withPowerup(this.doubleJump)
+            .withDoor({x: 20, y: 50, destRoom: 0, destX: 60, destY: 600})
         .build()
     ];
 }
