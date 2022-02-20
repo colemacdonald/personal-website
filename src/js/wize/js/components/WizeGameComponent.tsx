@@ -294,12 +294,7 @@ class WizeGameComponent extends Component {
                     monster.w
                 )
             ) {
-                this.cntx.fillRect(
-                    (monster.x - this.viewportX) * this.canvasScale,
-                    (monster.y - this.viewportY) * this.canvasScale,
-                    monster.w * this.canvasScale,
-                    monster.h * this.canvasScale
-                );
+                this.drawImage(monster.getNextFrame(), monster.box);
             }
         });
     }

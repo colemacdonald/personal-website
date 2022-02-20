@@ -24,11 +24,6 @@ class KYeezy extends ControllableCharacter {
         this.state = State.Idle;
     }
 
-
-    getNextFrame() {
-        return FRAMES[this.state][this.direction].images[this.frameCounter];
-    }
-
     move() {
         super.move();
         this.updateState();

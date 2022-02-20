@@ -32,8 +32,6 @@ class Character extends MovingSprite {
 
     game: WizeGame;
 
-
-
     constructor(options) {
         super(options.frames);
 
@@ -65,10 +63,6 @@ class Character extends MovingSprite {
         // Animation
         this.direction = Direction.Right;
         this.frameCounter = 0;
-    }
-
-    getNextFrame() {
-        throw new Error("Method not implemented.");
     }
 
     setGame(game) {
