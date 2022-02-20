@@ -37,6 +37,35 @@ class WizeGame {
     this.onGround = false;
     this.character.onG = false;
 
+    this.checkForCurrentPlatform();
+
+    // Move
+    this.character.move();
+
+    // Force in bounds
+    this.character.setPosition(Math.max(Math.min(this.room.w - this.character.w, this.character.x), 0), Math.max(Math.min(this.room.h - this.character.h + 30, this.character.y), 0));
+
+    this.updateAndCheckMonsters();
+
+    this.checkCoins();
+
+    this.checkPowerups();
+  }
+
+  getOverlappingPowerup() : Powerup {
+    let powerup = null;
+
+    this.room.powerups.forEach(p => {
+        if (util.doRectangleArraysOverlap([{x: p.coin.x - p.coin.r / 2, y: p.coin.y - p.coin.r/2, h: p.coin.r*2, w: p.coin.r*2}], this.character.getHurtBoxes())) {
+            powerup = p;
+        }
+    });
+
+    return powerup;
+}
+
+  /***************** UPDATERS *****************/
+  checkForCurrentPlatform() {
     this.room.platforms.forEach((plat) => {
       if (
         util.doRectanglesOverlap(
@@ -56,13 +85,9 @@ class WizeGame {
         this.onGround = true;
       }
     }, this);
+  }
 
-    // Move
-    this.character.move();
-
-    // Force in bounds
-    this.character.setPosition(Math.max(Math.min(this.room.w - this.character.w, this.character.x), 0), Math.max(Math.min(this.room.h - this.character.h + 30, this.character.y), 0));
-
+  updateAndCheckMonsters() {
     this.room.monsters.forEach(monster => {
       if (
         util.doRectangleArraysOverlap(this.character.getHurtBoxes(), [
@@ -73,7 +98,9 @@ class WizeGame {
       }
       monster.move();
     }, this);
+  }
 
+  checkCoins() {
     var indices = [];
 
     this.room.coins.forEach(coin => {
@@ -96,7 +123,9 @@ class WizeGame {
       this.score += 100;
       this.room.coins.splice(indices[i], 1);
     }
+  }
 
+  checkPowerups() {
     // check for powerups
     let powerup = this.getOverlappingPowerup();
     if (powerup) {
@@ -105,20 +134,6 @@ class WizeGame {
       this.lastPowerup = powerup;
     }
   }
-
-  getOverlappingPowerup() : Powerup {
-    let powerup = null;
-
-    this.room.powerups.forEach(p => {
-        if (util.doRectangleArraysOverlap([{x: p.coin.x - p.coin.r / 2, y: p.coin.y - p.coin.r/2, h: p.coin.r*2, w: p.coin.r*2}], this.character.getHurtBoxes())) {
-            powerup = p;
-        }
-    });
-
-    return powerup;
-}
-
-
   /***************** EVENTS *******************/
 
   leftPress() {

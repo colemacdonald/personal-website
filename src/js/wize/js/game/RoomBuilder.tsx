@@ -33,6 +33,12 @@ class RoomBuilder {
         return this;
     }
 
+    withMonster({w, h, plat}): RoomBuilder {
+        let platform = this.room.platforms[plat]
+        this.room.monsters.push(new Monster({w: w, h: h, x: platform.x + platform.w / 2, y: platform.y - 20, platform: platform, speed: 1 }))
+        return this;
+    }
+
     build() : Room {
         return this.room;
     }
