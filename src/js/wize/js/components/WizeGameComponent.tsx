@@ -222,39 +222,20 @@ class WizeGameComponent extends Component {
           plat.w
         )
       ) {
+        
         // Left corner
-        this.cntx.drawImage(
-          TILES.leftImg,
-        (plat.x - this.viewportX) * this.canvasScale,
-          (plat.y - this.viewportY) * this.canvasScale,
-          TILES.w * this.canvasScale,
-          TILES.h * this.canvasScale
-        );
+        this.drawImage(TILES.leftImg, {x: plat.x, y: plat.y, w: TILES.w, h: TILES.h});
 
+    
         // Middle tiles
-
         var i = 1;
         // Until we reach the right side
         while ((i + 1) * TILES.w < plat.w) {
-          this.cntx.drawImage(
-            TILES.centerImg,
-            (plat.x + TILES.w * i - this.viewportX) * this.canvasScale,
-            (plat.y - this.viewportY) * this.canvasScale,
-            TILES.w * this.canvasScale,
-            TILES.h * this.canvasScale
-          );
-
-          i++;
+            this.drawImage(TILES.centerImg, { x: plat.x + TILES.w * i, y: plat.y, w: TILES.w, h: TILES.h });
+            i++;        
         }
 
-        // Right corner
-        this.cntx.drawImage(
-          TILES.rightImg,
-          (plat.x + TILES.w * i - this.viewportX) * this.canvasScale,
-          (plat.y - this.viewportY) * this.canvasScale,
-          TILES.w * this.canvasScale,
-          TILES.h * this.canvasScale
-        );
+        this.drawImage(TILES.rightImg, { x: plat.x + TILES.w * i, y: plat.y, w: TILES.w, h: TILES.h });
       }
     });
   }
@@ -338,16 +319,8 @@ class WizeGameComponent extends Component {
           coin.box.w
         )
       ) {
-        var img = coin.getNextFrame();
-
-        this.cntx.drawImage(
-          img,
-          (coin.box.x - this.viewportX) * this.canvasScale,
-          (coin.box.y - this.viewportY) * this.canvasScale,
-          coin.box.h * this.canvasScale,
-          coin.box.w * this.canvasScale
-        );
-      }
+            this.drawImage(coin.getNextFrame(), coin.box);
+        }
     }, this);
   }
 
@@ -356,20 +329,17 @@ class WizeGameComponent extends Component {
    */
   drawPlayer() {
     let c = this.gameController.game.character,
-      frame = c.getFrame();
-    // drawImage(img, x, y, w, h)
+      img = c.getNextFrame();
 
-    this.cntx.drawImage(
-      frame.img,
-      (c.x - this.viewportX + frame.x_offset) * this.canvasScale,
-      (c.y - this.viewportY) * this.canvasScale,
-      (c.w + frame.width_extend) * this.canvasScale,
-      c.h * this.canvasScale
-    );
-    
+    this.drawImage(img, c.box);
+  }
 
-    // this.cntx.fillStyle = 'purple';
-    // this.cntx.fillRect(c.x - this.viewportX, c.y - this.viewportY, c.w, c.h);
+  drawImage(img: any, box: Rectangle) {
+    this.cntx.drawImage(img,
+        (box.x - this.viewportX) * this.canvasScale,
+        (box.y - this.viewportY) * this.canvasScale,
+        box.w * this.canvasScale,
+        box.h * this.canvasScale)
   }
 
   drawMinimap() {
