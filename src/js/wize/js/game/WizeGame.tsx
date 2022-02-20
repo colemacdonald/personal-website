@@ -63,7 +63,7 @@ class WizeGame {
     this.character.move();
 
     // Force in bounds
-    this.character.setPosition(Math.max(Math.min(this.room.w - this.character.w, this.character.x), 0), Math.max(Math.min(this.room.h - this.character.h + 15, this.character.y), 0));
+    this.character.setPosition(Math.max(Math.min(this.room.w - this.character.w, this.character.x), 0), Math.max(Math.min(this.room.h - this.character.h + 50, this.character.y), 0));
 
     this.room.monsters.forEach(monster => {
       if (

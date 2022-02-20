@@ -11,15 +11,4 @@ type Room = {
     doors: Array<Door>
 }
 
-function CreateRoomWithFloor(h: number, w: number) : Room {
-    return {
-        h: h,
-        w: w,
-        platforms: [{x: 0, y: h, w: w, h: 150}],
-        monsters: [],
-        coins: [],
-        doors: []
-    };
-}
-
-export { Room, CreateRoomWithFloor };
+export { Room };

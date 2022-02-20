@@ -1,27 +1,13 @@
-import { Room, CreateRoomWithFloor } from "../Room";
+import { Room } from "../Room";
 import { KYeezy } from "../sprites/KYeezyCharacter";
 import WizeGame from "../WizeGame";
 import { GameControllerBase, GameState } from "./GameControllerBase";
 import { util } from "../../util.js"
 import Door from "../sprites/Door";
+import { RoomBuilder } from "../RoomBuilder";
 
 
 class WizeGameController extends GameControllerBase {
-
-    rooms: Array<Room>;
-    
-    constructor() {
-        super();
-
-        this.rooms = [ 
-            CreateRoomWithFloor(1500, 2000),
-            CreateRoomWithFloor(500, 1000),
-        ];
-0
-        this.rooms[0].doors.push({x: 1900, y:1400, h:100, w: 50, destRoom: this.rooms[1], destX: 100, destY: 900});
-        this.rooms[1].doors.push({x: 50, y:400, h:100, w: 50, destRoom: this.rooms[0], destX: 1800, destY: 1400});
-    }
-
     newGame() {
         this.gameState = GameState.Playing;
         this.level = 0;
@@ -53,7 +39,7 @@ class WizeGameController extends GameControllerBase {
         if (door) {
            delete this.game;
 
-           this.game = new WizeGame(this.baseOptions, door.destRoom, this.character);
+           this.game = new WizeGame(this.baseOptions, this.rooms[door.destRoom], this.character);
             this.character.setPosition(door.destX, door.destY);
             this.character.setGame(this.game);
         }
@@ -70,6 +56,24 @@ class WizeGameController extends GameControllerBase {
 
         return overlappedDoor;
     }
+
+    rooms: Array<Room> = [
+        new RoomBuilder({h:750, w: 1000}).withFloor()
+            .withDoor({x: 900, y:650, h:100, w: 50, destRoom: 1, destX: 100, destY: 0})
+        .build(),
+        new RoomBuilder({h:2500, w:500}).withFloor()
+            .withPlatform({x: 0, y: 300, h: 150, w: 300})
+            .withDoor({x: 50, y:200, h:100, w: 50, destRoom: 0, destX: 840, destY: 750})
+            .withPlatform({x:200, y: 500, h: 150, w: 300})
+            .withPlatform({x:0, y: 800, h: 150, w: 300})
+            .withPlatform({x:200, y: 1100, h: 150, w: 300})
+            .withPlatform({x:0, y: 1400, h: 150, w: 300})
+            .withDoor({x:50, y: 2400, h: 100, w: 50, destRoom:2, destX: 2400, destY:50})
+        .build(),
+        new RoomBuilder({h: 100, w: 2500}).withFloor()
+            .withDoor({x: 2450, y:0, h: 100, w: 50, destRoom: 1, destX: 60, destY: 2450})
+        .build()
+    ];
 }
 
 export { WizeGameController };

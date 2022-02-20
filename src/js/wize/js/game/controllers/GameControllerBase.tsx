@@ -1,6 +1,4 @@
-import { RoomGenerator } from "../RoomGenerator";
 import { ControllableCharacter } from "../sprites/ControllableCharacter";
-import { KYeezy } from "../sprites/KYeezyCharacter";
 import { WizeGame } from "../WizeGame";
 
 

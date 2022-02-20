@@ -5,7 +5,7 @@ type Door = {
     y: number,
     h: number,
     w: number,
-    destRoom: Room,
+    destRoom: number,
     destX: number,
     destY: number
 };
