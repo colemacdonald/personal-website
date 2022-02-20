@@ -29,7 +29,7 @@ class util {
         return overlap;
     }
 
-    static bootstrapImages(frames: {sources: Array<string>, images: Array<any> }){
+    static bootstrapImages(frames: { sources: Array<string>, images: Array<any> }) {
         frames.sources.forEach((src) => {
             const img = new Image();
             img.src = src;
@@ -41,10 +41,10 @@ class util {
     static bootstrapMovingImages(frames) {
         for (let [state, sets] of Object.entries(frames)) {
             for (let [direction, set] of Object.entries(sets)) {
-                let frameSet = set as FrameSet;  
+                let frameSet = set as FrameSet;
                 this.bootstrapImages(frameSet);
             }
-        } 
+        }
     }
 }
 

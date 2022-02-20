@@ -6,24 +6,24 @@ import { RandomWizeGameController } from "./wize/js/game/controllers/RandomWizeG
 import { WizeGameController } from "./wize/js/game/controllers/WizeGameController";
 
 class MainNavBar extends Component {
-  render() {
-    var gameProps = {
-      gameController: new WizeGameController()
+    render() {
+        var gameProps = {
+            gameController: new WizeGameController()
+        }
+        return (
+            <Tabs defaultActiveKey="game" id="uncontrolled-tab-example">
+                <Tab eventKey="home" title="Home">
+                    <div className="tab-content">
+                        <Home />
+                    </div>
+                </Tab>
+                <Tab eventKey="game" title="Wize">
+                    <div className="tab-content">
+                        <WizeHome {...gameProps} />
+                    </div>
+                </Tab>
+            </Tabs>
+        );
     }
-    return (
-      <Tabs defaultActiveKey="game" id="uncontrolled-tab-example">
-        <Tab eventKey="home" title="Home">
-          <div className="tab-content">
-            <Home/>
-          </div>
-        </Tab>
-        <Tab eventKey="game" title="Wize">
-          <div className="tab-content">
-            <WizeHome {...gameProps}/>
-          </div>
-        </Tab>
-      </Tabs>
-    );
-  }
 }
 export default MainNavBar;

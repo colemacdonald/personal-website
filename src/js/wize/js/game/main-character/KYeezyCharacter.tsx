@@ -4,7 +4,7 @@ import { State } from "../Frames";
 
 class KYeezy extends ControllableCharacter {
     state: State;
-  
+
     constructor(options: any) {
         options.speed = 4;
 
@@ -28,7 +28,7 @@ class KYeezy extends ControllableCharacter {
     getNextFrame() {
         return FRAMES[this.state][this.direction].images[this.frameCounter];
     }
-  
+
     move() {
         super.move();
         this.updateState();
