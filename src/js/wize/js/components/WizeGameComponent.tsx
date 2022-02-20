@@ -1,6 +1,5 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import { TILES } from "../frames/PlatformTiles";
-import { COIN_FRAMES } from "../frames/CoinFrames";
 import { WizeGameController } from "../game/controllers/WizeGameController"
 import { util } from "../util.js";
 import { GameControllerBase, GameState } from "../game/controllers/GameControllerBase";
@@ -43,7 +42,6 @@ class WizeGameComponent extends Component {
 
     this.canvas = React.createRef();
 
-    this.bootstrapCoinsImages();
     this.bootstrapPlatformImages();
 
     this.gameController = props.gameController;
@@ -343,20 +341,20 @@ class WizeGameComponent extends Component {
           this.viewportY,
           this.viewportH,
           this.viewportW,
-          coin.x - coin.r,
-          coin.y - coin.r,
-          2 * coin.r,
-          2 * coin.r
+          coin.box.x,
+          coin.box.y,
+          coin.box.h,
+          coin.box.w
         )
       ) {
-        var index = coin.getImageIndex();
+        var img = coin.getNextFrame();
 
         this.cntx.drawImage(
-          COIN_FRAMES.images[index],
-          (coin.x - coin.r - this.viewportX) * this.canvasScale,
-          (coin.y - coin.r - this.viewportY) * this.canvasScale,
-          coin.r * 2 * this.canvasScale,
-          coin.r * 2 * this.canvasScale
+          img,
+          (coin.box.x - this.viewportX) * this.canvasScale,
+          (coin.box.y - this.viewportY) * this.canvasScale,
+          coin.box.h * this.canvasScale,
+          coin.box.w * this.canvasScale
         );
       }
     }, this);
@@ -467,15 +465,6 @@ class WizeGameComponent extends Component {
     } else if (c.y > this.viewportY + 0.65 * this.viewportH) {
       this.viewportY = c.y - 0.65 * this.viewportH;
     }
-  }
-
-  bootstrapCoinsImages() {
-    COIN_FRAMES.sources.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-
-      COIN_FRAMES.images.push(img);
-    });
   }
 
   bootstrapPlatformImages() {
