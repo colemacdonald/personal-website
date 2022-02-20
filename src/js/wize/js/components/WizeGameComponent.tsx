@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TILES } from "../frames/PlatformTiles";
+import { TILES } from "../game/tiles/PlatformTiles";
 import { WizeGameController } from "../game/controllers/WizeGameController"
 import { util } from "../util.js";
 import { GameControllerBase, GameState } from "../game/controllers/GameControllerBase";
@@ -23,13 +23,6 @@ class WizeGameComponent extends Component {
 
   interval: NodeJS.Timer;
 
-  platformImages: {
-    left: any,
-    center: any,
-    right: any
-  };
-  
-
   constructor(props) {
     super(props);
 
@@ -41,8 +34,6 @@ class WizeGameComponent extends Component {
     this.canvasScale = props.canvasScale;
 
     this.canvas = React.createRef();
-
-    this.bootstrapPlatformImages();
 
     this.gameController = props.gameController;
 
@@ -233,7 +224,7 @@ class WizeGameComponent extends Component {
       ) {
         // Left corner
         this.cntx.drawImage(
-          this.platformImages.left,
+          TILES.leftImg,
         (plat.x - this.viewportX) * this.canvasScale,
           (plat.y - this.viewportY) * this.canvasScale,
           TILES.w * this.canvasScale,
@@ -246,7 +237,7 @@ class WizeGameComponent extends Component {
         // Until we reach the right side
         while ((i + 1) * TILES.w < plat.w) {
           this.cntx.drawImage(
-            this.platformImages.center,
+            TILES.centerImg,
             (plat.x + TILES.w * i - this.viewportX) * this.canvasScale,
             (plat.y - this.viewportY) * this.canvasScale,
             TILES.w * this.canvasScale,
@@ -258,7 +249,7 @@ class WizeGameComponent extends Component {
 
         // Right corner
         this.cntx.drawImage(
-          this.platformImages.right,
+          TILES.rightImg,
           (plat.x + TILES.w * i - this.viewportX) * this.canvasScale,
           (plat.y - this.viewportY) * this.canvasScale,
           TILES.w * this.canvasScale,
@@ -465,22 +456,6 @@ class WizeGameComponent extends Component {
     } else if (c.y > this.viewportY + 0.65 * this.viewportH) {
       this.viewportY = c.y - 0.65 * this.viewportH;
     }
-  }
-
-  bootstrapPlatformImages() {
-    const left = new Image(),
-      right = new Image(),
-      center = new Image();
-
-    left.src = TILES.grass_left;
-    right.src = TILES.grass_right;
-    center.src = TILES.grass_mid;
-
-    this.platformImages = {
-      left: left,
-      right: right,
-      center: center,
-    };
   }
 
   /**

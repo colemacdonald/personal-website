@@ -1,5 +1,5 @@
 
-class Coin implements SpriteBase {
+class Coin implements ISprite {
   box: Rectangle;
 
   x: number;
