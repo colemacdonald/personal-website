@@ -13,13 +13,15 @@ class Fountain implements ISprite {
         this.frameCounter = 0;
     }
 
-    getNextFrame() {
+    tick() {
         this.frameCounter = (this.frameCounter + 1) % 4;
 
         if (this.frameCounter === 0) {
             this.imageCounter = (this.imageCounter + 1) % FOUNTAIN_FRAMES.sources.length;
         }
+    }
 
+    getFrame() {
         return FOUNTAIN_FRAMES.images[this.imageCounter];
     }
 }

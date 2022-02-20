@@ -21,13 +21,15 @@ class Coin implements ISprite {
         this.frameCounter = 0;
     }
 
-    getNextFrame() {
+    tick() {
         this.frameCounter = (this.frameCounter + 1) % 4;
 
         if (this.frameCounter === 0) {
             this.imageCounter = (this.imageCounter + 1) % COIN_FRAMES.sources.length;
         }
+    }
 
+    getFrame() {
         return COIN_FRAMES.images[this.imageCounter];
     }
 }

@@ -32,7 +32,7 @@ class WizeGame {
     /**
      * Update the game state to the next frame
      */
-    update() {
+    tick() {
         // If the character on a platform?
         this.onGround = false;
         this.character.onG = false;
@@ -40,28 +40,18 @@ class WizeGame {
         this.checkForCurrentPlatform();
 
         // Move
-        this.character.move();
+        this.character.tick();
 
         // Force in bounds
         this.character.setPosition(Math.max(Math.min(this.room.w - this.character.w, this.character.x), 0), Math.max(Math.min(this.room.h - this.character.h + 30, this.character.y), 0));
 
         this.updateAndCheckMonsters();
 
-        this.checkCoins();
+        this.updateAndCheckCoins();
 
-        this.checkPowerups();
-    }
+        this.updateAndCheckPowerups();
 
-    getOverlappingPowerup(): Powerup {
-        let powerup = null;
-
-        this.room.powerups.forEach(p => {
-            if (util.doRectangleArraysOverlap([{ x: p.coin.x - p.coin.r / 2, y: p.coin.y - p.coin.r / 2, h: p.coin.r * 2, w: p.coin.r * 2 }], this.character.hurtBoxes)) {
-                powerup = p;
-            }
-        });
-
-        return powerup;
+        this.updateBackgroundItems();
     }
 
     /***************** UPDATERS *****************/
@@ -96,11 +86,11 @@ class WizeGame {
             ) {
                 this.playerAlive = false;
             }
-            monster.move();
+            monster.tick();
         }, this);
     }
 
-    checkCoins() {
+    updateAndCheckCoins() {
         var indices = [];
 
         this.room.coins.forEach(coin => {
@@ -116,6 +106,7 @@ class WizeGame {
             ) {
                 indices.push(this.room.coins.indexOf(coin));
             }
+            coin.tick();
         }, this);
 
         // Remove coins from game
@@ -125,15 +116,30 @@ class WizeGame {
         }
     }
 
-    checkPowerups() {
+    updateAndCheckPowerups() {
+        let powerup = null;
+
+        this.room.powerups.forEach(p => {
+            if (util.doRectangleArraysOverlap([{ x: p.coin.x - p.coin.r / 2, y: p.coin.y - p.coin.r / 2, h: p.coin.r * 2, w: p.coin.r * 2 }], this.character.hurtBoxes)) {
+                powerup = p;
+            }
+            p.coin.tick();
+        });
+
         // check for powerups
-        let powerup = this.getOverlappingPowerup();
         if (powerup) {
             powerup.method(this.character);
             this.room.powerups.splice(this.room.powerups.indexOf(powerup), 1);
             this.lastPowerup = powerup;
         }
     }
+
+    updateBackgroundItems() {
+        this.room.backgroundElements.forEach(e => {
+            e.tick();
+        });
+    }
+
     /***************** EVENTS *******************/
 
     leftPress() {
