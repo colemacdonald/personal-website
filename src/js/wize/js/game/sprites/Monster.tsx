@@ -1,5 +1,5 @@
 import { util } from "../../util";
-import { Direction, State } from "../Frames";
+import { Direction, FrameC, State } from "../Frames";
 import { MovingSprite } from "./MovingSprite";
 
 class Monster extends MovingSprite {
@@ -24,6 +24,11 @@ class Monster extends MovingSprite {
         this.xv = this.speed;
     }
 
+    get box(): Rectangle {
+        let frame = this.getFrameC();
+        return { x: this.x + frame.x_offset, y: this.y, w: this.w + frame.width_extend, h: this.h };
+    }
+
     move() {
         //these walk back and forth on platforms
         if (
@@ -37,6 +42,25 @@ class Monster extends MovingSprite {
         this.x += this.xv;
 
         this.incrementFrameCounter();
+    }
+
+    incrementFrameCounter(): void {
+        let currentFrame = this.getFrameC();
+        this.ticksOnFrame++;
+
+        // next frame
+        if (this.ticksOnFrame > currentFrame.ticks) {
+            this.frameCounter++;
+            this.ticksOnFrame = 0;
+        }
+
+        // Make sure counter fits in our current state
+        this.frameCounter =
+            this.frameCounter % this.frames[this.state][this.direction].length;
+    }
+
+    getFrameC() : FrameC {
+        return this.frames[this.state][this.direction][this.frameCounter];
     }
 }
 
@@ -52,154 +76,23 @@ enum MonsterState {
     Dying
 }
 
-let monsterTypes = {}
+let monsterTypes = {};
 monsterTypes[MonsterType.Centipede] = { h: 33, w: 46, speed: 0.75 }
 monsterTypes[MonsterType.Centipede][State.Walking] = {};
-monsterTypes[MonsterType.Centipede][State.Walking][Direction.Right] = {
-    sources: [
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"),
-    ],
-    images: [],
-    x_offset: 0,
-    width_offset: 0,
-    width_extend: 0
-};
-monsterTypes[MonsterType.Centipede][State.Walking][Direction.Left] = {
-    sources: [
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-        require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"),
-    ],
-    images: [],
-    x_offset: 0,
-    width_offset: 0,
-    width_extend: 0
-};
+monsterTypes[MonsterType.Centipede][State.Walking][Direction.Right] = [
+    new FrameC(require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"), 16 ,[{ x: 0, y: 0, h: 33, w: 46 }]),
+    new FrameC(require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"), 16 ,[{ x: 0, y: 0, h: 33, w: 46 }]),
+    new FrameC(require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"), 16 ,[{ x: 0, y: 0, h: 33, w: 46 }]),
+    new FrameC(require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"), 16 ,[{ x: 0, y: 0, h: 33, w: 46 }])
+];
+monsterTypes[MonsterType.Centipede][State.Walking][Direction.Left] = [
+    new FrameC(require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"), 16 ,[{ x: 0, y: 0, h: 33, w: 46 }]),
+    new FrameC(require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"), 16 ,[{ x: 0, y: 0, h: 33, w: 46 }]),
+    new FrameC(require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"), 16 ,[{ x: 0, y: 0, h: 33, w: 46 }]),
+    new FrameC(require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"), 16 ,[{ x: 0, y: 0, h: 33, w: 46 }])
+];
 
-util.bootstrapMovingImages(monsterTypes[MonsterType.Centipede]);
+
+util.bootstrapFrames(monsterTypes[MonsterType.Centipede]);
 
 export { Monster, MonsterType };

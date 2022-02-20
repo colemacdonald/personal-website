@@ -292,7 +292,7 @@ class WizeGameComponent extends Component {
                     monster.w
                 )
             ) {
-                this.drawImage(monster.getFrame(), monster.box);
+                this.drawImage(monster.getFrameC().img, monster.box);
             }
         });
     }

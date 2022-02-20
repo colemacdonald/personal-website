@@ -2,6 +2,7 @@ import { Direction, Frame, State } from "../Frames";
 
 class MovingSprite implements ISprite {
     frameCounter: number;
+    ticksOnFrame: number;
 
     x: number;
     y: number;
@@ -18,6 +19,7 @@ class MovingSprite implements ISprite {
     constructor(frames) {
         this.frames = frames;
         this.frameCounter = 0;
+        this.ticksOnFrame = 0;
         this.state = State.Idle;
         this.direction = Direction.Right;
     }
