@@ -36,7 +36,7 @@ let FOUNTAIN_FRAMES = {
         require("../../../../../resources/wize/fountain/fountain0003.png"),
     ],
     images: [],
-  };
+};
 
 util.bootstrapImages(FOUNTAIN_FRAMES);
 

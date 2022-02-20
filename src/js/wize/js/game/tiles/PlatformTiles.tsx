@@ -9,14 +9,14 @@ let TILES = {
     rightImg: null,
     centerImg: null,
     bottomImg: null
-  };
-  
+};
+
 
 const bootstrapPlatformImages = () => {
     const left = new Image(),
-      right = new Image(),
-      center = new Image(),
-      bottom = new Image();
+        right = new Image(),
+        center = new Image(),
+        bottom = new Image();
 
     left.src = TILES.grass_left;
     right.src = TILES.grass_right;
@@ -27,9 +27,8 @@ const bootstrapPlatformImages = () => {
     TILES.rightImg = right;
     TILES.centerImg = center;
     TILES.bottomImg = bottom;
-  }
+}
 
-  bootstrapPlatformImages();
+bootstrapPlatformImages();
 
-  export { TILES };
-  
+export { TILES };

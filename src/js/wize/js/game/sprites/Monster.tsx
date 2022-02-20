@@ -21,7 +21,7 @@ class Monster implements ISprite {
 
         this.xv = this.speed;
     }
-  
+
     getNextFrame() {
         throw new Error("Method not implemented.");
     }
@@ -51,8 +51,8 @@ enum MonsterState {
     Dying
 }
 
-let monsterTypes = { }
-monsterTypes[MonsterType.Centipede] = { 
+let monsterTypes = {}
+monsterTypes[MonsterType.Centipede] = {
     sources: [
         require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png")
     ],

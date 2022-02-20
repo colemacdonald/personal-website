@@ -1,6 +1,6 @@
 
 import { util } from "../../util";
-import {State, Direction } from "../Frames";
+import { State, Direction } from "../Frames";
 
 let FRAMES = {};
 
@@ -104,7 +104,7 @@ FRAMES[State.Jumping][Direction.Left] = {
 };
 
 FRAMES[State.InAir] = {};
-FRAMES[State.InAir][Direction.Right] = 
+FRAMES[State.InAir][Direction.Right] =
 {
 	sources: [
 		// require("../../../../../resources/wize/kyell_jump/kyell_jump_right0000.png"),
@@ -117,7 +117,7 @@ FRAMES[State.InAir][Direction.Right] =
 	x_offset: 0,
 	width_extend: 0,
 };
-FRAMES[State.InAir][Direction.Left] = 
+FRAMES[State.InAir][Direction.Left] =
 {
 	sources: [
 		// require("../../../../../resources/wize/kyell_jump/kyell_jump_right0000.png"),

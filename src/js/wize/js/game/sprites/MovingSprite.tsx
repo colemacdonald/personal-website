@@ -19,11 +19,11 @@ class MovingSprite implements ISprite {
         this.frames = frames;
     }
 
-    get box() : Rectangle {
-        return {x: this.x + this.frames[this.state][this.direction].x_offset, y: this.y, w: this.w + this.frames[this.state][this.direction].width_extend, h: this.h};
+    get box(): Rectangle {
+        return { x: this.x + this.frames[this.state][this.direction].x_offset, y: this.y, w: this.w + this.frames[this.state][this.direction].width_extend, h: this.h };
     }
 
-    get hurtBoxes() : Array<Rectangle> {
+    get hurtBoxes(): Array<Rectangle> {
         var boxes = [];
 
         this.relativeHurtBoxes.forEach(function (box) {
@@ -38,8 +38,8 @@ class MovingSprite implements ISprite {
         return boxes;
     }
 
-    get hitBoxes() : Array<Rectangle> {
-        return [{x: this.x + this.frames[this.state][this.direction].x_offset, y: this.y, w: this.w + this.frames[this.state][this.direction].width_extend, h: this.h}];
+    get hitBoxes(): Array<Rectangle> {
+        return [{ x: this.x + this.frames[this.state][this.direction].x_offset, y: this.y, w: this.w + this.frames[this.state][this.direction].width_extend, h: this.h }];
     }
 
     incrementFrameCounter() {

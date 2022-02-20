@@ -15,7 +15,7 @@ class RandomWizeGameController extends GameControllerBase {
         this.character = new KYeezy({});
 
         this.game = new WizeGame(this.baseOptions, room, this.character);
-        this.character.setPosition(this.baseOptions.safeBox.x + this.baseOptions.safeBox.w/2, this.baseOptions.safeBox.y + this.baseOptions.safeBox.h/2);
+        this.character.setPosition(this.baseOptions.safeBox.x + this.baseOptions.safeBox.w / 2, this.baseOptions.safeBox.y + this.baseOptions.safeBox.h / 2);
         this.character.setGame(this.game);
     }
 
@@ -30,7 +30,7 @@ class RandomWizeGameController extends GameControllerBase {
         let room = RoomBuilder.buildRandomRoom(this.baseOptions);
 
         this.game = new WizeGame(this.baseOptions, room, this.character);
-        this.character.setPosition(this.baseOptions.safeBox.x + this.baseOptions.safeBox.w/2, this.baseOptions.safeBox.y + this.baseOptions.safeBox.h/2);
+        this.character.setPosition(this.baseOptions.safeBox.x + this.baseOptions.safeBox.w / 2, this.baseOptions.safeBox.y + this.baseOptions.safeBox.h / 2);
         this.character.setGame(this.game);
     }
 
