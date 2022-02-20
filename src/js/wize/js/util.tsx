@@ -1,4 +1,4 @@
-import { FrameSet } from "./game/Frames";
+import { Frame, FrameC, FrameSet } from "./game/Frames";
 
 //util.js
 class util {
@@ -43,6 +43,18 @@ class util {
             for (let [direction, set] of Object.entries(sets)) {
                 let frameSet = set as FrameSet;
                 this.bootstrapImages(frameSet);
+            }
+        }
+    }
+
+    static bootstrapFrames(frames) {
+        for (let [state, sets] of Object.entries(frames)) {
+            for (let [direction, set] of Object.entries(sets)) {
+                for (let f of set as Array<FrameC>) {
+                    let image = new Image();
+                    image.src = f.src;
+                    f.img = image;
+                }
             }
         }
     }
