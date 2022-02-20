@@ -1,4 +1,4 @@
-import { util } from "../util.js";
+import { util } from "../util";
 import { Monster } from "./sprites/Monster"
 import { Coin } from "./sprites/Coin"
 import { Room } from "./Room";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TILES } from "../game/tiles/PlatformTiles";
 import { WizeGameController } from "../game/controllers/WizeGameController"
-import { util } from "../util.js";
+import { util } from "../util";
 import { GameControllerBase, GameState } from "../game/controllers/GameControllerBase";
 import { RandomWizeGameController } from "../game/controllers/RandomWizeGameController";
 

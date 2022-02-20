@@ -1,7 +1,7 @@
-import { util } from "../util.js";
+import { util } from "../util";
 import { ControllableCharacter } from "./main-character/ControllableCharacter";
 import { Room } from "./Room";
-import { Powerup } from "./Powerup.js";
+import { Powerup } from "./Powerup";
 
 class WizeGame {
   grav: number;
