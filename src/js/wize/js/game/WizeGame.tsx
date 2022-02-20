@@ -56,7 +56,7 @@ class WizeGame {
     let powerup = null;
 
     this.room.powerups.forEach(p => {
-        if (util.doRectangleArraysOverlap([{x: p.coin.x - p.coin.r / 2, y: p.coin.y - p.coin.r/2, h: p.coin.r*2, w: p.coin.r*2}], this.character.getHurtBoxes())) {
+        if (util.doRectangleArraysOverlap([{x: p.coin.x - p.coin.r / 2, y: p.coin.y - p.coin.r/2, h: p.coin.r*2, w: p.coin.r*2}], this.character.hurtBoxes)) {
             powerup = p;
         }
     });
@@ -90,7 +90,7 @@ class WizeGame {
   updateAndCheckMonsters() {
     this.room.monsters.forEach(monster => {
       if (
-        util.doRectangleArraysOverlap(this.character.getHurtBoxes(), [
+        util.doRectangleArraysOverlap(this.character.hurtBoxes, [
           { x: monster.x, y: monster.y, h: monster.h, w: monster.w },
         ])
       ) {
@@ -105,7 +105,7 @@ class WizeGame {
 
     this.room.coins.forEach(coin => {
       if (
-        util.doRectangleArraysOverlap(this.character.getHurtBoxes(), [
+        util.doRectangleArraysOverlap(this.character.hurtBoxes, [
           {
             x: coin.x - coin.r,
             y: coin.y - coin.r,

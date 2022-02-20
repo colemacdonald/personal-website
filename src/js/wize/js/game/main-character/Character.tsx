@@ -1,27 +1,14 @@
 import { util } from "../../util";
+import { Direction, Frame } from "../Frames";
 import WizeGame from "../WizeGame.js";
-
-let DIRECTIONS = {
-  RIGHT: "right",
-  LEFT: "left",
-};
-
-type Frame = {
-  img: any,
-  x_offset: number,
-  width_extend: number
-};
+import { MovingSprite } from "../sprites/MovingSprite";
 
 /**
  * To be used as a base class for creating new characters - mainly to allow the implementation though I'm not sure
  * we are going to need this level of abstraction but just incase
  * Call the super class constructor if your are extending this class
  */
-class Character implements ISprite {
-  get box(): Rectangle {
-    return {x: this.x, y: this.y, h: this.h, w: this.w};
-  }
-
+class Character extends MovingSprite {
   x: number;
   y: number;
   h: number;
@@ -30,7 +17,7 @@ class Character implements ISprite {
 
   frameCounter: number;
   movingLeft: boolean;
-  direction: string;
+  direction: Direction;
   movingRight: boolean;
   
   alive: boolean;
@@ -45,10 +32,11 @@ class Character implements ISprite {
 
   game: WizeGame;
   
-  hitBoxes: Array<Rectangle>;
-  hurtBoxes: Array<Rectangle>;
+  
   
   constructor(options) {
+    super(options.frames);
+
     // Positioning and Movement
     this.x = options.x ? options.x : 0;
     this.y = options.y ? options.y : 0;
@@ -70,12 +58,12 @@ class Character implements ISprite {
     this.fallThroughPlatform = false;
 
     // Interaction
-    this.hurtBoxes = []; // List of rectangles relative to px,py
-    this.hitBoxes = []; // List of rectangles relative to px,py
+    this.relativeHurtBoxes = []; // List of rectangles relative to px,py
+    this.relativeHitBoxes = []; // List of rectangles relative to px,py
     this.currentPlatform = null;
 
     // Animation
-    this.direction = DIRECTIONS.RIGHT;
+    this.direction = Direction.Right;
     this.frameCounter = 0;
   }
 
@@ -161,21 +149,6 @@ class Character implements ISprite {
   getFrame(): Frame {
     return null;
   }
-
-  getHurtBoxes() {
-    var hurtBoxes = [];
-
-    this.hurtBoxes.forEach(function (box) {
-      hurtBoxes.push({
-        x: box.x + this.x,
-        y: box.y + this.y,
-        h: box.h,
-        w: box.w,
-      });
-    }, this);
-
-    return hurtBoxes;
-  }
 }
 
-export { DIRECTIONS, Character, Frame };
+export { Character };

@@ -26,14 +26,14 @@ class Fountain implements ISprite {
 
 let FOUNTAIN_FRAMES = {
     sources: [
-        require("../../../../resources/wize/fountain/fountain0000.png"),
-        require("../../../../resources/wize/fountain/fountain0000.png"),
-        require("../../../../resources/wize/fountain/fountain0001.png"),
-        require("../../../../resources/wize/fountain/fountain0001.png"),
-        require("../../../../resources/wize/fountain/fountain0002.png"),
-        require("../../../../resources/wize/fountain/fountain0002.png"),
-        require("../../../../resources/wize/fountain/fountain0003.png"),
-        require("../../../../resources/wize/fountain/fountain0003.png"),
+        require("../../../../../resources/wize/fountain/fountain0000.png"),
+        require("../../../../../resources/wize/fountain/fountain0000.png"),
+        require("../../../../../resources/wize/fountain/fountain0001.png"),
+        require("../../../../../resources/wize/fountain/fountain0001.png"),
+        require("../../../../../resources/wize/fountain/fountain0002.png"),
+        require("../../../../../resources/wize/fountain/fountain0002.png"),
+        require("../../../../../resources/wize/fountain/fountain0003.png"),
+        require("../../../../../resources/wize/fountain/fountain0003.png"),
     ],
     images: [],
   };

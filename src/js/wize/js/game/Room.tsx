@@ -10,7 +10,8 @@ type Room = {
     monsters: Array<Monster>,
     coins: Array<Coin>,
     doors: Array<Door>,
-    powerups: Array<Powerup>
+    powerups: Array<Powerup>,
+    backgroundElements: Array<ISprite>
 }
 
 export { Room };

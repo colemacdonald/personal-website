@@ -140,6 +140,11 @@ class WizeGameComponent extends Component {
       this.gameController.game.room.w * this.canvasScale,
       this.gameController.game.room.h * this.canvasScale
     );
+
+    // Background Elements
+    this.gameController.game.room.backgroundElements.forEach(e => {
+        this.drawImage(e.getNextFrame(), e.box);
+    });
   }
 
   /*

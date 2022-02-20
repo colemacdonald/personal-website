@@ -79,10 +79,10 @@ class WizeGameController extends GameControllerBase {
         let overlappedDoor = null;
 
         this.game.room.doors.forEach(door => {
-            if (util.doRectangleArraysOverlap([door], this.character.getHurtBoxes())) {
+            if (util.doRectangleArraysOverlap([door], this.character.hurtBoxes)) {
                 overlappedDoor = door;
             }
-        })
+        });
 
         return overlappedDoor;
     }
@@ -98,7 +98,7 @@ class WizeGameController extends GameControllerBase {
     rooms: Array<Room> = [
         new RoomBuilder({h:750, w: 1000}).withFloor()
             .withDoor({x: 900, y:650, destRoom: 1, destX: 100, destY: 0})
-            // .withDoor({x: 700, y:650, destRoom:3, destX: 300, destY:0})
+            .withFountain({x: 500, y: 650})
         .build(),
         new RoomBuilder({h:2400, w:500}).withFloor()
             .withPlatform({x: 0, y: 300, h: 50, w: 300})

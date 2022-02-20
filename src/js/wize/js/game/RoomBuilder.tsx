@@ -4,13 +4,14 @@ import { Coin } from "./sprites/Coin"
 import { Room } from "./Room";
 import Door from "./sprites/Door.js";
 import { Powerup } from "./Powerup";
+import { Fountain } from "./background-elements/Fountain";
 
 class RoomBuilder {
 
     room: Room;
 
-    constructor({h, w}) {
-        this.room = {h: h, w: w, platforms: [], monsters: [], coins: [], doors: [], powerups: []};
+    constructor(r: {h: number, w: number}) {
+        this.room = {h: r.h, w: r.w, platforms: [], monsters: [], coins: [], doors: [], powerups: [], backgroundElements: []};
     }
 
     withFloor() : RoomBuilder {
@@ -23,8 +24,8 @@ class RoomBuilder {
         return this;
     }
 
-    withDoor({x, y, destRoom, destX, destY}): RoomBuilder {
-        this.room.doors.push({x: x, y: y, destRoom: destRoom, destX: destX, destY: destY, h: 100, w: 50})
+    withDoor(d: {x: number, y: number, destRoom: number, destX: number, destY: number}): RoomBuilder {
+        this.room.doors.push({x: d.x, y: d.y, destRoom: d.destRoom, destX: d.destX, destY: d.destY, h: 100, w: 50})
         return this;
     }
 
@@ -33,9 +34,14 @@ class RoomBuilder {
         return this;
     }
 
-    withMonster({w, h, plat}): RoomBuilder {
-        let platform = this.room.platforms[plat]
-        this.room.monsters.push(new Monster({w: w, h: h, x: platform.x + platform.w / 2, y: platform.y - 20, platform: platform, speed: 1 }))
+    withMonster(m : {w: number, h: number, plat: number}): RoomBuilder {
+        let platform = this.room.platforms[m.plat]
+        this.room.monsters.push(new Monster({w: m.w, h: m.h, x: platform.x + platform.w / 2, y: platform.y - 20, platform: platform, speed: 1 }))
+        return this;
+    }
+
+    withFountain(f: {x: number, y: number}): RoomBuilder {
+        this.room.backgroundElements.push(new Fountain({x: f.x, y: f.y, h: 100, w: 100}));
         return this;
     }
 
