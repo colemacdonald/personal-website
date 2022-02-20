@@ -8,6 +8,12 @@ import { RoomBuilder } from "../RoomBuilder";
 
 
 class WizeGameController extends GameControllerBase {
+    constructor() {
+        super();
+
+        this.baseOptions.snapToPlatforms = false;
+    }
+
     newGame() {
         this.gameState = GameState.Playing;
         this.level = 0;
@@ -59,19 +65,50 @@ class WizeGameController extends GameControllerBase {
 
     rooms: Array<Room> = [
         new RoomBuilder({h:750, w: 1000}).withFloor()
-            .withDoor({x: 900, y:650, h:100, w: 50, destRoom: 1, destX: 100, destY: 0})
+            .withDoor({x: 900, y:650, destRoom: 1, destX: 100, destY: 0})
+            .withDoor({x: 700, y:650, destRoom:3, destX: 300, destY:2170})
         .build(),
         new RoomBuilder({h:2400, w:500}).withFloor()
-            .withPlatform({x: 0, y: 300, h: 150, w: 300})
-            .withDoor({x: 50, y:200, h:100, w: 50, destRoom: 0, destX: 840, destY: 750})
-            .withPlatform({x:200, y: 500, h: 150, w: 300})
-            .withPlatform({x:0, y: 800, h: 150, w: 300})
-            .withPlatform({x:200, y: 1100, h: 150, w: 300})
-            .withPlatform({x:0, y: 1400, h: 150, w: 300})
-            .withDoor({x:50, y: 2300, h: 100, w: 50, destRoom:2, destX: 2400, destY:50})
+            .withPlatform({x: 0, y: 300, h: 50, w: 300})
+            .withDoor({x: 50, y:200, destRoom: 0, destX: 840, destY: 750})
+            .withPlatform({x:200, y: 500, h: 50, w: 300})
+            .withPlatform({x:0, y: 800, h: 50, w: 300})
+            .withPlatform({x:200, y: 1100, h: 50, w: 300})
+            .withPlatform({x:0, y: 1400, h: 50, w: 300})
+            .withDoor({x:50, y: 2300, destRoom:2, destX: 1900, destY:50})
         .build(),
-        new RoomBuilder({h: 100, w: 2500}).withFloor()
-            .withDoor({x: 2450, y:0, h: 100, w: 50, destRoom: 1, destX: 110, destY: 2250})
+        new RoomBuilder({h: 100, w: 2000}).withFloor()
+            .withDoor({x: 2450, y:0, destRoom: 1, destX: 110, destY: 2350})
+            .withDoor({x:20, y: 0, destRoom: 3, destX: 870, destY: 2170})    
+        .build(),
+        new RoomBuilder({h: 2200, w: 1000}).withFloor()
+            .withDoor({x:940, y: 2100, destRoom: 2, destX: 75, destY:50})
+            .withPlatform({x: 0, y: 2100, w: 100, h: 50})
+            .withPlatform({x: 0, y: 2000, w: 100, h: 50})
+            .withPlatform({x: 0, y: 1900, w: 100, h: 50})
+            .withPlatform({x: 220, y: 1800, w: 100, h: 50})
+            .withPlatform({x: 440, y: 1700, w: 100, h: 50})
+            .withPlatform({x: 660, y: 1600, w: 100, h: 50})
+            .withPlatform({x: 880, y: 1500, w: 100, h: 50})
+            .withPlatform({x: 660, y: 1400, w: 100, h: 50})
+            .withPlatform({x: 880, y: 1300, w: 100, h: 50})
+            .withPlatform({x: 660, y: 1200, w: 100, h: 50})
+            .withPlatform({x: 880, y: 1100, w: 100, h: 50})
+            .withPlatform({x: 660, y: 1000, w: 100, h: 50})
+            .withPlatform({x: 440, y: 1000, w: 100, h: 50})
+            .withPlatform({x: 150, y: 1050, w: 200, h: 50})
+            .withPlatform({x: 0, y: 950, w: 100, h: 50})
+            .withPlatform({x: 220, y: 850, w: 100, h: 50})
+            .withPlatform({x: 0, y: 750, w: 100, h: 50})
+            .withPlatform({x: 220, y: 650, w: 100, h: 50})
+            .withPlatform({x: 0, y: 550, w: 100, h: 50})
+            .withPlatform({x: 220, y: 450, w: 100, h: 50})
+            .withPlatform({x: 440, y: 350, w: 200, h: 50})
+            .withPlatform({x: 760, y: 450, w: 100, h: 50})
+            .withPlatform({x: 900, y: 350, w: 100, h: 50})
+            .withPlatform({x: 900, y: 250, w: 100, h: 50})
+            .withPlatform({x: 0, y: 200, w: 750, h: 50})
+            .withPlatform({x: 0, y: 100, w: 450, h: 50})
         .build()
     ];
 }

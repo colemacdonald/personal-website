@@ -11,7 +11,7 @@ class MainNavBar extends Component {
       gameController: new WizeGameController()
     }
     return (
-      <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
+      <Tabs defaultActiveKey="game" id="uncontrolled-tab-example">
         <Tab eventKey="home" title="Home">
           <div className="tab-content">
             <Home/>
