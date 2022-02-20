@@ -1,5 +1,5 @@
 import { Room } from "../Room";
-import { KYeezy } from "../sprites/KYeezyCharacter";
+import { KYeezy } from "../main-character/KYeezyCharacter";
 import WizeGame from "../WizeGame";
 import { GameControllerBase, GameState } from "./GameControllerBase";
 import { util } from "../../util.js"

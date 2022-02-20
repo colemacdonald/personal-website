@@ -1,4 +1,4 @@
-import { ControllableCharacter } from "../sprites/ControllableCharacter";
+import { ControllableCharacter } from "../main-character/ControllableCharacter";
 import { WizeGame } from "../WizeGame";
 
 

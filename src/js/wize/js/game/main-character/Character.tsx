@@ -17,7 +17,11 @@ type Frame = {
  * we are going to need this level of abstraction but just incase
  * Call the super class constructor if your are extending this class
  */
-class Character {
+class Character implements ISprite {
+  get box(): Rectangle {
+    return {x: this.x, y: this.y, h: this.h, w: this.w};
+  }
+
   x: number;
   y: number;
   h: number;
@@ -73,6 +77,10 @@ class Character {
     // Animation
     this.direction = DIRECTIONS.RIGHT;
     this.frameCounter = 0;
+  }
+
+  getNextFrame() {
+    throw new Error("Method not implemented.");
   }
 
   setGame(game) {

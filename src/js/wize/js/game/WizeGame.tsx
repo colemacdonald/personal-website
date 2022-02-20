@@ -1,5 +1,5 @@
 import { util } from "../util.js";
-import { ControllableCharacter } from "./sprites/ControllableCharacter";
+import { ControllableCharacter } from "./main-character/ControllableCharacter";
 import { Room } from "./Room";
 import { Powerup } from "./Powerup.js";
 
