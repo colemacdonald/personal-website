@@ -15,6 +15,9 @@ class WizeGameComponent extends Component {
 
     canvas: any;
     cntx: any;
+    audio: any;
+    currentAudioSrc: string;
+    audioPlayed: boolean = false;
 
     gameController: GameControllerBase;
 
@@ -36,6 +39,7 @@ class WizeGameComponent extends Component {
         this.canvasScale = props.canvasScale;
 
         this.canvas = React.createRef();
+        this.audio = React.createRef();
 
         this.gameController = props.gameController;
 
@@ -46,10 +50,26 @@ class WizeGameComponent extends Component {
     /*
    * To be called at the frame rate.
    */
-    tick() {
+    tick() {     
         this.gameController.tick();
         if (this.gameController.gameState === GameState.Over) {
             if (this.interval) window.clearInterval(this.interval);
+        }
+
+        // update music if necessary
+        if (this.currentAudioSrc !== this.gameController.game.room.backgroundTheme.backgroundMusic || !this.audioPlayed) {
+            this.audio.current.pause();
+            this.audio.current.src = this.gameController.game.room.backgroundTheme.backgroundMusic;
+            this.currentAudioSrc = this.gameController.game.room.backgroundTheme.backgroundMusic;
+            try{
+                this.audio.current.play().then(() => {
+                    this.audioPlayed = true;
+                });
+            }
+            catch {
+                this.audioPlayed = false;
+            }
+            
         }
 
         this.updateViewport();
@@ -68,6 +88,7 @@ class WizeGameComponent extends Component {
     componentDidMount() {
         document.addEventListener("keyup", this.keyup.bind(this));
         document.addEventListener("keydown", this.keydown.bind(this));
+        this.audio.current.loop = true;
         this.startGame();
     }
 
@@ -81,6 +102,7 @@ class WizeGameComponent extends Component {
         return (
             <div className="flex-item">
                 <div className="flex-item">
+                    <audio ref={this.audio}></audio>
                     <h2>Game Mode:</h2>
                     <select onChange={this.gameModeChange.bind(this)}>
                         <option value="story">Story</option>

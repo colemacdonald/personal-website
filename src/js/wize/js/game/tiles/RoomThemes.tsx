@@ -17,7 +17,8 @@ type RoomTheme = {
     wallTiles: { topLeft: Frame, left: Frame, bottomLeft: Frame, topRight: Frame, right: Frame, bottomRight: Frame, ceiling: Frame },
     horizontalBackgroundImage: Frame,
     verticalBackgroundImage: Frame,
-    repeatBackgroundImage: boolean
+    repeatBackgroundImage: boolean,
+    backgroundMusic: string,
 };
 
 let RoomThemes = {};
@@ -34,7 +35,8 @@ RoomThemes[RoomBackgroundTheme.Empty] = {
         center: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_tile.png")}),
         right: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_right_corner.png")}),
     },
-    backgroundTiles: []
+    backgroundTiles: [],
+    backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3")
 };
 
 RoomThemes[RoomBackgroundTheme.Castle] = {
@@ -60,7 +62,8 @@ RoomThemes[RoomBackgroundTheme.Castle] = {
         right: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile56.png")}),
         bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile24.png")}),
         ceiling: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile59.png")})
-    }
+    },
+    backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3")
 }
 
 
@@ -87,7 +90,8 @@ RoomThemes[RoomBackgroundTheme.UnderGround] = {
         right: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_62.png")}),
         bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_68.png")}),
         ceiling: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_15.png")})
-    }
+    },
+    backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3")
 };
 
 RoomThemes[RoomBackgroundTheme.Cave] = {
@@ -115,7 +119,8 @@ RoomThemes[RoomBackgroundTheme.Cave] = {
         right: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile35.png")}),
         bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile35.png")}),
         ceiling: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile27.png")}),
-    }
+    },
+    backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3")
 }
 
 export { RoomBackgroundTheme, RoomTheme, RoomThemes };
