@@ -8,7 +8,6 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "bootstrap": "^4.5.0",
-    "gh-pages": "^3.0.0",
     "react-bootstrap": "^1.0.1",
     "react-router-dom": "^5.2.0",
     "typescript": "^4.5.5"
@@ -24,6 +23,7 @@
   "homepage": "http://colemacdonald.github.io/personal-website",
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
+    "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^5.0.0"
