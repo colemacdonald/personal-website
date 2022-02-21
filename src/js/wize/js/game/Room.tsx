@@ -3,6 +3,7 @@ import { Powerup } from "./Powerup";
 import { Coin } from "./sprites/Coin";
 import Door from "./sprites/Door";
 import { Monster } from "./sprites/Monster";
+import { RoomBackgroundTheme, RoomTheme, RoomThemes } from "./tiles/RoomThemes";
 
 class Room {
     h: number;
@@ -13,8 +14,7 @@ class Room {
     doors: Array<Door> = [];
     powerups: Array<Powerup> = [];
     backgroundElements: Array<ISprite> = [];
-    backgroundColour: string = "#33beff";
-    backgroundTheme: RoomBackgroundTheme = RoomBackgroundTheme.Empty;
+    backgroundTheme: RoomTheme = RoomThemes[RoomBackgroundTheme.Empty];
 
     constructor(options) {
         this.h = options.h;
@@ -22,23 +22,10 @@ class Room {
     }
 
     getBackgroundThemeTile(x: number, y: number): Frame {
-        let index = (Math.floor(x / 50) + Math.floor(y / 50)) % ROOM_THEME_TILES[this.backgroundTheme].length;
+        let index = (Math.floor(x / 50) + Math.floor(y / 50)) % this.backgroundTheme.backgroundTiles.length;
 
-        return ROOM_THEME_TILES[this.backgroundTheme][index];
+        return this.backgroundTheme.backgroundTiles[index];
     }
 };
 
-enum RoomBackgroundTheme {
-    Empty,
-    Dungeon,
-};
-
-export { Room, RoomBackgroundTheme };
-
-
-let ROOM_THEME_TILES = {};
-ROOM_THEME_TILES[RoomBackgroundTheme.Dungeon] = [
-    new Frame({src: require("../../../../resources/wize/tiles/medieval/tile13.png")}),
-    new Frame({src: require("../../../../resources/wize/tiles/medieval/tile4.png")}),
-    new Frame({src: require("../../../../resources/wize/tiles/medieval/tile10.png")}),
-]
+export { Room };

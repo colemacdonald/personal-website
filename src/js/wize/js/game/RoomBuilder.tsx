@@ -1,12 +1,12 @@
 import { util } from "../util";
 import { Monster, MonsterType } from "./sprites/Monster"
 import { Coin } from "./sprites/Coin"
-import { Room, RoomBackgroundTheme } from "./Room";
+import { Room } from "./Room";
 import Door from "./sprites/Door";
 import { Powerup } from "./Powerup";
 import { Fountain } from "./background-elements/Fountain";
-import { StaticElement, StaticElementType } from "./background-elements/StaticElement";
-import { BackgroundElement, BackgroundElementType } from "./background-elements/Backgrounds";
+import { StaticElement } from "./background-elements/StaticElement";
+import { RoomBackgroundTheme, RoomThemes } from "./tiles/RoomThemes";
 
 class RoomBuilder {
 
@@ -16,13 +16,9 @@ class RoomBuilder {
         this.room = new Room({ h: r.h, w: r.w });
     }
 
-    withBackground(colour: string): RoomBuilder {
-        this.room.backgroundColour = colour;
-        return this;
-    }
 
     withTheme(theme: RoomBackgroundTheme): RoomBuilder {
-        this.room.backgroundTheme = theme;
+        this.room.backgroundTheme = RoomThemes[theme];
         return this;
     }
 
@@ -47,9 +43,15 @@ class RoomBuilder {
         return this;
     }
 
-    withMonster(m: { monsterType: MonsterType, plat: number }): RoomBuilder {
-        let platform = this.room.platforms[m.plat];
-        this.room.monsters.push(new Monster({ monsterType: m.monsterType, x: platform.x + platform.w / 2, y: platform.y - 20, platform: platform }));
+    withMonster(options): RoomBuilder {
+        let platform: Rectangle;
+        if (options.plat) {
+            platform = this.room.platforms[options.plat];
+        } else {
+            platform = { x: options.x, y: options.y, w: options.w, h: options.h };
+        }
+
+        this.room.monsters.push(new Monster({ monsterType: options.monsterType, x: platform.x + platform.w / 2, y: platform.y - 20, platform: platform }));
         return this;
     }
 

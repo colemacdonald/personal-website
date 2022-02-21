@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { TILES } from "../game/tiles/PlatformTiles";
 import { WizeGameController } from "../game/controllers/WizeGameController"
 import { util } from "../util";
 import { GameControllerBase, GameState } from "../game/controllers/GameControllerBase";
 import { RandomWizeGameController } from "../game/controllers/RandomWizeGameController";
-import { RoomBackgroundTheme } from "../game/Room";
+import { RoomBackgroundTheme } from "../game/tiles/RoomThemes";
 
 // TODO: Separate view from game controller logic
 class WizeGameComponent extends Component {
@@ -136,31 +135,82 @@ class WizeGameComponent extends Component {
     }
 
     drawBackground() {
-        this.cntx.clearRect(
-            0,
-            0,
-            this.canvas.current.width,
-            this.canvas.current.height
-        );
+        this.cntx.clearRect(0, 0, this.canvas.current.width, this.canvas.current.height);
+
+        let w = 50;
+        let h = 50;
 
         let room = this.gameController.game.room;
+        let verticalRoom = room.h > room.w;
+        let backgroundImage = verticalRoom ? room.backgroundTheme.verticalBackgroundImage : room.backgroundTheme.horizontalBackgroundImage;
 
-        // Default Background - matches colour of floor
-        this.cntx.fillStyle = "#302c2e";
+        // Background Colour to infinity
+        this.cntx.fillStyle = room.backgroundTheme.primaryColour;
         this.cntx.fillRect(0, 0, this.canvas.current.width, this.canvas.current.height);
 
-        // Room Background "#33beff"
-        this.cntx.fillStyle = room.backgroundColour;
-        this.cntx.fillRect(0, 0 - this.viewportY * this.canvasScale, this.canvas.current.width, room.h * this.canvasScale);
+        // background image
+        if (backgroundImage) {
+            let img = backgroundImage.img;
 
-        if (room.backgroundTheme !== RoomBackgroundTheme.Empty) {
-            for (let x = 0; x < room.w; x += 50) {
-                for (let y = 0; y < room.h; y += 50) {
-                    this.drawImage(room.getBackgroundThemeTile(x, y).img, { x: x, y: y, w: 50, h: 50 })
-                }
+            let imgScale = Math.min(room.w / img.width, room.h / img.height);
+
+            // tiles default to 50/50 and we want just enough to clip into the wall tiles
+            let margin = 15 * this.canvasScale;
+
+            let i = -margin;
+
+            while (i < (verticalRoom ? room.h : room.w)) {
+                this.drawImage(img, {
+                        x: verticalRoom ? -margin : i,
+                        y: verticalRoom ? i : -margin, 
+                        w: verticalRoom ? room.w + margin * 2 : img.width * imgScale, 
+                        h: verticalRoom ? img.height * imgScale : room.h + margin * 2
+                    });
+
+                i += (verticalRoom ? img.height : img.width) * imgScale;
             }
+
+            // Cover overhanging background image
+            this.cntx.fillStyle = room.backgroundTheme.primaryColour;
+
+            this.cntx.fillRect((room.w - this.viewportX) * this.canvasScale + margin, 0, this.canvas.current.width, this.canvas.current.height);
         }
 
+        // Fill in floor
+        this.cntx.fillStyle = room.backgroundTheme.floorColour;
+        this.cntx.fillRect(-room.w, (room.h - this.viewportY + 25) * this.canvasScale, room.w * w, 500);
+        
+        if (room.backgroundTheme.key !== RoomBackgroundTheme.Empty) {
+            
+            if (!backgroundImage) {
+                // Background Tiles
+                for (let x = 0; x < room.w; x += w) {
+                    for (let y = 0; y < room.h; y += h) {
+                        this.drawImage(room.getBackgroundThemeTile(x, y).img, { x: x, y: y, w: w, h: h })
+                    }
+                }
+            }
+            
+            // Wall Tiles
+            // Left
+            this.drawImage(room.backgroundTheme.wallTiles.topLeft.img, {x: -w , y: -h, h: h, w: w})
+            for (let y = 0; y < room.h; y += h) {
+                this.drawImage(room.backgroundTheme.wallTiles.left.img, {x: -w, y: y, h: h, w: w});
+            }
+            this.drawImage(room.backgroundTheme.wallTiles.bottomLeft.img, {x: -w, y: room.h, h: h, w: w});
+        
+            // Right
+            this.drawImage(room.backgroundTheme.wallTiles.topRight.img, {x: room.w , y: -h, h: h, w: w})
+            for (let y = 0; y < room.h; y += h) {
+                this.drawImage(room.backgroundTheme.wallTiles.right.img, {x: room.w, y: y, h: h, w: w});
+            }
+            this.drawImage(room.backgroundTheme.wallTiles.bottomRight.img, {x: room.w, y: room.h, h: h, w: w});
+
+            // Ceiling
+            for (let x = 0; x < room.w; x += w) {
+                this.drawImage(room.backgroundTheme.wallTiles.ceiling.img, {x: x, y: -w, w: w, h:h})
+            }
+        }
     }
 
     isInView(box: Rectangle): boolean {
@@ -235,23 +285,28 @@ class WizeGameComponent extends Component {
      * Draws each platform that exists inside the viewport at its position offset the viewport
      */
     drawPlatforms() {
-        var plats = this.gameController.game.room.platforms;
+        let plats = this.gameController.game.room.platforms;
+
+        let theme = this.gameController.game.room.backgroundTheme;
+
+        let h = 50;
+        let w = 50;
 
         plats.forEach(plat => {
             // If visible
             if (this.isInView(plat)) {
                 // Left corner
-                this.drawImage(TILES.leftImg, { x: plat.x, y: plat.y, w: TILES.w, h: TILES.h });
+                this.drawImage(theme.platformTiles.left.img, { x: plat.x, y: plat.y, w: w, h: h});
 
                 // Middle tiles
                 let i = 1;
                 // Until we reach the right side
-                while ((i + 1) * TILES.w < plat.w) {
-                    this.drawImage(TILES.centerImg, { x: plat.x + TILES.w * i, y: plat.y, w: TILES.w, h: TILES.h });
+                while ((i + 1) * w < plat.w) {
+                    this.drawImage(theme.platformTiles.center.img, { x: plat.x + w * i, y: plat.y, w: w, h: h });
                     i++;
                 }
 
-                this.drawImage(TILES.rightImg, { x: plat.x + TILES.w * i, y: plat.y, w: TILES.w, h: TILES.h });
+                this.drawImage(theme.platformTiles.right.img, { x: plat.x + w * i, y: plat.y, w: w, h: h });
             }
         });
     }
