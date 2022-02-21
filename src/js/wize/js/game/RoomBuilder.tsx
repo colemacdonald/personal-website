@@ -2,9 +2,10 @@ import { util } from "../util";
 import { Monster, MonsterType } from "./sprites/Monster"
 import { Coin } from "./sprites/Coin"
 import { Room } from "./Room";
-import Door from "./sprites/Door.js";
+import Door from "./sprites/Door";
 import { Powerup } from "./Powerup";
 import { Fountain } from "./background-elements/Fountain";
+import { StaticElement, StaticElementType } from "./background-elements/StaticElement";
 
 class RoomBuilder {
 
@@ -25,7 +26,7 @@ class RoomBuilder {
     }
 
     withDoor(d: { x: number, y: number, destRoom: number, destX: number, destY: number }): RoomBuilder {
-        this.room.doors.push({ x: d.x, y: d.y, destRoom: d.destRoom, destX: d.destX, destY: d.destY, h: 100, w: 50 });
+        this.room.doors.push(new Door(d.x, d.y, d.destRoom, d.destX, d.destY));
         return this;
     }
 
@@ -41,7 +42,12 @@ class RoomBuilder {
     }
 
     withFountain(f: { x: number, y: number }): RoomBuilder {
-        this.room.backgroundElements.push(new Fountain({ x: f.x, y: f.y, h: 100, w: 100 }));
+        this.room.backgroundElements.push(new Fountain({ x: f.x, y: f.y, inFrontOfPlatforms: true }));
+        return this;
+    }
+
+    withStaticElement(e): RoomBuilder {
+        this.room.backgroundElements.push(new StaticElement(e));
         return this;
     }
 
