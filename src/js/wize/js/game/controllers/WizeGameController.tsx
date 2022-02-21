@@ -9,6 +9,7 @@ import { Coin } from "../sprites/Coin";
 import { Powerup } from "../Powerup";
 import { MonsterType } from "../sprites/Monster";
 import { StaticElementType } from "../background-elements/StaticElement";
+import { BackgroundElementType } from "../background-elements/Backgrounds";
 
 
 class WizeGameController extends GameControllerBase {
@@ -98,11 +99,12 @@ class WizeGameController extends GameControllerBase {
     };
 
     rooms: Array<Room> = [
-        new RoomBuilder({ h: 750, w: 1000 }).withFloor()
+        new RoomBuilder({ h: 750, w: 1000 })
+            .withFloor()
             .withDoor({ x: 900, y: 660, destRoom: 1, destX: 100, destY: 0 })
             .withFountain({ x: 500, y: 650 })
-            // .withStaticElement({type: StaticElementType.Tree4, x: 200, y: 380, inFrontOfPlatforms: true, scale: 2})
-            // .withStaticElement({type: StaticElementType.Stone1, x: 50, y: 743})
+            .withStaticElement({type: StaticElementType.Tree3, x: -240, y: 380, inFrontOfPlatforms: true, scale: 2})
+            .withStaticElement({type: StaticElementType.Stone1, x: 350, y: 743})
             .build(),
         new RoomBuilder({ h: 2400, w: 500 }).withFloor()
             .withPlatform({ x: 0, y: 300, h: 50, w: 300 })
