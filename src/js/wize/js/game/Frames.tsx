@@ -10,13 +10,7 @@ enum Direction {
     Left
 };
   
-type Frame = {
-    img: any,
-    x_offset: number,
-    width_extend: number
-};
-
-class FrameC {
+class Frame {
     src: string;
     img: any;
     ticks: number = 1;
@@ -27,19 +21,16 @@ class FrameC {
     relativeHitBoxes: Array<Rectangle> = [];
     relativeHurtBoxes: Array<Rectangle> = [];
 
-    constructor(src: string, ticks: number, hurtBoxes: Array<Rectangle>) {
-        this.src = src;
-        this.ticks = ticks;
-        this.relativeHurtBoxes = hurtBoxes;
+    constructor(frameOptions) {
+        this.src = frameOptions.src;
+        this.ticks = frameOptions.ticks || 1;
+        this.x_offset = frameOptions.x_offset || 0;
+        this.width_extend = frameOptions.width_extend || 0;
+        this.y_offset = frameOptions.y_offset || 0;
+        this.height_extend = frameOptions.height_extend || 0;
+        this.relativeHurtBoxes = frameOptions.hurtBoxes || [];
+        this.relativeHitBoxes = frameOptions.hitBoxes || [];
     }
 };
 
-type FrameSet = {
-	sources: Array<string>,
-	images: Array<any>,
-	x_offset: number,
-	width_offset: number,
-	width_extend: number,
-};
-
-export { State, Direction, Frame, FrameSet, FrameC }
+export { State, Direction, Frame }
