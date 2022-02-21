@@ -11,14 +11,11 @@ class KYeezy extends ControllableCharacter {
         options.h = 80;
         options.w = 40;
 
+        // set frames
         options.frames = FRAMES;
 
         // Call super class constructor
         super(options);
-
-        // Based of top left corner
-        this.relativeHurtBoxes = [{ x: 5, y: 10, h: 70, w: 30 }];
-        this.relativeHitBoxes = [];
 
         // For the getFrame fsm
         this.state = State.Idle;

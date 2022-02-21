@@ -292,7 +292,7 @@ class WizeGameComponent extends Component {
                     monster.w
                 )
             ) {
-                this.drawImage(monster.getFrameC().img, monster.box);
+                this.drawImage(monster.getFrame().img, monster.box);
             }
         });
     }
@@ -327,7 +327,7 @@ class WizeGameComponent extends Component {
      */
     drawPlayer() {
         let c = this.gameController.game.character,
-            img = c.getFrame();
+            img = c.getFrame().img;
 
         this.drawImage(img, c.box);
     }
