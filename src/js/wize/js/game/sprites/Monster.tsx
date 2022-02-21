@@ -32,8 +32,8 @@ class Monster extends MovingSprite {
     move() {
         //these walk back and forth on platforms
         if (
-            this.x < this.platform.x + 10 ||
-            this.x + this.w > this.platform.x + this.platform.w - 10
+            this.x < this.platform.x + 3 ||
+            this.x + this.w > this.platform.x + this.platform.w - 3
         ) {
             this.xv *= -1;
             this.direction = this.xv < 0 ? Direction.Left : Direction.Right;

@@ -8,7 +8,6 @@ class WizeHome extends Component {
 
     constructor(props) {
         super(props);
-        this.gameProperties.gameController = props.gameController;
     }
 
     // TODO: these aren't game dimensions, they are viewport dimensions
@@ -18,7 +17,6 @@ class WizeHome extends Component {
         viewportY: 0,
         viewportX: 0,
         canvasScale: 2,
-        gameController: null
     };
 
     description = `Play as Yeezy the Wize as he tries to collect all of the K-Coins.
@@ -26,7 +24,7 @@ class WizeHome extends Component {
 
     currentRecord = `Kyell: 7-1000`;
 
-    scoring = `After collecting all 20 coins you will advance to the next level.`;
+    scoring = `In Survival mode, play through random levels collecting coins. After collecting all 20 coins you will advance to the next level. In Story mode, progress through the pre-made levels.`;
 
     controls = [
         `← and → to Move`,
@@ -37,8 +35,7 @@ class WizeHome extends Component {
     ];
 
     changes = [
-        `Number of monsters and monster speed now scale with level!`,
-        `Coins won't spawn as close to the edge of the map.`,
+        
     ];
 
     background = `This game was developed by my friend and I in 2018. The physics are all custom, and frames are drawn on an html canvas (yes, really).`;
