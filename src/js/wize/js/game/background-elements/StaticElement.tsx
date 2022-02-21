@@ -1,7 +1,9 @@
 import { Frame } from "../Frames";
 
 class StaticElement implements ISprite {
-    box: Rectangle;
+    drawBox: Rectangle;
+    hitBoxes: Array<Rectangle>;
+
     type: StaticElementType;
     inFrontOfPlatforms: boolean = false;
 
@@ -11,7 +13,8 @@ class StaticElement implements ISprite {
 
         this.inFrontOfPlatforms = options.inFrontOfPlatforms || false;
 
-        this.box = { x: options.x, y: options.y, w: STATIC_ELEMENT_SIZES[this.type].w * scale, h: STATIC_ELEMENT_SIZES[this.type].h * scale };
+        this.drawBox = { x: options.x, y: options.y, w: STATIC_ELEMENT_SIZES[this.type].w * scale, h: STATIC_ELEMENT_SIZES[this.type].h * scale };
+        this.hitBoxes = [{ x: options.x, y: options.y, w: STATIC_ELEMENT_SIZES[this.type].w * scale, h: STATIC_ELEMENT_SIZES[this.type].h * scale }];
     }
 
     tick() { }

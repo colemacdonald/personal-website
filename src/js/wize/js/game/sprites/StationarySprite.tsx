@@ -1,7 +1,8 @@
 import { Frame, State } from "../Frames";
 
 class StationarySprite implements ISprite {
-    box: Rectangle;
+    drawBox: Rectangle;
+    hitBoxes: Array<Rectangle> = [];
 
     frameCounter: number = 0;
     ticksOnFrame: number = 0;

@@ -2,7 +2,8 @@ import { Frame } from "../Frames"
 
 
 class BackgroundElement implements ISprite {
-    box: Rectangle;
+    drawBox: Rectangle;
+    hitBoxes: Array<Rectangle> = [];
     type: BackgroundElementType;
     inFrontOfPlatforms: boolean = false;
 
@@ -12,7 +13,7 @@ class BackgroundElement implements ISprite {
 
         this.inFrontOfPlatforms = options.inFrontOfPlatforms || false;
 
-        this.box = { x: options.x, y: options.y, w: BACKGROUND_ELEMENT_SIZES[this.type].w * scale, h: BACKGROUND_ELEMENT_SIZES[this.type].h * scale };
+        this.drawBox = { x: options.x, y: options.y, w: BACKGROUND_ELEMENT_SIZES[this.type].w * scale, h: BACKGROUND_ELEMENT_SIZES[this.type].h * scale };
     }
 
     tick() { }

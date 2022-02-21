@@ -1,7 +1,7 @@
 import { util } from "../util";
 import { Monster, MonsterType } from "./sprites/Monster"
 import { Coin } from "./sprites/Coin"
-import { Room } from "./Room";
+import { Room, RoomBackgroundTheme } from "./Room";
 import Door from "./sprites/Door";
 import { Powerup } from "./Powerup";
 import { Fountain } from "./background-elements/Fountain";
@@ -13,11 +13,16 @@ class RoomBuilder {
     room: Room;
 
     constructor(r: { h: number, w: number }) {
-        this.room = { h: r.h, w: r.w, platforms: [], monsters: [], coins: [], doors: [], powerups: [], backgroundElements: [], background: new BackgroundElement({type: BackgroundElementType.PixelDay}) };
+        this.room = new Room({ h: r.h, w: r.w });
     }
 
-    withBackground(type: BackgroundElementType): RoomBuilder {
-        this.room.background = new BackgroundElement({type: type})
+    withBackground(colour: string): RoomBuilder {
+        this.room.backgroundColour = colour;
+        return this;
+    }
+
+    withTheme(theme: RoomBackgroundTheme): RoomBuilder {
+        this.room.backgroundTheme = theme;
         return this;
     }
 
