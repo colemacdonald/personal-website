@@ -7,9 +7,6 @@ import { WizeGameController } from "./wize/js/game/controllers/WizeGameControlle
 
 class MainNavBar extends Component {
     render() {
-        var gameProps = {
-            gameController: new WizeGameController()
-        }
         return (
             <Tabs defaultActiveKey="game" id="uncontrolled-tab-example">
                 <Tab eventKey="home" title="Home">
@@ -19,7 +16,7 @@ class MainNavBar extends Component {
                 </Tab>
                 <Tab eventKey="game" title="Wize">
                     <div className="tab-content">
-                        <WizeHome {...gameProps} />
+                        <WizeHome />
                     </div>
                 </Tab>
             </Tabs>

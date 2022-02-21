@@ -18,6 +18,8 @@ class WizeGameComponent extends Component {
 
     gameController: GameControllerBase;
 
+    gameMode: string = "survival";
+
     level: number;
     frameCount: number;
 
@@ -78,13 +80,21 @@ class WizeGameComponent extends Component {
     render() {
         return (
             <div className="flex-item">
-                <button
-                    onClick={() => {
-                        this.startGame();
-                    }}
-                >
-                    Start Again
-                </button>
+                <div className="flex-item">
+                    <h2>Game Mode:</h2>
+                    <select onChange={this.gameModeChange.bind(this)}>
+                        <option value="survival">Survival</option>
+                        <option value="story">Story</option>
+                    </select>
+                    <br/><br/>
+                    <button
+                        onClick={() => {
+                            this.startGame();
+                        }}
+                    >
+                        Start Again
+                    </button>
+                </div>
                 <div className="wize-game">
                     <canvas
                         ref={this.canvas}
@@ -97,9 +107,20 @@ class WizeGameComponent extends Component {
         );
     }
 
+    gameModeChange(event) {
+        this.gameMode = event.target.value;
+    }
+
     startGame() {
         this.level = 0;
         this.frameCount = 0;
+
+        if (this.gameMode === "survival") {
+            this.gameController = new RandomWizeGameController();
+        }
+        else {
+            this.gameController = new WizeGameController();
+        }
 
         this.gameController.newGame();
 
@@ -143,6 +164,10 @@ class WizeGameComponent extends Component {
         this.gameController.game.room.backgroundElements.forEach(e => {
             this.drawImage(e.getFrame(), e.box);
         });
+    }
+
+    isInView(box: Rectangle): boolean {
+        return util.doRectanglesOverlap(this.viewportX, this.viewportY, this.viewportH, this.viewportW, box.x, box.y, box.h, box.w);
     }
 
     /*
@@ -213,22 +238,9 @@ class WizeGameComponent extends Component {
 
         plats.forEach(plat => {
             // If visible
-            if (
-                util.doRectanglesOverlap(
-                    this.viewportX,
-                    this.viewportY,
-                    this.viewportH,
-                    this.viewportW,
-                    plat.x,
-                    plat.y,
-                    plat.h,
-                    plat.w
-                )
-            ) {
-
+            if (this.isInView(plat)) {
                 // Left corner
                 this.drawImage(TILES.leftImg, { x: plat.x, y: plat.y, w: TILES.w, h: TILES.h });
-
 
                 // Middle tiles
                 var i = 1;
@@ -280,18 +292,7 @@ class WizeGameComponent extends Component {
         this.cntx.fillStyle = "brown";
 
         monsters.forEach(monster => {
-            if (
-                util.doRectanglesOverlap(
-                    this.viewportX,
-                    this.viewportY,
-                    this.viewportH,
-                    this.viewportW,
-                    monster.x,
-                    monster.y,
-                    monster.h,
-                    monster.w
-                )
-            ) {
+            if (this.isInView(monster)) {
                 this.drawImage(monster.getFrame().img, monster.box);
             }
         });
@@ -303,20 +304,15 @@ class WizeGameComponent extends Component {
     drawCoins() {
         this.cntx.fillStyle = "yellow";
 
+        this.gameController.game.room.coins.forEach(c => {
+            if (this.isInView(c.box)) {
+                this.drawImage(c.getFrame(), c.box);
+            }
+        }, this);
+
         this.gameController.game.room.powerups.forEach(p => {
             let coin = p.coin;
-            if (
-                util.doRectanglesOverlap(
-                    this.viewportX,
-                    this.viewportY,
-                    this.viewportH,
-                    this.viewportW,
-                    coin.box.x,
-                    coin.box.y,
-                    coin.box.h,
-                    coin.box.w
-                )
-            ) {
+            if (this.isInView(coin.box)) {
                 this.drawImage(coin.getFrame(), coin.box);
             }
         }, this);
