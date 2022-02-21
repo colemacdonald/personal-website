@@ -28,26 +28,6 @@ class util {
 
         return overlap;
     }
-
-    static bootstrapImages(frames: { sources: Array<string>, images: Array<any> }) {
-        frames.sources.forEach((src) => {
-            const img = new Image();
-            img.src = src;
-            frames.images.push(img);
-        });
-    }
-
-    static bootstrapFrames(frames) {
-        for (let [state, sets] of Object.entries(frames)) {
-            for (let [direction, set] of Object.entries(sets)) {
-                for (let f of set as Array<Frame>) {
-                    let image = new Image();
-                    image.src = f.src;
-                    f.img = image;
-                }
-            }
-        }
-    }
 }
 
 export { util };

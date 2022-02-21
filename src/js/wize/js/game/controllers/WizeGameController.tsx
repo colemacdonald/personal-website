@@ -8,6 +8,7 @@ import { RoomBuilder } from "../RoomBuilder";
 import { Coin } from "../sprites/Coin";
 import { Powerup } from "../Powerup";
 import { MonsterType } from "../sprites/Monster";
+import { StaticElementType } from "../background-elements/StaticElement";
 
 
 class WizeGameController extends GameControllerBase {
@@ -80,7 +81,7 @@ class WizeGameController extends GameControllerBase {
         let overlappedDoor = null;
 
         this.game.room.doors.forEach(door => {
-            if (util.doRectangleArraysOverlap([door], this.character.hurtBoxes)) {
+            if (util.doRectangleArraysOverlap([door.box], this.character.hurtBoxes)) {
                 overlappedDoor = door;
             }
         });
@@ -98,12 +99,14 @@ class WizeGameController extends GameControllerBase {
 
     rooms: Array<Room> = [
         new RoomBuilder({ h: 750, w: 1000 }).withFloor()
-            .withDoor({ x: 900, y: 650, destRoom: 1, destX: 100, destY: 0 })
+            .withDoor({ x: 900, y: 660, destRoom: 1, destX: 100, destY: 0 })
             .withFountain({ x: 500, y: 650 })
+            // .withStaticElement({type: StaticElementType.Tree4, x: 200, y: 380, inFrontOfPlatforms: true, scale: 2})
+            // .withStaticElement({type: StaticElementType.Stone1, x: 50, y: 743})
             .build(),
         new RoomBuilder({ h: 2400, w: 500 }).withFloor()
             .withPlatform({ x: 0, y: 300, h: 50, w: 300 })
-            .withDoor({ x: 50, y: 200, destRoom: 0, destX: 840, destY: 750 })
+            .withDoor({ x: 50, y: 210, destRoom: 0, destX: 840, destY: 750 })
             .withPlatform({ x: 200, y: 500, h: 50, w: 300 })
             .withMonster({ monsterType: MonsterType.Centipede, plat: 2 })
             .withPlatform({ x: 0, y: 800, h: 50, w: 300 })
@@ -112,14 +115,14 @@ class WizeGameController extends GameControllerBase {
             .withMonster({ monsterType: MonsterType.Centipede, plat: 4 })
             .withPlatform({ x: 0, y: 1400, h: 50, w: 300 })
             .withMonster({ monsterType: MonsterType.Centipede, plat: 5 })
-            .withDoor({ x: 50, y: 2300, destRoom: 2, destX: 1900, destY: 50 })
+            .withDoor({ x: 50, y: 2310, destRoom: 2, destX: 1900, destY: 50 })
             .build(),
         new RoomBuilder({ h: 100, w: 2000 }).withFloor()
-            .withDoor({ x: 2450, y: 0, destRoom: 1, destX: 110, destY: 2350 })
-            .withDoor({ x: 20, y: 0, destRoom: 3, destX: 870, destY: 2170 })
+            .withDoor({ x: 2450, y: 10, destRoom: 1, destX: 110, destY: 2350 })
+            .withDoor({ x: 20, y: 10, destRoom: 3, destX: 870, destY: 2170 })
             .build(),
         new RoomBuilder({ h: 2200, w: 1000 }).withFloor()
-            .withDoor({ x: 940, y: 2100, destRoom: 2, destX: 75, destY: 50 })
+            .withDoor({ x: 940, y: 2110, destRoom: 2, destX: 75, destY: 50 })
             .withPlatform({ x: 0, y: 2100, w: 100, h: 50 })
             .withPlatform({ x: 0, y: 2000, w: 100, h: 50 })
             .withPlatform({ x: 0, y: 1900, w: 100, h: 50 })
@@ -146,7 +149,7 @@ class WizeGameController extends GameControllerBase {
             .withPlatform({ x: 900, y: 250, w: 100, h: 50 })
             .withPlatform({ x: 0, y: 150, w: 450, h: 50 })
             .withPowerup(this.doubleJump)
-            .withDoor({ x: 20, y: 50, destRoom: 0, destX: 60, destY: 600 })
+            .withDoor({ x: 20, y: 60, destRoom: 0, destX: 60, destY: 600 })
             .build()
     ];
 }

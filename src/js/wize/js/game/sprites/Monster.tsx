@@ -67,7 +67,4 @@ monsterTypes[MonsterType.Centipede][State.Walking][Direction.Left] = [
     new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: 33, w: 46 }] }),
 ];
 
-
-util.bootstrapFrames(monsterTypes[MonsterType.Centipede]);
-
 export { Monster, MonsterType };

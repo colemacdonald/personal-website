@@ -30,6 +30,11 @@ class Frame {
         this.height_extend = frameOptions.height_extend || 0;
         this.relativeHurtBoxes = frameOptions.hurtBoxes || [];
         this.relativeHitBoxes = frameOptions.hitBoxes || [];
+
+        // load image
+        let img = new Image();
+        img.src = this.src;
+        this.img = img;
     }
 };
 

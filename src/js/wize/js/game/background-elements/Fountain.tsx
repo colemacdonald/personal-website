@@ -1,45 +1,27 @@
 import { util } from "../../util";
+import { Frame, State } from "../Frames";
+import { StationarySprite } from "../sprites/StationarySprite";
 
-class Fountain implements ISprite {
-    box: Rectangle;
+class Fountain extends StationarySprite {
+    constructor(options) {
+        super(FOUNTAIN_FRAMES);
 
-    imageCounter: number;
-    frameCounter: number;
+        this.inFrontOfPlatforms = options.inFrontOfPlatforms || false;
 
-    constructor(box: Rectangle) {
-        this.box = box;
+        let scale = options.scale || 1;
 
-        this.imageCounter = Math.floor(Math.random() * FOUNTAIN_FRAMES.sources.length);
+        this.box = { x: options.x, y: options.y, w: 100 * scale, h: 100 * scale };
+
         this.frameCounter = 0;
-    }
-
-    tick() {
-        this.frameCounter = (this.frameCounter + 1) % 4;
-
-        if (this.frameCounter === 0) {
-            this.imageCounter = (this.imageCounter + 1) % FOUNTAIN_FRAMES.sources.length;
-        }
-    }
-
-    getFrame() {
-        return FOUNTAIN_FRAMES.images[this.imageCounter];
     }
 }
 
-let FOUNTAIN_FRAMES = {
-    sources: [
-        require("../../../../../resources/wize/fountain/fountain0000.png"),
-        require("../../../../../resources/wize/fountain/fountain0000.png"),
-        require("../../../../../resources/wize/fountain/fountain0001.png"),
-        require("../../../../../resources/wize/fountain/fountain0001.png"),
-        require("../../../../../resources/wize/fountain/fountain0002.png"),
-        require("../../../../../resources/wize/fountain/fountain0002.png"),
-        require("../../../../../resources/wize/fountain/fountain0003.png"),
-        require("../../../../../resources/wize/fountain/fountain0003.png"),
-    ],
-    images: [],
-};
-
-util.bootstrapImages(FOUNTAIN_FRAMES);
+let FOUNTAIN_FRAMES = {};
+FOUNTAIN_FRAMES[State.Idle] = [
+    new Frame({src: require("../../../../../resources/wize/fountain/fountain0000.png"), ticks: 5}),
+    new Frame({src: require("../../../../../resources/wize/fountain/fountain0001.png"), ticks: 5}),
+    new Frame({src: require("../../../../../resources/wize/fountain/fountain0002.png"), ticks: 5}),
+    new Frame({src: require("../../../../../resources/wize/fountain/fountain0003.png"), ticks: 5}),
+];
 
 export { Fountain, FOUNTAIN_FRAMES };
