@@ -4,6 +4,7 @@ import { WizeGameController } from "../game/controllers/WizeGameController"
 import { util } from "../util";
 import { GameControllerBase, GameState } from "../game/controllers/GameControllerBase";
 import { RandomWizeGameController } from "../game/controllers/RandomWizeGameController";
+import { RoomBackgroundTheme } from "../game/Room";
 
 // TODO: Separate view from game controller logic
 class WizeGameComponent extends Component {
@@ -83,8 +84,8 @@ class WizeGameComponent extends Component {
                 <div className="flex-item">
                     <h2>Game Mode:</h2>
                     <select onChange={this.gameModeChange.bind(this)}>
-                        <option value="survival">Survival</option>
                         <option value="story">Story</option>
+                        <option value="survival">Survival</option>
                     </select>
                     <br/><br/>
                     <button
@@ -142,27 +143,24 @@ class WizeGameComponent extends Component {
             this.canvas.current.height
         );
 
+        let room = this.gameController.game.room;
 
-        // Background
+        // Default Background - matches colour of floor
         this.cntx.fillStyle = "#302c2e";
-        this.cntx.fillRect(
-            0,
-            0,
-            this.canvas.current.width,
-            this.canvas.current.height
-        );
+        this.cntx.fillRect(0, 0, this.canvas.current.width, this.canvas.current.height);
 
-        // this.cntx.drawImage(this.gameController.game.room.background.getFrame().img, 0, 0, this.canvas.current.width, this.canvas.current.height);
+        // Room Background "#33beff"
+        this.cntx.fillStyle = room.backgroundColour;
+        this.cntx.fillRect(0, 0 - this.viewportY * this.canvasScale, this.canvas.current.width, room.h * this.canvasScale);
 
+        if (room.backgroundTheme !== RoomBackgroundTheme.Empty) {
+            for (let x = 0; x < room.w; x += 50) {
+                for (let y = 0; y < room.h; y += 50) {
+                    this.drawImage(room.getBackgroundThemeTile(x, y).img, { x: x, y: y, w: 50, h: 50 })
+                }
+            }
+        }
 
-        // Room Background
-        this.cntx.fillStyle = "#33beff";
-        this.cntx.fillRect(
-            0,
-            0 - this.viewportY * this.canvasScale,
-            this.canvas.current.width,
-            this.gameController.game.room.h * this.canvasScale
-        );
     }
 
     isInView(box: Rectangle): boolean {
@@ -262,7 +260,7 @@ class WizeGameComponent extends Component {
         // Background Elements
         this.gameController.game.room.backgroundElements.forEach(e => {
             if (e.inFrontOfPlatforms === inFrontOfPlatformsFlag) {
-                this.drawImage(e.getFrame().img, e.box);
+                this.drawImage(e.getFrame().img, e.drawBox);
             }
         });
     }
@@ -271,8 +269,8 @@ class WizeGameComponent extends Component {
         let doors = this.gameController.game.room.doors;
 
         doors.forEach(door => {
-            if (this.isInView(door.box)) {
-                this.drawImage(door.getFrame().img, door.box)
+            if (this.isInView(door.drawBox)) {
+                this.drawImage(door.getFrame().img, door.drawBox)
             }
         });
     }
@@ -297,15 +295,15 @@ class WizeGameComponent extends Component {
         this.cntx.fillStyle = "yellow";
 
         this.gameController.game.room.coins.forEach(c => {
-            if (this.isInView(c.box)) {
-                this.drawImage(c.getFrame().img, c.box);
+            if (this.isInView(c.drawBox)) {
+                this.drawImage(c.getFrame().img, c.drawBox);
             }
         }, this);
 
         this.gameController.game.room.powerups.forEach(p => {
             let coin = p.coin;
-            if (this.isInView(coin.box)) {
-                this.drawImage(coin.getFrame().img, coin.box);
+            if (this.isInView(coin.drawBox)) {
+                this.drawImage(coin.getFrame().img, coin.drawBox);
             }
         }, this);
     }
@@ -317,7 +315,7 @@ class WizeGameComponent extends Component {
         let c = this.gameController.game.character,
             img = c.getFrame().img;
 
-        this.drawImage(img, c.box);
+        this.drawImage(img, c.drawBox);
     }
 
     drawImage(img: any, box: Rectangle) {
@@ -363,7 +361,7 @@ class WizeGameComponent extends Component {
     drawMinimapDoors(scale, minimap) {
         this.cntx.fillStyle = "black";
 
-        this.drawOnMinimap(this.gameController.game.room.doors.map(d => d.box), scale, minimap);
+        this.drawOnMinimap(this.gameController.game.room.doors.map(d => d.drawBox), scale, minimap);
     }
 
     drawMinimapCharacter(scale, minimap) {
@@ -376,8 +374,8 @@ class WizeGameComponent extends Component {
     drawMinimapCoins(scale, minimap) {
         this.cntx.fillStyle = "gold";
 
-        this.drawOnMinimap(this.gameController.game.room.coins.map(c => c.box), scale, minimap);
-        this.drawOnMinimap(this.gameController.game.room.powerups.map(p => p.coin.box), scale, minimap);
+        this.drawOnMinimap(this.gameController.game.room.coins.map(c => c.drawBox), scale, minimap);
+        this.drawOnMinimap(this.gameController.game.room.powerups.map(p => p.coin.drawBox), scale, minimap);
     }
 
     drawMinimapMonsters(scale, minimap) {

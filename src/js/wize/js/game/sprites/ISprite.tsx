@@ -1,5 +1,7 @@
 interface ISprite {
-    box: Rectangle;
+    drawBox: Rectangle;
+    hitBoxes: Array<Rectangle>;
+
     inFrontOfPlatforms: boolean;
 
     tick();

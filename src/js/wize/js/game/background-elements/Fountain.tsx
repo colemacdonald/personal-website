@@ -10,7 +10,7 @@ class Fountain extends StationarySprite {
 
         let scale = options.scale || 1;
 
-        this.box = { x: options.x, y: options.y, w: 100 * scale, h: 100 * scale };
+        this.drawBox = { x: options.x, y: options.y, w: 100 * scale, h: 100 * scale };
 
         this.frameCounter = 0;
     }

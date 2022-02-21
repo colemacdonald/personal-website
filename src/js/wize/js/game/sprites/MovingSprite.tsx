@@ -26,7 +26,7 @@ class MovingSprite implements ISprite {
         this.direction = Direction.Right;
     }
 
-    get box(): Rectangle {
+    get drawBox(): Rectangle {
         return { x: this.x + this.getFrame().x_offset, y: this.y, w: this.w + this.getFrame().width_extend, h: this.h };
     }
 
@@ -46,7 +46,7 @@ class MovingSprite implements ISprite {
     }
 
     get hitBoxes(): Array<Rectangle> {
-        return [this.box];
+        return [this.drawBox];
     }
 
     tick() {
