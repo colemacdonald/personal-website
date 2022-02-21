@@ -6,17 +6,24 @@ import Door from "./sprites/Door";
 import { Powerup } from "./Powerup";
 import { Fountain } from "./background-elements/Fountain";
 import { StaticElement, StaticElementType } from "./background-elements/StaticElement";
+import { BackgroundElement, BackgroundElementType } from "./background-elements/Backgrounds";
 
 class RoomBuilder {
 
     room: Room;
 
     constructor(r: { h: number, w: number }) {
-        this.room = { h: r.h, w: r.w, platforms: [], monsters: [], coins: [], doors: [], powerups: [], backgroundElements: [] };
+        this.room = { h: r.h, w: r.w, platforms: [], monsters: [], coins: [], doors: [], powerups: [], backgroundElements: [], background: new BackgroundElement({type: BackgroundElementType.PixelDay}) };
+    }
+
+    withBackground(type: BackgroundElementType): RoomBuilder {
+        this.room.background = new BackgroundElement({type: type})
+        return this;
     }
 
     withFloor(): RoomBuilder {
-        this.room.platforms.push({ x: 0, y: this.room.h, w: this.room.w, h: 150 });
+        // add to front
+        this.room.platforms.unshift({ x: -this.room.w, y: this.room.h, w: this.room.w * 3, h: 150 });
         return this;
     }
 

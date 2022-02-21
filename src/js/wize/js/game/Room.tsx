@@ -1,3 +1,4 @@
+import { BackgroundElement } from "./background-elements/Backgrounds";
 import { Powerup } from "./Powerup";
 import { Coin } from "./sprites/Coin";
 import Door from "./sprites/Door";
@@ -11,7 +12,8 @@ type Room = {
     coins: Array<Coin>,
     doors: Array<Door>,
     powerups: Array<Powerup>,
-    backgroundElements: Array<ISprite>
+    backgroundElements: Array<ISprite>,
+    background: BackgroundElement
 }
 
 export { Room };
