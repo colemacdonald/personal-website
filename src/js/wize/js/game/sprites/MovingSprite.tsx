@@ -3,6 +3,10 @@ import { Direction, Frame, State } from "../Frames";
 class MovingSprite implements ISprite {
     frameCounter: number;
     ticksOnFrame: number;
+    state: State;
+    frames: any;
+
+    inFrontOfPlatforms: boolean = true;
 
     x: number;
     y: number;
@@ -12,8 +16,6 @@ class MovingSprite implements ISprite {
     relativeHitBoxes: Array<Rectangle>;
     relativeHurtBoxes: Array<Rectangle>;
 
-    state: State;
-    frames: any;
     direction: Direction;
 
     constructor(frames) {
@@ -44,7 +46,7 @@ class MovingSprite implements ISprite {
     }
 
     get hitBoxes(): Array<Rectangle> {
-        return [{ x: this.x + this.getFrame().x_offset, y: this.y, w: this.w + this.getFrame().width_extend, h: this.h }];
+        return [this.box];
     }
 
     tick() {
@@ -53,7 +55,7 @@ class MovingSprite implements ISprite {
     }
 
     move() {
-        
+
     }
 
     incrementFrameCounter(): void {

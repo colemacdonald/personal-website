@@ -63,7 +63,4 @@ FRAMES[State.InAir][Direction.Left] = [
 	new Frame({src: require("../../../../../resources/wize/kyell_jump/kyell_jump_left0004.png"), hurtBoxes: [hurtBox]})
 ];
 
-
-util.bootstrapFrames(FRAMES);
-
 export { FRAMES }

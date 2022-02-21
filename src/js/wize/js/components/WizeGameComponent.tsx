@@ -18,7 +18,7 @@ class WizeGameComponent extends Component {
 
     gameController: GameControllerBase;
 
-    gameMode: string = "survival";
+    gameMode: string = "story";
 
     level: number;
     frameCount: number;
@@ -159,11 +159,6 @@ class WizeGameComponent extends Component {
             this.gameController.game.room.w * this.canvasScale,
             this.gameController.game.room.h * this.canvasScale
         );
-
-        // Background Elements
-        this.gameController.game.room.backgroundElements.forEach(e => {
-            this.drawImage(e.getFrame(), e.box);
-        });
     }
 
     isInView(box: Rectangle): boolean {
@@ -189,8 +184,12 @@ class WizeGameComponent extends Component {
 
         this.drawBackground();
 
+        this.drawBackgroundElements(false);
+
         // Draw platforms (which are currently coded to hav width of 50 that are >= 100)
         this.drawPlatforms();
+
+        this.drawBackgroundElements(true);
 
         // Draw doors
         this.drawDoors();
@@ -255,30 +254,21 @@ class WizeGameComponent extends Component {
         });
     }
 
+    drawBackgroundElements(inFrontOfPlatformsFlag) {
+        // Background Elements
+        this.gameController.game.room.backgroundElements.forEach(e => {
+            if (e.inFrontOfPlatforms === inFrontOfPlatformsFlag) {
+                this.drawImage(e.getFrame().img, e.box);
+            }
+        });
+    }
+
     drawDoors() {
         let doors = this.gameController.game.room.doors;
 
-        this.cntx.fillStyle = "grey";
-
         doors.forEach(door => {
-            if (
-                util.doRectanglesOverlap(
-                    this.viewportX,
-                    this.viewportY,
-                    this.viewportH,
-                    this.viewportW,
-                    door.x,
-                    door.y,
-                    door.h,
-                    door.w
-                )
-            ) {
-                this.cntx.fillRect(
-                    (door.x - this.viewportX) * this.canvasScale,
-                    (door.y - this.viewportY) * this.canvasScale,
-                    door.w * this.canvasScale,
-                    door.h * this.canvasScale
-                );
+            if (this.isInView(door.box)) {
+                this.drawImage(door.getFrame().img, door.box)
             }
         });
     }
@@ -288,8 +278,6 @@ class WizeGameComponent extends Component {
      */
     drawMonsters() {
         let monsters = this.gameController.game.room.monsters;
-
-        this.cntx.fillStyle = "brown";
 
         monsters.forEach(monster => {
             if (this.isInView(monster)) {
@@ -306,14 +294,14 @@ class WizeGameComponent extends Component {
 
         this.gameController.game.room.coins.forEach(c => {
             if (this.isInView(c.box)) {
-                this.drawImage(c.getFrame(), c.box);
+                this.drawImage(c.getFrame().img, c.box);
             }
         }, this);
 
         this.gameController.game.room.powerups.forEach(p => {
             let coin = p.coin;
             if (this.isInView(coin.box)) {
-                this.drawImage(coin.getFrame(), coin.box);
+                this.drawImage(coin.getFrame().img, coin.box);
             }
         }, this);
     }
@@ -371,7 +359,7 @@ class WizeGameComponent extends Component {
     drawMinimapDoors(scale, minimap) {
         this.cntx.fillStyle = "black";
 
-        this.drawOnMinimap(this.gameController.game.room.doors, scale, minimap);
+        this.drawOnMinimap(this.gameController.game.room.doors.map(d => d.box), scale, minimap);
     }
 
     drawMinimapCharacter(scale, minimap) {
@@ -384,8 +372,8 @@ class WizeGameComponent extends Component {
     drawMinimapCoins(scale, minimap) {
         this.cntx.fillStyle = "gold";
 
-        this.drawOnMinimap(this.gameController.game.room.coins.map(c => { return { x: c.x - c.r / 2, y: c.y - c.r / 2, h: c.r * 2, w: c.r * 2 } }), scale, minimap);
-        this.drawOnMinimap(this.gameController.game.room.powerups.map(p => { return { x: p.coin.x - p.coin.r / 2, y: p.coin.y - p.coin.r / 2, h: p.coin.r * 2, w: p.coin.r * 2 } }), scale, minimap);
+        this.drawOnMinimap(this.gameController.game.room.coins.map(c => c.box), scale, minimap);
+        this.drawOnMinimap(this.gameController.game.room.powerups.map(p => p.coin.box), scale, minimap);
     }
 
     drawMinimapMonsters(scale, minimap) {
