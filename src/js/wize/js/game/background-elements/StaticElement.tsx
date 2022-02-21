@@ -37,10 +37,13 @@ STATIC_ELEMENT_FRAMES[StaticElementType.Tree2] = new Frame({src: require("../../
 STATIC_ELEMENT_FRAMES[StaticElementType.Tree3] = new Frame({src: require("../../../../../resources/wize/trees/Tree3.png")});
 STATIC_ELEMENT_FRAMES[StaticElementType.Tree4] = new Frame({src: require("../../../../../resources/wize/trees/Tree4.png")});
 
+
 STATIC_ELEMENT_SIZES[StaticElementType.Tree1] = { w: 62, h: 103 };
 STATIC_ELEMENT_SIZES[StaticElementType.Tree2] = { w: 124, h: 129 };
 STATIC_ELEMENT_SIZES[StaticElementType.Tree3] = { w: 175, h: 190 };
 STATIC_ELEMENT_SIZES[StaticElementType.Tree4] = { w: 175, h: 190 };
+
+
 
 /************************* Stones **********************/
 

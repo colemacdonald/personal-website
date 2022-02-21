@@ -142,8 +142,9 @@ class WizeGameComponent extends Component {
             this.canvas.current.height
         );
 
+
         // Background
-        this.cntx.fillStyle = "black";
+        this.cntx.fillStyle = "#302c2e";
         this.cntx.fillRect(
             0,
             0,
@@ -151,12 +152,15 @@ class WizeGameComponent extends Component {
             this.canvas.current.height
         );
 
+        // this.cntx.drawImage(this.gameController.game.room.background.getFrame().img, 0, 0, this.canvas.current.width, this.canvas.current.height);
+
+
         // Room Background
         this.cntx.fillStyle = "#33beff";
         this.cntx.fillRect(
-            0 - this.viewportX * this.canvasScale,
+            0,
             0 - this.viewportY * this.canvasScale,
-            this.gameController.game.room.w * this.canvasScale,
+            this.canvas.current.width,
             this.gameController.game.room.h * this.canvasScale
         );
     }
@@ -242,7 +246,7 @@ class WizeGameComponent extends Component {
                 this.drawImage(TILES.leftImg, { x: plat.x, y: plat.y, w: TILES.w, h: TILES.h });
 
                 // Middle tiles
-                var i = 1;
+                let i = 1;
                 // Until we reach the right side
                 while ((i + 1) * TILES.w < plat.w) {
                     this.drawImage(TILES.centerImg, { x: plat.x + TILES.w * i, y: plat.y, w: TILES.w, h: TILES.h });
@@ -383,12 +387,24 @@ class WizeGameComponent extends Component {
 
     drawOnMinimap(rects, scale, minimap) {
         rects.forEach((r) => {
+
+            // we might want things drawn outside of the room in the main game but we won't on the minimap
+            let trimmedToRoom = {
+                x: Math.max(r.x, 0),
+                y: Math.min(r.y, this.gameController.game.room.h),
+                w: r.w,
+                h: r.h
+            };
+
+            trimmedToRoom.w = Math.min(trimmedToRoom.w, this.gameController.game.room.w - trimmedToRoom.x);
+            // allow the floor
+            trimmedToRoom.h = Math.min(trimmedToRoom.h, this.gameController.game.room.h - trimmedToRoom.y + 50);
+
             this.cntx.fillRect(
-                (minimap.x + (r.x / this.gameController.game.room.w) * minimap.w) * this.canvasScale,
-                (minimap.y + (r.y / this.gameController.game.room.h) * minimap.h) * this.canvasScale,
-                r.w * scale * this.canvasScale,
-                r.h * scale * this.canvasScale
-            );
+                (minimap.x + (trimmedToRoom.x / this.gameController.game.room.w) * minimap.w) * this.canvasScale,
+                (minimap.y + (trimmedToRoom.y / this.gameController.game.room.h) * minimap.h) * this.canvasScale,
+                trimmedToRoom.w * scale * this.canvasScale,
+                trimmedToRoom.h * scale * this.canvasScale);
         });
     }
 
