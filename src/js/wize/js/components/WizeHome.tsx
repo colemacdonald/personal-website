@@ -53,7 +53,7 @@ class WizeHome extends Component {
         });
 
         return (
-            <div>
+            <div className="tab-content">
                 <p className="game-title">The Adventures of Yeezy the Wize</p>
                 <table>
                     <tbody>
