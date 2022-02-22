@@ -120,7 +120,7 @@ RoomThemes[RoomBackgroundTheme.Cave] = {
         bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile35.png")}),
         ceiling: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile27.png")}),
     },
-    backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3")
+    backgroundMusic: require("../../../../../resources/wize/audio/Cave 1.mp3")
 }
 
 export { RoomBackgroundTheme, RoomTheme, RoomThemes };
