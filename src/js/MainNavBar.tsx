@@ -17,6 +17,9 @@ class MainNavBar extends Component {
                     <Nav.Item>
                         <Nav.Link href="#/wize">Wize</Nav.Link>
                     </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link href="#/wizeabout">About Wize</Nav.Link>
+                    </Nav.Item>
                 </Nav>
                 </Navbar.Collapse>
             </Navbar>

@@ -16,7 +16,7 @@ class WizeHome extends Component {
         viewportW: 1000,
         viewportY: 0,
         viewportX: 0,
-        canvasScale: 2,
+        canvasScale: 1,
     };
 
     description = `Play as Yeezy the Wize as he tries to collect all of the K-Coins.
@@ -41,52 +41,12 @@ class WizeHome extends Component {
     background = `This game was developed by my friend and I in 2018. The physics are all custom, and frames are drawn on an html canvas (yes, really).`;
 
     render() {
-        let controls = [];
-
-        this.controls.forEach((cntrl, i) => {
-            controls.push(<li key={i}>{cntrl}</li>);
-        });
-
-        let changes = [];
-        this.changes.forEach((change, i) => {
-            changes.push(<li key={i}>{change}</li>);
-        });
-
         return (
             <div className="tab-content">
                 <p className="game-title">The Adventures of Yeezy the Wize</p>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div className="flex-item">
-                                    <div className="vertical-flex">
-                                        <div className="flex-item">
-                                            <p style={{ fontWeight: "bold", color: "greenyellow" }}>
-                                                Current HighScore: {this.currentRecord}*
-                                            </p>
-                                            <p style={{ color: "grey" }}>*(Previous Version)</p>
-                                        </div>
-                                        <div className="flex-item">{this.description}</div>
-                                        <div className="flex-item">{this.scoring}</div>
-                                        <div className="flex-item" style={{ fontWeight: "bold" }}>
-                                            Recent Changes:
-                                            {changes}
-                                        </div>
-                                        <div className="flex-item">
-                                            Controls:
-                                            {controls}
-                                        </div>
-                                        <div className="flex-item">{this.background}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <WizeGameComponent {...this.gameProperties} />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div >
+                    <WizeGameComponent {...this.gameProperties} />
+                </div>
             </div>
         );
     }

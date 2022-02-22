@@ -31,12 +31,10 @@ class WizeGameComponent extends Component {
     constructor(props) {
         super(props);
 
-        // TODO: separate canvas size from viewportH / allow scaling
         this.viewportH = props.viewportH;
         this.viewportW = props.viewportW;
         this.viewportY = props.viewportY;
         this.viewportX = props.viewportX;
-        this.canvasScale = props.canvasScale;
 
         this.canvas = React.createRef();
         this.audio = React.createRef();
@@ -94,14 +92,15 @@ class WizeGameComponent extends Component {
     render() {
         return (
             <div className="flex-item">
-                <div className="flex-item">
+                <div className="horizontal-flex-box">
                     <audio ref={this.audio} autoPlay></audio>
-                    <h2>Game Mode:</h2>
-                    <select onChange={this.gameModeChange.bind(this)}>
-                        <option value="story">Story</option>
-                        <option value="survival">Survival</option>
-                    </select>
-                    <br/><br/>
+                    <div className="horizontal-flex-box">
+                        <h5>Game Mode:</h5>
+                        <select onChange={this.gameModeChange.bind(this)}>
+                            <option value="story">Story</option>
+                            <option value="survival">Survival</option>
+                        </select>
+                    </div>
                     <button
                         onClick={() => {
                             this.startGame();
@@ -114,8 +113,13 @@ class WizeGameComponent extends Component {
                     <canvas
                         ref={this.canvas}
                         className="game-canvas"
-                        height={`${this.viewportH * this.canvasScale}px`}
-                        width={`${this.viewportW * this.canvasScale}px`}
+                        // default values though the canvas will autoscale
+                        // this impacts the size of text something to do with the size of the background images?
+                        // these values work since they were previous defaults - likely some hard coded values in
+                        // this class dependent on these
+                        // TODO: these values shouldn't matter
+                        height={"1000px"}
+                        width={"2000px"}
                     />
                 </div>
             </div>
@@ -236,6 +240,8 @@ class WizeGameComponent extends Component {
      * Calls various draw functions in order
      */
     drawGame() {
+        this.canvasScale = this.canvas.current.width / this.viewportW;
+
         if (this.gameController.gameState === GameState.Over) {
             this.drawBackground();
             this.cntx.fillStyle = "red";
@@ -519,15 +525,19 @@ class WizeGameComponent extends Component {
         switch (e.keyCode) {
             case 37:
                 this.gameController.game.leftPress();
+                e.preventDefault();
                 break;
             case 38:
                 this.gameController.game.upPress();
+                e.preventDefault();
                 break;
             case 39:
                 this.gameController.game.rightPress();
+                e.preventDefault();
                 break;
             case 40:
                 this.gameController.game.downPress();
+                e.preventDefault();
                 break;
             default:
                 break;
