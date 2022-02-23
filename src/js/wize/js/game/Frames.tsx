@@ -2,7 +2,8 @@ enum State {
 	Idle,
 	Walking,
 	Jumping,
-	InAir
+	InAir,
+    Attacking
 };
 
 enum Direction {

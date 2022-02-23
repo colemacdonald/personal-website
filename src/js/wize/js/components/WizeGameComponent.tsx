@@ -13,6 +13,8 @@ class WizeGameComponent extends Component {
     viewportX: number;
     canvasScale: number;
 
+    showHitboxes: boolean = false;
+
     canvas: any;
     cntx: any;
     audio: any;
@@ -101,6 +103,7 @@ class WizeGameComponent extends Component {
                             <option value="survival">Survival</option>
                         </select>
                     </div>
+                    <input type="checkbox" onChange={this.showHitboxesChanged.bind(this)}/> Show Hit/Hurt Boxes
                     <button
                         onClick={() => {
                             this.startGame();
@@ -128,6 +131,10 @@ class WizeGameComponent extends Component {
 
     gameModeChange(event) {
         this.gameMode = event.target.value;
+    }
+
+    showHitboxesChanged(event) {
+        this.showHitboxes = event.target.checked;
     }
 
     startGame() {
@@ -248,8 +255,8 @@ class WizeGameComponent extends Component {
             this.cntx.font = "30px Arial";
             this.cntx.fillText(
                 "Game Over...",
-                this.viewportW / 2 - 75,
-                this.viewportH / 2
+                (this.viewportW / 2 - 75) * this.canvasScale,
+                this.viewportH  * this.canvasScale / 2
             );
             this.drawScore();
             return;
@@ -281,6 +288,17 @@ class WizeGameComponent extends Component {
 
         // Mini Map
         this.drawMinimap();
+
+
+        if (this.showHitboxes) {
+            this.gameController.game.character.hurtBoxes.forEach(r => {
+                this.drawRect("blue", r, 0.5);
+            });
+    
+            this.gameController.game.character.hitBoxes.forEach(r => {
+                this.drawRect("red", r, 0.5);
+            });
+        }
 
         this.cntx.fillStyle = "gold";
         this.cntx.fillText(this.gameController.message, this.canvas.current.width / 2 - 50, this.canvas.current.height / 2);
@@ -359,7 +377,7 @@ class WizeGameComponent extends Component {
 
         monsters.forEach(monster => {
             if (this.isInView(monster)) {
-                this.drawImage(monster.getFrame().img, monster.box);
+                this.drawImage(monster.getFrame().img, monster.drawBox);
             }
         });
     }
@@ -400,6 +418,14 @@ class WizeGameComponent extends Component {
             (box.y - this.viewportY) * this.canvasScale,
             box.w * this.canvasScale,
             box.h * this.canvasScale)
+    }
+
+    drawRect(colour: string, box: Rectangle, opacity: number = 1) {
+        this.cntx.save();
+        this.cntx.fillStyle = colour;
+        this.cntx.globalAlpha = opacity;
+        this.cntx.fillRect((box.x - this.viewportX) * this.canvasScale, (box.y - this.viewportY) * this.canvasScale, box.w * this.canvasScale, box.h * this.canvasScale);
+        this.cntx.restore();
     }
 
     drawMinimap() {
@@ -539,6 +565,9 @@ class WizeGameComponent extends Component {
                 this.gameController.game.downPress();
                 e.preventDefault();
                 break;
+            // f - https://keycode.info/
+            case 70:
+                this.gameController.game.attackPress();
             default:
                 break;
         }

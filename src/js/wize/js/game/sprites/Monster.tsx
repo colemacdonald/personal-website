@@ -26,11 +26,6 @@ class Monster extends MovingSprite {
         this.xv = this.speed;
     }
 
-    get box(): Rectangle {
-        let frame = this.getFrame();
-        return { x: this.x + frame.x_offset, y: this.y, w: this.w + frame.width_extend, h: this.h };
-    }
-
     move() {
         //these walk back and forth on platforms
         if (
@@ -61,16 +56,16 @@ let w = 46;
 monsterTypes[MonsterType.Centipede] = { h: h, w: w, speed: 0.75 }
 monsterTypes[MonsterType.Centipede][State.Walking] = {};
 monsterTypes[MonsterType.Centipede][State.Walking][Direction.Right] = [
-    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-001.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-002.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-003.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-right-004.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
 ];
 monsterTypes[MonsterType.Centipede][State.Walking][Direction.Left] = [
-    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-001.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-002.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-003.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/centipede/walk/centipede-walk-left-004.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
 ];
 
 
@@ -79,16 +74,16 @@ w = 64;
 monsterTypes[MonsterType.Scorpion] = { h: h, w: w, speed: 0.75 }
 monsterTypes[MonsterType.Scorpion][State.Walking] = {};
 monsterTypes[MonsterType.Scorpion][State.Walking][Direction.Right] = [
-    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-right-001.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-right-002.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-right-003.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-right-004.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-right-001.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-right-002.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-right-003.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-right-004.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
 ];
 monsterTypes[MonsterType.Scorpion][State.Walking][Direction.Left] = [
-    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-left-001.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-left-002.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-left-003.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-left-004.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-left-001.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-left-002.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-left-003.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/scorpion/walk/scorpion-walk-left-004.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
 ];
 
 h = 19;
@@ -96,16 +91,16 @@ w = 37;
 monsterTypes[MonsterType.Vulture] = { h: h, w: w, speed: 1.5 }
 monsterTypes[MonsterType.Vulture][State.Walking] = {};
 monsterTypes[MonsterType.Vulture][State.Walking][Direction.Right] = [
-    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-right-001.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-right-002.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-right-003.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-right-004.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-right-001.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-right-002.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-right-003.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-right-004.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
 ];
 monsterTypes[MonsterType.Vulture][State.Walking][Direction.Left] = [
-    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-001.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-002.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-003.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
-    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-004.png"), ticks: 16 , hurtBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-001.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-002.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-003.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-004.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
 ];
 
 export { Monster, MonsterType };
