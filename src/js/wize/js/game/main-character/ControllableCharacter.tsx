@@ -52,6 +52,10 @@ class ControllableCharacter extends Character {
     downRelease() {
         this.fall = false;
     }
+
+    attack() {
+        
+    }
 }
 
 export { ControllableCharacter };

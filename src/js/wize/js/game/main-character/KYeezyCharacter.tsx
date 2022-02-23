@@ -5,20 +5,28 @@ import { State } from "../Frames";
 class KYeezy extends ControllableCharacter {
     state: State;
 
+    attackDuration: number = 20;
+    attackFrameCounter: number = 0;
+
     constructor(options: any) {
-        options.speed = 4;
-
-        options.h = 80;
-        options.w = 40;
-
-        // set frames
-        options.frames = FRAMES;
-
+    
         // Call super class constructor
-        super(options);
+        super(KYeezy.addOpts(options));
 
         // For the getFrame fsm
         this.state = State.Idle;
+    }
+
+    private static addOpts(opts) {
+        opts.speed = 4;
+
+        opts.h = 80;
+        opts.w = 40;
+
+        // set frames
+        opts.frames = FRAMES;
+
+        return opts;
     }
 
     move() {
@@ -28,6 +36,16 @@ class KYeezy extends ControllableCharacter {
     }
 
     updateState() {
+        if (this.state === State.Attacking) {
+            this.attackFrameCounter++;
+
+            if (this.attackFrameCounter === this.attackDuration) {
+                this.attackFrameCounter = 0;
+            } else {
+                return;
+            }
+        }
+
         /// landing
         if (this.state === State.InAir && this.xv === 0) {
         }
@@ -41,6 +59,11 @@ class KYeezy extends ControllableCharacter {
         } else {
             this.state = State.InAir;
         }
+    }
+
+    // override
+    attack() {
+        this.state = State.Attacking;
     }
 }
 

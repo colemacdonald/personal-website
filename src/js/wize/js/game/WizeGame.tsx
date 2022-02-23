@@ -80,9 +80,7 @@ class WizeGame {
     updateAndCheckMonsters() {
         this.room.monsters.forEach(monster => {
             if (
-                util.doRectangleArraysOverlap(this.character.hurtBoxes, [
-                    { x: monster.x, y: monster.y, h: monster.h, w: monster.w },
-                ])
+                util.doRectangleArraysOverlap(this.character.hurtBoxes, monster.hitBoxes) && !util.doRectangleArraysOverlap(this.character.hitBoxes, monster.hitBoxes)
             ) {
                 this.playerAlive = false;
             }
@@ -172,6 +170,10 @@ class WizeGame {
 
     downRelease() {
         this.character.downRelease();
+    }
+
+    attackPress() {
+        this.character.attack();
     }
 }
 

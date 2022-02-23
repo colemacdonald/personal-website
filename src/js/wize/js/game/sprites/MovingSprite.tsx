@@ -46,7 +46,18 @@ class MovingSprite implements ISprite {
     }
 
     get hitBoxes(): Array<Rectangle> {
-        return [this.drawBox];
+        var boxes = [];
+
+        this.getFrame().relativeHitBoxes.forEach(function (box) {
+            boxes.push({
+                x: box.x + this.x,
+                y: box.y + this.y,
+                h: box.h,
+                w: box.w,
+            });
+        }, this);
+
+        return boxes;
     }
 
     tick() {
