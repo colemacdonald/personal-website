@@ -79,9 +79,9 @@ class WizeGame {
 
     updateAndCheckMonsters() {
         this.room.monsters.forEach(monster => {
-            if (
-                util.doRectangleArraysOverlap(this.character.hurtBoxes, monster.hitBoxes) && !util.doRectangleArraysOverlap(this.character.hitBoxes, monster.hitBoxes)
-            ) {
+            if (util.doRectangleArraysOverlap(this.character.hitBoxes, monster.hitBoxes)){
+                monster.onHit().then(() => {console.log("audio played")}).catch((e) => {console.log(e)});
+            }else if (util.doRectangleArraysOverlap(this.character.hurtBoxes, monster.hitBoxes)) {
                 this.playerAlive = false;
             }
             monster.tick();
