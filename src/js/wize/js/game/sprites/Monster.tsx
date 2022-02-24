@@ -7,6 +7,9 @@ class Monster extends MovingSprite {
     platform: Rectangle;
     xv: number;
 
+    hitAudioSrc: string = require("../../../../../resources/wize/audio/sound-effects/beep-07a.mp3");
+    audio: any = null;
+
     constructor(options: {x: number, y: number, platform: Rectangle, monsterType: MonsterType}) {
         super(monsterTypes[options.monsterType]);
 
@@ -39,6 +42,18 @@ class Monster extends MovingSprite {
         this.x += this.xv;
 
         this.incrementFrameCounter();
+    }
+
+    onHit(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            if (!this.audio) {
+                this.audio = new Audio();
+                this.audio.src = this.hitAudioSrc;
+                this.audio.onended = (e) => { this.audio = null; }
+                this.audio.play();
+                resolve();
+            }
+        });
     }
 }
 
