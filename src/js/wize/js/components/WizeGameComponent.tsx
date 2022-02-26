@@ -410,7 +410,7 @@ class WizeGameComponent extends Component {
 
         doors.forEach(door => {
             if (this.isInView(door.drawBox)) {
-                this.drawImage(door.getFrame().img, door.drawBox)
+                this.drawImage(this.gameController.game.room.backgroundTheme.doorFrame.img, door.drawBox)
             }
         });
     }

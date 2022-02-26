@@ -19,13 +19,11 @@ class Door implements ISprite {
         this.destY = destY;
     }
 
+
+    // currently neither of these are used for doors but they could be if we wanted to animate them but for now, the frame simple belongs to the room theme
     tick() { }
 
-    getFrame() {
-        return FRAME;
-    }
+    getFrame() { return null; }
 }
-
-let FRAME = new Frame({src: require("../../../../../resources/wize/doors/door1.png")});
 
 export default Door;

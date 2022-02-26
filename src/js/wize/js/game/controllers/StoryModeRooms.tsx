@@ -54,45 +54,68 @@ let StoryModeRooms: Array<Room> = [
         .withCeiling()
         .withTheme(RoomBackgroundTheme.Cave)
         .withDoor({ x: 940, y: 2110, destRoom: 2, destX: 100, destY: 50 })
+        // First 3 to get height
         .withPlatform({ x: 0, y: 2100, w: 100, h: 50 })
         .withPlatform({ x: 0, y: 2000, w: 100, h: 50 })
         .withPlatform({ x: 0, y: 1900, w: 100, h: 50 })
+        // over and up
         .withPlatform({ x: 220, y: 1800, w: 100, h: 50 })
         .withPlatform({ x: 440, y: 1700, w: 100, h: 50 })
         .withPlatform({ x: 660, y: 1600, w: 100, h: 50 })
         .withPlatform({ x: 880, y: 1500, w: 100, h: 50 })
+        // zig zag
         .withPlatform({ x: 660, y: 1400, w: 100, h: 50 })
         .withPlatform({ x: 880, y: 1300, w: 100, h: 50 })
         .withPlatform({ x: 660, y: 1200, w: 100, h: 50 })
         .withPlatform({ x: 880, y: 1100, w: 100, h: 50 })
+        // over and up
         .withPlatform({ x: 660, y: 1000, w: 100, h: 50 })
         .withPlatform({ x: 440, y: 1000, w: 100, h: 50 })
         .withPlatform({ x: 150, y: 1050, w: 200, h: 50 })
         .withPlatform({ x: 0, y: 950, w: 100, h: 50 })
+        // zig zag
         .withPlatform({ x: 220, y: 850, w: 100, h: 50 })
         .withPlatform({ x: 0, y: 750, w: 100, h: 50 })
         .withPlatform({ x: 220, y: 650, w: 100, h: 50 })
         .withPlatform({ x: 0, y: 550, w: 100, h: 50 })
+        // over with drop
         .withPlatform({ x: 220, y: 450, w: 100, h: 50 })
         .withPlatform({ x: 440, y: 350, w: 200, h: 50 })
         .withPlatform({ x: 760, y: 450, w: 100, h: 50 })
         .withPlatform({ x: 900, y: 350, w: 100, h: 50 })
+        // doubleJump
         .withPlatform({ x: 900, y: 250, w: 100, h: 50 })
         .withPlatform({ x: 0, y: 150, w: 450, h: 50 })
         .withPowerup(doubleJump)
-        .withDoor({ x: 20, y: 60, destRoom: 4, destX: 1800, destY:50 })
+        .withDoor({ x: 20, y: 60, destRoom: 4, destX: 1800, destY: 270 })
         .build(),
-    new RoomBuilder({h: 600, w: 2000})
+    new RoomBuilder({h: 800, w: 2000})
         .withTheme(RoomBackgroundTheme.Cave)
         .withDamageZoneFloor()
-        .withPlatform({x: 1700, y: 150, w: 300, h: 50})
-        .withPlatform({x: 1900, y: 330, w: 100, h: 50})
-        .withPlatform({x: 1900, y: 510, w: 100, h: 50})
         .withCeiling()
+        // entrace
+        .withPlatform({x: 1700, y: 350, w: 300, h: 50})
+        .withDoor({x: 1900, y: 253, destRoom: 3, destX: 120, destY: 80})
+        // way out of lava
+        .withPlatform({x: 1900, y: 530, w: 100, h: 50})
+        .withPlatform({x: 1900, y: 710, w: 100, h: 50})
+        // long jumps across
+        .withPlatform({x: 1050, y: 540, w: 200, h: 50})
+        .withPlatform({x: 520, y: 710, w: 100, h: 50})
+        // climb up
+        .withPlatform({x: 100, y: 700, w: 100, h: 50})
+        .withPlatform({x: 100, y: 520, w: 100, h: 50})
+        .withPlatform({x: 100, y: 340, w: 100, h: 50})
+        .withPlatform({x: 0, y: 140, w: 200, h: 50})
+        .withDoor({x: 0, y: 43, destRoom: 5, destX: 400, destY: 1870})
         .build(),
-    new RoomBuilder({h: 600, w: 2000})
+    new RoomBuilder({h: 2000, w: 600})
+        .withTheme(RoomBackgroundTheme.Cave)
         .withDamageZoneFloor()
         .withCeiling()
+        // entrance
+        .withPlatform({x: 350, y: 1950, w: 250, h: 50})
+        .withDoor({x: 500, y: 1853, destRoom: 4, destX: 150, destY: 50})
         .build()
 ];
 
