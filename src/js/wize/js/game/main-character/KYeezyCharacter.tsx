@@ -1,12 +1,17 @@
 import { ControllableCharacter } from "./ControllableCharacter";
-import { FRAMES } from "./KYeezyFrames";
-import { State } from "../Frames";
+import { EmptyImageFrame, KYeezyFrames } from "./KYeezyFrames";
+import { Frame, State } from "../Frames";
+import { Monster } from "../sprites/Monster";
 
 class KYeezy extends ControllableCharacter {
     state: State;
 
     attackDuration: number = 20;
     attackFrameCounter: number = 0;
+
+    onHitInvincibilityFrames: number = 60;
+    onHitInvincibilityCounter: number = 0;
+    invincible: boolean = false;
 
     constructor(options: any) {
     
@@ -15,6 +20,8 @@ class KYeezy extends ControllableCharacter {
 
         // For the getFrame fsm
         this.state = State.Idle;
+
+        this.healthPoints = 3;
     }
 
     private static addOpts(opts) {
@@ -24,15 +31,33 @@ class KYeezy extends ControllableCharacter {
         opts.w = 40;
 
         // set frames
-        opts.frames = FRAMES;
+        opts.frames = KYeezyFrames;
 
         return opts;
     }
 
-    move() {
+    // override
+    getFrame(): Frame {
+        if (this.invincible && (this.onHitInvincibilityCounter % 4 === 0 || this.onHitInvincibilityCounter % 4 === 1)) {
+            EmptyImageFrame.copyFrom(super.getFrame());
+            return EmptyImageFrame;
+        }
+
+        return super.getFrame();
+    }
+
+    tick() {
         super.move();
         this.updateState();
         this.incrementFrameCounter();
+
+        if (this.invincible) {
+            this.onHitInvincibilityCounter++;
+            if (this.onHitInvincibilityCounter > this.onHitInvincibilityFrames) {
+                this.onHitInvincibilityCounter = 0;
+                this.invincible = false;
+            }
+        }
     }
 
     updateState() {
@@ -64,6 +89,13 @@ class KYeezy extends ControllableCharacter {
     // override
     attack() {
         this.state = State.Attacking;
+    }
+
+    onHit(m: Monster) {
+        if (!this.invincible) {
+            this.healthPoints--;
+            this.invincible = true;
+        }
     }
 }
 

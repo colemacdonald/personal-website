@@ -2,16 +2,16 @@ import { util } from "../util";
 import { ControllableCharacter } from "./main-character/ControllableCharacter";
 import { Room } from "./Room";
 import { Powerup } from "./Powerup";
+import { KYeezy } from "./main-character/KYeezyCharacter";
 
 class WizeGame {
     grav: number;
     room: Room;
-    character: ControllableCharacter;
+    character: KYeezy;
     onGround: boolean;
 
     gameOptions: GameOptions;
 
-    playerAlive: boolean;
     score: number;
 
     lastPowerup: Powerup;
@@ -19,13 +19,12 @@ class WizeGame {
     /**
      * Create a new game
      */
-    constructor(options: GameOptions, room: Room, character: ControllableCharacter) {
+    constructor(options: GameOptions, room: Room, character: KYeezy) {
         this.gameOptions = options;
         this.grav = options.grav;
         this.room = room;
         this.character = character;
 
-        this.playerAlive = true;
         this.score = 0;
     }
 
@@ -78,14 +77,22 @@ class WizeGame {
     }
 
     updateAndCheckMonsters() {
+        let toRemove = [];
         this.room.monsters.forEach(monster => {
             if (util.doRectangleArraysOverlap(this.character.hitBoxes, monster.hitBoxes)){
-                monster.onHit().then(() => {console.log("audio played")}).catch((e) => {console.log(e)});
+                monster.onHit();
+                toRemove.push(this.room.monsters.indexOf(monster));
             }else if (util.doRectangleArraysOverlap(this.character.hurtBoxes, monster.hitBoxes)) {
-                this.playerAlive = false;
+                this.character.onHit(monster);
             }
             monster.tick();
         }, this);
+
+        // need to remove in reverse order or else splice won't work
+        toRemove.reverse();
+        toRemove.forEach(m => {
+            this.room.monsters.splice(m, 1);
+        });
     }
 
     updateAndCheckCoins() {

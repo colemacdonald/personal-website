@@ -1,4 +1,4 @@
-import { ControllableCharacter } from "../main-character/ControllableCharacter";
+import { KYeezy } from "../main-character/KYeezyCharacter";
 import { WizeGame } from "../WizeGame";
 
 
@@ -11,7 +11,7 @@ enum GameState {
 class GameControllerBase {
     gameState: GameState = GameState.Playing;
     game: WizeGame;
-    character: ControllableCharacter;
+    character: KYeezy;
     level: number = 0;
     message: string = "";
 

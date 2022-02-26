@@ -37,6 +37,17 @@ class Frame {
         img.src = this.src;
         this.img = img;
     }
+
+    // special method used for copying info into the empty frame
+    copyFrom(frame: Frame): void {
+        this.ticks = frame.ticks;
+        this.x_offset = frame.x_offset;
+        this.width_extend = frame.width_extend;
+        this.y_offset = frame.y_offset;
+        this.height_extend = frame.height_extend;
+        this.relativeHitBoxes = frame.relativeHitBoxes;
+        this.relativeHurtBoxes = frame.relativeHurtBoxes;
+    }
 };
 
 export { State, Direction, Frame }
