@@ -29,6 +29,9 @@ class KYeezy extends ControllableCharacter {
 
         opts.h = 80;
         opts.w = 40;
+        opts.x = 0;
+        opts.y = 0;
+        opts.scale = 1;
 
         // set frames
         opts.frames = KYeezyFrames;

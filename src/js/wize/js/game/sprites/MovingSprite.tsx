@@ -1,15 +1,13 @@
 import { Direction, Frame, State } from "../Frames";
+import { SpriteBase } from "./SpriteBase";
 
-class MovingSprite implements ISprite {
+class MovingSprite extends SpriteBase {
     frameCounter: number;
     ticksOnFrame: number;
     state: State;
-    frames: any;
 
     inFrontOfPlatforms: boolean = true;
 
-    x: number;
-    y: number;
     h: number;
     w: number;
 
@@ -18,8 +16,9 @@ class MovingSprite implements ISprite {
 
     direction: Direction;
 
-    constructor(frames) {
-        this.frames = frames;
+    constructor(s: {frames: any, x: number, y: number, scale: number}) {
+        super(s);
+
         this.frameCounter = 0;
         this.ticksOnFrame = 0;
         this.state = State.Idle;
@@ -27,7 +26,8 @@ class MovingSprite implements ISprite {
     }
 
     get drawBox(): Rectangle {
-        return { x: this.x + this.getFrame().x_offset, y: this.y, w: this.w + this.getFrame().width_extend, h: this.h };
+        let f = this.getFrame();
+        return { x: this.x + f.x_offset, y: this.y + f.y_offset, w: this.w + f.width_extend, h: this.h + f.height_extend };
     }
 
     get hurtBoxes(): Array<Rectangle> {
@@ -45,20 +45,7 @@ class MovingSprite implements ISprite {
         return boxes;
     }
 
-    get hitBoxes(): Array<Rectangle> {
-        var boxes = [];
 
-        this.getFrame().relativeHitBoxes.forEach(function (box) {
-            boxes.push({
-                x: box.x + this.x,
-                y: box.y + this.y,
-                h: box.h,
-                w: box.w,
-            });
-        }, this);
-
-        return boxes;
-    }
 
     tick() {
         this.move();

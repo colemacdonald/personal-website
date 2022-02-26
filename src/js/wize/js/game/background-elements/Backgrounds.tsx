@@ -1,25 +1,23 @@
 import { Frame } from "../Frames"
+import { SpriteBase } from "../sprites/SpriteBase";
 
 
-class BackgroundElement implements ISprite {
-    drawBox: Rectangle;
-    hitBoxes: Array<Rectangle> = [];
-    type: BackgroundElementType;
+class BackgroundElement extends SpriteBase {
+        type: BackgroundElementType;
     inFrontOfPlatforms: boolean = false;
+    scale: number = 1;
 
     constructor(options) {
+        super({frames: [BACKGROUND_ELEMENT_FRAMES[options.type]], x: options.x, y: options.y, scale: options.scale || 1});
         this.type = options.type;
-        let scale = options.scale || 1;
 
         this.inFrontOfPlatforms = options.inFrontOfPlatforms || false;
-
-        this.drawBox = { x: options.x, y: options.y, w: BACKGROUND_ELEMENT_SIZES[this.type].w * scale, h: BACKGROUND_ELEMENT_SIZES[this.type].h * scale };
     }
 
     tick() { }
 
     getFrame(): Frame {
-        return BACKGROUND_ELEMENT_FRAMES[this.type];
+        return ;
     }
 }
 

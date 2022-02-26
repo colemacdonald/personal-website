@@ -3,18 +3,16 @@ import { Frame, State } from "../Frames";
 import { StationarySprite } from "./StationarySprite";
 
 class Coin extends StationarySprite {
-    x: number;
-    y: number;
     r: number;
 
+    get drawBox() {
+        return { x: this.x - this.r, y: this.y - this.r, h: 2 * this.r, w: 2 * this.r };
+    }
+
     constructor(options) {
-        super(COIN_FRAMES);
+        super({frames: COIN_FRAMES, x: options.x, y: options.y, scale: 1});
 
-        this.x = options.x;
-        this.y = options.y;
         this.r = options.r ? options.r : 15;
-
-        this.drawBox = { x: this.x - this.r, y: this.y - this.r, h: 2 * this.r, w: 2 * this.r };
 
         this.frameCounter = Math.floor(Math.random() * COIN_FRAMES[State.Idle].length);
     }

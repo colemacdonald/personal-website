@@ -1,17 +1,16 @@
 import { Frame, State } from "../Frames";
+import { SpriteBase } from "./SpriteBase";
 
-class StationarySprite implements ISprite {
-    drawBox: Rectangle;
-    hitBoxes: Array<Rectangle> = [];
+class StationarySprite extends SpriteBase {
+    scale: number = 1;
 
     frameCounter: number = 0;
     ticksOnFrame: number = 0;
     state: State = State.Idle;
-    frames: any;
-    inFrontOfPlatforms: boolean = false;
 
-    constructor(frames) {
-        this.frames = frames;
+
+    constructor(s: {frames: any, x: number, y: number, scale: number}) {
+        super(s);
     }
 
     tick() {

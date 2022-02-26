@@ -40,7 +40,7 @@ RoomThemes[RoomBackgroundTheme.Outside] = {
     },
     backgroundTiles: [],
     backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3"),
-    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png")})
+    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})
 };
 
 RoomThemes[RoomBackgroundTheme.Castle] = {
@@ -68,7 +68,7 @@ RoomThemes[RoomBackgroundTheme.Castle] = {
         ceiling: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile59.png")})
     },
     backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3"),
-    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png")})
+    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})
 }
 
 
@@ -97,7 +97,7 @@ RoomThemes[RoomBackgroundTheme.UnderGround] = {
         ceiling: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_15.png")})
     },
     backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3"),
-    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png")})
+    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})
 };
 
 RoomThemes[RoomBackgroundTheme.Cave] = {
@@ -132,7 +132,7 @@ RoomThemes[RoomBackgroundTheme.Cave] = {
         right: new Frame({src: require("../../../../../resources/wize/tiles/cave/lava_tile10.png")}),
     },
     backgroundMusic: require("../../../../../resources/wize/audio/Cave 1.mp3"),
-    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/cave/door1.png")})
+    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/cave/door.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})
 }
 
 RoomThemes[RoomBackgroundTheme.Autumn] = {
@@ -147,7 +147,7 @@ RoomThemes[RoomBackgroundTheme.Autumn] = {
         right: new Frame({src: require("../../../../../resources/wize/tiles/autumn/02.png")}),
     },
     backgroundMusic: require("../../../../../resources/wize/audio/Cave 1.mp3"),
-    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png")})
+    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})
 };
 
 export { RoomBackgroundTheme, RoomTheme, RoomThemes };

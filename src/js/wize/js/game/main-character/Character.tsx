@@ -9,8 +9,6 @@ import { MovingSprite } from "../sprites/MovingSprite";
  * Call the super class constructor if your are extending this class
  */
 class Character extends MovingSprite {
-    x: number;
-    y: number;
     h: number;
     w: number;
     speed: number;
@@ -32,11 +30,9 @@ class Character extends MovingSprite {
     game: WizeGame;
 
     constructor(options) {
-        super(options.frames);
+        super(options);
 
         // Positioning and Movement
-        this.x = options.x ? options.x : 0;
-        this.y = options.y ? options.y : 0;
         this.h = options.h ? options.h : 50;
         this.w = options.w ? options.w : 25;
 

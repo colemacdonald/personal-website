@@ -1,9 +1,13 @@
 import { Frame } from "../Frames";
+import { SpriteBase } from "./SpriteBase";
 
-class Door implements ISprite {
+class Door {
+
     drawBox: Rectangle;
-    hitBoxes: Array<Rectangle>;
+    
     inFrontOfPlatforms: boolean = true;
+
+    hitBoxes: Array<Rectangle>;
 
     destRoom: number;
     destX: number;

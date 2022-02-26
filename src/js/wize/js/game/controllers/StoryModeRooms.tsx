@@ -93,6 +93,7 @@ let StoryModeRooms: Array<Room> = [
         .withAnimatedElement({x: 1800, y: 200, type: AnimatedBackgroundElementType.Torch1})
         .withAnimatedElement({x: 1700, y: 200, type: AnimatedBackgroundElementType.Torch2})
         .withAnimatedElement({x: 1600, y: 200, type: AnimatedBackgroundElementType.Torch3})
+        .withAnimatedElement({x: 1500, y: 200, type: AnimatedBackgroundElementType.LavaDrop1})
         // way out of lava
         .withPlatform({x: 1800, y: 530, w: 100, h: 50})
         .withPlatform({x: 1800, y: 710, w: 100, h: 50})

@@ -3,6 +3,7 @@ import { Powerup } from "./Powerup";
 import { Coin } from "./sprites/Coin";
 import Door from "./sprites/Door";
 import { Monster } from "./sprites/Monster";
+import { SpriteBase } from "./sprites/SpriteBase";
 import { RoomBackgroundTheme, RoomTheme, RoomThemes } from "./tiles/RoomThemes";
 
 class Room {
@@ -14,7 +15,7 @@ class Room {
     coins: Array<Coin> = [];
     doors: Array<Door> = [];
     powerups: Array<Powerup> = [];
-    backgroundElements: Array<ISprite> = [];
+    backgroundElements: Array<SpriteBase> = [];
     backgroundTheme: RoomTheme = RoomThemes[RoomBackgroundTheme.Outside];
     hasCeiling: boolean = false;
 
