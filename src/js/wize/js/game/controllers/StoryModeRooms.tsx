@@ -89,16 +89,18 @@ let StoryModeRooms: Array<Room> = [
         .withCeiling()
         // entrace
         .withPlatform({x: 1700, y: 350, w: 300, h: 50})
+        .withAnimatedElement({x: 1750, y: 370, type: AnimatedBackgroundElementType.LavaDrop1_Top})
         .withDoor({x: 1900, y: 253, destRoom: 3, destX: 120, destY: 80})
-        .withAnimatedElement({x: 1800, y: 200, type: AnimatedBackgroundElementType.Torch1})
-        .withAnimatedElement({x: 1700, y: 200, type: AnimatedBackgroundElementType.Torch2})
-        .withAnimatedElement({x: 1600, y: 200, type: AnimatedBackgroundElementType.Torch3})
-        .withAnimatedElement({x: 1500, y: 200, type: AnimatedBackgroundElementType.LavaDrop1})
+        .withAnimatedElement({x: 1840, y: 270, type: AnimatedBackgroundElementType.Torch1})
+        .withAnimatedElement({x: 1770, y: 270, type: AnimatedBackgroundElementType.Torch1})
+        .withAnimatedElement({x: 1700, y: 270, type: AnimatedBackgroundElementType.Torch1})
         // way out of lava
         .withPlatform({x: 1800, y: 530, w: 100, h: 50})
         .withPlatform({x: 1800, y: 710, w: 100, h: 50})
+        .withAnimatedElement({x: 1750, y: 690, type: AnimatedBackgroundElementType.LavaDrop1_Drop})
         // long jumps across
         .withPlatform({x: 1050, y: 540, w: 200, h: 50})
+        
         .withPlatform({x: 520, y: 710, w: 100, h: 50})
         // climb up
         .withPlatform({x: 100, y: 700, w: 100, h: 50})

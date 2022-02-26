@@ -3,10 +3,6 @@ import { StationarySprite } from "../sprites/StationarySprite";
 
 class AnimatedBackgroundElement extends StationarySprite {
 
-    get drawBox() {
-        return  { x: this.x, y: this.y, w: 100 * this.scale, h: 100 * this.scale };
-    }
-
     constructor(options) {
         super({frames: AnimatedBackgroundElementFrames[options.type], x: options.x, y: options.y, scale: options.scale || 1});
 
@@ -17,7 +13,7 @@ class AnimatedBackgroundElement extends StationarySprite {
 enum AnimatedBackgroundElementType {
     Fountain, 
     Torch1, Torch2, Torch3,
-    LavaDrop1
+    LavaDrop1_Top, LavaDrop1_Drop
 }
 
 let AnimatedBackgroundElementFrames = {};
@@ -53,17 +49,22 @@ AnimatedBackgroundElementFrames[AnimatedBackgroundElementType.Torch3][State.Idle
     new Frame({src: require("../../../../../resources/wize/background-elements/torches/torch3_4.png"), ticks: 12}),
 ];
 
-AnimatedBackgroundElementFrames[AnimatedBackgroundElementType.LavaDrop1] = {};
-AnimatedBackgroundElementFrames[AnimatedBackgroundElementType.LavaDrop1][State.Idle] = [
+AnimatedBackgroundElementFrames[AnimatedBackgroundElementType.LavaDrop1_Top] = {};
+AnimatedBackgroundElementFrames[AnimatedBackgroundElementType.LavaDrop1_Top][State.Idle] = [
     new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_1.png"), ticks: 20}),
     new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_2.png"), ticks: 20}),
     new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_3.png"), ticks: 20}),
-    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_4.png"), ticks: 20}),
-    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_5.png"), ticks: 20}),
-    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_6.png"), ticks: 20}),
-    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_7.png"), ticks: 20}),
-    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_8.png"), ticks: 20}),
-    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_9.png"), ticks: 20}),
+    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_4.png"), ticks: 65}),
+];
+
+AnimatedBackgroundElementFrames[AnimatedBackgroundElementType.LavaDrop1_Drop] = {};
+AnimatedBackgroundElementFrames[AnimatedBackgroundElementType.LavaDrop1_Drop][State.Idle] = [
+    new Frame({src: require("../../../../../resources/wize/empty-image.png"), ticks: 45}),
+    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_5.png"), ticks: 20, y_offset: -100, x_offset: 48}),
+    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_6.png"), ticks: 20, x_offset: 33}),
+    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_7.png"), ticks: 20, x_offset: 33}),
+    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_8.png"), ticks: 20, x_offset: 33}),
+    new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_9.png"), ticks: 20, x_offset: 33}),
 ];
 
 export { AnimatedBackgroundElement, AnimatedBackgroundElementType }
