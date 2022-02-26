@@ -4,9 +4,10 @@ import { Coin } from "./sprites/Coin"
 import { Room } from "./Room";
 import Door from "./sprites/Door";
 import { Powerup } from "./Powerup";
-import { Fountain } from "./background-elements/Fountain";
+
 import { StaticElement } from "./background-elements/StaticElement";
 import { RoomBackgroundTheme, RoomThemes } from "./tiles/RoomThemes";
+import { AnimatedBackgroundElement, AnimatedBackgroundElementType } from "./background-elements/AnimatedBackgroundElement";
 
 class RoomBuilder {
 
@@ -28,9 +29,9 @@ class RoomBuilder {
         return this;
     }
 
-    withDamageZoneFloor(): RoomBuilder {
+    withDamageZoneFloor(extend: boolean = false): RoomBuilder {
         // add to front
-        this.room.damageZones.unshift({ x: -this.room.w, y: this.room.h, w: this.room.w * 3, h: 150 });
+        this.room.damageZones.unshift({ x: 0, y: this.room.h, w: this.room.w, h: 150 });
         return this;
     }
 
@@ -71,8 +72,8 @@ class RoomBuilder {
         return this;
     }
 
-    withFountain(f: { x: number, y: number }): RoomBuilder {
-        this.room.backgroundElements.push(new Fountain({ x: f.x, y: f.y, inFrontOfPlatforms: true }));
+    withAnimatedElement(e: { x: number, y: number, type: AnimatedBackgroundElementType }): RoomBuilder {
+        this.room.backgroundElements.push(new AnimatedBackgroundElement({ x: e.x, y: e.y, inFrontOfPlatforms: true, type: e.type }));
         return this;
     }
 
