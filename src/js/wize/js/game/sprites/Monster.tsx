@@ -7,7 +7,7 @@ class Monster extends MovingSprite {
     platform: Rectangle;
     xv: number;
 
-    hitAudioSrc: string = require("../../../../../resources/wize/audio/sound-effects/beep-07a.mp3");
+    hitAudioSrc: string = require("../../../../../resources/wize/audio/sound-effects/monster-death1.mp3");
     audio: any = null;
 
     constructor(options: {x: number, y: number, platform: Rectangle, monsterType: MonsterType}) {
@@ -48,6 +48,7 @@ class Monster extends MovingSprite {
         return new Promise((resolve, reject) => {
             if (!this.audio) {
                 this.audio = new Audio();
+                this.audio.volume = 0.5;
                 this.audio.src = this.hitAudioSrc;
                 this.audio.onended = (e) => { this.audio = null; }
                 this.audio.play();

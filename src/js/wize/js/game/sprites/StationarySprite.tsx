@@ -2,8 +2,6 @@ import { Frame, State } from "../Frames";
 import { SpriteBase } from "./SpriteBase";
 
 class StationarySprite extends SpriteBase {
-    scale: number = 1;
-
     frameCounter: number = 0;
     ticksOnFrame: number = 0;
     state: State = State.Idle;

@@ -72,8 +72,8 @@ class RoomBuilder {
         return this;
     }
 
-    withAnimatedElement(e: { x: number, y: number, type: AnimatedBackgroundElementType }): RoomBuilder {
-        this.room.backgroundElements.push(new AnimatedBackgroundElement({ x: e.x, y: e.y, inFrontOfPlatforms: true, type: e.type }));
+    withAnimatedElement(e: { x: number, y: number, type: AnimatedBackgroundElementType, scale: any }): RoomBuilder {
+        this.room.backgroundElements.push(new AnimatedBackgroundElement({ x: e.x, y: e.y, inFrontOfPlatforms: true, type: e.type, scale: e.scale }));
         return this;
     }
 

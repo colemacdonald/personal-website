@@ -16,7 +16,7 @@ let StoryModeRooms: Array<Room> = [
         .withFloor()
         .withDoor({ x: 900, y: 660, destRoom: 1, destX: 125, destY: 225 })
         .withMonster({monsterType: MonsterType.Vulture, x: 0, y: 600, w: 1000, h: 20 })
-        .withAnimatedElement({ x: 500, y: 650, type: AnimatedBackgroundElementType.Fountain })
+        .withAnimatedElement({ x: 500, y: 615, type: AnimatedBackgroundElementType.Fountain, scale: 2 })
         .withStaticElement({type: StaticElementType.Tree3, x: -240, y: 380, inFrontOfPlatforms: true, scale: 2})
         .withStaticElement({type: StaticElementType.Stone1, x: 350, y: 743})
         .build(),
@@ -89,15 +89,15 @@ let StoryModeRooms: Array<Room> = [
         .withCeiling()
         // entrace
         .withPlatform({x: 1700, y: 350, w: 300, h: 50})
-        .withAnimatedElement({x: 1750, y: 370, type: AnimatedBackgroundElementType.LavaDrop1_Top})
+        .withAnimatedElement({x: 1750, y: 370, type: AnimatedBackgroundElementType.LavaDrop1_Top, scale: 1})
         .withDoor({x: 1900, y: 253, destRoom: 3, destX: 120, destY: 80})
-        .withAnimatedElement({x: 1840, y: 270, type: AnimatedBackgroundElementType.Torch1})
-        .withAnimatedElement({x: 1770, y: 270, type: AnimatedBackgroundElementType.Torch1})
-        .withAnimatedElement({x: 1700, y: 270, type: AnimatedBackgroundElementType.Torch1})
+        .withAnimatedElement({x: 1840, y: 270, type: AnimatedBackgroundElementType.Torch1, scale: 1})
+        .withAnimatedElement({x: 1770, y: 270, type: AnimatedBackgroundElementType.Torch1, scale: 1})
+        .withAnimatedElement({x: 1700, y: 270, type: AnimatedBackgroundElementType.Torch1, scale: 1})
         // way out of lava
         .withPlatform({x: 1800, y: 530, w: 100, h: 50})
         .withPlatform({x: 1800, y: 710, w: 100, h: 50})
-        .withAnimatedElement({x: 1750, y: 690, type: AnimatedBackgroundElementType.LavaDrop1_Drop})
+        .withAnimatedElement({x: 1750, y: 690, type: AnimatedBackgroundElementType.LavaDrop1_Drop, scale:1})
         // long jumps across
         .withPlatform({x: 1050, y: 540, w: 200, h: 50})
         
