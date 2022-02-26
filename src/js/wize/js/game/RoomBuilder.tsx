@@ -54,6 +54,11 @@ class RoomBuilder {
         return this;
     }
 
+    withCustomPowerup(x: number, y: number, name: string, method: Function): RoomBuilder {
+        this.room.powerups.push({coin: new Coin({x: x, y: y}), name: name, method: method});
+        return this;
+    }
+
     withMonster(options): RoomBuilder {
         let platform: Rectangle;
         if (options.plat) {

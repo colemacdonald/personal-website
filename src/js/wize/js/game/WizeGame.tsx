@@ -95,6 +95,12 @@ class WizeGame {
             if (util.doRectangleArraysOverlap(this.character.hitBoxes, monster.hitBoxes)){
                 monster.onHit();
                 toRemove.push(this.room.monsters.indexOf(monster));
+                
+                // monsters drop health 50% of the time
+                if (Math.random() < 0.5) {
+                    this.room.powerups.push(Powerup.Health(monster.x, monster.y));
+                }
+
             }else if (util.doRectangleArraysOverlap(this.character.hurtBoxes, monster.hitBoxes)) {
                 this.character.onHit();
             }

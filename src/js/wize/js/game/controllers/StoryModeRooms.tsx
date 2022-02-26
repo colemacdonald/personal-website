@@ -7,14 +7,7 @@ import { Coin } from "../sprites/Coin";
 import { MonsterType } from "../sprites/Monster";
 import { RoomBackgroundTheme } from "../tiles/RoomThemes";
 
-let doubleJump: Powerup = {
-    coin: new Coin({ x: 950, y: 200 }),
-    name: "Double Jump",
-    method: (character: KYeezy) => {
-        character.maxJmpCnt = 2;
-    }
-};
-
+let doubleJump: Powerup = new Powerup ({x: 950, y: 200, name: "Double Jump", method: c => { c.maxJmpCnt = 2; }});
 
 let StoryModeRooms: Array<Room> = [
     new RoomBuilder({ h: 750, w: 1000 })
@@ -97,8 +90,8 @@ let StoryModeRooms: Array<Room> = [
         .withPlatform({x: 1700, y: 350, w: 300, h: 50})
         .withDoor({x: 1900, y: 253, destRoom: 3, destX: 120, destY: 80})
         // way out of lava
-        .withPlatform({x: 1900, y: 530, w: 100, h: 50})
-        .withPlatform({x: 1900, y: 710, w: 100, h: 50})
+        .withPlatform({x: 1800, y: 530, w: 100, h: 50})
+        .withPlatform({x: 1800, y: 710, w: 100, h: 50})
         // long jumps across
         .withPlatform({x: 1050, y: 540, w: 200, h: 50})
         .withPlatform({x: 520, y: 710, w: 100, h: 50})
