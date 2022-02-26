@@ -4,6 +4,7 @@ import { util } from "../util";
 import { GameControllerBase, GameState } from "../game/controllers/GameControllerBase";
 import { RandomWizeGameController } from "../game/controllers/RandomWizeGameController";
 import { RoomBackgroundTheme } from "../game/tiles/RoomThemes";
+import { KYeezyHealthIcon } from "../game/main-character/KYeezyFrames";
 
 // TODO: Separate view from game controller logic
 class WizeGameComponent extends Component {
@@ -64,7 +65,7 @@ class WizeGameComponent extends Component {
 
         this.updateViewport();
         this.drawGame();
-        if (this.gameController.game.playerAlive) {
+        if (this.gameController.character.healthPoints > 0) {
             this.frameCount++;
         }
 
@@ -318,6 +319,11 @@ class WizeGameComponent extends Component {
             10,
             30
         );
+
+        // health
+        for(let i = 0; i < this.gameController.character.healthPoints; i++) {
+            this.cntx.drawImage(KYeezyHealthIcon.img, 10 + i * 30, 40, 21, 33);
+        }
     }
 
     /*

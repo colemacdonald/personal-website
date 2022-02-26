@@ -46,7 +46,7 @@ class WizeGameController extends GameControllerBase {
             case GameState.Playing:
                 super.tick();
                 // check for death
-                if (!this.game.playerAlive) {
+                if (this.character.healthPoints === 0) {
                     this.gameState = GameState.Over;
                     return;
                 }

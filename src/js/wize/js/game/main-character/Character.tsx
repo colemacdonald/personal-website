@@ -20,7 +20,6 @@ class Character extends MovingSprite {
     direction: Direction;
     movingRight: boolean;
 
-    alive: boolean;
     jmpCnt: number;
     yv: number;
     xv: number;
@@ -52,7 +51,6 @@ class Character extends MovingSprite {
         this.movingLeft = false;
         this.jmpCnt = 0;
         this.fall = false;
-        this.alive = true;
         this.fallThroughPlatform = false;
 
         // Interaction

@@ -4,6 +4,7 @@ import { Direction } from "../Frames";
 class ControllableCharacter extends Character {
     upPressed: boolean;
     maxJmpCnt: number = 1;
+    healthPoints: number = 1;
 
     /************* CONTROLS **************/
     // To make characters do weird things, edit these functions!
