@@ -207,9 +207,8 @@ class WizeGameComponent extends Component {
         this.cntx.fillStyle = room.backgroundTheme.floorColour;
         this.cntx.fillRect(-room.w, (room.h - this.viewportY + 25) * this.canvasScale, room.w * w, 500);
         
-        if (room.backgroundTheme.key !== RoomBackgroundTheme.Empty) {
-            
-            if (!backgroundImage) {
+
+            if (!backgroundImage && room.backgroundTheme.backgroundTiles) {
                 // Background Tiles
                 for (let x = 0; x < room.w; x += w) {
                     for (let y = 0; y < room.h; y += h) {
@@ -219,25 +218,26 @@ class WizeGameComponent extends Component {
             }
             
             // Wall Tiles
-            // Left
-            this.drawImage(room.backgroundTheme.wallTiles.topLeft.img, {x: -w , y: -h, h: h, w: w})
-            for (let y = 0; y < room.h; y += h) {
-                this.drawImage(room.backgroundTheme.wallTiles.left.img, {x: -w, y: y, h: h, w: w});
-            }
-            this.drawImage(room.backgroundTheme.wallTiles.bottomLeft.img, {x: -w, y: room.h, h: h, w: w});
-        
-            // Right
-            this.drawImage(room.backgroundTheme.wallTiles.topRight.img, {x: room.w , y: -h, h: h, w: w})
-            for (let y = 0; y < room.h; y += h) {
-                this.drawImage(room.backgroundTheme.wallTiles.right.img, {x: room.w, y: y, h: h, w: w});
-            }
-            this.drawImage(room.backgroundTheme.wallTiles.bottomRight.img, {x: room.w, y: room.h, h: h, w: w});
+            if (room.backgroundTheme.wallTiles) {
+                // Left
+                this.drawImage(room.backgroundTheme.wallTiles.topLeft.img, {x: -w , y: -h, h: h, w: w})
+                for (let y = 0; y < room.h; y += h) {
+                    this.drawImage(room.backgroundTheme.wallTiles.left.img, {x: -w, y: y, h: h, w: w});
+                }
+                this.drawImage(room.backgroundTheme.wallTiles.bottomLeft.img, {x: -w, y: room.h, h: h, w: w});
 
-            // Ceiling
-            for (let x = 0; x < room.w; x += w) {
-                this.drawImage(room.backgroundTheme.wallTiles.ceiling.img, {x: x, y: -w, w: w, h:h})
+                // Right
+                this.drawImage(room.backgroundTheme.wallTiles.topRight.img, {x: room.w , y: -h, h: h, w: w})
+                for (let y = 0; y < room.h; y += h) {
+                    this.drawImage(room.backgroundTheme.wallTiles.right.img, {x: room.w, y: y, h: h, w: w});
+                }
+                this.drawImage(room.backgroundTheme.wallTiles.bottomRight.img, {x: room.w, y: room.h, h: h, w: w});
+
+                // Ceiling
+                for (let x = 0; x < room.w; x += w) {
+                    this.drawImage(room.backgroundTheme.wallTiles.ceiling.img, {x: x, y: -w, w: w, h:h})
+                }
             }
-        }
     }
 
     isInView(box: Rectangle): boolean {

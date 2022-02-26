@@ -5,6 +5,7 @@ enum RoomBackgroundTheme {
     Castle,
     UnderGround,
     Cave,
+    Autumn
 };
 
 type RoomTheme = {
@@ -122,5 +123,19 @@ RoomThemes[RoomBackgroundTheme.Cave] = {
     },
     backgroundMusic: require("../../../../../resources/wize/audio/Cave 1.mp3")
 }
+
+RoomThemes[RoomBackgroundTheme.Autumn] = {
+    key: RoomBackgroundTheme.Autumn,
+    primaryColour: "orange",
+    secondaryColour: "yellow",
+    floorColour: "brown",
+    horizontalBackgroundImage: new Frame({src: require("../../../../../resources/wize/backgrounds/autumn/background.png")}),
+    platformTiles: {
+        left: new Frame({src: require("../../../../../resources/wize/tiles/autumn/03.png")}),
+        center: new Frame({src: require("../../../../../resources/wize/tiles/autumn/04.png")}),
+        right: new Frame({src: require("../../../../../resources/wize/tiles/autumn/02.png")}),
+    },
+    backgroundMusic: require("../../../../../resources/wize/audio/Cave 1.mp3")
+};
 
 export { RoomBackgroundTheme, RoomTheme, RoomThemes };

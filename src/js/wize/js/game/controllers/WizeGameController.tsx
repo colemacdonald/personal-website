@@ -100,7 +100,7 @@ class WizeGameController extends GameControllerBase {
     };
 
     rooms: Array<Room> = [
-        new RoomBuilder({ h: 750, w: 1000 })
+        new RoomBuilder({ h: 750, w: 1000 }).withTheme(RoomBackgroundTheme.Autumn)
             .withFloor()
             .withDoor({ x: 900, y: 660, destRoom: 1, destX: 100, destY: 0 })
             .withMonster({monsterType: MonsterType.Vulture, x: 0, y: 600, w: 1000, h: 20 })
