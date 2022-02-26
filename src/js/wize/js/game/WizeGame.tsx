@@ -41,8 +41,11 @@ class WizeGame {
         // Move
         this.character.tick();
 
-        // Force in bounds
-        this.character.setPosition(Math.max(Math.min(this.room.w - this.character.w, this.character.x), 0), Math.max(Math.min(this.room.h - this.character.h + 30, this.character.y), 0));
+        // Force in bounds; rooms always have walls but only sometimes has ceilings
+        let aboveBottomY = Math.min(this.room.h - this.character.h + 30, this.character.y);
+        this.character.setPosition(Math.max(Math.min(this.room.w - this.character.w, this.character.x), 0), this.room.hasCeiling ? Math.max(aboveBottomY, 0) : Math.min(this.character.y, aboveBottomY));
+
+        this.checkDamageZones();
 
         this.updateAndCheckMonsters();
 
@@ -76,6 +79,16 @@ class WizeGame {
         }, this);
     }
 
+    checkDamageZones() {
+        this.room.damageZones.forEach(z => {
+            if (util.doRectanglesOverlap(this.character.x, this.character.y + this.character.h * 0.97, this.character.h * 0.1, this.character.w, z.x, z.y, z.h * 0.4 /* platforms are mostly dirt */, z.w)) {
+                this.character.onHit();
+                this.character.setCurrentPlatform(z);
+                this.onGround = true;
+            }
+        });
+    }
+
     updateAndCheckMonsters() {
         let toRemove = [];
         this.room.monsters.forEach(monster => {
@@ -83,7 +96,7 @@ class WizeGame {
                 monster.onHit();
                 toRemove.push(this.room.monsters.indexOf(monster));
             }else if (util.doRectangleArraysOverlap(this.character.hurtBoxes, monster.hitBoxes)) {
-                this.character.onHit(monster);
+                this.character.onHit();
             }
             monster.tick();
         }, this);

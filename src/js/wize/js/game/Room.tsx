@@ -9,12 +9,14 @@ class Room {
     h: number;
     w: number;
     platforms: Array<Rectangle> = [];
+    damageZones: Array<Rectangle> = [];
     monsters: Array<Monster> = [];
     coins: Array<Coin> = [];
     doors: Array<Door> = [];
     powerups: Array<Powerup> = [];
     backgroundElements: Array<ISprite> = [];
-    backgroundTheme: RoomTheme = RoomThemes[RoomBackgroundTheme.Empty];
+    backgroundTheme: RoomTheme = RoomThemes[RoomBackgroundTheme.Outside];
+    hasCeiling: boolean = false;
 
     constructor(options) {
         this.h = options.h;

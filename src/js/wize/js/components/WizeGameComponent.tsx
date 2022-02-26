@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { WizeGameController } from "../game/controllers/WizeGameController"
+import { WizeStoryGameController } from "../game/controllers/WizeStoryGameController"
 import { util } from "../util";
 import { GameControllerBase, GameState } from "../game/controllers/GameControllerBase";
-import { RandomWizeGameController } from "../game/controllers/RandomWizeGameController";
+import { WizeSurvivalGameController } from "../game/controllers/WizeSurvivalGameController";
 import { RoomBackgroundTheme } from "../game/tiles/RoomThemes";
 import { KYeezyHealthIcon } from "../game/main-character/KYeezyFrames";
 
@@ -30,6 +30,16 @@ class WizeGameComponent extends Component {
     frameCount: number;
 
     interval: NodeJS.Timer;
+
+    minimapColours = {
+        background: "green",
+        platforms: "brown",
+        monsters: "red",
+        doors: "black",
+        damageZones: "redorange",
+        character: "blue",
+        coins: "gold"
+    }
 
     constructor(props) {
         super(props);
@@ -143,10 +153,10 @@ class WizeGameComponent extends Component {
         this.frameCount = 0;
 
         if (this.gameMode === "survival") {
-            this.gameController = new RandomWizeGameController();
+            this.gameController = new WizeSurvivalGameController();
         }
         else {
-            this.gameController = new WizeGameController();
+            this.gameController = new WizeStoryGameController();
         }
 
         this.gameController.newGame();
@@ -201,43 +211,43 @@ class WizeGameComponent extends Component {
             this.cntx.fillStyle = room.backgroundTheme.primaryColour;
 
             this.cntx.fillRect((room.w - this.viewportX) * this.canvasScale + margin, 0, this.canvas.current.width, this.canvas.current.height);
+        } else if (room.backgroundTheme.backgroundTiles) {
+            // Background Tiles
+            for (let x = 0; x < room.w; x += w) {
+                for (let y = 0; y < room.h; y += h) {
+                    this.drawImage(room.getBackgroundThemeTile(x, y).img, { x: x, y: y, w: w, h: h })
+                }
+            }
         }
 
         // Fill in floor
         this.cntx.fillStyle = room.backgroundTheme.floorColour;
         this.cntx.fillRect(-room.w, (room.h - this.viewportY + 25) * this.canvasScale, room.w * w, 500);
         
-
-            if (!backgroundImage && room.backgroundTheme.backgroundTiles) {
-                // Background Tiles
-                for (let x = 0; x < room.w; x += w) {
-                    for (let y = 0; y < room.h; y += h) {
-                        this.drawImage(room.getBackgroundThemeTile(x, y).img, { x: x, y: y, w: w, h: h })
-                    }
-                }
+        
+        // Wall Tiles
+        if (room.backgroundTheme.wallTiles) {
+            // Left
+            this.drawImage(room.backgroundTheme.wallTiles.topLeft.img, {x: -w , y: -h, h: h, w: w})
+            for (let y = 0; y < room.h; y += h) {
+                this.drawImage(room.backgroundTheme.wallTiles.left.img, {x: -w, y: y, h: h, w: w});
             }
-            
-            // Wall Tiles
-            if (room.backgroundTheme.wallTiles) {
-                // Left
-                this.drawImage(room.backgroundTheme.wallTiles.topLeft.img, {x: -w , y: -h, h: h, w: w})
-                for (let y = 0; y < room.h; y += h) {
-                    this.drawImage(room.backgroundTheme.wallTiles.left.img, {x: -w, y: y, h: h, w: w});
-                }
-                this.drawImage(room.backgroundTheme.wallTiles.bottomLeft.img, {x: -w, y: room.h, h: h, w: w});
+            this.drawImage(room.backgroundTheme.wallTiles.bottomLeft.img, {x: -w, y: room.h, h: h, w: w});
 
-                // Right
-                this.drawImage(room.backgroundTheme.wallTiles.topRight.img, {x: room.w , y: -h, h: h, w: w})
-                for (let y = 0; y < room.h; y += h) {
-                    this.drawImage(room.backgroundTheme.wallTiles.right.img, {x: room.w, y: y, h: h, w: w});
-                }
-                this.drawImage(room.backgroundTheme.wallTiles.bottomRight.img, {x: room.w, y: room.h, h: h, w: w});
+            // Right
+            this.drawImage(room.backgroundTheme.wallTiles.topRight.img, {x: room.w , y: -h, h: h, w: w})
+            for (let y = 0; y < room.h; y += h) {
+                this.drawImage(room.backgroundTheme.wallTiles.right.img, {x: room.w, y: y, h: h, w: w});
+            }
+            this.drawImage(room.backgroundTheme.wallTiles.bottomRight.img, {x: room.w, y: room.h, h: h, w: w});
 
-                // Ceiling
+            // Ceiling
+            if (room.hasCeiling) {
                 for (let x = 0; x < room.w; x += w) {
                     this.drawImage(room.backgroundTheme.wallTiles.ceiling.img, {x: x, y: -w, w: w, h:h})
                 }
             }
+        }
     }
 
     isInView(box: Rectangle): boolean {
@@ -269,6 +279,9 @@ class WizeGameComponent extends Component {
 
         // Draw platforms (which are currently coded to hav width of 50 that are >= 100)
         this.drawPlatforms();
+
+        // Draw damage zones which are currently like platforms but apply the onHit effect to the character
+        this.drawDamageZones();
 
         this.drawBackgroundElements(true);
 
@@ -352,6 +365,33 @@ class WizeGameComponent extends Component {
                 }
 
                 this.drawImage(theme.platformTiles.right.img, { x: plat.x + w * i, y: plat.y, w: w, h: h });
+            }
+        });
+    }
+
+    drawDamageZones() {
+        let zones = this.gameController.game.room.damageZones;
+
+        let theme = this.gameController.game.room.backgroundTheme;
+
+        let h = 50;
+        let w = 50;
+
+        zones.forEach(z => {
+            // If visible
+            if (this.isInView(z)) {
+                // Left corner
+                this.drawImage(theme.damageZoneTiles.left.img, { x: z.x, y: z.y, w: w, h: h});
+
+                // Middle tiles
+                let i = 1;
+                // Until we reach the right side
+                while ((i + 1) * w < z.w) {
+                    this.drawImage(theme.damageZoneTiles.center.img, { x: z.x + w * i, y: z.y, w: w, h: h });
+                    i++;
+                }
+
+                this.drawImage(theme.damageZoneTiles.right.img, { x: z.x + w * i, y: z.y, w: w, h: h });
             }
         });
     }
@@ -452,6 +492,7 @@ class WizeGameComponent extends Component {
 
 
         this.drawMinimapPlatforms(minimapScale, minimap);
+        this.drawMinimapDamageZones(minimapScale, minimap);
         this.drawMinimapDoors(minimapScale, minimap);
         this.drawMinimapCharacter(minimapScale, minimap);
         this.drawMinimapCoins(minimapScale, minimap);
@@ -461,33 +502,39 @@ class WizeGameComponent extends Component {
     }
 
     drawMinimapPlatforms(scale, minimap) {
-        this.cntx.fillStyle = "brown";
+        this.cntx.fillStyle = this.minimapColours.platforms;
 
         this.drawOnMinimap(this.gameController.game.room.platforms, scale, minimap);
     }
 
+    drawMinimapDamageZones(scale, minimap) {
+        this.cntx.fillStyle = this.minimapColours.damageZones;
+
+        this.drawOnMinimap(this.gameController.game.room.damageZones, scale, minimap);
+    }
+
     drawMinimapDoors(scale, minimap) {
-        this.cntx.fillStyle = "black";
+        this.cntx.fillStyle = this.minimapColours.doors;
 
         this.drawOnMinimap(this.gameController.game.room.doors.map(d => d.drawBox), scale, minimap);
     }
 
     drawMinimapCharacter(scale, minimap) {
-        this.cntx.fillStyle = "blue";
+        this.cntx.fillStyle = this.minimapColours.character;
         let c = this.gameController.game.character;
 
         this.drawOnMinimap([c], scale, minimap);
     }
 
     drawMinimapCoins(scale, minimap) {
-        this.cntx.fillStyle = "gold";
+        this.cntx.fillStyle = this.minimapColours.coins;
 
         this.drawOnMinimap(this.gameController.game.room.coins.map(c => c.drawBox), scale, minimap);
         this.drawOnMinimap(this.gameController.game.room.powerups.map(p => p.coin.drawBox), scale, minimap);
     }
 
     drawMinimapMonsters(scale, minimap) {
-        this.cntx.fillStyle = "red";
+        this.cntx.fillStyle = this.minimapColours.monsters;
         this.drawOnMinimap(this.gameController.game.room.monsters, scale, minimap);
     }
 

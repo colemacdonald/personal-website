@@ -91,7 +91,7 @@ class KYeezy extends ControllableCharacter {
         this.state = State.Attacking;
     }
 
-    onHit(m: Monster) {
+    onHit() {
         if (!this.invincible) {
             this.healthPoints--;
             this.invincible = true;

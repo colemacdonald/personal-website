@@ -1,7 +1,7 @@
 import { Frame } from "../Frames";
 
 enum RoomBackgroundTheme {
-    Empty,
+    Outside,
     Castle,
     UnderGround,
     Cave,
@@ -13,7 +13,8 @@ type RoomTheme = {
     primaryColour: string,
     secondaryColour: string,
     floorColour: string,
-    platformTiles: { left: Frame, center: Frame, right: Frame }
+    platformTiles: { left: Frame, center: Frame, right: Frame },
+    damageZoneTiles: { left: Frame, center: Frame, right: Frame },
     backgroundTiles: Array<Frame>,
     wallTiles: { topLeft: Frame, left: Frame, bottomLeft: Frame, topRight: Frame, right: Frame, bottomRight: Frame, ceiling: Frame },
     horizontalBackgroundImage: Frame,
@@ -24,8 +25,8 @@ type RoomTheme = {
 
 let RoomThemes = {};
 
-RoomThemes[RoomBackgroundTheme.Empty] = {
-    key: RoomBackgroundTheme.Empty,
+RoomThemes[RoomBackgroundTheme.Outside] = {
+    key: RoomBackgroundTheme.Outside,
     primaryColour: "#33beff",
     secondaryColour: "white",
     floorColour: "#302c2e",
@@ -120,6 +121,11 @@ RoomThemes[RoomBackgroundTheme.Cave] = {
         right: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile35.png")}),
         bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile35.png")}),
         ceiling: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile27.png")}),
+    },
+    damageZoneTiles: {
+        left: new Frame({src: require("../../../../../resources/wize/tiles/cave/lava_tile8.png")}),
+        center: new Frame({src: require("../../../../../resources/wize/tiles/cave/lava_tile9.png")}),
+        right: new Frame({src: require("../../../../../resources/wize/tiles/cave/lava_tile10.png")}),
     },
     backgroundMusic: require("../../../../../resources/wize/audio/Cave 1.mp3")
 }

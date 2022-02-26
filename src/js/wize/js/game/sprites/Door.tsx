@@ -12,7 +12,7 @@ class Door implements ISprite {
     constructor(x: number, y: number, destRoom: number, destX: number, destY: number) {
         this.drawBox = { x: x, y: y, h: 100, w: 86 };
 
-        this.hitBoxes = [{x: x + 20, y: y + 20, h: 80, w: 60 }];
+        this.hitBoxes = [{x: x + 30, y: y + 60, h: 40, w: 40 }];
 
         this.destRoom = destRoom;
         this.destX = destX;

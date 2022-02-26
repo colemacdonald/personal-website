@@ -28,6 +28,17 @@ class RoomBuilder {
         return this;
     }
 
+    withDamageZoneFloor(): RoomBuilder {
+        // add to front
+        this.room.damageZones.unshift({ x: -this.room.w, y: this.room.h, w: this.room.w * 3, h: 150 });
+        return this;
+    }
+
+    withCeiling(): RoomBuilder {
+        this.room.hasCeiling = true;
+        return this;
+    }
+
     withPlatform(plat: Rectangle): RoomBuilder {
         this.room.platforms.push(plat);
         return this;

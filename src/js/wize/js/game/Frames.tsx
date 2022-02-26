@@ -10,7 +10,7 @@ enum Direction {
     Right,
     Left
 };
-  
+
 class Frame {
     src: string;
     img: any;

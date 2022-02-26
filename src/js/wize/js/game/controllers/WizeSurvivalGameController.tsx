@@ -3,7 +3,7 @@ import { KYeezy } from "../main-character/KYeezyCharacter";
 import { RoomBuilder } from "../RoomBuilder";
 import { GameControllerBase, GameState } from "./GameControllerBase"
 
-class RandomWizeGameController extends GameControllerBase {
+class WizeSurvivalGameController extends GameControllerBase {
     newGame() {
         this.gameState = GameState.Playing;
         this.level = 0;
@@ -50,4 +50,4 @@ class RandomWizeGameController extends GameControllerBase {
     }
 }
 
-export { RandomWizeGameController };
+export { WizeSurvivalGameController };
