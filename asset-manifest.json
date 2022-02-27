@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/personal-website/static/css/main.b693f39c.css",
-    "main.js": "/personal-website/static/js/main.decd15d9.js",
+    "main.js": "/personal-website/static/js/main.ffaf7941.js",
     "static/media/Prelude in F  Minor (with Accompaniment).mp3": "/personal-website/static/media/Prelude in F  Minor (with Accompaniment).eea08a1a8aa25f3e4f3d.mp3",
     "static/media/Cave 1.mp3": "/personal-website/static/media/Cave 1.667589734365bb3cb150.mp3",
     "static/media/background.png": "/personal-website/static/media/background.5ad8deea248c9dada441.png",
@@ -14,12 +14,14 @@
     "static/media/tree1.png": "/personal-website/static/media/tree1.fa3117136985b6e5fbce.png",
     "static/media/health-down.mp3": "/personal-website/static/media/health-down.cfe1a8c5846372aff3c7.mp3",
     "static/media/monster-death1.mp3": "/personal-website/static/media/monster-death1.f1b29ea1a3a0eabbdfea.mp3",
+    "static/media/tile21.png": "/personal-website/static/media/tile21.f5fb6a0c626e2bac432f.png",
+    "static/media/tile23.png": "/personal-website/static/media/tile23.a325237676bf5c85ed08.png",
     "index.html": "/personal-website/index.html",
     "main.b693f39c.css.map": "/personal-website/static/css/main.b693f39c.css.map",
-    "main.decd15d9.js.map": "/personal-website/static/js/main.decd15d9.js.map"
+    "main.ffaf7941.js.map": "/personal-website/static/js/main.ffaf7941.js.map"
   },
   "entrypoints": [
     "static/css/main.b693f39c.css",
-    "static/js/main.decd15d9.js"
+    "static/js/main.ffaf7941.js"
   ]
 }
