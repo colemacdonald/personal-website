@@ -596,6 +596,8 @@ class WizeGameComponent extends Component {
             case 40:
                 this.gameController.game.downRelease();
                 break;
+            case 32:
+                this.gameController.game.spaceRelease();
             default:
                 break;
         }
@@ -621,6 +623,9 @@ class WizeGameComponent extends Component {
             // f - https://keycode.info/
             case 70:
                 this.gameController.game.attackPress();
+            case 32:
+                this.gameController.game.spacePress();
+                e.preventDefault();
             default:
                 break;
         }

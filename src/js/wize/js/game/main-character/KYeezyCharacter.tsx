@@ -6,12 +6,17 @@ import { Monster } from "../sprites/Monster";
 class KYeezy extends ControllableCharacter {
     state: State;
 
+    healthUpAudioSrc: string = require("../../../../../resources/wize/audio/sound-effects/health-up.mp3");
+    healthDownAudioSrc: string = require("../../../../../resources/wize/audio/sound-effects/health-down.mp3");
+
     attackDuration: number = 20;
     attackFrameCounter: number = 0;
 
     onHitInvincibilityFrames: number = 60;
     onHitInvincibilityCounter: number = 0;
     invincible: boolean = false;
+
+    baseSpeed: number;
 
     constructor(options: any) {
     
@@ -22,6 +27,8 @@ class KYeezy extends ControllableCharacter {
         this.state = State.Idle;
 
         this.healthPoints = 3;
+
+        this.baseSpeed = this.speed;
     }
 
     private static addOpts(opts) {
@@ -98,7 +105,18 @@ class KYeezy extends ControllableCharacter {
         if (!this.invincible) {
             this.healthPoints--;
             this.invincible = true;
+            let audio = new Audio(this.healthDownAudioSrc);
+            audio.volume = 0.7;
+            audio.play();
         }
+    }
+
+    runStart() {
+        this.speed = this.baseSpeed * 2;
+    }
+
+    runEnd() {
+        this.speed = this.baseSpeed;
     }
 }
 

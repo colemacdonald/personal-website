@@ -201,6 +201,14 @@ class WizeGame {
     attackPress() {
         this.character.attack();
     }
+
+    spacePress() {
+        this.character.runStart();
+    }
+
+    spaceRelease() {
+        this.character.runEnd();
+    }
 }
 
 export default WizeGame;

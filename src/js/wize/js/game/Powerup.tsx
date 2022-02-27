@@ -12,7 +12,11 @@ class Powerup {
     }
 
     public static Health(x: number, y: number): Powerup {
-        return new Powerup({x: x, y: y, name: "Health", method: c => { c.healthPoints++; } });
+        return new Powerup({x: x, y: y, name: "Health", method: c => { 
+            c.healthPoints++; 
+            let audio = new Audio(c.healthUpAudioSrc);
+            audio.play();
+        } });
     }
 }
 
