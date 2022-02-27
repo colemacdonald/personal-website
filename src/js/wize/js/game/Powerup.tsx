@@ -13,6 +13,8 @@ class Powerup {
         this.sprite = new StationarySprite({scale: 1, ...p});
         this.name = p.name;
         this.method = p.method;
+        this.pauseDuration = p.pauseDuration;
+        this.instructions = p.instructions;
     }
 
     public static Health(x: number, y: number): Powerup {
@@ -24,7 +26,7 @@ class Powerup {
     }
 
     public static IncreaseJumps(x: number, y: number, newMaxJmpCnt: number, name: string): Powerup {
-        return new Powerup ({x: x, y: y, name: name, instructions: "You can now jump {newMaxJmpCnt} times.", pauseDuration: 180, frames: PowerupFrames[PowerupSpriteType.KCoin], method: c => {
+        return new Powerup ({x: x, y: y, name: name, instructions: `You can now jump ${newMaxJmpCnt} times.`, pauseDuration: 180, frames: PowerupFrames[PowerupSpriteType.KCoin], method: c => {
             c.maxJmpCnt = newMaxJmpCnt;
         }});
     }

@@ -35,7 +35,6 @@ class WizeStoryGameController extends GameControllerBase {
      Main game update method that signals a frame
      */
     tick() {
-
         switch (this.gameState) {
             case GameState.Playing:
                 super.tick();
@@ -54,21 +53,7 @@ class WizeStoryGameController extends GameControllerBase {
                     this.character.setPosition(door.destX, door.destY);
                     this.character.setGame(this.game);
                 }
-
-                // check for powerups
-                if (this.game.lastPowerup) {
-                    this.message = this.game.lastPowerup.name + " acquired!";
-
-                    this.gameState = GameState.Loading;
-                    this.game.lastPowerup = null;
-                }
-            case GameState.Loading:
-                this.loadingTicks++;
-                if (this.loadingTicks > this.maxLoadingTicks) {
-                    this.gameState = GameState.Playing;
-                    this.loadingTicks = 0;
-                    this.message = "";
-                }
+                break;
             default:
         }
     }

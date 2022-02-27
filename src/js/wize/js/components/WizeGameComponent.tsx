@@ -21,6 +21,7 @@ class WizeGameComponent extends Component {
     audio: any;
     currentAudioSrc: string;
     audioPlayed: boolean = false;
+    unPauseFrame: number = 0;
 
     gameController: GameControllerBase;
 
@@ -39,6 +40,15 @@ class WizeGameComponent extends Component {
         damageZones: "redorange",
         character: "blue",
         coins: "gold"
+    }
+
+    messageBoxStyle = {
+        backgroundColour: "#585858",
+        borderColour: "gold",
+        textColour: "gold",
+        headerFont: "30px Arial",
+        bodyFont: "20px Arial",
+        padding: 30
     }
 
     constructor(props) {
@@ -61,7 +71,29 @@ class WizeGameComponent extends Component {
     /*
    * To be called at the frame rate.
    */
-    tick() {     
+    tick() {
+        if (this.gameController.character.healthPoints > 0) {
+            this.frameCount++;
+        }
+
+        // player just got a power, will pause to display the information.
+        if (this.gameController.game.lastPowerup) {
+            
+            // first frame after grabbing powerup
+            if (this.unPauseFrame === 0) {
+                this.drawMessage(this.gameController.game.lastPowerup.name + " acquired!", this.gameController.game.lastPowerup.instructions);
+                this.unPauseFrame = this.frameCount + this.gameController.game.lastPowerup.pauseDuration;
+            }
+
+            if (this.frameCount < this.unPauseFrame) {
+                return;
+            } else {
+                this.unPauseFrame = 0;
+            }
+        }
+
+
+        // update game
         this.gameController.tick();
         if (this.gameController.gameState === GameState.Over) {
             if (this.interval) window.clearInterval(this.interval);
@@ -73,17 +105,9 @@ class WizeGameComponent extends Component {
             this.currentAudioSrc = this.gameController.game.room.backgroundTheme.backgroundMusic;           
         }
 
+        // draw
         this.updateViewport();
         this.drawGame();
-        if (this.gameController.character.healthPoints > 0) {
-            this.frameCount++;
-        }
-
-        if (this.gameController.game.lastPowerup) {
-            if (this.interval) window.clearInterval(this.interval);
-
-            this.interval = setInterval(this.tick.bind(this), 1000 / this.gameController.game.gameOptions.fps);
-        }
     }
 
     componentDidMount() {
@@ -169,6 +193,45 @@ class WizeGameComponent extends Component {
 
         if (this.interval) window.clearInterval(this.interval);
         this.interval = setInterval(this.tick.bind(this), 1000 / this.gameController.game.gameOptions.fps);
+    }
+
+    drawMessage(header: string, body: string) {
+        this.cntx.font = this.messageBoxStyle.headerFont;
+        let headerDimensions = this.cntx.measureText(header);
+        let hh = headerDimensions.actualBoundingBoxAscent - headerDimensions.actualBoundingBoxDescent;
+
+        this.cntx.font = this.messageBoxStyle.bodyFont;
+        let bodyDimensions = this.cntx.measureText(body);
+        let bh = bodyDimensions.actualBoundingBoxAscent - headerDimensions.actualBoundingBoxDescent;
+
+        let w = Math.max(headerDimensions.width, bodyDimensions.width) + this.messageBoxStyle.padding * 2;
+        let h = hh + bh + this.messageBoxStyle.padding * 3;
+
+        // don't like it but for speed drawRect will compensate...
+        let centerX = this.canvas.current.width / 2;
+        let centerY = this.canvas.current.height / 2;
+
+        this.cntx.fillStyle = this.messageBoxStyle.backgroundColour;
+
+        this.cntx.fillRect(centerX - w / 2, centerY - h / 2, w, h);
+        this.cntx.strokeStyle = this.messageBoxStyle.borderColour;
+        this.cntx.strokeRect(centerX - w / 2, centerY - h / 2, w, h);
+        this.cntx.stokeStyle = "#00000000";
+
+        this.cntx.fillStyle = this.messageBoxStyle.textColour;
+        this.cntx.font = this.messageBoxStyle.headerFont;
+        this.cntx.fillText(
+            header,
+            centerX - headerDimensions.width / 2,
+            centerY - h / 2 + this.messageBoxStyle.padding + hh / 2
+        );
+
+        this.cntx.font = this.messageBoxStyle.bodyFont;
+        this.cntx.fillText(
+            body,
+            centerX - bodyDimensions.width / 2,
+            centerY - h / 2 + this.messageBoxStyle.padding * 2.5 + hh + bh / 2
+        );
     }
 
     drawBackground() {
@@ -260,19 +323,6 @@ class WizeGameComponent extends Component {
     drawGame() {
         this.canvasScale = this.canvas.current.width / this.viewportW;
 
-        if (this.gameController.gameState === GameState.Over) {
-            this.drawBackground();
-            this.cntx.fillStyle = "red";
-            this.cntx.font = "30px Arial";
-            this.cntx.fillText(
-                "Game Over...",
-                (this.viewportW / 2 - 75) * this.canvasScale,
-                this.viewportH  * this.canvasScale / 2
-            );
-            this.drawScore();
-            return;
-        }
-
         this.drawBackground();
 
         this.drawBackgroundElements(false);
@@ -303,6 +353,10 @@ class WizeGameComponent extends Component {
         // Mini Map
         this.drawMinimap();
 
+        if (this.gameController.gameState === GameState.Over) {
+            this.drawMessage("Game Over...", "Better luck next time.");
+            return;
+        }
 
         if (this.showHitboxes) {
             this.gameController.game.character.hurtBoxes.forEach(r => {

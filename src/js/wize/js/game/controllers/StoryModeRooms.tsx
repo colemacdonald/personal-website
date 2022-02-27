@@ -14,7 +14,7 @@ let StoryModeRooms: Array<Room> = [
         .withFloor()
         .withDoor({ x: 900, y: 660, destRoom: 1, destX: 125, destY: 225 })
         .withMonster({monsterType: MonsterType.Vulture, x: 0, y: 600, w: 1000, h: 20 })
-        .withAnimatedElement({ x: 500, y: 615, type: AnimatedBackgroundElementType.Fountain, scale: 2 })
+        .withAnimatedElement({ x: 500, y: 650, type: AnimatedBackgroundElementType.Fountain, scale: 1.5 })
         .withStaticElement({type: StaticElementType.Tree3, x: -240, y: 380, inFrontOfPlatforms: true, scale: 2})
         .withStaticElement({type: StaticElementType.Stone1, x: 350, y: 743})
         .build(),

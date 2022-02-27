@@ -35,6 +35,7 @@ class WizeGame {
         // If the character on a platform?
         this.onGround = false;
         this.character.onG = false;
+        this.lastPowerup = null;
 
         this.checkForCurrentPlatform();
 
