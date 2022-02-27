@@ -70,6 +70,8 @@ class Character extends MovingSprite {
 
         if (!this.fall && !this.fallThroughPlatform) {
             this.y = plat.y - this.h;
+            // this.yv = 0;
+            // this.y += 50;
             this.onG = true;
         }
     }

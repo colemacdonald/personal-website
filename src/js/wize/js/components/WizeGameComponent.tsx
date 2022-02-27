@@ -312,6 +312,12 @@ class WizeGameComponent extends Component {
             this.gameController.game.character.hitBoxes.forEach(r => {
                 this.drawRect("red", r, 0.5);
             });
+
+            this.gameController.game.room.monsters.forEach(m => {
+                m.hitBoxes.forEach(r => {
+                    this.drawRect("red", r, 0.5);
+                });
+            });
         }
 
         this.cntx.fillStyle = "gold";
@@ -364,7 +370,7 @@ class WizeGameComponent extends Component {
                     i++;
                 }
 
-                this.drawImage(theme.platformTiles.right.img, { x: plat.x + w * i, y: plat.y, w: w, h: h });
+                this.drawImage(theme.platformTiles.right.img, { x: plat.x + plat.w - w, y: plat.y, w: w, h: h });
             }
         });
     }
@@ -377,21 +383,30 @@ class WizeGameComponent extends Component {
         let h = 50;
         let w = 50;
 
+        const period = 400;
+        const maxShift = 4;
+        let shift = this.frameCount % period / (period / (maxShift * 2));
+        
+        if (shift > maxShift) {
+            shift = maxShift * 2 - shift;
+        }
+
+        
         zones.forEach(z => {
             // If visible
             if (this.isInView(z)) {
                 // Left corner
-                this.drawImage(theme.damageZoneTiles.left.img, { x: z.x, y: z.y, w: w, h: h});
+                this.drawImage(theme.damageZoneTiles.left.img, { x: z.x, y: z.y, w: w + shift, h: h});
 
                 // Middle tiles
                 let i = 1;
                 // Until we reach the right side
                 while ((i + 1) * w < z.w) {
-                    this.drawImage(theme.damageZoneTiles.center.img, { x: z.x + w * i, y: z.y, w: w, h: h });
+                    this.drawImage(theme.damageZoneTiles.center.img, { x: z.x  - shift + w * i, y: z.y, w: w, h: h });
                     i++;
                 }
 
-                this.drawImage(theme.damageZoneTiles.right.img, { x: z.x + w * i, y: z.y, w: w, h: h });
+                this.drawImage(theme.damageZoneTiles.right.img, { x: z.x - shift + w * i, y: z.y, w: w + shift, h: h });
             }
         });
     }
@@ -598,6 +613,7 @@ class WizeGameComponent extends Component {
                 break;
             case 32:
                 this.gameController.game.spaceRelease();
+                break;
             default:
                 break;
         }
@@ -623,9 +639,11 @@ class WizeGameComponent extends Component {
             // f - https://keycode.info/
             case 70:
                 this.gameController.game.attackPress();
+                break;
             case 32:
                 this.gameController.game.spacePress();
                 e.preventDefault();
+                break;
             default:
                 break;
         }

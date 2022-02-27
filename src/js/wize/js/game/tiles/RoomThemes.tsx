@@ -129,7 +129,7 @@ RoomThemes[RoomBackgroundTheme.Cave] = {
     damageZoneTiles: {
         left: new Frame({src: require("../../../../../resources/wize/tiles/cave/lava_tile8.png")}),
         center: new Frame({src: require("../../../../../resources/wize/tiles/cave/lava_tile9.png")}),
-        right: new Frame({src: require("../../../../../resources/wize/tiles/cave/lava_tile10.png")}),
+        right: new Frame({src: require("../../../../../resources/wize/tiles/cave/lava_tile10.png"), width_extend: 20}),
     },
     backgroundMusic: require("../../../../../resources/wize/audio/Cave 1.mp3"),
     doorFrame: new Frame({src: require("../../../../../resources/wize/doors/cave/door.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})

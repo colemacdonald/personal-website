@@ -106,7 +106,7 @@ class KYeezy extends ControllableCharacter {
             this.healthPoints--;
             this.invincible = true;
             let audio = new Audio(this.healthDownAudioSrc);
-            audio.volume = 0.7;
+            audio.volume = 0.9;
             audio.play();
         }
     }

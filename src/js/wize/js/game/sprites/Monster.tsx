@@ -24,6 +24,7 @@ class Monster extends MovingSprite {
 
         this.h = monsterTypes[options.monsterType].h;
         this.w = monsterTypes[options.monsterType].w;
+        this.x = this.platform.x + 10 + Math.random() * (this.platform.w - this.w - 20);
         this.speed = monsterTypes[options.monsterType].speed;
 
         this.xv = this.speed;
@@ -48,7 +49,7 @@ class Monster extends MovingSprite {
         return new Promise((resolve, reject) => {
             if (!this.audio) {
                 this.audio = new Audio();
-                this.audio.volume = 0.5;
+                this.audio.volume = 0.8;
                 this.audio.src = this.hitAudioSrc;
                 this.audio.onended = (e) => { this.audio = null; }
                 this.audio.play();
@@ -60,10 +61,11 @@ class Monster extends MovingSprite {
 
 enum MonsterType {
     Centipede,
-    Turtle,
-    Bloated,
+    // Turtle,
+    // Bloated,
     Scorpion,
     Vulture,
+    OneEyedBat
 }
 
 let monsterTypes = {};
@@ -117,6 +119,25 @@ monsterTypes[MonsterType.Vulture].frames[State.Walking][Direction.Left] = [
     new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-002.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
     new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-003.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
     new Frame({src: require("../../../../../resources/wize/monsters/vulture/walk/vulture-walk-left-004.png"), ticks: 16 , hitBoxes: [{ x: 0, y: 0, h: h, w: w }] }),
+];
+
+monsterTypes[MonsterType.OneEyedBat] = {h: 39, w: 39, speed: 3, frames: {}};
+monsterTypes[MonsterType.OneEyedBat].frames[State.Walking] = {};
+monsterTypes[MonsterType.OneEyedBat].frames[State.Walking][Direction.Right] = [
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-right1.png"), ticks: 16 , hitBoxes: [{ x: 14, y: 14, h: 20, w: 20 }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-right2.png"), ticks: 16 , hitBoxes: [{ x: 16, y: 16, h: 16, w: 16 }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-right3.png"), ticks: 16 , hitBoxes: [{ x: 16, y: 16, h: 16, w: 16 }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-right4.png"), ticks: 16 , hitBoxes: [{ x: 6, y: 14, h: 22, w: 31 }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-right5.png"), ticks: 16 , hitBoxes: [{ x: 6, y: 6, h: 31, w: 31 }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-right6.png"), ticks: 16 , hitBoxes: [{ x: 7, y: 7, h: 29, w: 31 }] }),
+];
+monsterTypes[MonsterType.OneEyedBat].frames[State.Walking][Direction.Left] = [
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-left1.png"), ticks: 16 , hitBoxes: [{ x: 9, y: 14, h: 20, w: 20 }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-left2.png"), ticks: 16 , hitBoxes: [{ x: 11, y: 16, h: 16, w: 16 }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-left3.png"), ticks: 16 , hitBoxes: [{ x: 11, y: 16, h: 16, w: 16 }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-left4.png"), ticks: 16 , hitBoxes: [{ x: 6, y: 14, h: 22, w: 31 }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-left5.png"), ticks: 16 , hitBoxes: [{ x: 6, y: 6, h: 31, w: 31 }] }),
+    new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-left6.png"), ticks: 16 , hitBoxes: [{ x: 7, y: 7, h: 29, w: 31 }] }),
 ];
 
 export { Monster, MonsterType };

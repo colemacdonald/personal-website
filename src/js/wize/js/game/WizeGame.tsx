@@ -96,8 +96,8 @@ class WizeGame {
                 monster.onHit();
                 toRemove.push(this.room.monsters.indexOf(monster));
                 
-                // monsters drop health 50% of the time
-                if (Math.random() < 0.5) {
+                // monsters drop health 40% of the time
+                if (Math.random() < 0.4) {
                     this.room.powerups.push(Powerup.Health(monster.x, monster.y));
                 }
 
