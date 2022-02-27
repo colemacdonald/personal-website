@@ -23,9 +23,15 @@ class WizeGame {
         this.gameOptions = options;
         this.grav = options.grav;
         this.room = room;
+
         this.character = character;
 
         this.score = 0;
+
+        // revive dead monsters
+        while (this.room.deadMonsters.length > 0) {
+            this.room.monsters.push(this.room.deadMonsters.pop());
+        }
     }
 
     /**
@@ -127,7 +133,7 @@ class WizeGame {
         // need to remove in reverse order or else splice won't work
         toRemove.reverse();
         toRemove.forEach(m => {
-            this.room.monsters.splice(m, 1);
+            this.room.deadMonsters.push(this.room.monsters.splice(m, 1)[0]);
         });
     }
 

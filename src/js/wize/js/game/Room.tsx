@@ -12,6 +12,7 @@ class Room {
     platforms: Array<Rectangle> = [];
     damageZones: Array<Rectangle> = [];
     monsters: Array<Monster> = [];
+    deadMonsters: Array<Monster> = [];
     coins: Array<Coin> = [];
     doors: Array<Door> = [];
     powerups: Array<Powerup> = [];
