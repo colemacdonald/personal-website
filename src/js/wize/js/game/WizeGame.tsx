@@ -68,7 +68,7 @@ class WizeGame {
                     this.character.w,
                     plat.x,
                     plat.y,
-                    plat.h * 0.4, // platforms are mostly dirt
+                    20, // platforms are mostly dirt
                     plat.w
                 ) &&
                 !this.character.onG &&

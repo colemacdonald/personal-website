@@ -10,8 +10,9 @@ import { RoomBackgroundTheme } from "../tiles/RoomThemes";
 
 let StoryModeRooms: Array<Room> = [
     new RoomBuilder({ h: 750, w: 1000 })
-        .withTheme(RoomBackgroundTheme.Outside)
+        .withTheme(RoomBackgroundTheme.Cave)
         .withFloor()
+        .withPlatform({x: 300, y: 400, w: 200, h: 350})
         .withDoor({ x: 900, y: 660, destRoom: 1, destX: 125, destY: 225 })
         .withMonster({monsterType: MonsterType.Vulture, x: 0, y: 600, w: 1000, h: 20 })
         .withAnimatedElement({ x: 500, y: 650, type: AnimatedBackgroundElementType.Fountain, scale: 1.5 })

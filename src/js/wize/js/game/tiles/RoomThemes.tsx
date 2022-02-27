@@ -3,7 +3,7 @@ import { Frame } from "../Frames";
 enum RoomBackgroundTheme {
     Outside,
     Castle,
-    UnderGround,
+    // UnderGround,
     Cave,
     Autumn
 };
@@ -13,7 +13,7 @@ type RoomTheme = {
     primaryColour: string,
     secondaryColour: string,
     floorColour: string,
-    platformTiles: { left: Frame, center: Frame, right: Frame },
+    platformTiles: { left: Frame, center: Frame, right: Frame, leftSide: Frame, rightSide: Frame, bottomLeft: Frame, bottomRight: Frame, bottom: Frame, fill: Frame },
     damageZoneTiles: { left: Frame, center: Frame, right: Frame },
     backgroundTiles: Array<Frame>,
     wallTiles: { topLeft: Frame, left: Frame, bottomLeft: Frame, topRight: Frame, right: Frame, bottomRight: Frame, ceiling: Frame },
@@ -37,6 +37,12 @@ RoomThemes[RoomBackgroundTheme.Outside] = {
         left: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_left_corner.png")}),
         center: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_tile.png")}),
         right: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_right_corner.png")}),
+        leftSide: new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_vertical_tile_left.png")}),
+        rightSide: new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_vertical_tile_right.png")}),
+        bottomLeft: new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_vertical_floating_tile_left.png")}),
+        bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_vertical_floating_tile_right.png")}),
+        bottom: new Frame({src: require("../../../../../resources/wize/tiles/platforms/bottom_floating_plat.png")}),
+        fill: new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_inside.png")})
     },
     backgroundTiles: [],
     backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3"),
@@ -52,6 +58,12 @@ RoomThemes[RoomBackgroundTheme.Castle] = {
         left: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile23.png")}),
         center: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile22.png")}),
         right: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile21.png")}),
+        leftSide: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile58.png")}),
+        rightSide: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile56.png")}),
+        bottomLeft: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile35.png")}),
+        bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile24.png")}),
+        bottom: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile60.png")}),
+        fill: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile60.png")}),
     },
     backgroundTiles: [
         new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile13.png")}),
@@ -59,46 +71,46 @@ RoomThemes[RoomBackgroundTheme.Castle] = {
         new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile10.png")}),
     ],
     wallTiles: {
-        topLeft: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile61.png")}),
-        left: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile58.png")}),
-        bottomLeft: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile35.png")}),
-        topRight: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile49.png")}),
-        right: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile56.png")}),
-        bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile24.png")}),
-        ceiling: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile59.png")})
+        topLeft: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile121.png")}),
+        left: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile120.png")}),
+        bottomLeft: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile83.png")}),
+        topRight: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile118.png")}),
+        right: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile122.png")}),
+        bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile82.png")}),
+        ceiling: new Frame({src: require("../../../../../resources/wize/tiles/medieval/tile999.png")})
     },
     backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3"),
     doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})
 }
 
 
-RoomThemes[RoomBackgroundTheme.UnderGround] = {
-    key: RoomBackgroundTheme.UnderGround,
-    primaryColour: "#302c2e",
-    secondaryColour: "#472d3c",
-    floorColour: "#302c2e",
-    platformTiles: {
-        left: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_left_corner.png")}),
-        center: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_tile.png")}),
-        right: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_right_corner.png")}),
-    },
-    backgroundTiles: [
-        new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_inside.png")}),
-        new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_vertical_tile_left.png")}),
-        new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_vertical_tile_right.png")}),
-    ],
-    wallTiles: {
-        topLeft: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_53.png")}),
-        left: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_61.png")}),
-        bottomLeft: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_67.png")}),
-        topRight: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_41.png")}),
-        right: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_62.png")}),
-        bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_68.png")}),
-        ceiling: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_15.png")})
-    },
-    backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3"),
-    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})
-};
+// RoomThemes[RoomBackgroundTheme.UnderGround] = {
+//     key: RoomBackgroundTheme.UnderGround,
+//     primaryColour: "#302c2e",
+//     secondaryColour: "#472d3c",
+//     floorColour: "#302c2e",
+//     platformTiles: {
+//         left: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_left_corner.png")}),
+//         center: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_tile.png")}),
+//         right: new Frame({src: require("../../../../../resources/wize/tiles/platforms/grass_plat_right_corner.png")}),
+//     },
+//     backgroundTiles: [
+//         new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_inside.png")}),
+//         new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_vertical_tile_left.png")}),
+//         new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_vertical_tile_right.png")}),
+//     ],
+//     wallTiles: {
+//         topLeft: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_53.png")}),
+//         left: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_61.png")}),
+//         bottomLeft: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_67.png")}),
+//         topRight: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_41.png")}),
+//         right: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_62.png")}),
+//         bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_68.png")}),
+//         ceiling: new Frame({src: require("../../../../../resources/wize/tiles/green-zone/Tile_15.png")})
+//     },
+//     backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3"),
+//     doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})
+// };
 
 RoomThemes[RoomBackgroundTheme.Cave] = {
     key: RoomBackgroundTheme.Cave,
@@ -111,6 +123,12 @@ RoomThemes[RoomBackgroundTheme.Cave] = {
         left: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile1.png")}),
         center: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile2.png")}),
         right: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile3.png")}),
+        leftSide: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile4.png")}),
+        rightSide: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile6.png")}),
+        bottomLeft: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile9.png")}),
+        bottomRight: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile7.png")}),
+        bottom: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile8.png")}),
+        fill: new Frame({src: require("../../../../../resources/wize/tiles/cave/tile5.png")}),
     },
     backgroundTiles: [
         new Frame({src: require("../../../../../resources/wize/tiles/platforms/plat_inside.png")}),

@@ -413,6 +413,7 @@ class WizeGameComponent extends Component {
         plats.forEach(plat => {
             // If visible
             if (this.isInView(plat)) {
+                // ---------------------- Top 
                 // Left corner
                 this.drawImage(theme.platformTiles.left.img, { x: plat.x, y: plat.y, w: w, h: h});
 
@@ -423,8 +424,44 @@ class WizeGameComponent extends Component {
                     this.drawImage(theme.platformTiles.center.img, { x: plat.x + w * i, y: plat.y, w: w, h: h });
                     i++;
                 }
-
+                // right corner
                 this.drawImage(theme.platformTiles.right.img, { x: plat.x + plat.w - w, y: plat.y, w: w, h: h });
+
+                // ---------------------  Fill
+                let currentY = plat.y + h;
+                while (currentY < plat.y + plat.h - h) {
+                    this.drawImage(theme.platformTiles.leftSide.img, {x: plat.x, y: currentY, w: w, h: h});
+
+                    i = 1;
+                    // Until we reach the right side
+                    while ((i + 1) * w < plat.w) {
+                        this.drawImage(theme.platformTiles.fill.img, { x: plat.x + w * i, y: currentY, w: w, h: h });
+                        i++;
+                    }
+
+                    this.drawImage(theme.platformTiles.rightSide.img, {x: plat.x + plat.w - w, y: currentY, w: w, h: h});
+
+                    currentY += h;
+                }
+
+                // ---------------------  Bottom
+                if (currentY < plat.y + plat.h) {
+                    this.drawImage(theme.platformTiles.bottomLeft.img, {x: plat.x, y: currentY, w: w, h: h});
+
+                    i = 1;
+                    // Until we reach the right side
+                    while ((i + 1) * w < plat.w) {
+                        this.drawImage(theme.platformTiles.bottom.img, { x: plat.x + w * i, y: currentY, w: w, h: h });
+                        i++;
+                    }
+
+                    this.drawImage(theme.platformTiles.bottomRight.img, {x: plat.x + plat.w - w, y: currentY, w: w, h: h});
+
+                }
+
+                
+
+                
             }
         });
     }
