@@ -456,7 +456,7 @@ class WizeGameComponent extends Component {
         }, this);
 
         this.gameController.game.room.powerups.forEach(p => {
-            let coin = p.coin;
+            let coin = p.sprite;
             if (this.isInView(coin.drawBox)) {
                 this.drawImage(coin.getFrame().img, coin.drawBox);
             }
@@ -545,7 +545,7 @@ class WizeGameComponent extends Component {
         this.cntx.fillStyle = this.minimapColours.coins;
 
         this.drawOnMinimap(this.gameController.game.room.coins.map(c => c.drawBox), scale, minimap);
-        this.drawOnMinimap(this.gameController.game.room.powerups.map(p => p.coin.drawBox), scale, minimap);
+        this.drawOnMinimap(this.gameController.game.room.powerups.map(p => p.sprite.drawBox), scale, minimap);
     }
 
     drawMinimapMonsters(scale, minimap) {

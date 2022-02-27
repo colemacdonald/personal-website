@@ -8,8 +8,6 @@ import { Coin } from "../sprites/Coin";
 import { MonsterType } from "../sprites/Monster";
 import { RoomBackgroundTheme } from "../tiles/RoomThemes";
 
-let doubleJump: Powerup = new Powerup ({x: 950, y: 200, name: "Double Jump", method: c => { c.maxJmpCnt = 2; }});
-
 let StoryModeRooms: Array<Room> = [
     new RoomBuilder({ h: 750, w: 1000 })
         .withTheme(RoomBackgroundTheme.Outside)
@@ -109,7 +107,7 @@ let StoryModeRooms: Array<Room> = [
         // doubleJump
         .withPlatform({ x: 900, y: 250, w: 100, h: 50 })
         .withPlatform({ x: 0, y: 150, w: 450, h: 50 })
-        .withPowerup(doubleJump)
+        .withPowerup(Powerup.IncreaseJumps(950, 200, 2, "Double Jump"))
         .withDoor({ x: 20, y: 60, destRoom: 4, destX: 1800, destY: 270 })
         .build(),
     new RoomBuilder({h: 800, w: 2000})

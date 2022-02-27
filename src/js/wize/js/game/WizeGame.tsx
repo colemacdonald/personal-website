@@ -144,10 +144,10 @@ class WizeGame {
         let powerup = null;
 
         this.room.powerups.forEach(p => {
-            if (util.doRectangleArraysOverlap([{ x: p.coin.x - p.coin.r / 2, y: p.coin.y - p.coin.r / 2, h: p.coin.r * 2, w: p.coin.r * 2 }], this.character.hurtBoxes)) {
+            if (util.doRectangleArraysOverlap([p.sprite.drawBox], this.character.hurtBoxes)) {
                 powerup = p;
             }
-            p.coin.tick();
+            p.sprite.tick();
         });
 
         // check for powerups
