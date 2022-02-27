@@ -4,7 +4,6 @@ import { Direction } from "../Frames";
 class ControllableCharacter extends Character {
     upPressed: boolean;
     maxJmpCnt: number = 1;
-    healthPoints: number = 1;
 
     /************* CONTROLS **************/
     // To make characters do weird things, edit these functions!
@@ -44,6 +43,11 @@ class ControllableCharacter extends Character {
     }
 
     downPress() {
+        // don't allow through the floor of through tall platforms
+        if (this.currentPlatform && (this.currentPlatform.w > this.game.room.w || this.currentPlatform.h > 50)) {
+            return;
+        }
+
         this.fall = true;
         if (this.currentPlatform) {
             this.yv = 6 * this.game.grav;

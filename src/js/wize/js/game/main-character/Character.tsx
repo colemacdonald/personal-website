@@ -13,6 +13,16 @@ class Character extends MovingSprite {
     w: number;
     speed: number;
 
+    healthPointsInternal: number = 1;
+    
+    get healthPoints() {
+        return this.healthPointsInternal;
+    }
+
+    set healthPoints(value) {
+        this.healthPointsInternal = Math.min(value, 5);
+    }
+
     frameCounter: number;
     movingLeft: boolean;
     direction: Direction;

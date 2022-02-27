@@ -46,6 +46,8 @@ class WizeGame {
         let aboveBottomY = Math.min(this.room.h - this.character.h + 30, this.character.y);
         this.character.setPosition(Math.max(Math.min(this.room.w - this.character.w, this.character.x), 0), this.room.hasCeiling ? Math.max(aboveBottomY, 0) : Math.min(this.character.y, aboveBottomY));
 
+        this.checkTallPlatforms();
+
         this.checkDamageZones();
 
         this.updateAndCheckMonsters();
@@ -60,24 +62,38 @@ class WizeGame {
     /***************** UPDATERS *****************/
     checkForCurrentPlatform() {
         this.room.platforms.forEach((plat) => {
-            if (
-                util.doRectanglesOverlap(
-                    this.character.x,
-                    this.character.y + this.character.h * 0.97,
-                    this.character.h * 0.1,
-                    this.character.w,
-                    plat.x,
-                    plat.y,
-                    20, // platforms are mostly dirt
-                    plat.w
-                ) &&
-                !this.character.onG &&
-                this.character.yv > 0
-            ) {
+            if (util.doRectanglesOverlap(this.character.x, this.character.y + this.character.h * 0.97, this.character.h * 0.1, this.character.w,
+                    plat.x, plat.y, 20, plat.w)
+                    && !this.character.onG && this.character.yv > 0
+                ) {
+                // landing on a platform
                 this.character.setCurrentPlatform(plat);
                 this.onGround = true;
             }
         }, this);
+    }
+
+    checkTallPlatforms() {
+        this.room.platforms.forEach((plat) => {
+            if (plat.h > 50 && plat.y < this.room.h 
+            && util.doRectanglesOverlap(this.character.x, this.character.y, this.character.h, this.character.w, plat.x, plat.y + 25, plat.h - 25, plat.w)) {
+                // left side
+                if (util.doRectanglesOverlap(this.character.x, this.character.y, this.character.h, this.character.w, plat.x, plat.y + 25, plat.h - 35, 25)) {
+                    this.character.x = plat.x - this.character.w;
+                    this.character.xv = 0;
+                }
+                // right side
+                if (util.doRectanglesOverlap(this.character.x, this.character.y, this.character.h, this.character.w, plat.x + plat.w - 25, plat.y + 25, plat.h - 35, 25)) {
+                    this.character.x = plat.x + plat.w;
+                    this.character.xv = 0;
+                }
+                // bottom
+                if (util.doRectanglesOverlap(this.character.x, this.character.y, 25, this.character.w, plat.x + 25, plat.y + plat.h - 25, 25, plat.w - 50)) {
+                    this.character.y = plat.y + plat.h;
+                    this.character.yv = 0;
+                }
+            }
+        });
     }
 
     checkDamageZones() {
@@ -97,8 +113,8 @@ class WizeGame {
                 monster.onHit();
                 toRemove.push(this.room.monsters.indexOf(monster));
                 
-                // monsters drop health 40% of the time
-                if (Math.random() < 0.4) {
+                // monsters drop health some of the time
+                if (Math.random() < 0.25) {
                     this.room.powerups.push(Powerup.Health(monster.x, monster.y));
                 }
 
