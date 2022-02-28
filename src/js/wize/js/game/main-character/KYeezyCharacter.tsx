@@ -24,8 +24,8 @@ class KYeezy extends ControllableCharacter {
         // For the getFrame fsm
         this.state = State.Idle;
 
-        this.maxHealthPoints = 25;
-        this.healthPoints = 20;
+        this.maxHealthPoints = 5;
+        this.healthPoints = 3;
 
         this.baseSpeed = this.speed;
     }

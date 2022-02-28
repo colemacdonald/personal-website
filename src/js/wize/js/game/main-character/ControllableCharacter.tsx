@@ -24,6 +24,14 @@ class ControllableCharacter extends Character {
 
         super.move();
     }
+    
+    // override
+    incrementFrameCounter(): void {
+        super.incrementFrameCounter();
+
+        // move through frames relative to our speed
+        this.frameCounter = Math.floor(this.frameCounter + this.speed / this.baseSpeed - 1);
+    }
 
     /************* CONTROLS **************/
     // To make characters do weird things, edit these functions!

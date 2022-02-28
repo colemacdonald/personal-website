@@ -24,6 +24,7 @@ class WizeStoryGameController extends GameControllerBase {
         this.baseOptions.numberOfMonsters = 20;
 
         this.character = new KYeezy({});
+        this.character.canRun = true;
 
         this.game = new WizeGame(this.baseOptions, StoryModeRooms[0], this.character);
         this.character.setCurrentPlatform(this.game.room.platforms[0]);
