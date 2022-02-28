@@ -15,6 +15,8 @@ let StoryModeRooms: Array<Room> = [
         .withDoor({ x: 900, y: 660, destRoom: 1, destX: 125, destY: 225 })
         .withMonster({monsterType: MonsterType.Vulture, x: 0, y: 600, w: 1000, h: 20 })
         .withAnimatedElement({ x: 500, y: 650, type: AnimatedBackgroundElementType.Fountain, scale: 1.5 })
+        .withSlope({x1: 300, y1: 750, x2: 500, y2: 550})
+        .withSlope({x1: 500, y1: 550, x2: 700, y2: 750})
         .withStaticElement({type: StaticElementType.Tree3, x: -240, y: 380, inFrontOfPlatforms: true, scale: 2})
         .withStaticElement({type: StaticElementType.Stone1, x: 350, y: 743})
         .withPowerup(Powerup.Complete(100, 100))
@@ -57,9 +59,9 @@ let StoryModeRooms: Array<Room> = [
         .withDoor({ x: -10, y: 10, destRoom: 3, destX: 870, destY: 2120 })
         .build(),
     new RoomBuilder({ h: 2200, w: 1000 })
+        .withTheme(RoomBackgroundTheme.Cave)
         .withFloor()
         .withCeiling()
-        .withTheme(RoomBackgroundTheme.Cave)
         .withDoor({ x: 940, y: 2110, destRoom: 2, destX: 100, destY: 20 })
         // First 3 to get height
         .withPlatform({ x: 0, y: 2100, w: 100, h: 50 })
@@ -176,6 +178,7 @@ let StoryModeRooms: Array<Room> = [
     new RoomBuilder({h: 500, w: 2500})
         .withTheme(RoomBackgroundTheme.Cave)
         .withDamageZoneFloor()
+        .withCeiling()
         // entrance
         .withDoor({x: -50, y: -50, destRoom: 5, destX: 500, destY: 50})
         .withPlatform({x: 0, y: 400, w: 200, h: 100})
