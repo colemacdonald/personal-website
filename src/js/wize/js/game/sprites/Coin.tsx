@@ -21,20 +21,20 @@ class Coin extends StationarySprite {
 
 let COIN_FRAMES = {};
 COIN_FRAMES[State.Idle] = [
-    new Frame({src: require("../../../../../resources/wize/coin/coin0000.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0001.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0002.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0003.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0004.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0005.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0006.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0007.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0008.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0009.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0010.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0011.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0012.png"), ticks: 2}),
-    new Frame({src: require("../../../../../resources/wize/coin/coin0013.png"), ticks: 2})
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0000.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0001.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0002.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0003.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0004.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0005.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0006.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0007.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0008.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0009.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0010.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0011.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0012.png"), ticks: 2}),
+    new Frame({src: require("../../../../../resources/wize/powerups/coin/coin0013.png"), ticks: 2})
 ];
 
 export { Coin, COIN_FRAMES };

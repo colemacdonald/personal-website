@@ -12,12 +12,12 @@ let StoryModeRooms: Array<Room> = [
     new RoomBuilder({ h: 750, w: 1000 })
         .withTheme(RoomBackgroundTheme.Outside)
         .withFloor()
-        // .withPlatform({x: 300, y: 400, w: 200, h: 300})
         .withDoor({ x: 900, y: 660, destRoom: 1, destX: 125, destY: 225 })
         .withMonster({monsterType: MonsterType.Vulture, x: 0, y: 600, w: 1000, h: 20 })
         .withAnimatedElement({ x: 500, y: 650, type: AnimatedBackgroundElementType.Fountain, scale: 1.5 })
         .withStaticElement({type: StaticElementType.Tree3, x: -240, y: 380, inFrontOfPlatforms: true, scale: 2})
         .withStaticElement({type: StaticElementType.Stone1, x: 350, y: 743})
+        .withPowerup(Powerup.Complete(100, 100))
         .build(),
     new RoomBuilder({ h: 2400, w: 500 })
         .withTheme(RoomBackgroundTheme.Castle)
@@ -65,7 +65,7 @@ let StoryModeRooms: Array<Room> = [
         .withPlatform({ x: 0, y: 2100, w: 100, h: 50 })
         .withMonster({ monsterType: MonsterType.Centipede, plat: 1 })
         .withPlatform({ x: 0, y: 2000, w: 100, h: 50 })
-        .withMonster({ monsterType: MonsterType.Centipede, plat: 2 })
+        .withMonster({ monsterType: MonsterType.Scorpion, plat: 2 })
         .withPlatform({ x: 0, y: 1900, w: 100, h: 50 })
         .withMonster({ monsterType: MonsterType.Centipede, plat: 3 })
         // over and up
@@ -74,7 +74,7 @@ let StoryModeRooms: Array<Room> = [
         .withPlatform({ x: 440, y: 1700, w: 100, h: 50 })
         .withMonster({ x: 50, y: 1650, w: 900, h: 50, monsterType: MonsterType.OneEyedBat})
         .withPlatform({ x: 660, y: 1600, w: 100, h: 50 })
-        .withMonster({ monsterType: MonsterType.Centipede, plat: 6 })
+        .withMonster({ monsterType: MonsterType.Scorpion, plat: 6 })
         .withPlatform({ x: 880, y: 1500, w: 100, h: 50 })
         // zig zag
         .withPlatform({ x: 660, y: 1400, w: 100, h: 50 })
@@ -88,7 +88,7 @@ let StoryModeRooms: Array<Room> = [
         .withMonster({ monsterType: MonsterType.Centipede, plat: 12 })
         .withPlatform({ x: 440, y: 1000, w: 100, h: 50 })
         .withPlatform({ x: 150, y: 1050, w: 200, h: 50 })
-        .withMonster({ monsterType: MonsterType.Centipede, plat: 14 })
+        .withMonster({ monsterType: MonsterType.Scorpion, plat: 14 })
         .withPlatform({ x: 0, y: 950, w: 100, h: 50 })
         // zig zag
         .withPlatform({ x: 220, y: 850, w: 100, h: 50 })
@@ -103,7 +103,7 @@ let StoryModeRooms: Array<Room> = [
         .withPlatform({ x: 440, y: 350, w: 200, h: 50 })
         .withMonster({ monsterType: MonsterType.Centipede, plat: 21 })
         .withPlatform({ x: 760, y: 450, w: 100, h: 50 })
-        .withMonster({ monsterType: MonsterType.Centipede, plat: 22 })
+        .withMonster({ monsterType: MonsterType.Scorpion, plat: 22 })
         .withPlatform({ x: 900, y: 350, w: 100, h: 50 })
         // doubleJump
         .withPlatform({ x: 900, y: 250, w: 100, h: 50 })
@@ -130,7 +130,7 @@ let StoryModeRooms: Array<Room> = [
         .withPlatform({x: 1050, y: 540, w: 200, h: 50})
         .withMonster({ monsterType: MonsterType.Centipede, plat: 3 })
         .withPlatform({x: 520, y: 710, w: 100, h: 50})
-        .withMonster({ monsterType: MonsterType.Centipede, plat: 4 })
+        .withMonster({ monsterType: MonsterType.Scorpion, plat: 4 })
         // climb up
         .withPlatform({x: 100, y: 700, w: 100, h: 50})
         .withPlatform({x: 100, y: 520, w: 100, h: 50})
@@ -146,13 +146,44 @@ let StoryModeRooms: Array<Room> = [
         // entrance
         .withPlatform({x: 440, y: 1950, w: 200, h: 100})
         .withDoor({x: 555, y: 1853, destRoom: 4, destX: 100, destY: 50})
+        // couple tough jumps
         .withPlatform({x: 100, y: 1800, w: 100, h: 50})
         .withPlatform({x: 400, y: 1600, w: 150, h: 50})
         .withMonster({ monsterType: MonsterType.Centipede, plat: 2 })
         .withMonster({x: 0, y: 1700, w: 600, h: 50, monsterType: MonsterType.OneEyedBat})
+        // zig zag
         .withPlatform({x: 500, y: 1400, w: 100, h: 50})
+        .withDamageZone({x: 50, y: 1400, w: 100, h: 50  })
         .withPlatform({x: 250, y: 1200, w: 100, h: 50})
+        .withMonster( { monsterType: MonsterType.Scorpion, plat: 4})
+        // through the fire!
         .withPlatform({x: 0, y: 1000, w: 100, h: 50})
+        .withDamageZone({x: 125, y: 900, w: 100, h: 50})
+        .withPlatform({x: 250, y: 800, w: 100, h: 50})
+        .withDamageZone({x: 375, y: 700, w: 100, h: 50})
+        .withPlatform({x: 500, y: 600, w: 100, h: 50})
+        .withDamageZone({x: 375, y: 500, w: 100, h: 50})
+        .withPlatform({x: 250, y: 400, w: 100, h: 50})
+        .withDamageZone({x: 125, y: 300, w: 100, h: 50})
+        .withMonster({x: 0, y: 1100, w: 600, h: 50, monsterType: MonsterType.OneEyedBat})
+        .withMonster({x: 0, y: 750, w: 600, h: 50, monsterType: MonsterType.OneEyedBat})
+        .withMonster({x: 0, y: 375, w: 600, h: 50, monsterType: MonsterType.OneEyedBat})
+        // powerup and exit
+        .withPlatform({x: 0, y: 100, w: 150, h: 50})
+        .withPowerup(Powerup.Speed(50, 50))
+        .withDoor({x: 550, y: 50, destRoom: 6, destX: 50, destY: 50})
+        .build(),
+    new RoomBuilder({h: 500, w: 2500})
+        .withTheme(RoomBackgroundTheme.Cave)
+        .withDamageZoneFloor()
+        // entrance
+        .withDoor({x: -50, y: -50, destRoom: 5, destX: 500, destY: 50})
+        .withPlatform({x: 0, y: 400, w: 200, h: 100})
+        .withPlatform({x: 0, y: 200, w: 100, h: 50})
+        .withPlatform({x: 1000, y: 200, w: 200, h: 200})
+        .withMonster({monsterType: MonsterType.Centipede, plat: 2})
+        .withPlatform({x: 2200, y: 250, w: 300, h: 200})
+        .withDoor({x: 2450, y: 170, destRoom: 0, destX: 100, destY: 100})
         .build()
 ];
 

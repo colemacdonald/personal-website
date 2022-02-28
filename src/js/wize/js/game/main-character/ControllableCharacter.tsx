@@ -5,6 +5,26 @@ class ControllableCharacter extends Character {
     upPressed: boolean;
     maxJmpCnt: number = 1;
 
+    baseSpeed: number;
+    canRun: boolean = false;
+    running: boolean = false;
+
+    constructor(options) {
+        super(options);
+
+        this.baseSpeed = this.speed;
+    }
+
+    //override
+    move() {
+        if (this.running) {
+            this.speed += 0.2;
+            this.speed = Math.min(this.speed, 12);
+        }
+
+        super.move();
+    }
+
     /************* CONTROLS **************/
     // To make characters do weird things, edit these functions!
     leftPress() {
@@ -60,6 +80,18 @@ class ControllableCharacter extends Character {
 
     attack() {
         
+    }
+
+    runStart() {
+        if (this.canRun) {
+            this.running = true;
+            this.speed = this.baseSpeed * 2;
+        }
+    }
+
+    runEnd() {
+        this.running = false;
+        this.speed = this.baseSpeed;
     }
 }
 

@@ -37,7 +37,7 @@ class WizeGameComponent extends Component {
         platforms: "brown",
         monsters: "red",
         doors: "black",
-        damageZones: "redorange",
+        damageZones: "darkorange",
         character: "blue",
         coins: "gold"
     }

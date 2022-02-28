@@ -16,8 +16,6 @@ class KYeezy extends ControllableCharacter {
     onHitInvincibilityCounter: number = 0;
     invincible: boolean = false;
 
-    baseSpeed: number;
-
     constructor(options: any) {
     
         // Call super class constructor
@@ -26,7 +24,8 @@ class KYeezy extends ControllableCharacter {
         // For the getFrame fsm
         this.state = State.Idle;
 
-        this.healthPoints = 3;
+        this.maxHealthPoints = 25;
+        this.healthPoints = 20;
 
         this.baseSpeed = this.speed;
     }
@@ -111,13 +110,7 @@ class KYeezy extends ControllableCharacter {
         }
     }
 
-    runStart() {
-        this.speed = this.baseSpeed * 2;
-    }
-
-    runEnd() {
-        this.speed = this.baseSpeed;
-    }
+    
 }
 
 export { KYeezy };

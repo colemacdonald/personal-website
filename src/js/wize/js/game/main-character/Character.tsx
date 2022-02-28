@@ -14,13 +14,14 @@ class Character extends MovingSprite {
     speed: number;
 
     healthPointsInternal: number = 1;
+    maxHealthPoints: number = 5;
     
     get healthPoints() {
         return this.healthPointsInternal;
     }
 
     set healthPoints(value) {
-        this.healthPointsInternal = Math.min(value, 5);
+        this.healthPointsInternal = Math.min(value, this.maxHealthPoints);
     }
 
     frameCounter: number;

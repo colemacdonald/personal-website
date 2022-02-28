@@ -77,6 +77,19 @@ class WizeGame {
                 this.onGround = true;
             }
         }, this);
+
+        this.room.damageZones.forEach((z) => {
+            if (util.doRectanglesOverlap(this.character.x, this.character.y + this.character.h * 0.75, this.character.h * 0.25, this.character.w,
+                    z.x, z.y, 20, z.w)
+                    && !this.character.onG && this.character.yv > 0
+                ) {
+                // landing on a damage zone
+                this.character.setCurrentPlatform({x: z.x, 
+                    y: z.y + (Math.min(this.character.x - z.x, z.x + z.w - this.character.x - 30) > 0 ? 25 : 0), // we hold them higher on the edge of the damage zones
+                    w: z.w, h: z.h});
+                this.onGround = true;
+            }
+        }, this);
     }
 
     checkTallPlatforms() {
@@ -104,9 +117,8 @@ class WizeGame {
 
     checkDamageZones() {
         this.room.damageZones.forEach(z => {
-            if (util.doRectanglesOverlap(this.character.x, this.character.y + this.character.h * 0.97, this.character.h * 0.1, this.character.w, z.x, z.y, z.h * 0.4 /* platforms are mostly dirt */, z.w)) {
+            if (util.doRectangleArraysOverlap(this.character.hurtBoxes, [{x: z.x + 30,y : z.y, h: z.h, w: z.w - 60}])) {
                 this.character.onHit();
-                this.character.setCurrentPlatform(z);
                 this.onGround = true;
             }
         });

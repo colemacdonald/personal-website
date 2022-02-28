@@ -46,7 +46,7 @@ RoomThemes[RoomBackgroundTheme.Outside] = {
     },
     backgroundTiles: [],
     backgroundMusic: require("../../../../../resources/wize/audio/Prelude in F  Minor (with Accompaniment).mp3"),
-    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/castle/door1.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})
+    doorFrame: new Frame({src: require("../../../../../resources/wize/doors/cave/door.png"), hitBoxes: [{x: 30, y: 60, h: 40, w: 40 }]})
 };
 
 RoomThemes[RoomBackgroundTheme.Castle] = {

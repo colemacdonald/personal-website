@@ -45,6 +45,11 @@ class RoomBuilder {
         return this;
     }
 
+    withDamageZone(zone: Rectangle): RoomBuilder {
+        this.room.damageZones.push(zone);
+        return this;
+    }
+
     withDoor(d: { x: number, y: number, destRoom: number, destX: number, destY: number }): RoomBuilder {
         this.room.doors.push(new Door(d.x, d.y, d.destRoom, d.destX, d.destY));
         return this;
@@ -55,7 +60,7 @@ class RoomBuilder {
         return this;
     }
 
-    withMonster(options): RoomBuilder {
+    withMonster(options: {monsterType: MonsterType, plat?: number, x?: number, y?: number, h?: number, w?: number}): RoomBuilder {
         let platform: Rectangle;
         if (options.plat) {
             platform = this.room.platforms[options.plat];
