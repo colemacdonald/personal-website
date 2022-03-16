@@ -50,6 +50,11 @@ class RoomBuilder {
         return this;
     }
 
+    withSlope(slope: Slope): RoomBuilder {
+        this.room.slopes.push(slope);
+        return this;
+    }
+
     withDoor(d: { x: number, y: number, destRoom: number, destX: number, destY: number }): RoomBuilder {
         this.room.doors.push(new Door(d.x, d.y, d.destRoom, d.destX, d.destY));
         return this;

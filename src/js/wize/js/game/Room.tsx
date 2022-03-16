@@ -19,6 +19,7 @@ class Room {
     backgroundElements: Array<SpriteBase> = [];
     backgroundTheme: RoomTheme = RoomThemes[RoomBackgroundTheme.Outside];
     hasCeiling: boolean = false;
+    slopes: Array<Slope> = [];
 
     constructor(options) {
         this.h = options.h;

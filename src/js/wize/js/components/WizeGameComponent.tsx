@@ -465,6 +465,20 @@ class WizeGameComponent extends Component {
                 
             }
         });
+
+
+        let slopes = this.gameController.game.room.slopes;
+        this.cntx.save();
+
+        this.cntx.strokeStyle = "red";
+        slopes.forEach(s => {
+            this.cntx.beginPath();
+            this.cntx.moveTo((s.x1 - this.viewportX) * this.canvasScale, (s.y1 - this.viewportY) * this.canvasScale);
+            this.cntx.lineTo((s.x2 - this.viewportX) * this.canvasScale, (s.y2 - this.viewportY) * this.canvasScale);
+            // this.cntx.
+            this.cntx.stroke();
+        });
+        this.cntx.restore();
     }
 
     drawDamageZones() {

@@ -90,6 +90,23 @@ class WizeGame {
                 this.onGround = true;
             }
         }, this);
+
+        this.room.slopes.forEach(s => {
+            let x = s.x1;
+            let y = s.y1;
+            
+            let yinc = -(Math.abs(s.x1 - s.x2) / (s.y1 - s.y2));
+            let xinc = 1;
+
+            while (x < s.x2) {
+                if (util.doRectanglesOverlap(this.character.x, this.character.y + this.character.h * 0.97, this.character.h * 0.1, this.character.w,
+                    x, y, 1, 1)) {
+                        this.character.setCurrentPlatform({x: x, y: y, h: 50, w: 50});
+                    }
+                x += xinc;
+                y += yinc;
+            }
+        });
     }
 
     checkTallPlatforms() {
