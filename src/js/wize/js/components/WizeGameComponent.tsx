@@ -5,6 +5,7 @@ import { GameControllerBase, GameState } from "../game/controllers/GameControlle
 import { WizeSurvivalGameController } from "../game/controllers/WizeSurvivalGameController";
 import { RoomBackgroundTheme } from "../game/tiles/RoomThemes";
 import { KYeezyHealthIcon } from "../game/main-character/KYeezyFrames";
+import { Button, Dropdown, Form, } from "react-bootstrap";
 
 // TODO: Separate view from game controller logic
 class WizeGameComponent extends Component {
@@ -133,19 +134,19 @@ class WizeGameComponent extends Component {
                     <audio ref={this.audio} autoPlay></audio>
                     <div className="horizontal-flex-box">
                         <h5>Game Mode:</h5>
-                        <select onChange={this.gameModeChange.bind(this)}>
+                        <Form.Control as="select" onChange={this.gameModeChange.bind(this)}>
                             <option value="story">Story</option>
                             <option value="survival">Survival</option>
-                        </select>
+                        </Form.Control>
                     </div>
                     <input type="checkbox" onChange={this.showHitboxesChanged.bind(this)}/> Show Hit/Hurt Boxes
-                    <button
+                    <Button
                         onClick={() => {
                             this.startGame();
                         }}
                     >
                         Start Again
-                    </button>
+                    </Button>
                 </div>
                 <div className="wize-game">
                     <canvas
