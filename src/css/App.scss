@@ -1,0 +1,58 @@
+$primary-colour: #233b37;
+$secondary-colour: white;
+$background-colour: rgb(37, 37, 37);
+$text-colour: lightgrey;
+
+$theme-colors: (
+  "primary": $primary-colour,
+  "danger": red
+);
+
+html {
+  background-color: $background-colour;
+}
+
+.app {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  color: $text-colour;
+
+  .tab-content {
+    padding: 10px 0 20px 20px;
+  }
+  
+  .horizontal-flex-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.background {
+  background-image: url("../resources/home/osaka-castle.jpeg");
+  /* Add the blur effect */
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+
+  /* Full height */
+  height: 99.1vh;
+  width: 99.5vw;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  overflow: hidden;
+}
+
+
+@import "./home";
+@import "./wize";
+
+@import "~bootstrap/scss/bootstrap";

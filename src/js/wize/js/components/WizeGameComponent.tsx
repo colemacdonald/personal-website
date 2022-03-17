@@ -5,7 +5,7 @@ import { GameControllerBase, GameState } from "../game/controllers/GameControlle
 import { WizeSurvivalGameController } from "../game/controllers/WizeSurvivalGameController";
 import { RoomBackgroundTheme } from "../game/tiles/RoomThemes";
 import { KYeezyHealthIcon } from "../game/main-character/KYeezyFrames";
-import { Button, Dropdown, Form, } from "react-bootstrap";
+import { Button, Form, } from "react-bootstrap";
 
 // TODO: Separate view from game controller logic
 class WizeGameComponent extends Component {

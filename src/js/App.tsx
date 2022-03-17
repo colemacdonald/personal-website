@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
-import "../css/App.css";
-import Home from "./Home";
+import "../css/App.scss";
+import Home from "./home/Home";
 import MainNavBar from "./MainNavBar";
 import { WizeAbout } from "./wize/js/components/WizeAbout";
 import WizeHome from "./wize/js/components/WizeHome";
@@ -10,6 +10,7 @@ class App extends Component {
     render() {
         return (
             <HashRouter basename="/">
+                <div className="background"/>
                 <div className="app">
                     <MainNavBar />
                     <Routes>

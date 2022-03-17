@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { WizeGameComponent } from "./WizeGameComponent";
-import "../../../../css/wize.css";
+import "../../../../css/wize.scss";
 import { GameControllerBase } from "../game/controllers/GameControllerBase";
 
 class WizeHome extends Component {
