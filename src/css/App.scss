@@ -10,7 +10,13 @@ $theme-colors: (
 
 html {
   background-color: $background-colour;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.nav-bar {
+  height: 50px;
+  background-color: rgb(255, 255, 255, 0.5);
+  color: black;
 }
 
 .app {
@@ -20,7 +26,8 @@ html {
   left: 0;
   right: 0;
 
-  font-size: 12px;  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
   color: $text-colour;
 
   .tab-content {
@@ -63,9 +70,12 @@ html {
   filter: blur(12px);
   -webkit-filter: blur(12px);
 
-  /* Full height */
-  height: 99.1vh;
-  width: 99.5vw;
+  /* Fill entire window */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 
   /* Center and scale the image nicely */
   background-position: center;
