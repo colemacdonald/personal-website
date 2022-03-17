@@ -10,6 +10,7 @@ $theme-colors: (
 
 html {
   background-color: $background-colour;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .app {
@@ -18,26 +19,49 @@ html {
   bottom: 0;
   left: 0;
   right: 0;
-  
+
+  font-size: 12px;  
   color: $text-colour;
 
   .tab-content {
-    padding: 10px 0 20px 20px;
+    padding: 10px 20px 20px 20px;
   }
   
   .horizontal-flex-box {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
     gap: 20px;
+  }
+
+  .vertical-flex-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .left {
+    align-items: left;
+    justify-content: left;
+  }
+
+  .centered {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stretched {
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: stretch;
+    width: 100%;
   }
 }
 
 .background {
   background-image: url("../resources/home/osaka-castle.jpeg");
   /* Add the blur effect */
-  filter: blur(10px);
-  -webkit-filter: blur(10px);
+  filter: blur(12px);
+  -webkit-filter: blur(12px);
 
   /* Full height */
   height: 99.1vh;

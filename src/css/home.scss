@@ -1,9 +1,53 @@
 .home {
+    .giant-button {
+        width: 45%;
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 60px;
+
+        background-color: rgb(255, 255, 255, 0.5);
+        opacity: 0.4;
+
+        p {
+            color: black;
+        }
+
+        &:hover {
+            background-color: rgb(255, 255, 255, 0.5);
+            opacity: 0.6;
+            text-decoration: none;
+        }
+    }
+}
+
+.professional-home {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    gap: 50px;
+
     .title {
-        
+        margin-top: 200px;
+
+        font-size: 72px;
+    }
+
+    .subtitle {
+        font-family: monospace;
+        font-size: 24px;
+    }
+
+    .about-me {
+        background-color: white;
+        color: black;
+        width: stretch;
+
+        .content {
+            width: 700px;
+        }
     }
 }
