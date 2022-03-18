@@ -1,49 +1,78 @@
-$primary-colour: #233b37;
-$secondary-colour: white;
-$background-colour: rgb(37, 37, 37);
+$primary-colour: rgb(55,71,32);
+$secondary-colour: #e79d50;
+$background-colour: rgb(55,71,32);
 $text-colour: lightgrey;
 
 $theme-colors: (
-  "primary": $primary-colour,
+  "primary": $background-colour,
+  "secondary": $secondary-colour,
   "danger": red
 );
 
 html {
-  background-color: $background-colour;
-
+  // background-color: $background-colour;
+  height:100%;
+  // overflow-x:auto;
 }
 
 .nav-bar {
+  position: fixed !important;
+  width: 100%;
+  top: 0;
   height: 50px;
   background-color: rgb(255, 255, 255, 0.5);
   color: black;
+  z-index: 10;
+  padding: 0 15px;
+
+  .home-icon {
+    height: 40px;
+    width: 40px;
+    svg {
+      fill: $primary-colour;
+      
+      polygon {
+        stroke-linejoin: round;
+        stroke: $primary-colour;
+        stroke-width: 5px;
+      }
+    }
+  }
 }
 
 .app {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+
+  height: 100%;
+  width: 100%;
 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 14px;
   color: $text-colour;
 
+  p {
+    margin: 0;
+  }
+
   .tab-content {
+    margin: 50px 0 0 0;
     padding: 10px 20px 20px 20px;
   }
   
+  .content {
+    max-width: 1000px;
+  }
+
   .horizontal-flex-box {
     display: flex;
     justify-content: flex-start;
-    gap: 20px;
+    gap: 10px;
   }
 
   .vertical-flex-box {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    // gap: 10px;
   }
 
   .left {
@@ -62,6 +91,49 @@ html {
     align-content: stretch;
     width: 100%;
   }
+
+  .wrap {
+    flex-wrap: wrap;
+  }
+
+  .title {
+    font-size: 72px;
+  }
+
+  .subtitle {
+    font-size: 24px;
+    text-align: left;
+  }
+
+  .title3 {
+    font-size: 20px;
+    text-align: left;
+  }
+
+  .title4 {
+    font-size: 14px;
+    text-align: left;
+    font-style: italic;
+    color: rgb(163, 163, 163);
+  }
+
+  .line {
+    width: 100px;
+    height: 6px;
+    margin: 10px 0;
+    background-color: $secondary-colour;
+  }
+
+  .small-line {
+    width: 50px;
+    height: 4px;
+    margin: 5px 0;
+    background-color: $secondary-colour;
+  }
+
+  .professional-home, .personal-home, .home {
+    margin: 75px 0 0 0;
+  }
 }
 
 .background {
@@ -71,22 +143,26 @@ html {
   -webkit-filter: blur(12px);
 
   /* Fill entire window */
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  position: fixed;
+  z-index: -1;
+  // left: 0;
+  // right: 0;
+  // top: 0;
+  // bottom: 0;
+
+  width: 100%;
+  height: 100%;
 
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
-  overflow: hidden;
+  background-attachment: fixed;
 }
 
 
 @import "./home";
 @import "./wize";
+@import "./professional-home";
 
 @import "~bootstrap/scss/bootstrap";

@@ -5,7 +5,9 @@
     
     position: absolute;
     bottom: 0px;
-    top: 60px;
+    top: 0px;
+
+    gap: 50px;
 
     .nav-buttons {
         width: 100%;
@@ -31,36 +33,6 @@
             background-color: rgb(255, 255, 255, 0.5);
             opacity: 0.6;
             text-decoration: none;
-        }
-    }
-
-    .title {
-        margin-top: 200px;
-
-        font-size: 72px;
-    }
-
-    .subtitle {
-        // font-family: monospace;
-        font-size: 24px;
-    }
-}
-
-.professional-home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 50px;
-
-    .about-me {
-        background-color: white;
-        color: black;
-        width: stretch;
-
-        .content {
-            width: 700px;
         }
     }
 }

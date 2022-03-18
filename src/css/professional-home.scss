@@ -1,0 +1,61 @@
+.professional-home {
+    .professional-summary {
+        background-color: rgb(55,71,32, 0.6);
+        width: 100%;
+        padding: 10px 0 20px 0;
+
+        margin-top: 175px;
+
+        .professional-summary-image {
+            height: 250px;
+            width: 250px;
+            border-radius: 50%;
+            align-self: center;
+            margin-top: -135px;
+        }
+
+        .summary-items {
+            margin-top: 20px;
+        }
+    }
+
+    .technical-skills {
+        padding: 20px 0;
+        :nth-child(even).skill {
+            background-color: rgba(92, 119, 54, 0.8);
+        }
+
+        :nth-child(odd).skill {
+            background-color: rgba(30, 39, 18, 0.8);
+        }
+
+        background-color: none;
+
+        .skill {
+            height: 125px;
+            width: 125px;
+            border-radius: 50%;
+
+            padding: 5px;
+
+            text-align: center;
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+
+    .projects {
+        background-color: rgb(55,71,32, 0.6);
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .professional-footer {
+        color: black;
+        background-color: rgb(255, 255, 255, 0.5);
+        width: 100%;
+        padding: 20px 0;
+    }
+}
