@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import "../css/App.scss";
 import { Home } from "./home/Home";
-import { PersonalHome } from "./home/PersonalHome";
-import { ProfessionalHome } from "./home/ProfessionalHome";
-import MainNavBar from "./MainNavBar";
+import { PersonalHome } from "./home/thehuman/PersonalHome";
+import { ProfessionalHome } from "./home/theengineer/ProfessionalHome";
+import { MainNavBar } from "./MainNavBar";
 import { WizeAbout } from "./wize/js/components/WizeAbout";
 import WizeHome from "./wize/js/components/WizeHome";
 
