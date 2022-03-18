@@ -4,7 +4,7 @@ import { Subtitle, Title3 } from "../Titles";
 
 const ProfessionalSummary = () => 
     {
-        return <div className="professional-summary vertical-flex-box centered">
+        return <div className="professional-summary vertical-flex-box centered highlighted-section">
             <div className="content vertical-flex-box left">
                 <img className="professional-summary-image" src={require("../../../resources/home/cole1.jpeg")} />
                 <Subtitle text="Professional Summary" />

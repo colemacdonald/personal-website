@@ -51,7 +51,7 @@ const Project = (props: {title: string, company: string, notes: Array<string>}) 
     </div>;
 
 const Projects = () => 
-    <div className="projects vertical-flex-box centered">
+    <div className="projects vertical-flex-box centered highlighted-section">
         <div className="content vertical-flex-box left">
             <Subtitle text="Projects"/>
             {projectDescriptions.map(p => <Project {...p} />)}

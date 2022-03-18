@@ -14,10 +14,9 @@ const MainNavBar = () =>
             <div className="horizontal-flex-box">
                 <Dropdown>
                     <Dropdown.Toggle id="nav-dropdown" className="hide-after nav-dropdown-toggle vertical-flex-box centered">
-                         <div/>
-                         <div/>
-                         <div/>
+                         <div/><div/><div/>
                      </Dropdown.Toggle>
+
                     <Dropdown.Menu>
                         <Dropdown.Item href="#/thehuman">The Human</Dropdown.Item>
 
@@ -29,7 +28,6 @@ const MainNavBar = () =>
                         <Dropdown.Divider />
 
                         <Dropdown.Item href="#/theengineer">The Engineer</Dropdown.Item>
-
                     </Dropdown.Menu>
                 </Dropdown>
             </div>

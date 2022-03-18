@@ -1,4 +1,5 @@
 import React from "react";
+import { Music } from "./Music";
 
 const PersonalHome = () =>
             <div className="tab-content personal-home">
@@ -12,6 +13,7 @@ const PersonalHome = () =>
                     <p>While your here, try your hand at a highscore in Yeezy the Wize!</p>
                     <a href="#/wize">Play Now!</a>
                 </div>
+                <Music />
             </div>;
 
 export { PersonalHome };
