@@ -1,7 +1,5 @@
 .professional-home {
     .professional-summary {
-        background-color: rgb(55,71,32, 0.6);
-        width: 100%;
         padding: 10px 0 20px 0;
 
         margin-top: 175px;
@@ -22,11 +20,11 @@
     .technical-skills {
         padding: 20px 0;
         :nth-child(even).skill {
-            background-color: rgba(92, 119, 54, 0.8);
+            background-color: $light-green;
         }
 
         :nth-child(odd).skill {
-            background-color: rgba(30, 39, 18, 0.8);
+            background-color: $dark-green;
         }
 
         background-color: none;
@@ -46,10 +44,31 @@
         }
     }
 
-    .projects {
-        background-color: rgb(55,71,32, 0.6);
-        width: 100%;
-        padding: 20px 0;
+    .download-resume-button {
+        text-align: center;
+        padding: 20px;
+
+        a {
+            height: 70px;
+            width: 300px;
+
+            background-color: $text-colour;
+            color: $primary-colour;
+            
+            border-style: solid;
+            border-radius: 10px;
+            border-color: $light-green;
+            border-width: 5px;
+            
+
+
+            &:hover {
+                text-decoration: none;
+                font-style: bold;
+                font-size: 15px;
+                border-width: 6px;
+            }
+        }
     }
 
     .professional-footer {

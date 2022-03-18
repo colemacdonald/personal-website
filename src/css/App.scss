@@ -1,6 +1,12 @@
 $primary-colour: rgb(55,71,32);
 $secondary-colour: #e79d50;
 $background-colour: rgb(55,71,32);
+
+$light-green: rgba(92, 119, 54, 0.8);
+$dark-green: rgba(30, 39, 18, 0.8);
+
+$translucent-background-colour: rgb(55,71,32, 0.6);
+
 $text-colour: lightgrey;
 
 $theme-colors: (
@@ -155,6 +161,12 @@ html {
 
   .professional-home, .personal-home, .home {
     margin: 75px 0 0 0;
+  }
+
+  .highlighted-section {
+    background-color: $translucent-background-colour;
+    width: 100%;
+    padding: 20px 0;
   }
 }
 
