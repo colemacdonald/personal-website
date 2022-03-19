@@ -8,10 +8,17 @@ let images = [
         src: require("../../../resources/home/photography/ritsurin1.jpeg"),
         caption: "Ritsurin Garden, Takamatsu"
     },
-
+    {
+        src: require("../../../resources/home/photography/turtle.jpeg"),
+        caption: "Sea Turle, Oahu"
+    },
     {
         src: require("../../../resources/home/photography/temple2.jpeg"),
         caption: "Shibata Castle, Shibata"
+    },
+    {
+        src: require("../../../resources/home/photography/eagle-ray.jpeg"),
+        caption: "Eagle Ray, Oahu"
     },
     {
         src: require("../../../resources/home/photography/temple1.jpeg"),
@@ -27,8 +34,16 @@ let images = [
     },
     {
         src: require("../../../resources/home/photography/hawaii1.jpeg"),
-        caption: "Oahu, Hawai'i"
+        caption: "Diamond Back, Oahu"
     },
+    {
+        src: require("../../../resources/home/photography/deep-creek.jpeg"),
+        caption: "Deep Creek Conservation Park, South Australia"
+    },
+    {
+        src: require("../../../resources/home/photography/kangaroo.jpeg"),
+        caption: "Kangaroo, Cleland Wildlife Park, South Australia"
+    }
 ];
 
 const Photography = () => 

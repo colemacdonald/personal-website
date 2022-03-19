@@ -1,4 +1,15 @@
 .professional-home {
+    .linkedin-link {
+        margin-left: -34px;
+        margin-top: 10px;
+        path {
+            fill: #0b66c2;
+        }
+        rect {
+            fill: $text-colour;
+        }
+    }
+
     .professional-summary {
         padding: 10px 0 20px 0;
 

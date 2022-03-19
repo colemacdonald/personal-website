@@ -7,6 +7,15 @@
     bottom: 0px;
     top: 0px;
 
+    .home-image {
+        height: 250px;
+        width: 250px;
+        border-radius: 50%;
+        align-self: center;
+        z-index: 10;
+
+    }
+
     .nav-buttons {
         width: 100%;
         flex-grow: 2;
