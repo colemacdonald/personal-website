@@ -84,7 +84,7 @@ html {
 
   .tab-content {
     margin: 50px 0 0 0;
-    padding: 10px 20px 20px 20px;
+    padding: 10px 0 0 20px;
   }
   
   .content {
@@ -111,6 +111,12 @@ html {
   .centered {
     align-items: center;
     justify-content: center;
+  }
+
+  .right {
+    align-items: flex-end;
+    justify-content: right;
+    align-self: flex-end;
   }
 
   .stretched {
@@ -168,6 +174,40 @@ html {
     width: 100%;
     padding: 20px 0;
   }
+
+  .primary-button {
+    text-align: center;
+    padding: 20px 0;
+
+    a {
+        height: 70px;
+        width: 300px;
+
+        background-color: $text-colour;
+        color: $primary-colour;
+        
+        border-style: solid;
+        border-radius: 10px;
+        border-color: $light-green;
+        border-width: 5px;
+        
+
+
+        &:hover {
+            text-decoration: none;
+            font-style: bold;
+            font-size: 15px;
+            border-width: 6px;
+        }
+    }
+  }
+
+  .footer {
+    color: black;
+    background-color: rgb(255, 255, 255, 0.5);
+    width: 100%;
+    padding: 20px 0;
+  }
 }
 
 .background {
@@ -198,5 +238,6 @@ html {
 @import "./home";
 @import "./wize";
 @import "./professional-home";
+@import "./personal-home";
 
 @import "~bootstrap/scss/bootstrap";

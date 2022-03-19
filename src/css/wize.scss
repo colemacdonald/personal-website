@@ -15,6 +15,12 @@ a {
   text-decoration: none;
 }
 
+.wize-game-component {
+  .horizontal-flex-box {
+    align-items: center;
+  }
+}
+
 .wize-game {
   text-align: center;
 }

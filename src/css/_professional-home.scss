@@ -43,38 +43,4 @@
             }
         }
     }
-
-    .download-resume-button {
-        text-align: center;
-        padding: 20px;
-
-        a {
-            height: 70px;
-            width: 300px;
-
-            background-color: $text-colour;
-            color: $primary-colour;
-            
-            border-style: solid;
-            border-radius: 10px;
-            border-color: $light-green;
-            border-width: 5px;
-            
-
-
-            &:hover {
-                text-decoration: none;
-                font-style: bold;
-                font-size: 15px;
-                border-width: 6px;
-            }
-        }
-    }
-
-    .professional-footer {
-        color: black;
-        background-color: rgb(255, 255, 255, 0.5);
-        width: 100%;
-        padding: 20px 0;
-    }
 }

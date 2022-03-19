@@ -23,7 +23,7 @@ const MainNavBar = () =>
                         <Dropdown.Divider />
 
                         <Dropdown.Item href="#/wize">Wize</Dropdown.Item>
-                        <Dropdown.Item href="#/wizeabout">About Wize</Dropdown.Item>
+                        {/* <Dropdown.Item href="#/wizeabout">About Wize</Dropdown.Item> */}
 
                         <Dropdown.Divider />
 
