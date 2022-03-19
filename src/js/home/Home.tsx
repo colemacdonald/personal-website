@@ -6,7 +6,7 @@ const Home = () =>
             <p className="title">Welcome!</p>
             <p className="subtitle">Click below to find out more about Cole Macdonald.</p>
         </div>
-        <div className="horizontal-flex-box centered nav-buttons">
+        <div className={"horizontal-flex-box centered nav-buttons" + (window.innerWidth < 600 ? " wrap" : "")}>
             <a className="giant-button" href="#/thehuman">
                 <p>THE HUMAN</p>
             </a>
