@@ -1,12 +1,23 @@
 {
   "files": {
-    "main.css": "/personal-website/static/css/main.ea37aaac.css",
-    "main.js": "/personal-website/static/js/main.07218208.js",
+    "main.css": "/personal-website/static/css/main.24e2c655.css",
+    "main.js": "/personal-website/static/js/main.6de1eb2d.js",
+    "static/media/ritsurin1.jpeg": "/personal-website/static/media/ritsurin1.7778628cac88e8228bf8.jpeg",
     "static/media/Prelude in F  Minor (with Accompaniment).mp3": "/personal-website/static/media/Prelude in F  Minor (with Accompaniment).eea08a1a8aa25f3e4f3d.mp3",
+    "static/media/wize-story2.png": "/personal-website/static/media/wize-story2.926510659ae8a108b137.png",
     "static/media/Cave 1.mp3": "/personal-website/static/media/Cave 1.667589734365bb3cb150.mp3",
+    "static/media/ritsurin2.jpeg": "/personal-website/static/media/ritsurin2.3191e9af02c4f7b16790.jpeg",
+    "static/media/wize-survival.png": "/personal-website/static/media/wize-survival.2db43680b72b8b0e2cff.png",
+    "static/media/wize-story1.png": "/personal-website/static/media/wize-story1.a4568a4dbbabcf5f02d7.png",
+    "static/media/osaka-castle.jpeg": "/personal-website/static/media/osaka-castle.8f0d3135265be2606499.jpeg",
+    "static/media/temple2.jpeg": "/personal-website/static/media/temple2.6f25eccf0b206ea63fa9.jpeg",
+    "static/media/temple1.jpeg": "/personal-website/static/media/temple1.85fa0eae5e7314c2dd75.jpeg",
     "static/media/background.png": "/personal-website/static/media/background.5ad8deea248c9dada441.png",
+    "static/media/hawaii1.jpeg": "/personal-website/static/media/hawaii1.419596bcb05ca7a4b9cd.jpeg",
     "static/media/Background-vertical.png": "/personal-website/static/media/Background-vertical.e6711d0f89639d3844cd.png",
     "static/media/Background.png": "/personal-website/static/media/Background.57e56c65910477c57583.png",
+    "static/media/cole1.jpeg": "/personal-website/static/media/cole1.3dbd9287d601b08839d6.jpeg",
+    "static/media/cole-macdonald_resume_2022-01-28.pdf": "/personal-website/static/media/cole-macdonald_resume_2022-01-28.21c52b24e85c505bf68c.pdf",
     "static/media/health-up.mp3": "/personal-website/static/media/health-up.7756673fbe6d331fcd53.mp3",
     "static/media/02.png": "/personal-website/static/media/02.20538bb55796d8c70018.png",
     "static/media/03.png": "/personal-website/static/media/03.bf0e78a29c01054a1c8d.png",
@@ -17,11 +28,11 @@
     "static/media/tile21.png": "/personal-website/static/media/tile21.f5fb6a0c626e2bac432f.png",
     "static/media/tile23.png": "/personal-website/static/media/tile23.a325237676bf5c85ed08.png",
     "index.html": "/personal-website/index.html",
-    "main.ea37aaac.css.map": "/personal-website/static/css/main.ea37aaac.css.map",
-    "main.07218208.js.map": "/personal-website/static/js/main.07218208.js.map"
+    "main.24e2c655.css.map": "/personal-website/static/css/main.24e2c655.css.map",
+    "main.6de1eb2d.js.map": "/personal-website/static/js/main.6de1eb2d.js.map"
   },
   "entrypoints": [
-    "static/css/main.ea37aaac.css",
-    "static/js/main.07218208.js"
+    "static/css/main.24e2c655.css",
+    "static/js/main.6de1eb2d.js"
   ]
 }
