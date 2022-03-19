@@ -15,7 +15,7 @@ class WizeAbout extends Component {
     controls = [
         `← and → to Move`,
         `↑ to Jump`,
-        `↓ to Drop`,
+        `↓ to Drop through thin platforms`,
         `Double jumps supported!`,
         `Super-secret dance move: hold one direction and tap the other...`,
     ];

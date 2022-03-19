@@ -129,16 +129,16 @@ class WizeGameComponent extends Component {
 
     render() {
         return (
-            <div className="flex-item">
+            <div className="wize-game-component flex-item">
                 <div className="horizontal-flex-box">
                     <audio ref={this.audio} autoPlay></audio>
-                    <div className="horizontal-flex-box">
                         <h5>Game Mode:</h5>
-                        <Form.Control as="select" onChange={this.gameModeChange.bind(this)}>
-                            <option value="story">Story</option>
-                            <option value="survival">Survival</option>
-                        </Form.Control>
-                    </div>
+                        <div>
+                            <Form.Control as="select" onChange={this.gameModeChange.bind(this)}>
+                                <option value="story">Story</option>
+                                <option value="survival">Survival</option>
+                            </Form.Control>
+                        </div>
                     <input type="checkbox" onChange={this.showHitboxesChanged.bind(this)}/> Show Hit/Hurt Boxes
                     <Button
                         onClick={() => {

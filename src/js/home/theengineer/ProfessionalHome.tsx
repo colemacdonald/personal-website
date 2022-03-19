@@ -1,6 +1,6 @@
 import React from "react";
 import { DownloadResumeButton } from "./DownloadResumeButton";
-import { ProfessionalFooter } from "./ProfessionalFooter";
+import { Footer } from "../Footer";
 import { ProfessionalSummary } from "./ProfessionalSummary";
 import { Projects } from "./Projects";
 import { TechnicalSkills } from "./TechnicalSkills";
@@ -15,7 +15,7 @@ const ProfessionalHome = () =>
         <TechnicalSkills />
         <Projects />
         <DownloadResumeButton />
-        <ProfessionalFooter />
+        <Footer />
     </div>;
 
 export { ProfessionalHome };

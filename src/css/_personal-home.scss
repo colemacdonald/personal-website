@@ -1,0 +1,35 @@
+.personal-home {
+    .summary {
+        .title3 {
+            margin: 10px 0 20px 0;
+        }
+    }
+    
+    .wize-info {
+        img {
+            height: 300px;
+            width: 600px;
+            margin: 10px;
+        }
+    }
+
+    .photography {
+        padding: 10px 0;
+        img {
+            width: 1000px;
+            height: 500px;
+            object-fit: scale-down;
+        }
+    }
+
+    .song {
+        iframe {
+            width: 475px;   
+        }
+        .visualAudible__artworkOverlay {
+            display: none !important;
+            height: 0px;
+            width: 0px;
+        }
+    }
+}
