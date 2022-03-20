@@ -13,11 +13,11 @@ const PersonalHome = () =>
                 <div className="horizontal-flex-box centered nav-buttons">
                     <GiantButton text="Music" href="#/thehuman/music"/>
                     <GiantButton text="Games" href="#/thehuman/wizethegame"/>
-                    <GiantButton text="Reading" href=""/>
+                    <GiantButton text="Reading" href="#/thehuman/reading"/>
                 </div>
                 <div className="horizontal-flex-box centered nav-buttons">
-                    <GiantButton text="Travels" href=""/>
-                    <GiantButton text="Sports" href=""/>
+                    <GiantButton text="Travels" href="#/thehuman/travels"/>
+                    <GiantButton text="Sports" href="#/thehuman/sports"/>
                     <GiantButton text="Photography" href="#/thehuman/photography"/>
                 </div>
             </div>;
