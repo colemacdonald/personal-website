@@ -1,52 +1,52 @@
 body {
-  overflow: scroll;
-  font-size: 8pt;
+    overflow: scroll;
+    font-size: 8pt;
 }
 
 a {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 .game-title {
-  font-size: 20pt;
-  font-family: monospace;
-  color: white;
-  text-decoration: none;
+    font-size: 20pt;
+    font-family: monospace;
+    color: white;
+    text-decoration: none;
 }
 
 .wize-game-component {
-  .horizontal-flex-box {
-    align-items: center;
-  }
+    .horizontal-flex-box {
+        align-items: center;
+    }
 }
 
 .wize-game {
-  text-align: center;
+    text-align: center;
 }
 
 /* Weird things */
 
 svg {
-  position: absolute;
-  overflow: hidden;
+    position: absolute;
+    overflow: hidden;
 }
 
 polygon {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 img.left {
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 canvas.left {
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 .game-canvas {
-  width: 90%;
-  aspect-ratio: 2 / 1;
+    width: 90%;
+    aspect-ratio: 2 / 1;
 }

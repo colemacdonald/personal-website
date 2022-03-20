@@ -1,5 +1,6 @@
 import React from "react";
-import { Subtitle, Title3 } from "../Titles";
+import { ContentPage } from "../../components/ContentPage";
+import { Subtitle, Title3 } from "../../components/Titles";
 
 let songDescriptions = [
     {
@@ -20,7 +21,7 @@ const Song = (props: {name: string, instruments: Array<string>, soundcloudTrackI
     </div>;
 
 const Music = () => 
-    <div className="music highlighted-section vertical-flex-box centered">
+    <ContentPage classes="music">
         <div className="content summary">
             <Subtitle text="Music" />
             <p>Music is one of my life passions and my top choice for creative expression. Being a life-long musician I play multiple instruments including guitar, bass, drums, and piano. Anything I record that is worth sharing will be posted here <a href="https://soundcloud.com/colethomasmusic" title="colethomas" target="_blank" >colethomas</a>.</p>
@@ -34,6 +35,6 @@ const Music = () =>
                 {songDescriptions.map(s => <Song {...s} />)}
             </div>
         </div>
-    </div>;
+    </ContentPage>;
 
 export { Music };

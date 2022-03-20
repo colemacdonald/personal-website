@@ -1,5 +1,5 @@
 import React from "react";
-import { Subtitle, Title3 } from "../Titles";
+import { Subtitle, Title3 } from "../../components/Titles";
 
 
 const ProfessionalSummary = () => 

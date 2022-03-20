@@ -7,6 +7,9 @@ import { ProfessionalHome } from "./home/theengineer/ProfessionalHome";
 import { MainNavBar } from "./MainNavBar";
 import { WizeAbout } from "./wize/js/components/WizeAbout";
 import WizeHome from "./wize/js/components/WizeHome";
+import { Music } from "./home/thehuman/Music";
+import { Photography } from "./home/thehuman/Photography";
+import { WizePanel } from "./home/thehuman/WizePanel";
 
 class App extends Component {
     render() {
@@ -17,8 +20,11 @@ class App extends Component {
                     <MainNavBar />
                     <Routes>
                         <Route path="/" element={<Home/>}/> 
-                        <Route path="/theengineer" element={<ProfessionalHome/>} />
                         <Route path="/thehuman" element={<PersonalHome/>}/>
+                        <Route path="/thehuman/music" element={<Music/>} />
+                        <Route path="/thehuman/photography" element={<Photography/>} />
+                        <Route path="/thehuman/wizethegame" element={<WizePanel/>} />
+                        <Route path="/theengineer" element={<ProfessionalHome/>} />
                         <Route path="/wize" element={<WizeHome/>} />
                         <Route path="/wizeabout" element={<WizeAbout />}/>
                     </Routes>
