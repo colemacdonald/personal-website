@@ -43,6 +43,10 @@ let images = [
     {
         src: require("../../../resources/home/photography/kangaroo.jpeg"),
         caption: "Kangaroo, Cleland Wildlife Park, South Australia"
+    },
+    {
+        src: require("../../../resources/home/photography/phineas1.jpeg"),
+        caption: "Phineas, July 2022"
     }
 ];
 
