@@ -1,7 +1,8 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
 import CarouselCaption from "react-bootstrap/CarouselCaption";
-import { Subtitle } from "../Titles";
+import { ContentPage } from "../../components/ContentPage";
+import { Subtitle } from "../../components/Titles";
 
 let images = [
     {
@@ -51,27 +52,21 @@ let images = [
 ];
 
 const Photography = () => 
-    <div className="photography vertical-flex-box centered">
-        <div className="content">
-            <div className="vertical-flex-box">
-                <Subtitle text="Photography" />
-                <p>This is a small collection of the photos I have taken over the years. The majority of them were shot on iPhone but some of them were taken with a GoPro. Hope you enjoy!</p>
-                <div className="vertical-flex-box centered">
-                    <Carousel fade={true}> {
-                        images.map(i => 
-                            <Carousel.Item>
-                                <img src={i.src} />
-                                <CarouselCaption>
-                                    <p>{i.caption}</p>
-                                </CarouselCaption>
-                            </Carousel.Item>)
-                        }
-                    </Carousel>
-                </div>
-               
-            </div>
-            
+    <ContentPage classes="photography">
+        <Subtitle text="Photography" />
+        <p>This is a small collection of the photos I have taken over the years. The majority of them were shot on iPhone but some of them were taken with a GoPro. Hope you enjoy!</p>
+        <div className="vertical-flex-box centered ">
+            <Carousel fade={true}> {
+                images.map(i => 
+                    <Carousel.Item>
+                        <img src={i.src} />
+                        <CarouselCaption>
+                            <p>{i.caption}</p>
+                        </CarouselCaption>
+                    </Carousel.Item>)
+                }
+            </Carousel>
         </div>
-    </div>;
+    </ContentPage>;
 
 export { Photography };

@@ -1,5 +1,6 @@
 import React from "react";
-import { Subtitle } from "../Titles";
+import { ContentPage } from "../../components/ContentPage";
+import { Subtitle } from "../../components/Titles";
 
 let controls = [
     `← and → to Move`,
@@ -8,7 +9,7 @@ let controls = [
 ];
 
 const WizePanel = () => 
-    <div className="wize-info vertical-flex-box centered highlighted-section">
+    <ContentPage classes="wize-info">
         <div className="content">
             <Subtitle text="Yeezy the Wize" />
 
@@ -32,6 +33,7 @@ const WizePanel = () =>
             
             <p>While your here, try your hand at a highscore or your best time!</p>
         </div>
-    </div>;
+        <div></div>
+    </ContentPage>;
 
 export { WizePanel };

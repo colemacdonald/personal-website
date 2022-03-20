@@ -1,5 +1,5 @@
 import React from "react";
-import { Subtitle } from "../Titles";
+import { Subtitle } from "../../components/Titles";
 
 const Skill = (props: {name: string}) => 
     <div className="skill vertical-flex-box centered">

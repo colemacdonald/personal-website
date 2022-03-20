@@ -1,5 +1,5 @@
 import React from "react";
-import { Subtitle } from "../Titles";
+import { Subtitle } from "../../components/Titles";
 
 let projectDescriptions = [
     {
