@@ -4,8 +4,8 @@ import { Subtitle, Title3 } from "../../components/Titles";
 
 const ProfessionalSummary = () => 
     {
-        return <div className="professional-summary vertical-flex-box centered highlighted-section">
-            <div className="content vertical-flex-box left">
+        return <div className="professional-summary vertical-flex-box centered">
+            <div className="vertical-flex-box left">
                 <img className="professional-summary-image" src={require("../../../resources/home/cole1.jpeg")} />
                 <Subtitle text="Professional Summary" />
                 <div>Full-stack, back-end leaning, Software Engineer with a degree from the University of Victoria. Hard worker who enjoys a fast-paced learning environment. 3 years of professional experience with C# (.Net), Java, and Web frameworks.</div>

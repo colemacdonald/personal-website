@@ -8,7 +8,7 @@ const Skill = (props: {name: string}) =>
 
 const TechnicalSkills = () => 
     <div className="technical-skills vertical-flex-box centered">
-        <div className="content vertical-flex-box left">
+        <div className="vertical-flex-box left">
             <Subtitle text="Technical Skills"/>
             <div className="horizontal-flex-box wrap">
                 <Skill name="ASP .NET"/>

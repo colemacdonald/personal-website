@@ -10,17 +10,22 @@
         }
     }
 
-    .professional-summary {
-        padding: 10px 0 20px 0;
-
+    .content {
         margin-top: 175px;
+        gap: 20px;
+        padding: 0 20px;
+    }
+
+    .professional-summary {
+
+        margin-top: 185px;
 
         .professional-summary-image {
             height: 250px;
             width: 250px;
             border-radius: 50%;
             align-self: center;
-            margin-top: -135px;
+            margin-top: -310px;
         }
 
         .summary-items {
@@ -29,7 +34,6 @@
     }
 
     .technical-skills {
-        padding: 20px 0;
         :nth-child(even).skill {
             background-color: $light-green;
         }

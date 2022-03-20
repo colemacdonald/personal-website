@@ -21,16 +21,13 @@ const Song = (props: {name: string, instruments: Array<string>, soundcloudTrackI
     </div>;
 
 const Music = () => 
-    <ContentPage classes="music">
-        <div className="content summary">
+    <ContentPage classes="music content">
+        <div className="summary">
             <Subtitle text="Music" />
             <p>Music is one of my life passions and my top choice for creative expression. Being a life-long musician I play multiple instruments including guitar, bass, drums, and piano. Anything I record that is worth sharing will be posted here <a href="https://soundcloud.com/colethomasmusic" title="colethomas" target="_blank" >colethomas</a>.</p>
             <Title3 text="Compositions" />
         </div>
-
-        
-
-        <div className="content">
+        <div>
             <div className="horizontal-flex-box wrap">
                 {songDescriptions.map(s => <Song {...s} />)}
             </div>

@@ -10,7 +10,7 @@ let controls = [
 
 const WizePanel = () => 
     <ContentPage classes="wize-info">
-        <div className="content">
+        <div>
             <Subtitle text="Yeezy the Wize" />
 
             <p>This game was originally developed by my friend and I in 2018. The physics are all custom, and frames are drawn on an html canvas (yes, really). 2022 saw a large graphics revamp and the introduction of story mode.</p>

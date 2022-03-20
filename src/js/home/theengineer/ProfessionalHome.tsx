@@ -18,10 +18,13 @@ const ProfessionalHome = () =>
                 </svg>
             </a>
         </div>
-        <ProfessionalSummary />
-        <TechnicalSkills />
-        <Projects />
-        <DownloadResumeButton />
+        <div className="content vertical-flex-box stretched">
+            <ProfessionalSummary />
+            <TechnicalSkills />
+            <Projects />
+            <DownloadResumeButton />
+        </div>
+        
     </ContentPage>;
 
 export { ProfessionalHome };

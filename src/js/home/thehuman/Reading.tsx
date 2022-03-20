@@ -4,7 +4,7 @@ import { Subtitle } from "../../components/Titles";
 
 
 const Reading = () =>
-    <ContentPage classes="" >
+    <ContentPage classes="content" >
         <Subtitle text="Reading"/>
         <p>In progress...</p>
     </ContentPage>;

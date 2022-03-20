@@ -52,7 +52,7 @@ let images = [
 ];
 
 const Photography = () => 
-    <ContentPage classes="photography">
+    <ContentPage classes="photography content">
         <Subtitle text="Photography" />
         <p>This is a small collection of the photos I have taken over the years. The majority of them were shot on iPhone but some of them were taken with a GoPro. Hope you enjoy!</p>
         <div className="vertical-flex-box centered ">

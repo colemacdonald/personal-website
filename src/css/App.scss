@@ -87,17 +87,13 @@ $nav-bar-height: 60px;
     }
 
     .content-page {
-        background-color: $translucent-background-colour;
         width: 100%;
-
-        .content-page-internal {
-            flex-grow: 2;
-            padding: 20px 0;
-        }
+        background-color: $translucent-background-colour;
     }
 
     .content {
         max-width: 1000px;
+        padding: 20px;
     }
 
     
@@ -107,7 +103,7 @@ $nav-bar-height: 60px;
     .horizontal-flex-box {
         display: flex;
         justify-content: flex-start;
-        gap: 10px;
+        gap: 5px 10px;
     }
 
     .vertical-flex-box {
@@ -134,8 +130,6 @@ $nav-bar-height: 60px;
 
     .stretched {
         align-items: stretch;
-        justify-content: flex-start;
-        align-content: stretch;
         width: 100%;
     }
 
@@ -185,11 +179,6 @@ $nav-bar-height: 60px;
         background-color: $secondary-colour;
     }
 
-    .highlighted-section {
-        
-    }
-
-
     // ------------------- buttons
     .primary-button {
         text-align: center;
@@ -230,23 +219,68 @@ $nav-bar-height: 60px;
         }
 
         .giant-button {
-            width: 100%;
+            width: 50%;
             min-width: 450px;
             display: flex;
             justify-content: center;
             align-items: center;
+
+            height: inherit;
+
+            a {
+                height: 100%;
+                width: 100%;
+                text-align: center;
+                z-index: 10;
+            }
     
             background-color: rgb(255, 255, 255, 0.5);
             opacity: 0.4;
     
             p {
                 color: black;
+                z-index: 1;
+                width: 100%;
             }
-    
+            
+            .silhouette-container {
+                position: absolute;
+                display: none;
+                // height:600px;
+                // width: 600px;
+                height: 100%;
+                width: 100%;
+
+                div {
+                    width: inherit;
+                    height: inherit;
+                }
+            }
+
+            .silhouette {
+                width: inherit;
+                height: inherit;
+                fill: rgb(55, 71, 32, 0.3);
+            }
+
             &:hover {
                 background-color: rgb(255, 255, 255, 0.5);
+                // background-image: url("../resources/home/simple-Gear.svg");
+                // background-repeat: no-repeat;
+                // background-size: contain;
+                // background-position: center;
+                
                 opacity: 0.6;
-                text-decoration: none;
+
+                a {
+                    text-decoration: none;
+                }
+
+
+                .silhouette-container {
+                    display: block;
+                }
+        
             }
         }
     }

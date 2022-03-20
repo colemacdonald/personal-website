@@ -1,5 +1,6 @@
 import React from "react";
 import { GiantButton } from "../../components/Buttons";
+import { SilhouetteType } from "../Silhouettes";
 
 const PersonalHome = () =>
             <div className="page personal-home home vertical-flex-box">
@@ -11,14 +12,14 @@ const PersonalHome = () =>
                     <p>Thanks for coming you might be the first person here...</p>
                 </div>
                 <div className="horizontal-flex-box centered nav-buttons">
-                    <GiantButton text="Music" href="#/thehuman/music"/>
-                    <GiantButton text="Games" href="#/thehuman/wizethegame"/>
-                    <GiantButton text="Reading" href="#/thehuman/reading"/>
+                    <GiantButton text="Music" href="#/thehuman/music" silhouetteType={SilhouetteType.Gear}/>
+                    <GiantButton text="Games" href="#/thehuman/wizethegame" silhouetteType={SilhouetteType.None}/>
+                    <GiantButton text="Reading" href="#/thehuman/reading" silhouetteType={SilhouetteType.Head}/>
                 </div>
                 <div className="horizontal-flex-box centered nav-buttons">
-                    <GiantButton text="Travels" href="#/thehuman/travels"/>
-                    <GiantButton text="Sports" href="#/thehuman/sports"/>
-                    <GiantButton text="Photography" href="#/thehuman/photography"/>
+                    <GiantButton text="Travels" href="#/thehuman/travels" silhouetteType={SilhouetteType.None}/>
+                    <GiantButton text="Sports" href="#/thehuman/sports" silhouetteType={SilhouetteType.None}/>
+                    <GiantButton text="Photography" href="#/thehuman/photography" silhouetteType={SilhouetteType.None}/>
                 </div>
             </div>;
 
