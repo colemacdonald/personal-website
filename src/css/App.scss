@@ -94,6 +94,10 @@ $nav-bar-height: 60px;
             flex-grow: 2;
             padding: 20px 0;
         }
+
+        .title {
+            align-self: left;
+        }
     }
 
     .content {
@@ -149,22 +153,24 @@ $nav-bar-height: 60px;
     }
 
     .title {
+        color: $secondary-colour;
         font-size: 72px;
     }
 
     .subtitle {
         font-size: 24px;
-        text-align: left;
     }
 
-    .title3 {
+    .heading1 {
+        font-size: 24px;
+    }
+
+    .heading2 {
         font-size: 20px;
-        text-align: left;
     }
 
-    .title4 {
+    .heading3 {
         font-size: 14px;
-        text-align: left;
         font-style: italic;
         color: rgb(163, 163, 163);
     }
