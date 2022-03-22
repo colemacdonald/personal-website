@@ -1,21 +1,30 @@
 import React from "react";
 
-const Subtitle = (props: {text: string}) =>
+const Title = (props: {text: string}) => 
+    <div className="title">
+        <p>{props.text}</p>
+    </div>;
+
+const Subtitle = (props: {text: string}) => 
     <div className="subtitle">
+        <p>{props.text}</p>
+    </div>;
+
+const Heading1 = (props: {text: string}) =>
+    <div className="heading1">
         <p>{props.text}</p>
         <div className="line"/>
     </div>;
 
-const Title3 = (props: {text: string}) => 
-    <div className="title3">
+const Heading2 = (props: {text: string}) => 
+    <div className="heading2">
         <p>{props.text}</p>
         <div className="small-line" />
     </div>;
 
-
-const Title4 = (props: {text: string}) => 
-    <div className="title4">
+const Heading3 = (props: {text: string}) => 
+    <div className="heading3">
         <p>{props.text}</p>
     </div>;
 
-export { Subtitle, Title3, Title4 };
+export { Title, Subtitle, Heading1, Heading2, Heading3 };

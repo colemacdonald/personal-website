@@ -1,5 +1,5 @@
 import React from "react";
-import { Subtitle } from "../../components/Titles";
+import { Heading1 } from "../../components/Titles";
 
 let projectDescriptions = [
     {
@@ -8,7 +8,7 @@ let projectDescriptions = [
         notes: [
             "Designed and implemented a connected Windows 10 installed application for flight data analysis which synchronizes its data with a .NET Core server.",
             "Application allowed a flight data analyst the view flight data in interactive tables and graphs.",
-            "Designed a domain-specific language for detailing how engineering units are extracted from the raw flight data.",
+            "Designed a domain-specific language for detailing how the raw data is to be extracted from the underlying binary stream and how to turn them into engineering units.",
             "Technologies included ASP .NET, .NETCore 3, MSSQL, SQLite, gRPC, SignalR, Entity Framework, and Docker."
         ]
     },
@@ -37,8 +37,8 @@ let projectDescriptions = [
 
 const ProjectTitle = (props: {title: string, company: string}) => 
     <div>
-        <p className="title3">{props.title}</p>
-        <p className="title4">{props.company}</p>
+        <p className="heading2">{props.title}</p>
+        <p className="heading3">{props.company}</p>
         <div className="small-line" />
     </div>;
 
@@ -51,9 +51,9 @@ const Project = (props: {title: string, company: string, notes: Array<string>}) 
     </div>;
 
 const Projects = () => 
-    <div className="projects vertical-flex-box centered highlighted-section">
+    <div className="projects">
         <div className="content vertical-flex-box left">
-            <Subtitle text="Projects"/>
+            <Heading1 text="Projects"/>
             {projectDescriptions.map(p => <Project {...p} />)}
         </div>
     </div>;

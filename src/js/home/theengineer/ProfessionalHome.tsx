@@ -5,11 +5,12 @@ import { ProfessionalSummary } from "./ProfessionalSummary";
 import { Projects } from "./Projects";
 import { TechnicalSkills } from "./TechnicalSkills";
 import { ContentPage } from "../../components/ContentPage";
+import { Title } from "../../components/Titles";
 
 const ProfessionalHome = () =>
     <ContentPage classes="professional-home">
         <div className="centered vertical-flex-box">
-            <p className="title">Cole Macdonald, EIT</p>
+            <Title text="Cole Macdonald, EIT"/>
             <p className="subtitle">SOFTWARE ENGINEER</p>
             <a className="linkedin-link" target="_blank" href="https://www.linkedin.com/in/cole-macdonald-seng/">
                 <svg width="34" height="34" viewBox="0 0 34 34">

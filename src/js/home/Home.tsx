@@ -1,10 +1,11 @@
 import React from "react";
 import { GiantButton } from "../components/Buttons";
+import { Title } from "../components/Titles";
 
 const Home = () => 
     <div className="page vertical-flex-box home">
         <div className="vertical-flex-box centered">
-            <p className="title">Welcome!</p>
+            <Title text="Welcome!"/>
             <img className="home-image" src={require("../../resources/home/cole2.jpeg")} />
 
             <p className="subtitle">Click below to learn more about Cole Macdonald.</p>

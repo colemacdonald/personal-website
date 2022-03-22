@@ -1,5 +1,5 @@
 import React from "react";
-import { Subtitle } from "../../components/Titles";
+import { Heading1 } from "../../components/Titles";
 
 const Skill = (props: {name: string}) => 
     <div className="skill vertical-flex-box centered">
@@ -9,7 +9,7 @@ const Skill = (props: {name: string}) =>
 const TechnicalSkills = () => 
     <div className="technical-skills vertical-flex-box centered">
         <div className="content vertical-flex-box left">
-            <Subtitle text="Technical Skills"/>
+            <Heading1 text="Technical Skills"/>
             <div className="horizontal-flex-box wrap">
                 <Skill name="ASP .NET"/>
                 <Skill name="API Design"/>

@@ -8,12 +8,6 @@
     
 }
 
-.summary {
-    .title3 {
-        margin: 10px 0 20px 0;
-    }
-}
-
 .wize-info {
     img {
         height: 300px;
@@ -32,13 +26,27 @@
     }
 }
 
-.song {
-    iframe {
-        width: 475px;   
+.music {
+    .intro-text {
+        p {
+            margin: 10px 0;
+        }
     }
-    .visualAudible__artworkOverlay {
-        display: none !important;
-        height: 0px;
-        width: 0px;
+
+    .songs {
+        p {
+            margin: 10px 0;
+        }
+    }
+
+    .song {
+        iframe {
+            width: 475px;   
+        }
+        .visualAudible__artworkOverlay {
+            display: none !important;
+            height: 0px;
+            width: 0px;
+        }
     }
 }
