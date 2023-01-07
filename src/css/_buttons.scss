@@ -1,0 +1,49 @@
+// ------------------- buttons
+.primary-button {
+    text-align: center;
+    padding: 20px 0;
+
+    a {
+        height: 70px;
+        width: 300px;
+
+        background-color: $text-colour;
+        color: $primary-colour;
+
+        border-style: solid;
+        border-radius: 10px;
+        border-color: $light-green;
+        border-width: 5px;
+
+        &:hover {
+            text-decoration: none;
+            font-style: bold;
+            font-size: 15px;
+            border-width: 6px;
+        }
+    }
+}
+
+.giant-button {
+    // fill space
+    flex: 1;
+    position: relative;
+    
+    // center align text content
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 50px;
+    min-width: min(400px, 100%);
+
+    color: black;
+    background-color: rgb(255, 255, 255, 0.5);
+    opacity: 0.4;
+
+    &:hover {
+        background-color: rgb(255, 255, 255, 0.5);
+        opacity: 0.6;
+        text-decoration: none;
+    }
+}

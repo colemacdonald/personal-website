@@ -22,7 +22,7 @@ export const App = () => {
                 <div className="background" />
                 <div className="app-content">
                     <MainNavBar />
-                    <div className="app-body">
+                    <div>
                         <Routes>
                             <Route path="/" element={<Home />}/>
                             <Route path="/thehuman" element={<PersonalHome/>}/>
