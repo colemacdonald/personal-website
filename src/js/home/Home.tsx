@@ -1,5 +1,5 @@
 import React from "react";
-import { GiantButton } from "../components/Buttons";
+import { GiantButtonList } from "../components/Buttons";
 import { Title } from "../components/Titles";
 
 export const Home = () => 
@@ -10,8 +10,14 @@ export const Home = () =>
 
             <p className="subtitle">Click below to learn more about Cole Macdonald.</p>
         </div>
-        <div className="home-button-container">
-            <GiantButton text="THE HUMAN" href="#/thehuman" />
-            <GiantButton text="THE ENGINEER" href="#/theengineer"/>    
-        </div>
+        <GiantButtonList buttons={[
+            {
+                text: "THE HUMAN",
+                href: "#/thehuman"
+            },
+            {
+                text: "THE ENGINEER",
+                href: "#/theengineer"
+            }
+        ]} />
     </div>;
