@@ -33,9 +33,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 
     font-size: 50px;
     min-width: min(400px, 100%);
+    padding: 20px;
 
     color: black;
     background-color: rgb(255, 255, 255, 0.5);
