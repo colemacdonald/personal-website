@@ -1,5 +1,3 @@
-
-
 a {
     color: black;
     text-decoration: none;
@@ -7,6 +5,8 @@ a {
 
 .wize-game-root {
     max-width: unset;
+    display: grid;
+    grid-template-rows: auto 1fr;
 }
 
 .game-title {
@@ -17,13 +17,21 @@ a {
 }
 
 .wize-game-component {
-    .horizontal-flex-box {
-        align-items: center;
-    }
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.wize-game-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    padding: 10px;
 }
 
 .wize-game {
     text-align: center;
+    height: 100%;
 }
 
 /* Weird things */
