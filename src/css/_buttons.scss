@@ -47,3 +47,12 @@
         text-decoration: none;
     }
 }
+
+.giant-button-list {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+}

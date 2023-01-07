@@ -1,9 +1,18 @@
 import React from "react";
 
+export interface GiantButtonProps {
+    text: string;
+    href: string;
+}
 
-const GiantButton = (props: {text: string, href: string}) => 
-    <a className="giant-button" href={props.href}>
-        <p>{props.text}</p>
+export const GiantButton = ({text, href}: GiantButtonProps) => 
+    <a className="giant-button" href={href}>
+        <p>{text}</p>
     </a>;
 
-export { GiantButton };
+
+
+export const GiantButtonList = ({buttons}: {buttons: GiantButtonProps[]}) => 
+    <div className="giant-button-list">
+        {buttons.map(button => <GiantButton {...button} />)}
+    </div>;
