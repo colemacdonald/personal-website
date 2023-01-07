@@ -1,17 +1,27 @@
 .home {
-    align-items: stretch;
-    justify-content: space-between;
-    width: 100%;
-    
-    position: absolute;
-    bottom: 0px;
-    top: 0px;
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto 1fr;
+}
 
-    .home-image {
-        height: 250px;
-        width: 250px;
-        border-radius: 50%;
-        align-self: center;
-        z-index: 10;
-    }    
+.home-hero-section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.home-image {
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    align-self: center;
+    z-index: 10;
+}
+
+.home-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: wrap;
 }
