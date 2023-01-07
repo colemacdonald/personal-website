@@ -1,11 +1,21 @@
 .personal-home {
+    text-align: center;
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
+}
 
+.personal-home-hero {
 
-    
+}
 
-    
-
-    
+.personal-home-nav-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .wize-info {

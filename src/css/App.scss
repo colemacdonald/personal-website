@@ -48,6 +48,8 @@ $theme-colors: (
 .title {
     color: $secondary-colour;
     font-size: 72px;
+    line-height: 1em;
+    margin: 10px;
 }
 
 .subtitle {
@@ -112,9 +114,8 @@ $theme-colors: (
 
 .giant-button {
     // fill space
-    flex-grow: 1;
+    flex: 1;
     position: relative;
-    wrap: wrap;
     
     // center align text content
     display: flex;
