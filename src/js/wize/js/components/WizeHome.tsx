@@ -45,9 +45,7 @@ export class WizeHome extends Component {
         return (
             <ContentPage classes="wize-game-root">
                 <p className="game-title">The Adventures of Yeezy the Wize</p>
-                <div >
-                    <WizeGameComponent {...this.gameProperties} />
-                </div>
+                <WizeGameComponent {...this.gameProperties} />
             </ContentPage>
         );
     }
