@@ -26,10 +26,6 @@ $theme-colors: (
     /* Fill entire window */
     position: fixed;
     z-index: -1;
-    // left: 0;
-    // right: 0;
-    // top: 0;
-    // bottom: 0;
 
     width: 100%;
     height: 100%;
@@ -45,100 +41,6 @@ $theme-colors: (
     display: none !important;
 }
 
-.title {
-    color: $secondary-colour;
-    font-size: 72px;
-    line-height: 1em;
-    margin: 10px 0;
-}
-
-.subtitle {
-    font-size: 24px;
-}
-
-.heading1 {
-    font-size: 24px;
-}
-
-.heading2 {
-    font-size: 20px;
-}
-
-.heading3 {
-    font-size: 14px;
-    font-style: italic;
-    color: rgb(163, 163, 163);
-}
-
-// ------------------ graphics
-
-.line {
-    width: 100px;
-    height: 6px;
-    margin: 10px 0;
-    background-color: $secondary-colour;
-}
-
-.small-line {
-    width: 50px;
-    height: 4px;
-    margin: 5px 0;
-    background-color: $secondary-colour;
-}
-
-// ------------------- buttons
-.primary-button {
-    text-align: center;
-    padding: 20px 0;
-
-    a {
-        height: 70px;
-        width: 300px;
-
-        background-color: $text-colour;
-        color: $primary-colour;
-
-        border-style: solid;
-        border-radius: 10px;
-        border-color: $light-green;
-        border-width: 5px;
-
-        &:hover {
-            text-decoration: none;
-            font-style: bold;
-            font-size: 15px;
-            border-width: 6px;
-        }
-    }
-}
-
-.giant-button {
-    // fill space
-    flex: 1;
-    position: relative;
-    
-    // center align text content
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 50px;
-    min-width: min(400px, 100%);
-
-    color: black;
-    background-color: rgb(255, 255, 255, 0.5);
-    opacity: 0.4;
-
-    &:hover {
-        background-color: rgb(255, 255, 255, 0.5);
-        opacity: 0.6;
-        text-decoration: none;
-    }
-}
-
-
-// ----------- NEW
-
 .app-container {
     height: 100%;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -150,72 +52,11 @@ $theme-colors: (
     }
 }
 
-.nav-bar {
-    width: 100%;
-    position: sticky;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    background-color: rgb(255, 255, 255, 0.5);
-    color: black;
-    // z-index: 10;
-    padding: 10px;
-
-    .home-icon {
-        height: 40px;
-        width: 40px;
-        svg {
-            fill: $primary-colour;
-
-            polygon {
-                stroke-linejoin: round;
-                stroke: $primary-colour;
-                stroke-width: 5px;
-            }
-
-            .door {
-                fill: $text-colour;
-                stroke: $text-colour;
-                stroke-width: 2px;
-            }
-        }
-    }
-
-    .nav-dropdown2 {
-        height: 40px;
-        width: 40px;
-        padding: 5px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        
-        div {
-            padding: 0;
-            height: 3px;
-            width: 20px;
-            background-color: $text-colour;
-            margin: 2px 0;
-        }
-    }
-}
-
 .app-content {
     height: 100%;
     display: grid;
     // header body footer
     grid-template-rows: auto 1fr auto;
-}
-
-.app-body {
-}
-
-.footer {
-    color: black;
-    background-color: rgb(255, 255, 255, 0.5);
-    padding: 5px;
-    text-align: center;
 }
 
 .content-page-root {
@@ -226,54 +67,24 @@ $theme-colors: (
 }
 
 .content-page-internal {
-    max-width: 700px;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     align-items: left;
 }
 
-// ------------ END NEW
-
-// ------------ flex boxes
-
-.horizontal-flex-box {
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
+.footer {
+    color: black;
+    background-color: rgb(255, 255, 255, 0.5);
+    padding: 5px;
+    text-align: center;
 }
 
-.vertical-flex-box {
-    display: flex;
-    flex-direction: column;
-    // gap: 10px;
-}
-
-.left {
-    align-items: left;
-    justify-content: left;
-}
-
-.centered {
-    align-items: center;
-    justify-content: center;
-}
-
-.right {
-    align-items: flex-end;
-    justify-content: right;
-    align-self: flex-end;
-}
-
-.stretched {
-    align-items: stretch;
-    justify-content: flex-start;
-    align-content: stretch;
-    width: 100%;
-}
-
-.wrap {
-    flex-wrap: wrap;
-}
+@import "./flex";
+@import "./text";
+@import "./graphics";
+@import "./buttons";
+@import "./navbar";
 
 @import "./home";
 @import "./wize";
