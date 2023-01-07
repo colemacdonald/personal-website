@@ -6,7 +6,7 @@ import { PersonalHome } from "./home/thehuman/PersonalHome";
 import { ProfessionalHome } from "./home/theengineer/ProfessionalHome";
 import { MainNavBar } from "./MainNavBar";
 import { WizeAbout } from "./wize/js/components/WizeAbout";
-import WizeHome from "./wize/js/components/WizeHome";
+import { WizeHome } from "./wize/js/components/WizeHome";
 import { Music } from "./home/thehuman/Music";
 import { Photography } from "./home/thehuman/Photography";
 import { WizePanel } from "./home/thehuman/WizePanel";
