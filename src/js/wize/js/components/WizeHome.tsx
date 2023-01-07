@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { WizeGameComponent } from "./WizeGameComponent";
 import "../../../../css/wize.scss";
 import { GameControllerBase } from "../game/controllers/GameControllerBase";
+import { ContentPage } from "../../../components/ContentPage";
 
-class WizeHome extends Component {
+export class WizeHome extends Component {
     gameController: GameControllerBase;
 
     constructor(props) {
@@ -42,14 +43,12 @@ class WizeHome extends Component {
 
     render() {
         return (
-            <div className="tab-content">
+            <ContentPage classes="wize-game-root">
                 <p className="game-title">The Adventures of Yeezy the Wize</p>
                 <div >
                     <WizeGameComponent {...this.gameProperties} />
                 </div>
-            </div>
+            </ContentPage>
         );
     }
 }
-
-export default WizeHome;
