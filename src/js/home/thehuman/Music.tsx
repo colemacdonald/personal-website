@@ -24,28 +24,22 @@ const Song = (props: {name: string, year: string, instruments: Array<string>, so
         <iframe scrolling="no" frameBorder="no" allow="autoplay" src={"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + props.soundcloudTrackId + "&color=ffb464&visual=true&show_user=true&show_teaser=true&show_comments=false"}></iframe>
     </div>;
 
-const Music = () => 
+export const Music = () => 
     <ContentPage classes="music">
 
-        <div className="content">
-            <Title text="Music" />
+        <Title text="Music" />
 
-            <div className="intro-text">
-                <p>Music is one of my life passions and my top choice for creative expression. After playing piana for a few years as a kid I switched to guitar. My passion didn't really take off until I met a couple of musical friends and formed my first band and starting picking up other instruments; including a return to the piano.</p>
-                <p>As a lifelong musician I try to play as many instruments as I can but can only say I'm competent with guitar, bass, drums, and piano.</p>
-                <p>Anything I record that is worth sharing will be posted here <a href="https://soundcloud.com/colethomasmusic" title="colethomas" target="_blank" >colethomas</a>.</p>
-            </div>
-            
-            <div className="songs">
-                <Heading1 text="Compositions" />
-                <p>A sample of pieces that I have written and recorded.</p>
-                <div className="vertical-flex-box">
-                    {songDescriptions.map(s => <Song {...s} />)}
-                </div>
-            </div>
-            
+        <div className="intro-text">
+            <p>Music is one of my life passions and my top choice for creative expression. After playing piana for a few years as a kid I switched to guitar. My passion didn't really take off until I met a couple of musical friends and formed my first band and starting picking up other instruments; including a return to the piano.</p>
+            <p>As a lifelong musician I try to play as many instruments as I can but can only say I'm competent with guitar, bass, drums, and piano.</p>
+            <p>Anything I record that is worth sharing will be posted here <a href="https://soundcloud.com/colethomasmusic" title="colethomas" target="_blank" >colethomas</a>.</p>
         </div>
-        <div></div>
+        
+        <div className="songs">
+            <Heading1 text="Compositions" />
+            <p>A sample of pieces that I have written and recorded.</p>
+            <div className="vertical-flex-box">
+                {songDescriptions.map(s => <Song {...s} />)}
+            </div>
+        </div>
     </ContentPage>;
-
-export { Music };

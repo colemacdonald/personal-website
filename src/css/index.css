@@ -2,9 +2,10 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgb(55, 71, 32);
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+    height: 1px;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 #root {
