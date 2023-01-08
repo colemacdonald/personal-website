@@ -1,57 +1,82 @@
-.professional-home {
-  .linkedin-link {
-    margin-left: -34px;
-    margin-top: 10px;
-    path {
-      fill: #0b66c2;
-    }
-    rect {
-      fill: $text-colour;
-    }
+.professional-hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.professional-hero-image {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  align-self: center;
+  margin-top: 50px;
+}
+
+.linkedin-link {
+  margin-left: -34px;
+  margin-top: 10px;
+  path {
+    fill: $linked-in-blue;
+  }
+  rect {
+    fill: $text-colour;
+  }
+}
+
+.professional-summary {
+  padding: 10px 0 20px 0;
+
+  .summary-items {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+.technical-skills {
+  padding: 20px 0;
+  :nth-child(even).skill {
+    background-color: $light-green;
   }
 
-  .professional-summary {
-    padding: 10px 0 20px 0;
-
-    margin-top: 175px;
-
-    .professional-summary-image {
-      height: 250px;
-      width: 250px;
-      border-radius: 50%;
-      align-self: center;
-      margin-top: -135px;
-    }
-
-    .summary-items {
-      margin-top: 20px;
-    }
+  :nth-child(odd).skill {
+    background-color: $dark-green;
   }
 
-  .technical-skills {
-    padding: 20px 0;
-    :nth-child(even).skill {
-      background-color: $light-green;
-    }
+  background-color: none;
+}
 
-    :nth-child(odd).skill {
-      background-color: $dark-green;
-    }
+.skill-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-    background-color: none;
+.skill {
+  height: 125px;
+  width: 125px;
+  border-radius: 50%;
 
-    .skill {
-      height: 125px;
-      width: 125px;
-      border-radius: 50%;
+  padding: 5px;
 
-      padding: 5px;
+  text-align: center;
 
-      text-align: center;
-
-      p {
-        margin: 0;
-      }
-    }
+  p {
+    margin: 0;
   }
+
+  display: grid;
+  align-items: center;
+}
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.download-resume-button {
+  align-self: center;
 }

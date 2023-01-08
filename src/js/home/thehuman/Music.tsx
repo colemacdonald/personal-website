@@ -60,7 +60,7 @@ export const Music = () => (
     <div className="songs">
       <Heading1 text="Compositions" />
       <p>A sample of pieces that I have written and recorded.</p>
-      <div className="vertical-flex-box">
+      <div>
         {songDescriptions.map((s) => (
           <Song {...s} />
         ))}

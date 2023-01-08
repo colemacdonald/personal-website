@@ -7,7 +7,11 @@
     height: 70px;
     width: 300px;
 
-    background-color: $text-colour;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $background-colour;
     color: $primary-colour;
 
     border-style: solid;
@@ -44,13 +48,13 @@
   padding: 20px;
 
   color: black;
-  background-color: rgb(255, 255, 255, 0.5);
+  background-color: $translucent-hightlight-background-colour;
   opacity: 0.4;
 
   &:hover {
-    background-color: rgb(255, 255, 255, 0.5);
     opacity: 0.6;
     text-decoration: none;
+    color: $primary-colour;
   }
 }
 

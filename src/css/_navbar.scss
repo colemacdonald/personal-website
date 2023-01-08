@@ -5,7 +5,7 @@
   flex-direction: row;
   justify-content: space-between;
 
-  background-color: rgb(255, 255, 255, 0.5);
+  background-color: $translucent-hightlight-background-colour;
   color: black;
   // z-index: 10;
   padding: 10px;
@@ -27,10 +27,24 @@
         stroke: $text-colour;
         stroke-width: 2px;
       }
+
+      &:hover {
+        fill: $primary-background-colour;
+
+        polygon {
+          stroke: $primary-background-colour;
+        }
+
+        .door {
+          fill: $text-colour;
+          stroke: $text-colour;
+          stroke-width: 2px;
+        }
+      }
     }
   }
 
-  .nav-dropdown2 {
+  .nav-dropdown {
     height: 40px;
     width: 40px;
     padding: 5px;
@@ -39,12 +53,28 @@
     align-items: center;
     justify-content: center;
 
+    &:hover {
+      background-color: $primary-background-colour;
+    }
+
     div {
       padding: 0;
       height: 3px;
       width: 20px;
       background-color: $text-colour;
       margin: 2px 0;
+    }
+  }
+}
+
+.nav-dropdown-menu {
+  background-color: $primary-background-colour !important;
+  box-shadow: 0px 2px 6px $primary-colour;
+  a {
+    color: $text-colour !important;
+
+    &:hover {
+      background-color: $primary-colour;
     }
   }
 }
