@@ -20,7 +20,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "prettier:write": "npm prettier --write ."
+    "prettier:check": "npx prettier --check .",
+    "prettier:write": "npx prettier --write ."
   },
   "homepage": ".",
   "devDependencies": {
