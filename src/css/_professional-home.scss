@@ -1,57 +1,57 @@
 .professional-home {
-    .linkedin-link {
-        margin-left: -34px;
-        margin-top: 10px;
-        path {
-            fill: #0b66c2;
-        }
-        rect {
-            fill: $text-colour;
-        }
+  .linkedin-link {
+    margin-left: -34px;
+    margin-top: 10px;
+    path {
+      fill: #0b66c2;
+    }
+    rect {
+      fill: $text-colour;
+    }
+  }
+
+  .professional-summary {
+    padding: 10px 0 20px 0;
+
+    margin-top: 175px;
+
+    .professional-summary-image {
+      height: 250px;
+      width: 250px;
+      border-radius: 50%;
+      align-self: center;
+      margin-top: -135px;
     }
 
-    .professional-summary {
-        padding: 10px 0 20px 0;
+    .summary-items {
+      margin-top: 20px;
+    }
+  }
 
-        margin-top: 175px;
-
-        .professional-summary-image {
-            height: 250px;
-            width: 250px;
-            border-radius: 50%;
-            align-self: center;
-            margin-top: -135px;
-        }
-
-        .summary-items {
-            margin-top: 20px;
-        }
+  .technical-skills {
+    padding: 20px 0;
+    :nth-child(even).skill {
+      background-color: $light-green;
     }
 
-    .technical-skills {
-        padding: 20px 0;
-        :nth-child(even).skill {
-            background-color: $light-green;
-        }
-
-        :nth-child(odd).skill {
-            background-color: $dark-green;
-        }
-
-        background-color: none;
-
-        .skill {
-            height: 125px;
-            width: 125px;
-            border-radius: 50%;
-
-            padding: 5px;
-
-            text-align: center;
-
-            p {
-                margin: 0;
-            }
-        }
+    :nth-child(odd).skill {
+      background-color: $dark-green;
     }
+
+    background-color: none;
+
+    .skill {
+      height: 125px;
+      width: 125px;
+      border-radius: 50%;
+
+      padding: 5px;
+
+      text-align: center;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
 }

@@ -1,19 +1,19 @@
 .home {
-    display: grid;
-    height: 100%;
-    grid-template-rows: auto 1fr;
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr;
 }
 
 .home-hero-section {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .home-image {
-    height: 250px;
-    width: 250px;
-    border-radius: 50%;
-    align-self: center;
-    z-index: 10;
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  align-self: center;
+  z-index: 10;
 }

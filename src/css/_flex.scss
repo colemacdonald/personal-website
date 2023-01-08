@@ -1,40 +1,40 @@
 // ------------ flex boxes
 
 .horizontal-flex-box {
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .vertical-flex-box {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .left {
-    align-items: left;
-    justify-content: left;
+  align-items: left;
+  justify-content: left;
 }
 
 .centered {
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .right {
-    align-items: flex-end;
-    justify-content: right;
-    align-self: flex-end;
+  align-items: flex-end;
+  justify-content: right;
+  align-self: flex-end;
 }
 
 .stretched {
-    align-items: stretch;
-    justify-content: flex-start;
-    align-content: stretch;
-    width: 100%;
+  align-items: stretch;
+  justify-content: flex-start;
+  align-content: stretch;
+  width: 100%;
 }
 
 .wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
