@@ -1,22 +1,4 @@
-// variables
-$mobile-max-width: 600px;
-
-$primary-colour: rgb(55, 71, 32);
-$secondary-colour: #e79d50;
-$background-colour: rgb(55, 71, 32);
-
-$light-green: rgba(92, 119, 54, 0.8);
-$dark-green: rgba(30, 39, 18, 0.8);
-
-$translucent-background-colour: rgb(55, 71, 32, 0.7);
-
-$text-colour: lightgrey;
-
-$theme-colors: (
-  'primary': $background-colour,
-  'secondary': $secondary-colour,
-  'danger': red
-);
+@import './variables';
 
 .background {
   background-image: url('../resources/home/osaka-castle.jpeg');
@@ -77,8 +59,8 @@ $theme-colors: (
 
 .footer {
   color: black;
-  background-color: rgb(255, 255, 255, 0.5);
-  padding: 5px;
+  background-color: $translucent-hightlight-background-colour;
+  padding: 10px;
   text-align: center;
 }
 

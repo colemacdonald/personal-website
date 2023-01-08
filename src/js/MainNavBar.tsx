@@ -15,13 +15,13 @@ export const MainNavBar = () => {
       </div>
       <div>
         <Dropdown>
-          <Dropdown.Toggle id="nav-dropdown" className="nav-dropdown2 hide-after">
+          <Dropdown.Toggle id="nav-dropdown" className="nav-dropdown hide-after">
             <div />
             <div />
             <div />
           </Dropdown.Toggle>
 
-          <Dropdown.Menu>
+          <Dropdown.Menu className="nav-dropdown-menu">
             <Dropdown.Item href="#/thehuman">The Human</Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item href="#/wize">Wize</Dropdown.Item>

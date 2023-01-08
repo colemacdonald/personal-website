@@ -1,0 +1,25 @@
+// variables
+$mobile-max-width: 600px;
+
+$primary-colour: #283618;
+$secondary-colour: #e79d50;
+
+$primary-background-colour: #606c38;
+$background-colour: #fefae0;
+
+$light-green: #606c38AA;
+$dark-green: #283618AA;
+
+$translucent-background-colour: rgb(55, 71, 32, 0.7);
+$translucent-hightlight-background-colour: #fefae088;
+
+$text-colour: #fefae0;
+$heading3-colour: rgb(200, 200, 200);
+
+$theme-colors: (
+  'primary': $primary-colour,
+  'secondary': $secondary-colour,
+  'danger': red
+);
+
+$linked-in-blue: #0b66c2;
