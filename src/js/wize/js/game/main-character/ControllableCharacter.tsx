@@ -1,7 +1,7 @@
 import { Character } from "./Character";
 import { Direction } from "../Frames";
 
-class ControllableCharacter extends Character {
+export class ControllableCharacter extends Character {
     upPressed: boolean;
     maxJmpCnt: number = 1;
 
@@ -102,5 +102,3 @@ class ControllableCharacter extends Character {
         this.speed = this.baseSpeed;
     }
 }
-
-export { ControllableCharacter };

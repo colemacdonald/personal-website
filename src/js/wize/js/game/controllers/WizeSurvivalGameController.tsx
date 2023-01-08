@@ -1,9 +1,9 @@
-import WizeGame from "../WizeGame";
+import { WizeGame } from "../WizeGame";
 import { KYeezy } from "../main-character/KYeezyCharacter";
 import { RoomBuilder } from "../RoomBuilder";
 import { GameControllerBase, GameState } from "./GameControllerBase"
 
-class WizeSurvivalGameController extends GameControllerBase {
+export class WizeSurvivalGameController extends GameControllerBase {
     newGame() {
         this.gameState = GameState.Playing;
         this.level = 0;
@@ -49,5 +49,3 @@ class WizeSurvivalGameController extends GameControllerBase {
         }
     }
 }
-
-export { WizeSurvivalGameController };

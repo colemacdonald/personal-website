@@ -4,7 +4,7 @@ import { Room } from "./Room";
 import { Powerup } from "./Powerup";
 import { KYeezy } from "./main-character/KYeezyCharacter";
 
-class WizeGame {
+export class WizeGame {
     grav: number;
     room: Room;
     character: KYeezy;
@@ -245,7 +245,3 @@ class WizeGame {
         this.character.runEnd();
     }
 }
-
-export default WizeGame;
-
-export { WizeGame };

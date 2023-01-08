@@ -7,7 +7,7 @@ import { TechnicalSkills } from "./TechnicalSkills";
 import { ContentPage } from "../../components/ContentPage";
 import { Title } from "../../components/Titles";
 
-const ProfessionalHome = () =>
+export const ProfessionalHome = () =>
     <ContentPage classes="professional-home">
         <div className="centered vertical-flex-box">
             <Title text="Cole Macdonald, EIT"/>
@@ -24,5 +24,3 @@ const ProfessionalHome = () =>
         <Projects />
         <DownloadResumeButton />
     </ContentPage>;
-
-export { ProfessionalHome };

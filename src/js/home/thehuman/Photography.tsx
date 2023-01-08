@@ -4,7 +4,7 @@ import CarouselCaption from "react-bootstrap/CarouselCaption";
 import { ContentPage } from "../../components/ContentPage";
 import { Title } from "../../components/Titles";
 
-let images = [
+const images = [
     {
         src: require("../../../resources/home/photography/ritsurin1.jpeg"),
         caption: "Ritsurin Garden, Takamatsu"
@@ -51,7 +51,7 @@ let images = [
     }
 ];
 
-const Photography = () => 
+export const Photography = () => 
     <ContentPage classes="photography">
         <Title text="Photography" />
         <p>This is a small collection of the photos I have taken over the years. The majority of them were shot on iPhone but some of them were taken with a GoPro. Hope you enjoy!</p>
@@ -66,5 +66,3 @@ const Photography = () =>
             }
         </Carousel>
     </ContentPage>;
-
-export { Photography };

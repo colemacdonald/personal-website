@@ -1,7 +1,7 @@
 import { Frame } from "../Frames";
 import { SpriteBase } from "./SpriteBase";
 
-class Door {
+export class Door {
 
     drawBox: Rectangle;
     
@@ -29,5 +29,3 @@ class Door {
 
     getFrame() { return null; }
 }
-
-export default Door;

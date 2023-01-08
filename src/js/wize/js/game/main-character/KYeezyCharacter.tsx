@@ -3,7 +3,7 @@ import { EmptyImageFrame, KYeezyFrames } from "./KYeezyFrames";
 import { Frame, State } from "../Frames";
 import { Monster } from "../sprites/Monster";
 
-class KYeezy extends ControllableCharacter {
+export class KYeezy extends ControllableCharacter {
     state: State;
 
     healthUpAudioSrc: string = require("../../../../../resources/wize/audio/sound-effects/health-up.mp3");
@@ -112,5 +112,3 @@ class KYeezy extends ControllableCharacter {
 
     
 }
-
-export { KYeezy };

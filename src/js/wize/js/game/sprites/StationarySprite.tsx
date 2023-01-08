@@ -1,7 +1,7 @@
 import { Frame, State } from "../Frames";
 import { SpriteBase } from "./SpriteBase";
 
-class StationarySprite extends SpriteBase {
+export class StationarySprite extends SpriteBase {
     frameCounter: number = 0;
     ticksOnFrame: number = 0;
     state: State = State.Idle;
@@ -31,5 +31,3 @@ class StationarySprite extends SpriteBase {
         return this.frames[this.state][this.frameCounter];
     }
 }
-
-export { StationarySprite }

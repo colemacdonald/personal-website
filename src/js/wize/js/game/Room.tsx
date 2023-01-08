@@ -1,12 +1,12 @@
 import { Frame } from "./Frames";
 import { Powerup } from "./Powerup";
 import { Coin } from "./sprites/Coin";
-import Door from "./sprites/Door";
+import { Door } from "./sprites/Door";
 import { Monster } from "./sprites/Monster";
 import { SpriteBase } from "./sprites/SpriteBase";
 import { RoomBackgroundTheme, RoomTheme, RoomThemes } from "./tiles/RoomThemes";
 
-class Room {
+export class Room {
     h: number;
     w: number;
     platforms: Array<Rectangle> = [];
@@ -31,5 +31,3 @@ class Room {
         return this.backgroundTheme.backgroundTiles[index];
     }
 };
-
-export { Room };

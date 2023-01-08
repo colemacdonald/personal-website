@@ -2,7 +2,7 @@ import { Frame, State } from "./Frames";
 import { Coin } from "./sprites/Coin";
 import { StationarySprite } from "./sprites/StationarySprite";
 
-class Powerup {
+export class Powerup {
     sprite: StationarySprite;
     name: string;
     instructions: string;
@@ -42,7 +42,7 @@ class Powerup {
     }
 }
 
-enum PowerupSpriteType {
+export enum PowerupSpriteType {
     KCoin,
     Heart,
     Run,
@@ -100,5 +100,3 @@ PowerupFrames[PowerupSpriteType.Run][State.Idle] = [
     new Frame({src: require("../../../../resources/wize/powerups/speed/000_0021_speed15.png"), ticks: 4}),
     new Frame({src: require("../../../../resources/wize/powerups/speed/000_0020_speed16.png"), ticks: 4}),
 ];
-
-export { Powerup }

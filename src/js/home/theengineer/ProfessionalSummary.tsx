@@ -2,7 +2,7 @@ import React from "react";
 import { Heading1, Heading2 } from "../../components/Titles";
 
 
-const ProfessionalSummary = () => 
+export const ProfessionalSummary = () => 
     {
         return <div className="professional-summary vertical-flex-box centered highlighted-section">
             <div className="content vertical-flex-box left">
@@ -26,5 +26,3 @@ const ProfessionalSummary = () =>
             </div>
         </div>;
     };
-
-export { ProfessionalSummary };

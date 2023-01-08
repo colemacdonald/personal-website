@@ -1,4 +1,4 @@
-enum State {
+export enum State {
 	Idle,
 	Walking,
 	Jumping,
@@ -6,12 +6,12 @@ enum State {
     Attacking
 };
 
-enum Direction {
+export enum Direction {
     Right,
     Left
 };
 
-class Frame {
+export class Frame {
     src: string;
     img: any;
     ticks: number = 1;
@@ -49,5 +49,3 @@ class Frame {
         this.relativeHurtBoxes = frame.relativeHurtBoxes;
     }
 };
-
-export { State, Direction, Frame }

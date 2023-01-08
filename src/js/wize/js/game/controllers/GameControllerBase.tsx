@@ -2,13 +2,13 @@ import { KYeezy } from "../main-character/KYeezyCharacter";
 import { WizeGame } from "../WizeGame";
 
 
-enum GameState {
+export enum GameState {
     Loading,
     Playing,
     Over
 }
 
-class GameControllerBase {
+export class GameControllerBase {
     gameState: GameState = GameState.Playing;
     game: WizeGame;
     character: KYeezy;
@@ -40,5 +40,3 @@ class GameControllerBase {
         this.game.tick();
     }
 }
-
-export { GameControllerBase, GameState };

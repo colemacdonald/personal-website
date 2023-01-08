@@ -6,7 +6,7 @@ const Skill = (props: {name: string}) =>
         <p>{props.name}</p>
     </div>;
 
-const TechnicalSkills = () => 
+export const TechnicalSkills = () => 
     <div className="technical-skills vertical-flex-box centered">
         <div className="content vertical-flex-box left">
             <Heading1 text="Technical Skills"/>
@@ -28,5 +28,3 @@ const TechnicalSkills = () =>
             </div>
         </div>
     </div>;
-
-export { TechnicalSkills };

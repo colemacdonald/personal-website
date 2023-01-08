@@ -1,6 +1,6 @@
 import { util } from "../../util";
 import { Direction, Frame } from "../Frames";
-import WizeGame from "../WizeGame.js";
+import { WizeGame } from "../WizeGame.js";
 import { MovingSprite } from "../sprites/MovingSprite";
 
 /**
@@ -8,7 +8,7 @@ import { MovingSprite } from "../sprites/MovingSprite";
  * we are going to need this level of abstraction but just incase
  * Call the super class constructor if your are extending this class
  */
-class Character extends MovingSprite {
+ export class Character extends MovingSprite {
     h: number;
     w: number;
     speed: number;
@@ -147,5 +147,3 @@ class Character extends MovingSprite {
         }
     }
 }
-
-export { Character };

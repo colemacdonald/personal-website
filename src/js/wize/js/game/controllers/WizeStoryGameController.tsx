@@ -1,15 +1,13 @@
 import { KYeezy } from "../main-character/KYeezyCharacter";
-import WizeGame from "../WizeGame";
+import { WizeGame } from "../WizeGame";
 import { GameControllerBase, GameState } from "./GameControllerBase";
 import { util } from "../../util"
-import Door from "../sprites/Door";
+import { Door } from "../sprites/Door";
 import { CreateStoryModeRooms } from "./StoryModeRooms";
 import { Room } from "../Room";
 
 
-class WizeStoryGameController extends GameControllerBase {
-    loadingTicks: number = 0;
-    maxLoadingTicks: number = 250;
+export class WizeStoryGameController extends GameControllerBase {
     rooms: Room[];
 
     constructor() {
@@ -73,5 +71,3 @@ class WizeStoryGameController extends GameControllerBase {
         return overlappedDoor;
     }
 }
-
-export { WizeStoryGameController };

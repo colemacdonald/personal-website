@@ -1,7 +1,7 @@
 import { Frame, State } from "../Frames";
 import { StationarySprite } from "../sprites/StationarySprite";
 
-class AnimatedBackgroundElement extends StationarySprite {
+export class AnimatedBackgroundElement extends StationarySprite {
 
     constructor(options) {
         super({frames: AnimatedBackgroundElementFrames[options.type], x: options.x, y: options.y, scale: options.scale || 1});
@@ -10,7 +10,7 @@ class AnimatedBackgroundElement extends StationarySprite {
     }
 }
 
-enum AnimatedBackgroundElementType {
+export enum AnimatedBackgroundElementType {
     Fountain, 
     Torch1, Torch2, Torch3,
     LavaDrop1_Top, LavaDrop1_Drop
@@ -66,5 +66,3 @@ AnimatedBackgroundElementFrames[AnimatedBackgroundElementType.LavaDrop1_Drop][St
     new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_8.png"), ticks: 20, x_offset: 33}),
     new Frame({src: require("../../../../../resources/wize/background-elements/lava-drop/lava_drop1_9.png"), ticks: 20, x_offset: 33}),
 ];
-
-export { AnimatedBackgroundElement, AnimatedBackgroundElementType }

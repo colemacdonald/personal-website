@@ -2,8 +2,8 @@ import { Frame } from "../Frames"
 import { SpriteBase } from "../sprites/SpriteBase";
 
 
-class BackgroundElement extends SpriteBase {
-        type: BackgroundElementType;
+export class BackgroundElement extends SpriteBase {
+    type: BackgroundElementType;
     inFrontOfPlatforms: boolean = false;
     scale: number = 1;
 
@@ -21,7 +21,7 @@ class BackgroundElement extends SpriteBase {
     }
 }
 
-enum BackgroundElementType {
+export enum BackgroundElementType {
     PixelDay,
     PixelNight,
     TreesDay
@@ -38,5 +38,3 @@ BACKGROUND_ELEMENT_FRAMES[BackgroundElementType.PixelDay] = new Frame({src: requ
 let BACKGROUND_ELEMENT_SIZES = {};
 BACKGROUND_ELEMENT_SIZES[BackgroundElementType.TreesDay] = {w: 1152, h: 460 };
 BACKGROUND_ELEMENT_SIZES[BackgroundElementType.PixelDay] = {w: 1152, h: 460 };
-
-export { BackgroundElement, BackgroundElementType }

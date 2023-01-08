@@ -2,7 +2,16 @@ import { util } from "../../util";
 import { Direction, Frame, State } from "../Frames";
 import { MovingSprite } from "./MovingSprite";
 
-class Monster extends MovingSprite {
+export enum MonsterType {
+    Centipede,
+    // Turtle,
+    // Bloated,
+    Scorpion,
+    Vulture,
+    OneEyedBat
+}
+
+export class Monster extends MovingSprite {
     speed: number;
     platform: Rectangle;
     xv: number;
@@ -57,15 +66,6 @@ class Monster extends MovingSprite {
             }
         });
     }
-}
-
-enum MonsterType {
-    Centipede,
-    // Turtle,
-    // Bloated,
-    Scorpion,
-    Vulture,
-    OneEyedBat
 }
 
 let monsterTypes = {};
@@ -139,5 +139,3 @@ monsterTypes[MonsterType.OneEyedBat].frames[State.Walking][Direction.Left] = [
     new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-left5.png"), ticks: 16 , hitBoxes: [{ x: 6, y: 6, h: 31, w: 31 }] }),
     new Frame({src: require("../../../../../resources/wize/monsters/one-eyed-bat/one-eyed-bat-left6.png"), ticks: 16 , hitBoxes: [{ x: 7, y: 7, h: 29, w: 31 }] }),
 ];
-
-export { Monster, MonsterType };

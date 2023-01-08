@@ -1,7 +1,7 @@
 import { Frame } from "./game/Frames";
 
 //util.js
-class util {
+export class util {
     static doRectanglesOverlap(x1, y1, h1, w1, x2, y2, h2, w2) {
         if (x1 > x2 + w2 || x2 > x1 + w1) return false;
 
@@ -29,5 +29,3 @@ class util {
         return overlap;
     }
 }
-
-export { util };

@@ -2,7 +2,7 @@ import React from "react";
 import { ContentPage } from "../../components/ContentPage";
 import { Heading1, Title } from "../../components/Titles";
 
-let controls = [
+const controls = [
     `← and → to Move`,
     `↑ to Jump`,
     `↓ to Drop through thin platforms`,

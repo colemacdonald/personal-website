@@ -1,6 +1,6 @@
 import { Frame } from "../Frames";
 
-class SpriteBase {
+export class SpriteBase {
     scale: number = 1;
     x: number;
     y: number;
@@ -44,5 +44,3 @@ class SpriteBase {
         return this.frames[this.frameCounter];
     }
 }
-
-export { SpriteBase }

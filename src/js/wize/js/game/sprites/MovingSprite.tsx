@@ -1,7 +1,7 @@
 import { Direction, Frame, State } from "../Frames";
 import { SpriteBase } from "./SpriteBase";
 
-class MovingSprite extends SpriteBase {
+export class MovingSprite extends SpriteBase {
     frameCounter: number;
     ticksOnFrame: number;
     state: State;
@@ -76,5 +76,3 @@ class MovingSprite extends SpriteBase {
         return this.frames[this.state][this.direction][this.frameCounter];
     }
 }
-
-export { MovingSprite } 

@@ -2,14 +2,14 @@ import { util } from "../util";
 import { Monster, MonsterType } from "./sprites/Monster"
 import { Coin } from "./sprites/Coin"
 import { Room } from "./Room";
-import Door from "./sprites/Door";
+import { Door } from "./sprites/Door";
 import { Powerup } from "./Powerup";
 
 import { StaticElement } from "./background-elements/StaticElement";
 import { RoomBackgroundTheme, RoomThemes } from "./tiles/RoomThemes";
 import { AnimatedBackgroundElement, AnimatedBackgroundElementType } from "./background-elements/AnimatedBackgroundElement";
 
-class RoomBuilder {
+export class RoomBuilder {
 
     room: Room;
 
@@ -149,5 +149,3 @@ class RoomBuilder {
         return room;
     }
 }
-
-export { RoomBuilder };

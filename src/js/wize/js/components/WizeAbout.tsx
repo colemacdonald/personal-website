@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class WizeAbout extends Component {
+export class WizeAbout extends Component {
     constructor(props) {
         super(props);
     }
@@ -65,5 +65,3 @@ class WizeAbout extends Component {
         );
     }
 }
-
-export { WizeAbout };

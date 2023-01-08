@@ -8,7 +8,7 @@ import { KYeezyHealthIcon } from "../game/main-character/KYeezyFrames";
 import { Button, Form, } from "react-bootstrap";
 
 // TODO: Separate view from game controller logic
-class WizeGameComponent extends Component {
+export class WizeGameComponent extends Component {
     viewportH: number;
     viewportW: number;
     viewportY: number;
@@ -742,5 +742,3 @@ class WizeGameComponent extends Component {
         }
     }
 }
-
-export { WizeGameComponent };

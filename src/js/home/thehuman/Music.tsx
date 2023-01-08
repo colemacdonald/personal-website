@@ -2,7 +2,7 @@ import React from "react";
 import { ContentPage } from "../../components/ContentPage";
 import { Heading1, Title, Heading2, Heading3 } from "../../components/Titles";
 
-let songDescriptions = [
+const songDescriptions = [
     {
         name: "Descent in C Minor",
         year: "2022",

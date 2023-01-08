@@ -1,7 +1,7 @@
 import { Frame } from "../Frames";
 import { SpriteBase } from "../sprites/SpriteBase";
 
-class StaticElement extends SpriteBase {
+export class StaticElement extends SpriteBase {
     type: StaticElementType;
     inFrontOfPlatforms: boolean = false;
 
@@ -16,7 +16,7 @@ class StaticElement extends SpriteBase {
     tick() { }
 }
 
-enum StaticElementType {
+export enum StaticElementType {
     Tree1, Tree2, Tree3, Tree4,
     Stone1, Stone2, Stone3, Stone4, Stone5, Stone6,
     AutumnTree1, AutumnTree2, AutumnBush1, AutumnBush2
@@ -60,5 +60,3 @@ STATIC_ELEMENT_SIZES[StaticElementType.Stone6] = { w: 70, h: 44 };
 /********************* Autumn Trees ********************/
 STATIC_ELEMENT_FRAMES[StaticElementType.AutumnTree1] = new Frame({src: require("../../../../../resources/wize/backgrounds/autumn/tree1.png")});
 STATIC_ELEMENT_SIZES[StaticElementType.AutumnTree1] = {w: 828, h: 832};
-
-export { StaticElement, StaticElementType }
