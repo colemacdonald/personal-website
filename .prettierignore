@@ -1,2 +1,4 @@
 *.gen.ts
 *.gen.tsx
+
+build
