@@ -1,5 +1,6 @@
 import React from "react";
 import { GiantButtonList } from "../components/Buttons";
+import { SilhouetteType } from "../components/Silhouettes";
 import { Title } from "../components/Titles";
 
 export const Home = () => 
@@ -13,11 +14,13 @@ export const Home = () =>
         <GiantButtonList buttons={[
             {
                 text: "THE HUMAN",
-                href: "#/thehuman"
+                href: "#/thehuman",
+                silhouetteType: SilhouetteType.Head
             },
             {
                 text: "THE ENGINEER",
-                href: "#/theengineer"
+                href: "#/theengineer",
+                silhouetteType: SilhouetteType.Gear
             }
         ]} />
     </div>;

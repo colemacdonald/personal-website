@@ -35,7 +35,7 @@
     justify-content: center;
     text-align: center;
 
-    font-size: 50px;
+    font-size: 60px;
     min-width: min(400px, 100%);
     padding: 20px;
 
@@ -48,6 +48,11 @@
         opacity: 0.6;
         text-decoration: none;
     }
+}
+
+.button-silhouette {
+    position: absolute;
+    inset: 10px;
 }
 
 .giant-button-list {

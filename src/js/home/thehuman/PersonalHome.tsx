@@ -1,6 +1,7 @@
 import React from "react";
 import { GiantButtonList } from "../../components/Buttons";
 import { Title } from "../../components/Titles";
+import { SilhouetteType } from "../../components/Silhouettes";
 
 const PersonalHome = () =>
             <div className="personal-home">
@@ -12,15 +13,18 @@ const PersonalHome = () =>
                 <GiantButtonList buttons={[
                     {
                         text: "Music",
-                        href: "#/thehuman/music"
+                        href: "#/thehuman/music",
+                        silhouetteType: SilhouetteType.MusicNote
                     },
                     {
                         text: "Photography",
-                        href: "#/thehuman/photography"
+                        href: "#/thehuman/photography",
+                        silhouetteType: SilhouetteType.Camera
                     },
                     {
                         text: "Game Development",
-                        href: "#/thehuman/wizethegame"
+                        href: "#/thehuman/wizethegame",
+                        silhouetteType: SilhouetteType.GameController
                     }
                 ]} />
             </div>;
