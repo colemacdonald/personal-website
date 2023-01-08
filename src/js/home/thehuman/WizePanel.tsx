@@ -13,8 +13,8 @@ export const WizePanel = () => (
       an html canvas (yes, really). 2022 saw a large graphics revamp and the introduction of story mode.
     </p>
 
-    <div className="primary-button">
-      <a className="vertical-flex-box centered" href="#/wize">
+    <div className="primary-button play-now-button">
+      <a href="#/wize">
         <p>Play Now!</p>
       </a>
     </div>

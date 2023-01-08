@@ -56,11 +56,9 @@ const Project = (props: { title: string; company: string; notes: Array<string> }
 
 export const Projects = () => (
   <div className="projects">
-    <div className="content vertical-flex-box left">
-      <Heading1 text="Projects" />
-      {projectDescriptions.map((p) => (
-        <Project {...p} />
-      ))}
-    </div>
+    <Heading1 text="Projects" />
+    {projectDescriptions.map((p) => (
+      <Project {...p} />
+    ))}
   </div>
 );
