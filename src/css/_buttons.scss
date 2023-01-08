@@ -36,6 +36,10 @@
     text-align: center;
 
     font-size: 60px;
+    @media screen and (max-width: $mobile-max-width) {
+        font-size: 24px;
+    }
+    
     min-width: min(400px, 100%);
     padding: 20px;
 
