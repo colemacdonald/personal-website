@@ -3,12 +3,14 @@ import WizeGame from "../WizeGame";
 import { GameControllerBase, GameState } from "./GameControllerBase";
 import { util } from "../../util"
 import Door from "../sprites/Door";
-import { StoryModeRooms } from "./StoryModeRooms"
+import { CreateStoryModeRooms } from "./StoryModeRooms";
+import { Room } from "../Room";
 
 
 class WizeStoryGameController extends GameControllerBase {
     loadingTicks: number = 0;
     maxLoadingTicks: number = 250;
+    rooms: Room[];
 
     constructor() {
         super();
@@ -24,8 +26,9 @@ class WizeStoryGameController extends GameControllerBase {
         this.baseOptions.numberOfMonsters = 20;
 
         this.character = new KYeezy({});
+        this.rooms = CreateStoryModeRooms();
 
-        this.game = new WizeGame(this.baseOptions, StoryModeRooms[0], this.character);
+        this.game = new WizeGame(this.baseOptions, this.rooms[0], this.character);
         this.character.setCurrentPlatform(this.game.room.platforms[0]);
         this.character.setPosition(this.game.room.platforms[0].x, this.character.y);
         this.character.setGame(this.game);
@@ -49,7 +52,7 @@ class WizeStoryGameController extends GameControllerBase {
                 if (door) {
                     delete this.game;
 
-                    this.game = new WizeGame(this.baseOptions, StoryModeRooms[door.destRoom], this.character);
+                    this.game = new WizeGame(this.baseOptions, this.rooms[door.destRoom], this.character);
                     this.character.setPosition(door.destX, door.destY);
                     this.character.setGame(this.game);
                 }

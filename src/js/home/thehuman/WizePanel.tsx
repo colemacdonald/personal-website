@@ -8,35 +8,30 @@ let controls = [
     `↓ to Drop through thin platforms`,
 ];
 
-const WizePanel = () => 
+export const WizePanel = () => 
     <ContentPage classes="wize-info">
-        <div className="">
-            <Title text="Yeezy the Wize" />
+        <Title text="Yeezy the Wize" />
 
-            <p>This game was originally developed by my friend and I in 2018. The physics are all custom, and frames are drawn on an html canvas (yes, really). 2022 saw a large graphics revamp and the introduction of story mode.</p>
+        <p>This game was originally developed by my friend and I in 2018. The physics are all custom, and frames are drawn on an html canvas (yes, really). 2022 saw a large graphics revamp and the introduction of story mode.</p>
 
-            <div className="primary-button">
-                <a className="vertical-flex-box centered" href="#/wize"><p>Play Now!</p></a>
-            </div>
-            <div>
-                <Heading1 text="Controls" />
-                <ul>
-                    {controls.map(c => <li>{c}</li>)}
-                </ul>
-            </div>
-
-            <Heading1 text="Game Modes" />
-            <div className="wize-game-modes-container">
-                <p>In Survival mode, play through random levels collecting coins. After collecting all 20 coins you will advance to the next level.</p>
-                <img src={require("../../../resources/home/wize-survival.png")} />
-                <p>In Story mode, progress through the pre-made levels collecting powerups along the way.</p>
-                <img src={require("../../../resources/home/wize-story1.png")} />
-                <img className="" src={require("../../../resources/home/wize-story2.png")} />
-            </div>
-            
-            <p>While your here, try your hand at a highscore or your best time!</p>
+        <div className="primary-button">
+            <a className="vertical-flex-box centered" href="#/wize"><p>Play Now!</p></a>
         </div>
-        <div></div>
-    </ContentPage>;
+        <div>
+            <Heading1 text="Controls" />
+            <ul>
+                {controls.map(c => <li>{c}</li>)}
+            </ul>
+        </div>
 
-export { WizePanel };
+        <Heading1 text="Game Modes" />
+        <div className="wize-game-modes-container">
+            <p>In Survival mode, play through random levels collecting coins. After collecting all 20 coins you will advance to the next level.</p>
+            <img src={require("../../../resources/home/wize-survival.png")} />
+            <p>In Story mode, progress through the pre-made levels collecting powerups along the way.</p>
+            <img src={require("../../../resources/home/wize-story1.png")} />
+            <img className="" src={require("../../../resources/home/wize-story2.png")} />
+        </div>
+        
+        <p>While you're here, try your hand at a highscore or your best time!</p>
+    </ContentPage>;
