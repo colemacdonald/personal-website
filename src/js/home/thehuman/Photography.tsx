@@ -55,18 +55,16 @@ const Photography = () =>
     <ContentPage classes="photography">
         <Title text="Photography" />
         <p>This is a small collection of the photos I have taken over the years. The majority of them were shot on iPhone but some of them were taken with a GoPro. Hope you enjoy!</p>
-        <div className="vertical-flex-box centered ">
-            <Carousel fade={true}> {
-                images.map(i => 
-                    <Carousel.Item>
-                        <img src={i.src} />
-                        <CarouselCaption>
-                            <p>{i.caption}</p>
-                        </CarouselCaption>
-                    </Carousel.Item>)
-                }
-            </Carousel>
-        </div>
+        <Carousel fade={true}> {
+            images.map(i => 
+                <Carousel.Item>
+                    <img src={i.src} />
+                    <CarouselCaption>
+                        <p>{i.caption}</p>
+                    </CarouselCaption>
+                </Carousel.Item>)
+            }
+        </Carousel>
     </ContentPage>;
 
 export { Photography };

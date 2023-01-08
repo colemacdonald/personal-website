@@ -1,12 +1,20 @@
 .title {
     color: $secondary-colour;
-    font-size: 72px;
     line-height: 1em;
     margin: 10px 0;
+
+    font-size: 72px;
+
+    @media screen and (max-width: $mobile-max-width) {
+        font-size: 36px;
+    }
 }
 
 .subtitle {
     font-size: 24px;
+    @media screen and (max-width: $mobile-max-width) {
+        font-size: 20px;
+    }
 }
 
 .heading1 {
